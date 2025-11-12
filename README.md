@@ -16,6 +16,8 @@ A single-file HTML flashcard app that runs entirely offline. No server, no depen
 
 ## Editing Flashcards
 
+You can copy the tsofa.html file in this repo to start with.
+
 Open the HTML file in any text editor. Find the `FLASHCARDS` variable near the top of the `<script>` section.
 
 You can put any HTML tags you want and they will be rendered in the flash card. You can use this to display images in the flash cards.
