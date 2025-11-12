@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<script>
+// ===== MODIFY YOUR FLASHCARDS HERE =====
+// Option 1: Array of arrays format
+let FLASHCARDS = [
+    ["What is the capital of France?", "Paris"],
+    ["What is 2 + 2?", "4"],
+    ["What is the largest planet in our solar system?", "<b>Jupiter</b><br><i>It has a mass of 1.898 × 10²⁷ kg</i>"],
+    ["What year did World War II end?", "1945"],
+    ["Who wrote 'Romeo and Juliet'?", "William Shakespeare"],
+    ["What is HTML?", "<b>HyperText Markup Language</b><br>The standard markup language for creating web pages"],
+];
+
+// Option 2: CSV string format (uncomment to use)
+/*
+let FLASHCARDS = `"What is the capital of France?","Paris"
+"What is 2 + 2?","4"
+"What is the largest planet in our solar system?","<b>Jupiter</b><br><i>It has a mass of 1.898 × 10²⁷ kg</i>"
+"What year did World War II end?","1945"
+"Who wrote 'Romeo and Juliet'?","William Shakespeare"
+"What is HTML?","<b>HyperText Markup Language</b><br>The standard markup language for creating web pages"`;
+*/
+// ========================================
+</script>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TSOFA - The Simple, Offline Flashcard App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            background-color: #f0f0f0;
+            margin: 0;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 600px;
+            width: 100%;
+        }
+        
+        .card-counter {
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 18px;
+            color: #555;
+        }
+        
+        .flashcard {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            min-height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            margin-bottom: 20px;
+            user-select: none;
+            transition: transform 0.1s;
+        }
+        
+        .flashcard:hover {
+            transform: scale(1.02);
+        }
+        
+        .flashcard:active {
+            transform: scale(0.98);
+        }
+        
+        .flashcard-content {
+            font-size: 20px;
+            line-height: 1.5;
+            width: 100%;
+        }
+        
+        .flashcard-content.centered {
+            text-align: center;
+        }
+        
+        .flashcard-content.left-aligned {
+            text-align: left;
+            white-space: pre-wrap;
+        }
+        
+        .controls {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .secondary-controls {
+            display: grid;
+            grid-template-columns: 1fr 1fr auto;
+            gap: 10px;
+            align-items: center;
+        }
+        
+        .secondary-controls button {
+            font-size: 16px;
+        }
+        
+        .checkbox-label {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 16px;
+            color: #333;
+            cursor: pointer;
+            user-select: none;
+            padding: 0 10px;
+        }
+        
+        .checkbox-label input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+        
+        button {
+            padding: 12px 20px;
+            font-size: 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        
+        button:hover {
+            background-color: #0056b3;
+        }
+        
+        button:active {
+            transform: scale(0.95);
+        }
+        
+        button:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+        
+        .flip-btn {
+            background-color: #28a745;
+        }
+        
+        .flip-btn:hover {
+            background-color: #218838;
+        }
+        
+        .shuffle-btn {
+            background-color: #ffc107;
+            color: #333;
+        }
+        
+        .shuffle-btn:hover {
+            background-color: #e0a800;
+        }
+        
+        .invert-btn {
+            background-color: #dc3545;
+        }
+        
+        .invert-btn:hover {
+            background-color: #c82333;
+        }
+        
+        .nav-btn {
+            background-color: #6c757d;
+        }
+        
+        .nav-btn:hover {
+            background-color: #5a6268;
+        }
+        
+        .instructions {
+            text-align: center;
+            color: #666;
+            margin-top: 20px;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <p style="text-align: center; color: #666; margin-top: -10px; font-size: 14px;">TSOFA - The Simple, Offline Flashcard App by Al Sweigart</p>
+        
+        <div class="card-counter" id="cardCounter">Card 1 of 2</div>
+        
+        <div class="flashcard" id="flashcard" onclick="flipCard()">
+            <div class="flashcard-content" id="cardContent"></div>
+        </div>
+        
+        <div class="controls">
+            <button onclick="goToFirst()" class="nav-btn" title="First">⇤</button>
+            <button onclick="prevCard()" id="prevBtn" title="Previous (left)">←</button>
+            <button onclick="flipCard()" class="flip-btn" title="Flip (space)">⤾</button>
+            <button onclick="nextCard()" id="nextBtn" title="Next (right)">→</button>
+            <button onclick="goToLast()" class="nav-btn" title="Last">⇥</button>
+        </div>
+        
+        <div class="secondary-controls">
+            <button onclick="shuffleCards()" class="shuffle-btn">Shuffle</button>
+            <button onclick="invertCards()" class="invert-btn">Invert Q/A</button>
+            <label class="checkbox-label">
+                <input type="checkbox" id="centerCheckbox" checked onchange="toggleCenter()">
+                Center
+            </label>
+        </div>
+        
+        <div class="instructions">
+            <strong>Keyboard shortcuts:</strong><br>
+            Space: Flip card | ← →: Navigate cards<br>
+            Click the card to flip it
+        </div>
+    </div>
+    
+    <script>
+        // Parse CSV string to array format
+        function parseCSV(csvString) {
+            const rows = [];
+            let currentRow = [];
+            let currentField = '';
+            let inQuotes = false;
+            let i = 0;
+            
+            while (i < csvString.length) {
+                const char = csvString[i];
+                const nextChar = csvString[i + 1];
+                
+                if (!inQuotes) {
+                    if (char === '"') {
+                        inQuotes = true;
+                    } else if (char === ',') {
+                        currentRow.push(currentField);
+                        currentField = '';
+                    } else if (char === '\n' || (char === '\r' && nextChar === '\n')) {
+                        currentRow.push(currentField);
+                        if (currentRow.length > 0 && (currentRow[0] !== '' || currentRow.length > 1)) {
+                            rows.push(currentRow);
+                        }
+                        currentRow = [];
+                        currentField = '';
+                        if (char === '\r' && nextChar === '\n') {
+                            i++; // Skip the \n in \r\n
+                        }
+                    } else {
+                        currentField += char;
+                    }
+                } else {
+                    if (char === '"' && nextChar === '"') {
+                        currentField += '"';
+                        i++; // Skip the next quote
+                    } else if (char === '"') {
+                        inQuotes = false;
+                    } else {
+                        currentField += char;
+                    }
+                }
+                i++;
+            }
+            
+            // Handle the last field and row
+            if (currentField !== '' || currentRow.length > 0) {
+                currentRow.push(currentField);
+                if (currentRow.length > 0 && (currentRow[0] !== '' || currentRow.length > 1)) {
+                    rows.push(currentRow);
+                }
+            }
+            
+            // Ensure each row has exactly 2 columns (question and answer)
+            return rows.map(row => {
+                if (row.length === 0) return ['', ''];
+                if (row.length === 1) return [row[0], ''];
+                return [row[0], row[1]];
+            }).filter(row => row[0] !== '' || row[1] !== ''); // Remove completely empty rows
+        }
+        
+        // Process FLASHCARDS whether it's an array or CSV string
+        let processedFlashcards;
+        if (typeof FLASHCARDS === 'string') {
+            processedFlashcards = parseCSV(FLASHCARDS);
+        } else {
+            processedFlashcards = FLASHCARDS;
+        }
+        
+        // App state
+        let currentCards = [...processedFlashcards];
+        let currentIndex = 0;
+        let showingQuestion = true;
+        let isInverted = false;
+        
+        // Initialize the app
+        function init() {
+            displayCard();
+            updateButtons();
+            updateCounter();
+            updateTextAlignment();
+        }
+        
+        // Display current card
+        function displayCard() {
+            const cardContent = document.getElementById('cardContent');
+            const card = currentCards[currentIndex];
+            
+            if (!card) {
+                cardContent.innerHTML = "No flashcards available";
+                return;
+            }
+            
+            const questionIndex = isInverted ? 1 : 0;
+            const answerIndex = isInverted ? 0 : 1;
+            
+            if (showingQuestion) {
+                cardContent.innerHTML = card[questionIndex];
+            } else {
+                cardContent.innerHTML = card[answerIndex];
+            }
+            
+            // Apply centering based on checkbox
+            updateTextAlignment();
+        }
+        
+        // Toggle center alignment
+        function toggleCenter() {
+            updateTextAlignment();
+        }
+        
+        // Update text alignment based on checkbox state
+        function updateTextAlignment() {
+            const cardContent = document.getElementById('cardContent');
+            const centerCheckbox = document.getElementById('centerCheckbox');
+            
+            if (centerCheckbox.checked) {
+                cardContent.classList.remove('left-aligned');
+                cardContent.classList.add('centered');
+            } else {
+                cardContent.classList.remove('centered');
+                cardContent.classList.add('left-aligned');
+            }
+        }
+        
+        // Flip the current card
+        function flipCard() {
+            showingQuestion = !showingQuestion;
+            displayCard();
+        }
+        
+        // Navigate to next card
+        function nextCard() {
+            if (currentIndex < currentCards.length - 1) {
+                currentIndex++;
+                showingQuestion = true;
+                displayCard();
+                updateButtons();
+                updateCounter();
+            }
+        }
+        
+        // Navigate to previous card
+        function prevCard() {
+            if (currentIndex > 0) {
+                currentIndex--;
+                showingQuestion = true;
+                displayCard();
+                updateButtons();
+                updateCounter();
+            }
+        }
+        
+        // Go to first card
+        function goToFirst() {
+            currentIndex = 0;
+            showingQuestion = true;
+            displayCard();
+            updateButtons();
+            updateCounter();
+        }
+        
+        // Go to last card
+        function goToLast() {
+            currentIndex = currentCards.length - 1;
+            showingQuestion = true;
+            displayCard();
+            updateButtons();
+            updateCounter();
+        }
+        
+        // Shuffle the cards
+        function shuffleCards() {
+            // Reset to original cards before shuffling
+            currentCards = [...processedFlashcards];
+            for (let i = currentCards.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [currentCards[i], currentCards[j]] = [currentCards[j], currentCards[i]];
+            }
+            currentIndex = 0;
+            showingQuestion = true;
+            displayCard();
+            updateButtons();
+            updateCounter();
+        }
+        
+        // Invert all cards (swap questions and answers)
+        function invertCards() {
+            isInverted = !isInverted;
+            displayCard();
+        }
+        
+        // Update button states
+        function updateButtons() {
+            document.getElementById('prevBtn').disabled = currentIndex === 0;
+            document.getElementById('nextBtn').disabled = currentIndex === currentCards.length - 1;
+        }
+        
+        // Update card counter
+        function updateCounter() {
+            const counter = document.getElementById('cardCounter');
+            counter.textContent = `Card ${currentIndex + 1} of ${currentCards.length}`;
+        }
+        
+        // Keyboard event listeners
+        document.addEventListener('keydown', function(event) {
+            switch(event.key) {
+                case ' ':
+                case 'Spacebar':
+                    event.preventDefault();
+                    flipCard();
+                    break;
+                case 'ArrowLeft':
+                    event.preventDefault();
+                    prevCard();
+                    break;
+                case 'ArrowRight':
+                    event.preventDefault();
+                    nextCard();
+                    break;
+            }
+        });
+        
+        // Initialize app when page loads
+        window.onload = init;
+    </script>
+</body>
+</html>
