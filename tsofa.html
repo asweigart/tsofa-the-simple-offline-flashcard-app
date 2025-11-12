@@ -1,5 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
+<script>
+    // ===== MODIFY YOUR FLASHCARDS HERE =====
+    // Option 1: Array of arrays format
+    let FLASHCARDS = [
+        ["What is the capital of France?", "Paris"],
+        ["What is 2 + 2?", "4"],
+        ["What is the largest planet in our solar system?", "<b>Jupiter</b><br><i>It has a mass of 1.898 × 10²⁷ kg</i>"],
+        ["What year did World War II end?", "1945"],
+        ["Who wrote 'Romeo and Juliet'?", "William Shakespeare"],
+        ["What is HTML?", "<b>HyperText Markup Language</b><br>The standard markup language for creating web pages"],
+    ];
+    
+    // Option 2: CSV string format (uncomment to use)
+    /*
+    let FLASHCARDS = `"What is the capital of France?","Paris"
+"What is 2 + 2?","4"
+"What is the largest planet in our solar system?","<b>Jupiter</b><br><i>It has a mass of 1.898 × 10²⁷ kg</i>"
+"What year did World War II end?","1945"
+"Who wrote 'Romeo and Juliet'?","William Shakespeare"
+"What is HTML?","<b>HyperText Markup Language</b><br>The standard markup language for creating web pages"`;
+    */
+    // ========================================
+</script>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -75,24 +98,51 @@
         
         .secondary-controls {
             display: grid;
-            grid-template-columns: 1fr 1fr auto auto;
+            grid-template-columns: repeat(4, 1fr) auto auto;
             gap: 10px;
             align-items: center;
         }
         
         .secondary-controls button {
             font-size: 16px;
+            height: 72px;
+            padding: 0 16px;
+        }
+        
+        .font-size-btn {
+            width: 72px;
+            padding: 0 !important;
+        }
+        
+        .remove-btn {
+            background-color: #dc3545;
+        }
+        
+        .remove-btn:hover {
+            background-color: #c82333;
+        }
+        
+        .undo-btn {
+            background-color: #17a2b8;
+        }
+        
+        .undo-btn:hover:not(:disabled) {
+            background-color: #138496;
+        }
+        
+        .undo-btn:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
         }
         
         .font-size-controls {
             display: flex;
             gap: 5px;
         }
-
+        
         .font-size-btn {
-            width: 36px;
-            height: 36px;
-            padding: 0;
+            width: 72px;
+            padding: 0 !important;
             font-size: 24px !important;
             line-height: 1;
             display: flex;
@@ -100,11 +150,11 @@
             justify-content: center;
             background-color: #6c757d;
         }
-
+        
         .font-size-btn:hover {
             background-color: #5a6268;
         }
-
+        
         .checkbox-label {
             display: flex;
             align-items: center;
@@ -114,6 +164,7 @@
             cursor: pointer;
             user-select: none;
             padding: 0 10px;
+            height: 72px;
         }
         
         .checkbox-label input[type="checkbox"] {
@@ -144,6 +195,53 @@
         button:disabled {
             background-color: #cccccc;
             cursor: not-allowed;
+        }
+        
+        .timer-row {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #ddd;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .timer-display {
+            font-family: 'Courier New', monospace;
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+            min-width: 120px;
+            text-align: center;
+        }
+        
+        .timer-btn {
+            background-color: #17a2b8;
+            padding: 10px 20px;
+            font-size: 16px;
+        }
+        
+        .timer-btn:hover {
+            background-color: #138496;
+        }
+        
+        .timer-btn.pause {
+            background-color: #ffc107;
+        }
+        
+        .timer-btn.pause:hover {
+            background-color: #e0a800;
+        }
+        
+        .reset-btn {
+            background-color: #6c757d;
+            padding: 10px 20px;
+            font-size: 16px;
+        }
+        
+        .reset-btn:hover {
+            background-color: #5a6268;
         }
         
         .flip-btn {
@@ -208,8 +306,10 @@
         </div>
         
         <div class="secondary-controls">
-            <button onclick="shuffleCards()" class="shuffle-btn">Shuffle</button>
+            <button onclick="shuffleCards()" class="shuffle-btn">Shuffle Cards</button>
             <button onclick="invertCards()" class="invert-btn">Invert Q/A</button>
+            <button onclick="removeCard()" class="remove-btn">Remove Current Card</button>
+            <button onclick="undoRemove()" class="undo-btn" id="undoBtn">Undo Last Remove</button>
             <div class="font-size-controls">
                 <button onclick="decreaseFontSize()" class="font-size-btn" title="Decrease font size">−</button>
                 <button onclick="increaseFontSize()" class="font-size-btn" title="Increase font size">+</button>
@@ -218,6 +318,12 @@
                 <input type="checkbox" id="centerCheckbox" checked onchange="toggleCenter()">
                 Center
             </label>
+        </div>
+        
+        <div class="timer-row">
+            <div class="timer-display" id="timerDisplay">00:00:00</div>
+            <button onclick="toggleTimer()" class="timer-btn" id="timerBtn">Start Timer</button>
+            <button onclick="resetTimer()" class="reset-btn">Reset Timer</button>
         </div>
         
         <div class="instructions">
@@ -302,6 +408,7 @@
         let showingQuestion = true;
         let isInverted = false;
         let currentFontSize = 20; // Default font size in pixels
+        let removedCards = []; // Stack to store removed cards for undo
         
         // Initialize the app
         function init() {
@@ -310,6 +417,7 @@
             updateCounter();
             updateTextAlignment();
             updateFontSize();
+            updateUndoButton();
         }
         
         // Display current card
@@ -361,7 +469,7 @@
                 updateFontSize();
             }
         }
-
+        
         // Decrease font size
         function decreaseFontSize() {
             if (currentFontSize > 12) { // Minimum font size
@@ -369,13 +477,71 @@
                 updateFontSize();
             }
         }
-
+        
         // Update the font size of the flashcard content
         function updateFontSize() {
             const cardContent = document.getElementById('cardContent');
             cardContent.style.fontSize = currentFontSize + 'px';
         }
-
+        
+        // Remove current card
+        function removeCard() {
+            if (currentCards.length === 0) return;
+            
+            // Store removed card with its index for undo
+            removedCards.push({
+                card: currentCards[currentIndex],
+                index: currentIndex
+            });
+            
+            // Remove card from current deck
+            currentCards.splice(currentIndex, 1);
+            
+            // Adjust current index if necessary
+            if (currentCards.length === 0) {
+                currentIndex = 0;
+            } else if (currentIndex >= currentCards.length) {
+                currentIndex = currentCards.length - 1;
+            }
+            
+            // Reset to question side
+            showingQuestion = true;
+            
+            // Update display
+            displayCard();
+            updateButtons();
+            updateCounter();
+            updateUndoButton();
+        }
+        
+        // Undo last card removal
+        function undoRemove() {
+            if (removedCards.length === 0) return;
+            
+            // Get the last removed card
+            const lastRemoved = removedCards.pop();
+            
+            // Insert card back at its original position or at the end if position is invalid
+            const insertIndex = Math.min(lastRemoved.index, currentCards.length);
+            currentCards.splice(insertIndex, 0, lastRemoved.card);
+            
+            // Set current index to the restored card
+            currentIndex = insertIndex;
+            showingQuestion = true;
+            
+            // Update display
+            displayCard();
+            updateButtons();
+            updateCounter();
+            updateUndoButton();
+        }
+        
+        // Update undo button state
+        function updateUndoButton() {
+            const undoBtn = document.getElementById('undoBtn');
+            undoBtn.disabled = removedCards.length === 0;
+        }
+        
         // Flip the current card
         function flipCard() {
             showingQuestion = !showingQuestion;
@@ -426,6 +592,8 @@
         function shuffleCards() {
             // Reset to original cards before shuffling
             currentCards = [...processedFlashcards];
+            // Clear removed cards history
+            removedCards = [];
             for (let i = currentCards.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
                 [currentCards[i], currentCards[j]] = [currentCards[j], currentCards[i]];
@@ -435,6 +603,7 @@
             displayCard();
             updateButtons();
             updateCounter();
+            updateUndoButton();
         }
         
         // Invert all cards (swap questions and answers)
@@ -473,6 +642,69 @@
                     break;
             }
         });
+        
+        // Timer variables
+        let timerStartTime = 0;
+        let timerElapsedTime = 0;
+        let timerInterval = null;
+        let isTimerRunning = false;
+        
+        // Format time as HH:MM:SS
+        function formatTime(milliseconds) {
+            const totalSeconds = Math.floor(milliseconds / 1000);
+            const hours = Math.floor(totalSeconds / 3600);
+            const minutes = Math.floor((totalSeconds % 3600) / 60);
+            const seconds = totalSeconds % 60;
+            
+            return String(hours).padStart(2, '0') + ':' +
+                   String(minutes).padStart(2, '0') + ':' +
+                   String(seconds).padStart(2, '0');
+        }
+        
+        // Update timer display
+        function updateTimerDisplay() {
+            const currentTime = isTimerRunning ? 
+                timerElapsedTime + (Date.now() - timerStartTime) : 
+                timerElapsedTime;
+            document.getElementById('timerDisplay').textContent = formatTime(currentTime);
+        }
+        
+        // Toggle timer (start/pause)
+        function toggleTimer() {
+            const timerBtn = document.getElementById('timerBtn');
+            
+            if (isTimerRunning) {
+                // Pause timer
+                clearInterval(timerInterval);
+                timerElapsedTime += Date.now() - timerStartTime;
+                isTimerRunning = false;
+                timerBtn.textContent = 'Start Timer';
+                timerBtn.classList.remove('pause');
+            } else {
+                // Start timer
+                timerStartTime = Date.now();
+                isTimerRunning = true;
+                timerBtn.textContent = 'Pause Timer';
+                timerBtn.classList.add('pause');
+                
+                // Update display every second
+                timerInterval = setInterval(updateTimerDisplay, 1000);
+            }
+        }
+        
+        // Reset timer
+        function resetTimer() {
+            clearInterval(timerInterval);
+            timerStartTime = 0;
+            timerElapsedTime = 0;
+            isTimerRunning = false;
+            
+            const timerBtn = document.getElementById('timerBtn');
+            timerBtn.textContent = 'Start Timer';
+            timerBtn.classList.remove('pause');
+            
+            updateTimerDisplay();
+        }
         
         // Initialize app when page loads
         window.onload = init;
