@@ -1,28 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-<script>
-// ===== MODIFY YOUR FLASHCARDS HERE =====
-// Option 1: Array of arrays format
-let FLASHCARDS = [
-    ["What is the capital of France?", "Paris"],
-    ["What is 2 + 2?", "4"],
-    ["What is the largest planet in our solar system?", "<b>Jupiter</b><br><i>It has a mass of 1.898 × 10²⁷ kg</i>"],
-    ["What year did World War II end?", "1945"],
-    ["Who wrote 'Romeo and Juliet'?", "William Shakespeare"],
-    ["What is HTML?", "<b>HyperText Markup Language</b><br>The standard markup language for creating web pages"],
-];
-
-// Option 2: CSV string format (uncomment to use)
-/*
-let FLASHCARDS = `"What is the capital of France?","Paris"
-"What is 2 + 2?","4"
-"What is the largest planet in our solar system?","<b>Jupiter</b><br><i>It has a mass of 1.898 × 10²⁷ kg</i>"
-"What year did World War II end?","1945"
-"Who wrote 'Romeo and Juliet'?","William Shakespeare"
-"What is HTML?","<b>HyperText Markup Language</b><br>The standard markup language for creating web pages"`;
-*/
-// ========================================
-</script>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -98,7 +75,7 @@ let FLASHCARDS = `"What is the capital of France?","Paris"
         
         .secondary-controls {
             display: grid;
-            grid-template-columns: 1fr 1fr auto;
+            grid-template-columns: 1fr 1fr auto auto;
             gap: 10px;
             align-items: center;
         }
@@ -107,6 +84,27 @@ let FLASHCARDS = `"What is the capital of France?","Paris"
             font-size: 16px;
         }
         
+        .font-size-controls {
+            display: flex;
+            gap: 5px;
+        }
+
+        .font-size-btn {
+            width: 36px;
+            height: 36px;
+            padding: 0;
+            font-size: 24px !important;
+            line-height: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #6c757d;
+        }
+
+        .font-size-btn:hover {
+            background-color: #5a6268;
+        }
+
         .checkbox-label {
             display: flex;
             align-items: center;
@@ -192,7 +190,8 @@ let FLASHCARDS = `"What is the capital of France?","Paris"
 </head>
 <body>
     <div class="container">
-        <p style="text-align: center; color: #666; margin-top: -10px; font-size: 14px;">TSOFA - The Simple, Offline Flashcard App by Al Sweigart</p>
+        <h1 style="text-align: center; color: #333;">TSOFA</h1>
+        <p style="text-align: center; color: #666; margin-top: -10px; font-size: 14px;">The Simple, Offline Flashcard App</p>
         
         <div class="card-counter" id="cardCounter">Card 1 of 2</div>
         
@@ -211,6 +210,10 @@ let FLASHCARDS = `"What is the capital of France?","Paris"
         <div class="secondary-controls">
             <button onclick="shuffleCards()" class="shuffle-btn">Shuffle</button>
             <button onclick="invertCards()" class="invert-btn">Invert Q/A</button>
+            <div class="font-size-controls">
+                <button onclick="decreaseFontSize()" class="font-size-btn" title="Decrease font size">−</button>
+                <button onclick="increaseFontSize()" class="font-size-btn" title="Increase font size">+</button>
+            </div>
             <label class="checkbox-label">
                 <input type="checkbox" id="centerCheckbox" checked onchange="toggleCenter()">
                 Center
@@ -298,6 +301,7 @@ let FLASHCARDS = `"What is the capital of France?","Paris"
         let currentIndex = 0;
         let showingQuestion = true;
         let isInverted = false;
+        let currentFontSize = 20; // Default font size in pixels
         
         // Initialize the app
         function init() {
@@ -305,6 +309,7 @@ let FLASHCARDS = `"What is the capital of France?","Paris"
             updateButtons();
             updateCounter();
             updateTextAlignment();
+            updateFontSize();
         }
         
         // Display current card
@@ -349,6 +354,28 @@ let FLASHCARDS = `"What is the capital of France?","Paris"
             }
         }
         
+        // Increase font size
+        function increaseFontSize() {
+            if (currentFontSize < 48) { // Maximum font size
+                currentFontSize += 4;
+                updateFontSize();
+            }
+        }
+
+        // Decrease font size
+        function decreaseFontSize() {
+            if (currentFontSize > 12) { // Minimum font size
+                currentFontSize -= 4;
+                updateFontSize();
+            }
+        }
+
+        // Update the font size of the flashcard content
+        function updateFontSize() {
+            const cardContent = document.getElementById('cardContent');
+            cardContent.style.fontSize = currentFontSize + 'px';
+        }
+
         // Flip the current card
         function flipCard() {
             showingQuestion = !showingQuestion;

@@ -6,7 +6,6 @@ A single-file HTML flashcard app that runs entirely offline. No server, no ads, 
 
 - **Single HTML file** - Everything in one file
 - **Keyboard controls** - Space to flip, arrows to navigate  
-- **Symbol buttons** - ⇤ ← ⤾ → ⇥ with hover tooltips
 - **HTML support** - Embed images, format text, add links
 - **Shuffle cards** - Randomize order for practice
 - **Invert Q/A** - Swap questions with answers
@@ -22,9 +21,9 @@ Open the HTML file in any text editor. Find the `FLASHCARDS` variable near the t
 
 You can put any HTML tags you want and they will be rendered in the flash card. You can use this to display images in the flash cards.
 
-### Array Format
+### Array/JSON Format
 
-For the array format, I recommend using backticks (on the keyboard to the left of the 1 key) for the `FLASHCARDS` string values so you can include quote characters and span multiple lines.
+For the array/JSON format, I recommend using backticks (on the keyboard to the left of the 1 key) for the `FLASHCARDS` string values so you can include quote characters and span multiple lines.
 
 ```javascript
 let FLASHCARDS = [
