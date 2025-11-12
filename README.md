@@ -1,6 +1,6 @@
 # TSOFA: The Simple, Offline Flashcard App
 
-A single-file HTML flashcard app that runs entirely offline. No server, no dependencies, no build process, no cloud sync. Just save and open in a browser.
+A single-file HTML flashcard app that runs entirely offline. No server, no ads, no registration, no premium features to pay for, no dependencies, no build process, no cloud sync. Just save and open in a browser.
 
 ## Features
 
