@@ -19,11 +19,13 @@ You can edit the flashcards directly in the file, using just text or HTML tags. 
 - **Zero setup** - Works immediately offline, no programming skills needed
 - **Free** - No registration, no paywall
 
-## Editing Flashcards
+## Creating and Editing Flashcards
 
 Download the tsofa.html file and open it in any text editor. Find the `FLASHCARDS` variable (and optionally the `TOPIC` variable) near the top of the `<script>` section, and edit the text string values.
 
 You can put any HTML tags you want and they will be rendered in the flash card. You can use this to display images in the flash cards.
+
+Alternatively, if you don't know what a text editor is, you can use the form on [the TSOFA main page under the "Create Your Own TSOFA Flashcard Sets" section](https://inventwithpython.com/tsofa/).
 
 ### Array/JSON Format for Flashcards
 
