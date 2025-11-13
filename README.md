@@ -1,6 +1,6 @@
 # TSOFA: The Simple, Offline Flashcard App
 
-TSOFA ("tee-sofa") - The Simple, Offline, Flashcard App - is a flash card app that exists entirely in a single HTML file you can view in the browser. [Here is a basic demo.](/tsofa/tsofa.html)
+TSOFA ("tee-sofa") - The Simple, Offline, Flashcard App - is a flash card app that exists entirely in a single HTML file you can view in the browser. [Here is a basic demo.](https://inventwithpython.com/tsofa/tsofa.html)
 
 You can edit the flashcards directly in the file, using just text or HTML tags. It also supports a CSV string for the flashcard content so you can import flashcards from other apps. Otherwise, it's just a simple, free flashcard app: No server, no ads, no registration, no premium features to pay for, no dependencies, no build process, no cloud sync.
 
