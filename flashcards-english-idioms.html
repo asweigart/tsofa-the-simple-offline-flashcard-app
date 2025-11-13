@@ -1,0 +1,1310 @@
+<!DOCTYPE html>
+<html lang="en">
+<script>
+const version = "1.0.0";
+
+// ===== MODIFY YOUR FLASHCARDS HERE =====
+const TOPIC = "English Idioms";
+
+// Option 1: Array of arrays format
+// English Idioms and Their Meanings flashcards
+// Copy and paste this into the FLASHCARDS variable in your TSOFA app
+
+let FLASHCARDS = [
+    // Common English Idioms
+    ["<b>A piece of cake</b>", "Something very easy to do"],
+    ["<b>Break a leg</b>", "Good luck (especially before a performance)"],
+    ["<b>Hit the nail on the head</b>", "To be exactly right about something"],
+    ["<b>Let the cat out of the bag</b>", "To reveal a secret accidentally"],
+    ["<b>Kill two birds with one stone</b>", "To accomplish two things with one action"],
+    ["<b>It's raining cats and dogs</b>", "It's raining heavily"],
+    ["<b>Bite the bullet</b>", "To face a difficult situation with courage"],
+    ["<b>Break the ice</b>", "To initiate conversation in an awkward situation"],
+    ["<b>Burn the midnight oil</b>", "To work late into the night"],
+    ["<b>Cost an arm and a leg</b>", "To be very expensive"],
+    ["<b>Cut corners</b>", "To do something poorly to save time or money"],
+    ["<b>Get cold feet</b>", "To become nervous about something"],
+    ["<b>Hit the sack</b>", "To go to bed"],
+    ["<b>Once in a blue moon</b>", "Very rarely"],
+    ["<b>Spill the beans</b>", "To reveal a secret"],
+    ["<b>The ball is in your court</b>", "It's your turn to take action"],
+    ["<b>Under the weather</b>", "Feeling sick"],
+    ["<b>When pigs fly</b>", "Something that will never happen"],
+    ["<b>Add fuel to the fire</b>", "To make a bad situation worse"],
+    ["<b>Barking up the wrong tree</b>", "To pursue a mistaken approach"],
+    ["<b>Beat around the bush</b>", "To avoid talking directly about something"],
+    ["<b>Bite off more than you can chew</b>", "To take on more than you can handle"],
+    ["<b>Blow off steam</b>", "To release anger or frustration"],
+    ["<b>Break someone's heart</b>", "To cause emotional pain to someone"],
+    ["<b>Call it a day</b>", "To stop working for the day"],
+    ["<b>Cross that bridge when you come to it</b>", "Deal with a problem when it arises"],
+    ["<b>Cry over spilled milk</b>", "To waste time worrying about past mistakes"],
+    ["<b>Cut to the chase</b>", "Get to the point"],
+    ["<b>Don't count your chickens before they hatch</b>", "Don't assume success before it happens"],
+    ["<b>Every cloud has a silver lining</b>", "There's something good in every bad situation"],
+    ["<b>Feel blue</b>", "To feel sad"],
+    ["<b>Get out of hand</b>", "To become uncontrollable"],
+    ["<b>Give someone the cold shoulder</b>", "To ignore someone deliberately"],
+    ["<b>Go the extra mile</b>", "To make an extra effort"],
+    ["<b>Hit the books</b>", "To study hard"],
+    ["<b>In hot water</b>", "In trouble"],
+    ["<b>It takes two to tango</b>", "Both parties are responsible"],
+    ["<b>Jump on the bandwagon</b>", "To follow a popular trend"],
+    ["<b>Keep your chin up</b>", "Stay positive"],
+    ["<b>Let sleeping dogs lie</b>", "Don't disturb a situation that could cause trouble"],
+    ["<b>Make a long story short</b>", "To summarize briefly"],
+    ["<b>Miss the boat</b>", "To miss an opportunity"],
+    ["<b>No pain, no gain</b>", "You have to work hard to achieve something"],
+    ["<b>On cloud nine</b>", "Extremely happy"],
+    ["<b>Pull someone's leg</b>", "To joke with someone"],
+    ["<b>Put all your eggs in one basket</b>", "To risk everything on one plan"],
+    ["<b>See eye to eye</b>", "To agree completely"],
+    ["<b>Sit on the fence</b>", "To be undecided"],
+    ["<b>Steal someone's thunder</b>", "To take credit for someone else's work"],
+    ["<b>Take it with a grain of salt</b>", "Don't believe everything completely"],
+    ["<b>The best of both worlds</b>", "Having all the advantages"],
+    ["<b>Through thick and thin</b>", "In good times and bad"],
+    ["<b>Time flies when you're having fun</b>", "Time passes quickly during enjoyable activities"],
+    ["<b>To make matters worse</b>", "To make a situation even more difficult"],
+    ["<b>Turn a blind eye</b>", "To ignore something deliberately"],
+    ["<b>Two peas in a pod</b>", "Two people who are very similar"],
+    ["<b>Up in the air</b>", "Uncertain or undecided"],
+    ["<b>Walking on air</b>", "Feeling extremely happy"],
+    ["<b>You can't judge a book by its cover</b>", "Don't judge by appearances"],
+    ["<b>A blessing in disguise</b>", "Something bad that turns out good"],
+    ["<b>A dime a dozen</b>", "Very common and of little value"],
+    ["<b>Actions speak louder than words</b>", "What you do is more important than what you say"],
+    ["<b>All ears</b>", "Listening intently"],
+    ["<b>At the drop of a hat</b>", "Without hesitation"],
+    ["<b>Back to the drawing board</b>", "Start over with a new plan"],
+    ["<b>Beat a dead horse</b>", "To waste time on something that won't change"],
+    ["<b>Better late than never</b>", "It's better to arrive late than not at all"],
+    ["<b>Bite your tongue</b>", "To stop yourself from saying something"],
+    ["<b>Blessing in disguise</b>", "A misfortune that results in something good"],
+    ["<b>Blood is thicker than water</b>", "Family bonds are stronger than other relationships"],
+    ["<b>Burn bridges</b>", "To destroy relationships permanently"],
+    ["<b>By the skin of your teeth</b>", "Barely succeeding"],
+    ["<b>Can't hold a candle to</b>", "Not as good as something else"],
+    ["<b>Caught between a rock and a hard place</b>", "In a difficult situation with no good options"],
+    ["<b>Costs a pretty penny</b>", "Very expensive"],
+    ["<b>Curiosity killed the cat</b>", "Being too curious can be dangerous"],
+    ["<b>Devil's advocate</b>", "Someone who argues an opposing view for discussion"],
+    ["<b>Don't cry wolf</b>", "Don't ask for help when you don't need it"],
+    ["<b>Don't put all your eggs in one basket</b>", "Don't risk everything on one thing"],
+    ["<b>Down in the dumps</b>", "Feeling depressed"],
+    ["<b>Draw the line</b>", "To set a limit"],
+    ["<b>Easier said than done</b>", "More difficult to do than to say"],
+    ["<b>Elephant in the room</b>", "An obvious problem everyone ignores"],
+    ["<b>Face the music</b>", "To accept consequences"],
+    ["<b>Fit as a fiddle</b>", "In excellent health"],
+    ["<b>Get a taste of your own medicine</b>", "Experience what you've done to others"],
+    ["<b>Get your act together</b>", "To organize yourself"],
+    ["<b>Give the benefit of the doubt</b>", "To trust someone despite doubts"],
+    ["<b>Go back to square one</b>", "Start from the beginning"],
+    ["<b>Good things come to those who wait</b>", "Be patient"],
+    ["<b>Hang in there</b>", "Don't give up"],
+    ["<b>Have your cake and eat it too</b>", "Want everything without compromise"],
+    ["<b>Head over heels</b>", "Deeply in love"],
+    ["<b>Hear it on the grapevine</b>", "To hear rumors"],
+    ["<b>Hit the ground running</b>", "Start something energetically"],
+    ["<b>Hold your horses</b>", "Wait, be patient"],
+    ["<b>Ignorance is bliss</b>", "Not knowing something can be better"],
+    ["<b>In the heat of the moment</b>", "Acting without thinking due to strong emotions"],
+    ["<b>It's a piece of work</b>", "Something or someone difficult"],
+    ["<b>Jump the gun</b>", "To start too early"],
+    ["<b>Keep your fingers crossed</b>", "To hope for good luck"],
+    ["<b>Kick the bucket</b>", "To die"],
+    ["<b>Kill time</b>", "To do something while waiting"],
+    ["<b>Last straw</b>", "The final problem that causes action"],
+    ["<b>Learn the ropes</b>", "To learn how to do something"],
+    ["<b>Let bygones be bygones</b>", "Forget past conflicts"],
+    ["<b>Like two peas in a pod</b>", "Very similar"],
+    ["<b>Look before you leap</b>", "Think before acting"],
+    ["<b>Lose your touch</b>", "To lose an ability"],
+    ["<b>Make ends meet</b>", "To have enough money to live"],
+    ["<b>Method to my madness</b>", "Crazy behavior with a purpose"],
+    ["<b>Needle in a haystack</b>", "Something very difficult to find"],
+    ["<b>No use crying over spilt milk</b>", "Don't waste time on things that can't be changed"],
+    ["<b>Not playing with a full deck</b>", "Not mentally competent"],
+    ["<b>Off the hook</b>", "No longer in trouble"],
+    ["<b>On the ball</b>", "Alert and competent"],
+    ["<b>On thin ice</b>", "In a risky situation"],
+    ["<b>Out of the blue</b>", "Unexpectedly"],
+    ["<b>Over the moon</b>", "Extremely happy"],
+    ["<b>Paint the town red</b>", "Go out and celebrate"],
+    ["<b>Play devil's advocate</b>", "Argue the opposite for discussion"],
+    ["<b>Pull yourself together</b>", "Calm down and act normally"],
+    ["<b>Put your foot in your mouth</b>", "Say something embarrassing"],
+    ["<b>Rain on someone's parade</b>", "To spoil someone's plans"],
+    ["<b>Read between the lines</b>", "Understand the hidden meaning"],
+    ["<b>Ring a bell</b>", "Sound familiar"],
+    ["<b>Rock the boat</b>", "Cause trouble"],
+    ["<b>Rule of thumb</b>", "A general guideline"],
+    ["<b>Run like the wind</b>", "Run very fast"],
+    ["<b>Saved by the bell</b>", "Saved at the last moment"],
+    ["<b>Shoot from the hip</b>", "Speak without thinking"],
+    ["<b>Sick as a dog</b>", "Very sick"],
+    ["<b>Sitting duck</b>", "An easy target"],
+    ["<b>Skeletons in the closet</b>", "Hidden secrets from the past"],
+    ["<b>Sleep on it</b>", "Think about it overnight"],
+    ["<b>Speak of the devil</b>", "The person just mentioned arrives"],
+    ["<b>Steal the show</b>", "Get all the attention"],
+    ["<b>Straight from the horse's mouth</b>", "From a reliable source"],
+    ["<b>Take the bull by the horns</b>", "Face a problem directly"],
+    ["<b>The apple doesn't fall far from the tree</b>", "Children resemble their parents"],
+    ["<b>The early bird catches the worm</b>", "Success comes to those who act early"],
+    ["<b>The last laugh</b>", "Final victory"],
+    ["<b>The whole nine yards</b>", "Everything possible"],
+    ["<b>Throw in the towel</b>", "To give up"],
+    ["<b>Tie the knot</b>", "Get married"],
+    ["<b>Time is money</b>", "Time is valuable"],
+    ["<b>To each his own</b>", "Everyone has different preferences"],
+    ["<b>Too many cooks spoil the broth</b>", "Too many people involved ruins things"],
+    ["<b>Turn over a new leaf</b>", "Start behaving better"],
+    ["<b>Two wrongs don't make a right</b>", "Revenge doesn't solve problems"],
+    ["<b>Under your nose</b>", "Right in front of you"],
+    ["<b>Until the cows come home</b>", "For a very long time"],
+    ["<b>Variety is the spice of life</b>", "Differences make life interesting"],
+    ["<b>Water under the bridge</b>", "Past events that don't matter now"],
+    ["<b>Wear your heart on your sleeve</b>", "Show emotions openly"],
+    ["<b>Weather the storm</b>", "Survive difficult times"],
+    ["<b>When in Rome, do as the Romans do</b>", "Follow local customs"],
+    ["<b>Wild goose chase</b>", "A hopeless pursuit"],
+    ["<b>Wouldn't be caught dead</b>", "Would never do something"],
+    ["<b>Wrap your head around</b>", "Understand something difficult"],
+    ["<b>You can lead a horse to water</b>", "You can't force someone to do something"],
+    ["<b>Your guess is as good as mine</b>", "I don't know either"],
+    ["<b>Zip your lips</b>", "Be quiet"],
+    ["<b>A drop in the bucket</b>", "A very small amount"],
+    ["<b>A fool and his money are soon parted</b>", "Foolish people lose money easily"],
+    ["<b>A penny for your thoughts</b>", "What are you thinking about?"],
+    ["<b>A picture is worth a thousand words</b>", "Images convey meaning better than words"],
+    ["<b>A storm in a teacup</b>", "A big fuss about nothing"],
+    ["<b>Absence makes the heart grow fonder</b>", "Distance increases affection"],
+    ["<b>Add insult to injury</b>", "Make a bad situation worse"],
+    ["<b>Against the clock</b>", "In a race against time"],
+    ["<b>All bark and no bite</b>", "Threatening but not dangerous"],
+    ["<b>All in the same boat</b>", "In the same situation"],
+    ["<b>An apple a day keeps the doctor away</b>", "Healthy habits prevent illness"],
+    ["<b>As right as rain</b>", "Perfectly fine"],
+    ["<b>At a crossroads</b>", "At a point of decision"],
+    ["<b>At loggerheads</b>", "In strong disagreement"],
+    ["<b>Back to basics</b>", "Return to fundamental principles"],
+    ["<b>Bad apple</b>", "One bad person in a group"],
+    ["<b>Ball and chain</b>", "Something that limits freedom"],
+    ["<b>Baptism by fire</b>", "Difficult first experience"],
+    ["<b>Be all and end all</b>", "The most important thing"],
+    ["<b>Beat the clock</b>", "Finish before deadline"],
+    ["<b>Beauty is in the eye of the beholder</b>", "Perception of beauty is subjective"],
+    ["<b>Beggars can't be choosers</b>", "Accept what you're given when desperate"],
+    ["<b>Behind closed doors</b>", "In private"],
+    ["<b>Bell the cat</b>", "Take on a dangerous task"],
+    ["<b>Best thing since sliced bread</b>", "An excellent innovation"],
+    ["<b>Between the devil and the deep blue sea</b>", "Between two bad choices"],
+    ["<b>Beyond the pale</b>", "Unacceptable behavior"],
+    ["<b>Big fish in a small pond</b>", "Important person in a small group"],
+    ["<b>Birds of a feather flock together</b>", "Similar people associate together"],
+    ["<b>Bite the hand that feeds you</b>", "Harm someone who helps you"],
+    ["<b>Black sheep</b>", "Disreputable family member"],
+    ["<b>Blow hot and cold</b>", "Be inconsistent"],
+    ["<b>Blue in the face</b>", "Exhausted from effort"],
+    ["<b>Born with a silver spoon</b>", "Born wealthy"],
+    ["<b>Bottom line</b>", "The essential point"],
+    ["<b>Bread and butter</b>", "Basic source of income"],
+    ["<b>Bring home the bacon</b>", "Earn money for family"],
+    ["<b>Bury the hatchet</b>", "End a conflict"],
+    ["<b>Butter someone up</b>", "Flatter for favor"],
+    ["<b>By hook or by crook</b>", "By any means necessary"],
+    ["<b>Can of worms</b>", "A complicated problem"],
+    ["<b>Card up your sleeve</b>", "A secret advantage"],
+    ["<b>Cast in stone</b>", "Unchangeable"],
+    ["<b>Catch 22</b>", "A paradoxical situation"],
+    ["<b>Caught red-handed</b>", "Caught in the act"],
+    ["<b>Charity begins at home</b>", "Take care of family first"],
+    ["<b>Cheap as chips</b>", "Very inexpensive"],
+    ["<b>Chickens come home to roost</b>", "Face consequences of actions"],
+    ["<b>Chip on your shoulder</b>", "Holding a grudge"],
+    ["<b>Clear as mud</b>", "Very confusing"],
+    ["<b>Close but no cigar</b>", "Almost but not quite"],
+    ["<b>Clutch at straws</b>", "Try anything in desperation"],
+    ["<b>Cold comfort</b>", "Little consolation"],
+    ["<b>Come hell or high water</b>", "No matter what happens"],
+    ["<b>Cook the books</b>", "Falsify financial records"],
+    ["<b>Cool as a cucumber</b>", "Very calm"],
+    ["<b>Couch potato</b>", "Lazy person who watches TV"],
+    ["<b>Cross your fingers</b>", "Hope for good luck"],
+    ["<b>Cry wolf</b>", "False alarm"],
+    ["<b>Cut and dried</b>", "Already decided"],
+    ["<b>Cut from the same cloth</b>", "Very similar"],
+    ["<b>Dark horse</b>", "Unexpected winner"],
+    ["<b>Dead as a doornail</b>", "Completely dead"],
+    ["<b>Dead ringer</b>", "Exact duplicate"],
+    ["<b>Diamond in the rough</b>", "Good person with rough exterior"],
+    ["<b>Different kettle of fish</b>", "Completely different matter"],
+    ["<b>Dog days</b>", "Hot summer days"],
+    ["<b>Don't look a gift horse in the mouth</b>", "Don't criticize a gift"],
+    ["<b>Double-edged sword</b>", "Something with both advantages and disadvantages"],
+    ["<b>Down to earth</b>", "Practical and realistic"],
+    ["<b>Drive up the wall</b>", "Annoy greatly"],
+    ["<b>Drop in the ocean</b>", "Very small amount"],
+    ["<b>Dry run</b>", "Practice session"],
+    ["<b>Dutch courage</b>", "Confidence from alcohol"],
+    ["<b>Eagle eye</b>", "Sharp observation"],
+    ["<b>Early to bed, early to rise</b>", "Good sleep habits bring success"],
+    ["<b>Easy come, easy go</b>", "Gained and lost easily"],
+    ["<b>Eat humble pie</b>", "Admit you were wrong"],
+    ["<b>Egg on your face</b>", "Look foolish"],
+    ["<b>Eleventh hour</b>", "Last possible moment"],
+    ["<b>Empty vessels make the most noise</b>", "Ignorant people talk most"],
+    ["<b>End of the line</b>", "The final point"],
+    ["<b>Every dog has its day</b>", "Everyone gets a chance"],
+    ["<b>Eye for an eye</b>", "Equal retaliation"],
+    ["<b>Fair and square</b>", "Honestly"],
+    ["<b>Fall on deaf ears</b>", "Be ignored"],
+    ["<b>Familiarity breeds contempt</b>", "Too much familiarity causes disrespect"],
+    ["<b>Feather in your cap</b>", "An achievement"],
+    ["<b>Few and far between</b>", "Rare"],
+    ["<b>Fifth wheel</b>", "Unnecessary person"],
+    ["<b>Fight fire with fire</b>", "Use same tactics as opponent"],
+    ["<b>Fish out of water</b>", "Out of place"],
+    ["<b>Flash in the pan</b>", "Brief success"],
+    ["<b>Fly by night</b>", "Unreliable"],
+    ["<b>Fly off the handle</b>", "Lose temper suddenly"],
+    ["<b>Fool's gold</b>", "Something that appears valuable but isn't"],
+    ["<b>Forbidden fruit</b>", "Something desired because it's prohibited"],
+    ["<b>Fortune favors the brave</b>", "Courage brings success"],
+    ["<b>From rags to riches</b>", "From poverty to wealth"],
+    ["<b>Full of beans</b>", "Energetic"],
+    ["<b>Get the show on the road</b>", "Start something"],
+    ["<b>Get up on the wrong side of the bed</b>", "Start the day badly"],
+    ["<b>Get wind of</b>", "Hear about something"],
+    ["<b>Give and take</b>", "Compromise"],
+    ["<b>Give someone a run for their money</b>", "Provide strong competition"],
+    ["<b>Go down in flames</b>", "Fail spectacularly"],
+    ["<b>Go for broke</b>", "Risk everything"],
+    ["<b>Go out on a limb</b>", "Take a risk"],
+    ["<b>Go with the flow</b>", "Accept things as they are"],
+    ["<b>Golden opportunity</b>", "Perfect chance"],
+    ["<b>Grasp at straws</b>", "Try desperate measures"],
+    ["<b>Grease someone's palm</b>", "Bribe"],
+    ["<b>Green thumb</b>", "Good at gardening"],
+    ["<b>Green with envy</b>", "Very jealous"],
+    ["<b>Grin and bear it</b>", "Accept something unpleasant"],
+    ["<b>Guilty pleasure</b>", "Something enjoyed despite feeling guilty"],
+    ["<b>Half-baked</b>", "Not well planned"],
+    ["<b>Hands are tied</b>", "Unable to act"],
+    ["<b>Haste makes waste</b>", "Rushing causes mistakes"],
+    ["<b>Have a bone to pick</b>", "Have a complaint"],
+    ["<b>Have bigger fish to fry</b>", "Have more important things to do"],
+    ["<b>He who laughs last laughs longest</b>", "Final victory is best"],
+    ["<b>Heart in your mouth</b>", "Very nervous"],
+    ["<b>Heart of gold</b>", "Very kind person"],
+    ["<b>Hell bent</b>", "Determined"],
+    ["<b>High and dry</b>", "Abandoned"],
+    ["<b>Hit below the belt</b>", "Unfair attack"],
+    ["<b>Hit the road</b>", "Leave"],
+    ["<b>Hold the fort</b>", "Take care of things temporarily"],
+    ["<b>Hook, line and sinker</b>", "Completely deceived"],
+    ["<b>Hot potato</b>", "Controversial issue"],
+    ["<b>In a nutshell</b>", "In summary"],
+    ["<b>In deep water</b>", "In serious trouble"],
+    ["<b>In dire straits</b>", "In terrible trouble"],
+    ["<b>In the black</b>", "Profitable"],
+    ["<b>In the red</b>", "In debt"],
+    ["<b>Iron out the wrinkles</b>", "Solve small problems"],
+    ["<b>It never rains but it pours</b>", "Problems come all at once"],
+    ["<b>Jack of all trades</b>", "Person with many skills"],
+    ["<b>Jump ship</b>", "Leave a failing situation"],
+    ["<b>Keep something at bay</b>", "Keep something away"],
+    ["<b>Keep your eyes peeled</b>", "Watch carefully"],
+    ["<b>Keep your nose clean</b>", "Stay out of trouble"],
+    ["<b>Kick the habit</b>", "Stop a bad habit"],
+    ["<b>Know the ropes</b>", "Be experienced"],
+    ["<b>Labor of love</b>", "Work done for pleasure"],
+    ["<b>Larger than life</b>", "Impressive personality"],
+    ["<b>Laugh up your sleeve</b>", "Laugh secretly"],
+    ["<b>Lay your cards on the table</b>", "Be honest"],
+    ["<b>Leave no stone unturned</b>", "Try everything"],
+    ["<b>Let the dust settle</b>", "Wait for calm"],
+    ["<b>Level playing field</b>", "Fair competition"],
+    ["<b>Life in the fast lane</b>", "Exciting but risky lifestyle"],
+    ["<b>Light at the end of the tunnel</b>", "Hope after difficulty"],
+    ["<b>Like a bull in a china shop</b>", "Clumsy in delicate situation"],
+    ["<b>Like clockwork</b>", "Very regular"],
+    ["<b>Live and learn</b>", "Learn from experience"],
+    ["<b>Living on borrowed time</b>", "Living beyond expected time"],
+    ["<b>Lock horns</b>", "Argue"],
+    ["<b>Long shot</b>", "Unlikely to succeed"],
+    ["<b>Look a million dollars</b>", "Look very good"],
+    ["<b>Loose cannon</b>", "Unpredictable person"],
+    ["<b>Lost cause</b>", "Hopeless situation"],
+    ["<b>Make a mountain out of a molehill</b>", "Exaggerate a problem"],
+    ["<b>Make hay while the sun shines</b>", "Take advantage of opportunity"],
+    ["<b>Make no bones about it</b>", "Be direct"],
+    ["<b>Make waves</b>", "Cause trouble"],
+    ["<b>Mind over matter</b>", "Mental strength overcomes physical"],
+    ["<b>Money doesn't grow on trees</b>", "Money is limited"],
+    ["<b>Nip in the bud</b>", "Stop early"],
+    ["<b>Not all it's cracked up to be</b>", "Not as good as expected"],
+    ["<b>Nothing ventured, nothing gained</b>", "Must take risks for rewards"],
+    ["<b>Nuts and bolts</b>", "Basic details"],
+    ["<b>Off the beaten track</b>", "Away from usual places"],
+    ["<b>Old habits die hard</b>", "Difficult to change habits"],
+    ["<b>On pins and needles</b>", "Very anxious"],
+    ["<b>On the fence</b>", "Undecided"],
+    ["<b>On the same wavelength</b>", "Thinking alike"],
+    ["<b>Once bitten, twice shy</b>", "Cautious after bad experience"],
+    ["<b>Out of sight, out of mind</b>", "Forgotten when not seen"],
+    ["<b>Out of the frying pan into the fire</b>", "From bad to worse"],
+    ["<b>Over my dead body</b>", "Never"],
+    ["<b>Paper tiger</b>", "Something that seems powerful but isn't"],
+    ["<b>Pass the buck</b>", "Shift responsibility"],
+    ["<b>Pay through the nose</b>", "Pay too much"],
+    ["<b>Pearl of wisdom</b>", "Wise saying"],
+    ["<b>Penny wise, pound foolish</b>", "Save small amounts but waste large"],
+    ["<b>Play it by ear</b>", "Improvise"],
+    ["<b>Play second fiddle</b>", "Be less important"],
+    ["<b>Practice makes perfect</b>", "Improvement through repetition"],
+    ["<b>Preaching to the choir</b>", "Convincing those already convinced"],
+    ["<b>Pride comes before a fall</b>", "Arrogance leads to failure"],
+    ["<b>Push the envelope</b>", "Exceed limits"],
+    ["<b>Put on your thinking cap</b>", "Think hard"],
+    ["<b>Put the cart before the horse</b>", "Do things in wrong order"],
+    ["<b>Put your best foot forward</b>", "Make best effort"],
+    ["<b>Put your money where your mouth is</b>", "Support words with action"],
+    ["<b>Quick as a flash</b>", "Very fast"],
+    ["<b>Quiet as a mouse</b>", "Very quiet"],
+    ["<b>Rags to riches</b>", "From poverty to wealth"],
+    ["<b>Rain check</b>", "Postpone to later"],
+    ["<b>Raise the bar</b>", "Set higher standards"],
+    ["<b>Red herring</b>", "Misleading clue"],
+    ["<b>Red tape</b>", "Bureaucratic procedures"],
+    ["<b>Rome wasn't built in a day</b>", "Important things take time"],
+    ["<b>Rub salt in the wound</b>", "Make things worse"],
+    ["<b>Run of the mill</b>", "Ordinary"],
+    ["<b>Safe and sound</b>", "Unharmed"],
+    ["<b>Sail close to the wind</b>", "Take risks"],
+    ["<b>Salt of the earth</b>", "Good, honest person"],
+    ["<b>Save for a rainy day</b>", "Save for future need"],
+    ["<b>Scarce as hen's teeth</b>", "Very rare"],
+    ["<b>Scrape the barrel</b>", "Use last resources"],
+    ["<b>Sell like hot cakes</b>", "Sell quickly"],
+    ["<b>Separate the wheat from the chaff</b>", "Distinguish valuable from worthless"],
+    ["<b>Ships that pass in the night</b>", "Brief encounter"],
+    ["<b>Short and sweet</b>", "Brief but good"],
+    ["<b>Shot in the dark</b>", "Random guess"],
+    ["<b>Show your true colors</b>", "Reveal real character"],
+    ["<b>Silver lining</b>", "Good aspect of bad situation"],
+    ["<b>Sink or swim</b>", "Succeed or fail by own efforts"],
+    ["<b>Sixth sense</b>", "Intuition"],
+    ["<b>Skating on thin ice</b>", "In dangerous situation"],
+    ["<b>Slow and steady wins the race</b>", "Persistence succeeds"],
+    ["<b>Small fry</b>", "Unimportant person"],
+    ["<b>Smoke and mirrors</b>", "Deception"],
+    ["<b>Smooth sailing</b>", "Easy progress"],
+    ["<b>Snake in the grass</b>", "Hidden enemy"],
+    ["<b>Snowball effect</b>", "Growing rapidly"],
+    ["<b>Spitting image</b>", "Exact likeness"],
+    ["<b>Square peg in a round hole</b>", "Doesn't fit in"],
+    ["<b>Stab in the back</b>", "Betray"],
+    ["<b>Stand your ground</b>", "Maintain position"],
+    ["<b>Stars in your eyes</b>", "Unrealistic hopes"],
+    ["<b>Steer clear</b>", "Avoid"],
+    ["<b>Still waters run deep</b>", "Quiet people are complex"],
+    ["<b>Storm in a teacup</b>", "Big fuss about nothing"],
+    ["<b>Strike while the iron is hot</b>", "Act at the right time"],
+    ["<b>Stubborn as a mule</b>", "Very stubborn"],
+    ["<b>Swallow your pride</b>", "Accept humiliation"],
+    ["<b>Sweet tooth</b>", "Love of sweet foods"],
+    ["<b>Take the cake</b>", "Be the most extreme example"],
+    ["<b>Talk shop</b>", "Discuss work"],
+    ["<b>Taste of your own medicine</b>", "Experience what you do to others"],
+    ["<b>Teach an old dog new tricks</b>", "Change established habits"],
+    ["<b>Test the waters</b>", "Try carefully"],
+    ["<b>The ball's in your court</b>", "Your turn to act"],
+    ["<b>The bee's knees</b>", "Excellent"],
+    ["<b>The big picture</b>", "Overall view"],
+    ["<b>The buck stops here</b>", "Take final responsibility"],
+    ["<b>The proof is in the pudding</b>", "Results show the truth"],
+    ["<b>The tip of the iceberg</b>", "Small visible part of large problem"],
+    ["<b>There's no smoke without fire</b>", "Rumors have some truth"],
+    ["<b>Thick and fast</b>", "Rapidly"],
+    ["<b>Think outside the box</b>", "Think creatively"],
+    ["<b>Third time's a charm</b>", "Third attempt succeeds"],
+    ["<b>Tighten your belt</b>", "Reduce spending"],
+    ["<b>Till the cows come home</b>", "For a very long time"],
+    ["<b>Tip of the tongue</b>", "Almost remembered"],
+    ["<b>To be up in arms</b>", "Very angry"],
+    ["<b>Tongue in cheek</b>", "Not serious"],
+    ["<b>Too little, too late</b>", "Insufficient and overdue"],
+    ["<b>Touch and go</b>", "Uncertain outcome"],
+    ["<b>Tough cookie</b>", "Strong person"],
+    ["<b>Train of thought</b>", "Connected ideas"],
+    ["<b>Tread on thin ice</b>", "Be in risky situation"],
+    ["<b>Trick of the trade</b>", "Professional technique"],
+    ["<b>True blue</b>", "Loyal"],
+    ["<b>Turn the tables</b>", "Reverse situation"],
+    ["<b>Twenty-four seven</b>", "All the time"],
+    ["<b>Twist someone's arm</b>", "Persuade forcefully"],
+    ["<b>Two cents worth</b>", "Personal opinion"],
+    ["<b>Under someone's thumb</b>", "Under control"],
+    ["<b>Up a creek without a paddle</b>", "In trouble without help"],
+    ["<b>Up for grabs</b>", "Available"],
+    ["<b>Upper hand</b>", "Advantage"],
+    ["<b>Upset the apple cart</b>", "Disrupt plans"],
+    ["<b>Vanish into thin air</b>", "Disappear completely"],
+    ["<b>Vicious circle</b>", "Self-perpetuating problem"],
+    ["<b>Walk on eggshells</b>", "Be very careful"],
+    ["<b>Wash your hands of</b>", "Refuse responsibility"],
+    ["<b>Watch your back</b>", "Be careful of danger"],
+    ["<b>Wave a white flag</b>", "Surrender"],
+    ["<b>Weak at the knees</b>", "Feel weak from emotion"],
+    ["<b>Wear many hats</b>", "Have many roles"],
+    ["<b>Well oiled machine</b>", "Efficient operation"],
+    ["<b>Wet behind the ears</b>", "Inexperienced"],
+    ["<b>What goes around comes around</b>", "Actions have consequences"],
+    ["<b>When hell freezes over</b>", "Never"],
+    ["<b>When push comes to shove</b>", "When decisive action needed"],
+    ["<b>Where there's a will, there's a way</b>", "Determination finds solutions"],
+    ["<b>White elephant</b>", "Expensive but useless"],
+    ["<b>Whole shebang</b>", "Everything"],
+    ["<b>Win hands down</b>", "Win easily"],
+    ["<b>Wind up</b>", "End up"],
+    ["<b>Wing it</b>", "Improvise"],
+    ["<b>Wolf in sheep's clothing</b>", "Dangerous person disguised as harmless"],
+    ["<b>Work like a dog</b>", "Work very hard"],
+    ["<b>Worth its weight in gold</b>", "Very valuable"],
+    ["<b>Written in stone</b>", "Unchangeable"],
+    ["<b>X marks the spot</b>", "Exact location"],
+    ["<b>Year in, year out</b>", "Every year"],
+    ["<b>You can't have it both ways</b>", "Must choose one option"],
+    ["<b>You can't make an omelet without breaking eggs</b>", "Can't achieve without sacrifice"],
+    ["<b>You can't teach an old dog new tricks</b>", "Hard to change old habits"],
+    ["<b>You reap what you sow</b>", "Get results of your actions"],
+    ["<b>Your heart sinks</b>", "Feel disappointed"],
+    ["<b>Zero hour</b>", "Critical moment"]
+];
+
+
+// Option 2: CSV string format (uncomment to use)
+/*
+let FLASHCARDS = `"What is the capital of France?","Paris"
+"What is 2 + 2?","4"
+"What is the largest planet in our solar system?","<b>Jupiter</b><br><i>It has a mass of 1.898 × 10²⁷ kg</i>"
+"What year did World War II end?","1945"
+"Who wrote 'Romeo and Juliet'?","William Shakespeare"
+"What is HTML?","<b>HyperText Markup Language</b><br>The standard markup language for creating web pages"`;
+*/
+    // ========================================
+
+    // Update page title if TOPIC is set
+    if (TOPIC && TOPIC.trim() !== "") {
+        document.title = "TSOFA - " + TOPIC;
+    }
+</script>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TSOFA - The Simple, Offline Flashcard App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            background-color: #f0f0f0;
+            margin: 0;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 600px;
+            width: 100%;
+        }
+
+        .card-counter {
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 18px;
+            color: #555;
+        }
+
+        .flashcard {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            min-height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            margin-bottom: 20px;
+            user-select: none;
+            transition: transform 0.1s;
+        }
+
+        .flashcard:hover {
+            transform: scale(1.02);
+        }
+
+        .flashcard:active {
+            transform: scale(0.98);
+        }
+
+        .flashcard-content {
+            font-size: 20px;
+            line-height: 1.5;
+            width: 100%;
+        }
+
+        .flashcard-content.centered {
+            text-align: center;
+        }
+
+        .flashcard-content.left-aligned {
+            text-align: left;
+            white-space: pre-wrap;
+        }
+
+        .controls {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .secondary-controls {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr) auto auto;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .secondary-controls button {
+            font-size: 16px;
+            height: 72px;
+            padding: 0 16px;
+        }
+
+        .font-size-btn {
+            width: 72px;
+            padding: 0 !important;
+        }
+
+        .remove-btn {
+            background-color: #dc3545;
+        }
+
+        .remove-btn:hover {
+            background-color: #c82333;
+        }
+
+        .undo-btn {
+            background-color: #17a2b8;
+        }
+
+        .undo-btn:hover:not(:disabled) {
+            background-color: #138496;
+        }
+
+        .undo-btn:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+
+        .font-size-controls {
+            display: flex;
+            gap: 5px;
+        }
+
+        .font-size-btn {
+            width: 72px;
+            padding: 0 !important;
+            font-size: 24px !important;
+            line-height: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #6c757d;
+        }
+
+        .font-size-btn:hover {
+            background-color: #5a6268;
+        }
+
+        .checkbox-label {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 16px;
+            color: #333;
+            cursor: pointer;
+            user-select: none;
+            padding: 0 10px;
+            height: 72px;
+        }
+
+        .checkbox-label input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+
+        button {
+            padding: 12px 20px;
+            font-size: 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        button:active {
+            transform: scale(0.95);
+        }
+
+        button:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+
+        .timer-row {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #ddd;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .timer-display {
+            font-family: 'Courier New', monospace;
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+            min-width: 120px;
+            text-align: center;
+        }
+
+        .timer-btn {
+            background-color: #17a2b8;
+            padding: 10px 20px;
+            font-size: 16px;
+        }
+
+        .timer-btn:hover {
+            background-color: #138496;
+        }
+
+        .timer-btn.pause {
+            background-color: #ffc107;
+        }
+
+        .timer-btn.pause:hover {
+            background-color: #e0a800;
+        }
+
+        .reset-btn {
+            background-color: #6c757d;
+            padding: 10px 20px;
+            font-size: 16px;
+        }
+
+        .reset-btn:hover {
+            background-color: #5a6268;
+        }
+
+        .print-row {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #ddd;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .print-btn {
+            background-color: #6c757d;
+            padding: 10px 30px;
+            font-size: 16px;
+        }
+
+        .print-btn:hover {
+            background-color: #5a6268;
+        }
+
+        @media print {
+            body {
+                background: white;
+                padding: 20px;
+            }
+
+            .container {
+                display: none;
+            }
+
+            .print-table {
+                display: table !important;
+                width: 100%;
+                border-collapse: collapse;
+                font-family: Arial, sans-serif;
+            }
+
+            .print-table thead {
+                display: none;
+            }
+
+            .print-table td {
+                border: 1px solid #999;
+                padding: 10px;
+                text-align: left;
+                vertical-align: top;
+                width: 50%;
+            }
+
+            .print-table tr:nth-child(even) {
+                background-color: #f9f9f9;
+            }
+
+            .print-header {
+                display: none !important;
+            }
+        }
+
+        .print-table {
+            display: none;
+        }
+
+        .print-header {
+            display: none;
+        }
+
+        .flip-btn {
+            background-color: #28a745;
+        }
+
+        .flip-btn:hover {
+            background-color: #218838;
+        }
+
+        .shuffle-btn {
+            background-color: #ffc107;
+            color: #333;
+        }
+
+        .shuffle-btn:hover {
+            background-color: #e0a800;
+        }
+
+        .invert-btn {
+            background-color: #dc3545;
+        }
+
+        .invert-btn:hover {
+            background-color: #c82333;
+        }
+
+        .nav-btn {
+            background-color: #6c757d;
+        }
+
+        .nav-btn:hover {
+            background-color: #5a6268;
+        }
+
+        .instructions {
+            text-align: center;
+            color: #666;
+            margin-top: 20px;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        <p style="text-align: center; color: #666; margin-top: -10px; font-size: 14px;"><a href="https://inventwithpython.com/tsofa/">TSOFA - The Simple, Offline Flashcard App by Al Sweigart</a></p>
+        <h2 id="topicHeading" style="text-align: center; color: #555; margin-top: 10px; margin-bottom: 20px; display: none;"></h2>
+
+        <div class="card-counter" id="cardCounter">Card 1 of 2</div>
+
+        <div class="flashcard" id="flashcard" onclick="flipCard()">
+            <div class="flashcard-content" id="cardContent"></div>
+        </div>
+
+        <div class="controls">
+            <button onclick="goToFirst()" class="nav-btn" title="First">⇤</button>
+            <button onclick="prevCard()" id="prevBtn" title="Previous (left)">←</button>
+            <button onclick="flipCard()" class="flip-btn" title="Flip (space)">⤾</button>
+            <button onclick="nextCard()" id="nextBtn" title="Next (right)">→</button>
+            <button onclick="goToLast()" class="nav-btn" title="Last">⇥</button>
+        </div>
+
+        <div class="secondary-controls">
+            <button onclick="shuffleCards()" class="shuffle-btn">Shuffle Cards</button>
+            <button onclick="invertCards()" class="invert-btn">Invert Q/A</button>
+            <button onclick="removeCard()" class="remove-btn">Remove Current Card</button>
+            <button onclick="undoRemove()" class="undo-btn" id="undoBtn">Undo Last Remove</button>
+            <div class="font-size-controls">
+                <button onclick="decreaseFontSize()" class="font-size-btn" title="Decrease font size">−</button>
+                <button onclick="increaseFontSize()" class="font-size-btn" title="Increase font size">+</button>
+            </div>
+            <label class="checkbox-label">
+                <input type="checkbox" id="centerCheckbox" checked onchange="toggleCenter()">
+                Center
+            </label>
+        </div>
+
+        <div class="timer-row">
+            <div class="timer-display" id="timerDisplay">00:00:00</div>
+            <button onclick="toggleTimer()" class="timer-btn" id="timerBtn">Start Timer</button>
+            <button onclick="resetTimer()" class="reset-btn">Reset Timer</button>
+        </div>
+
+        <div class="print-row">
+            <button onclick="printFlashcards()" class="print-btn">Print</button>
+        </div>
+
+        <div class="instructions">
+            <strong>Keyboard shortcuts:</strong><br>
+            Space: Flip card | ← →: Navigate cards<br>
+            Click the card to flip it
+        </div>
+    </div>
+
+    <!-- Print-only content -->
+    <div class="print-header" id="printHeader">
+        <h2>TSOFA Flashcards</h2>
+        <h3 id="printTopic"></h3>
+    </div>
+    <table class="print-table" id="printTable">
+        <thead>
+            <tr>
+                <th>Question</th>
+                <th>Answer</th>
+            </tr>
+        </thead>
+        <tbody id="printTableBody">
+        </tbody>
+    </table>
+
+    <script>
+        // Parse CSV string to array format
+        function parseCSV(csvString) {
+            const rows = [];
+            let currentRow = [];
+            let currentField = '';
+            let inQuotes = false;
+            let i = 0;
+
+            while (i < csvString.length) {
+                const char = csvString[i];
+                const nextChar = csvString[i + 1];
+
+                if (!inQuotes) {
+                    if (char === '"') {
+                        inQuotes = true;
+                    } else if (char === ',') {
+                        currentRow.push(currentField);
+                        currentField = '';
+                    } else if (char === '\n' || (char === '\r' && nextChar === '\n')) {
+                        currentRow.push(currentField);
+                        if (currentRow.length > 0 && (currentRow[0] !== '' || currentRow.length > 1)) {
+                            rows.push(currentRow);
+                        }
+                        currentRow = [];
+                        currentField = '';
+                        if (char === '\r' && nextChar === '\n') {
+                            i++; // Skip the \n in \r\n
+                        }
+                    } else {
+                        currentField += char;
+                    }
+                } else {
+                    if (char === '"' && nextChar === '"') {
+                        currentField += '"';
+                        i++; // Skip the next quote
+                    } else if (char === '"') {
+                        inQuotes = false;
+                    } else {
+                        currentField += char;
+                    }
+                }
+                i++;
+            }
+
+            // Handle the last field and row
+            if (currentField !== '' || currentRow.length > 0) {
+                currentRow.push(currentField);
+                if (currentRow.length > 0 && (currentRow[0] !== '' || currentRow.length > 1)) {
+                    rows.push(currentRow);
+                }
+            }
+
+            // Ensure each row has exactly 2 columns (question and answer)
+            return rows.map(row => {
+                if (row.length === 0) return ['', ''];
+                if (row.length === 1) return [row[0], ''];
+                return [row[0], row[1]];
+            }).filter(row => row[0] !== '' || row[1] !== ''); // Remove completely empty rows
+        }
+
+        // Process FLASHCARDS whether it's an array or CSV string
+        let processedFlashcards;
+        if (typeof FLASHCARDS === 'string') {
+            processedFlashcards = parseCSV(FLASHCARDS);
+        } else {
+            processedFlashcards = FLASHCARDS;
+        }
+
+        // App state
+        let currentCards = [...processedFlashcards];
+        let currentIndex = 0;
+        let showingQuestion = true;
+        let isInverted = false;
+        let currentFontSize = 20; // Default font size in pixels
+        let removedCards = []; // Stack to store removed cards for undo
+
+        // Initialize the app
+        function init() {
+            // Display topic if set
+            if (TOPIC && TOPIC.trim() !== "") {
+                const topicHeading = document.getElementById('topicHeading');
+                topicHeading.textContent = "Topic: " + TOPIC;
+                topicHeading.style.display = 'block';
+            }
+
+            displayCard();
+            updateButtons();
+            updateCounter();
+            updateTextAlignment();
+            updateFontSize();
+            updateUndoButton();
+        }
+
+        // Display current card
+        function displayCard() {
+            const cardContent = document.getElementById('cardContent');
+            const card = currentCards[currentIndex];
+
+            if (!card) {
+                cardContent.innerHTML = "No flashcards available";
+                return;
+            }
+
+            const questionIndex = isInverted ? 1 : 0;
+            const answerIndex = isInverted ? 0 : 1;
+
+            if (showingQuestion) {
+                cardContent.innerHTML = card[questionIndex];
+            } else {
+                cardContent.innerHTML = card[answerIndex];
+            }
+
+            // Apply centering based on checkbox
+            updateTextAlignment();
+        }
+
+        // Toggle center alignment
+        function toggleCenter() {
+            updateTextAlignment();
+        }
+
+        // Update text alignment based on checkbox state
+        function updateTextAlignment() {
+            const cardContent = document.getElementById('cardContent');
+            const centerCheckbox = document.getElementById('centerCheckbox');
+
+            if (centerCheckbox.checked) {
+                cardContent.classList.remove('left-aligned');
+                cardContent.classList.add('centered');
+            } else {
+                cardContent.classList.remove('centered');
+                cardContent.classList.add('left-aligned');
+            }
+        }
+
+        // Increase font size
+        function increaseFontSize() {
+            if (currentFontSize < 48) { // Maximum font size
+                currentFontSize += 4;
+                updateFontSize();
+            }
+        }
+
+        // Decrease font size
+        function decreaseFontSize() {
+            if (currentFontSize > 12) { // Minimum font size
+                currentFontSize -= 4;
+                updateFontSize();
+            }
+        }
+
+        // Update the font size of the flashcard content
+        function updateFontSize() {
+            const cardContent = document.getElementById('cardContent');
+            cardContent.style.fontSize = currentFontSize + 'px';
+        }
+
+        // Remove current card
+        function removeCard() {
+            if (currentCards.length === 0) return;
+
+            // Store removed card with its index for undo
+            removedCards.push({
+                card: currentCards[currentIndex],
+                index: currentIndex
+            });
+
+            // Remove card from current deck
+            currentCards.splice(currentIndex, 1);
+
+            // Adjust current index if necessary
+            if (currentCards.length === 0) {
+                currentIndex = 0;
+            } else if (currentIndex >= currentCards.length) {
+                currentIndex = currentCards.length - 1;
+            }
+
+            // Reset to question side
+            showingQuestion = true;
+
+            // Update display
+            displayCard();
+            updateButtons();
+            updateCounter();
+            updateUndoButton();
+        }
+
+        // Undo last card removal
+        function undoRemove() {
+            if (removedCards.length === 0) return;
+
+            // Get the last removed card
+            const lastRemoved = removedCards.pop();
+
+            // Insert card back at its original position or at the end if position is invalid
+            const insertIndex = Math.min(lastRemoved.index, currentCards.length);
+            currentCards.splice(insertIndex, 0, lastRemoved.card);
+
+            // Set current index to the restored card
+            currentIndex = insertIndex;
+            showingQuestion = true;
+
+            // Update display
+            displayCard();
+            updateButtons();
+            updateCounter();
+            updateUndoButton();
+        }
+
+        // Update undo button state
+        function updateUndoButton() {
+            const undoBtn = document.getElementById('undoBtn');
+            undoBtn.disabled = removedCards.length === 0;
+        }
+
+        // Flip the current card
+        function flipCard() {
+            showingQuestion = !showingQuestion;
+            displayCard();
+        }
+
+        // Navigate to next card
+        function nextCard() {
+            if (currentIndex < currentCards.length - 1) {
+                currentIndex++;
+                showingQuestion = true;
+                displayCard();
+                updateButtons();
+                updateCounter();
+            }
+        }
+
+        // Navigate to previous card
+        function prevCard() {
+            if (currentIndex > 0) {
+                currentIndex--;
+                showingQuestion = true;
+                displayCard();
+                updateButtons();
+                updateCounter();
+            }
+        }
+
+        // Go to first card
+        function goToFirst() {
+            currentIndex = 0;
+            showingQuestion = true;
+            displayCard();
+            updateButtons();
+            updateCounter();
+        }
+
+        // Go to last card
+        function goToLast() {
+            currentIndex = currentCards.length - 1;
+            showingQuestion = true;
+            displayCard();
+            updateButtons();
+            updateCounter();
+        }
+
+        // Shuffle the cards
+        function shuffleCards() {
+            // Reset to original cards before shuffling
+            currentCards = [...processedFlashcards];
+            // Clear removed cards history
+            removedCards = [];
+            for (let i = currentCards.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [currentCards[i], currentCards[j]] = [currentCards[j], currentCards[i]];
+            }
+            currentIndex = 0;
+            showingQuestion = true;
+            displayCard();
+            updateButtons();
+            updateCounter();
+            updateUndoButton();
+        }
+
+        // Invert all cards (swap questions and answers)
+        function invertCards() {
+            isInverted = !isInverted;
+            displayCard();
+        }
+
+        // Update button states
+        function updateButtons() {
+            document.getElementById('prevBtn').disabled = currentIndex === 0;
+            document.getElementById('nextBtn').disabled = currentIndex === currentCards.length - 1;
+        }
+
+        // Update card counter
+        function updateCounter() {
+            const counter = document.getElementById('cardCounter');
+            counter.textContent = `Card ${currentIndex + 1} of ${currentCards.length}`;
+        }
+
+        // Keyboard event listeners
+        document.addEventListener('keydown', function(event) {
+            switch(event.key) {
+                case ' ':
+                case 'Spacebar':
+                    event.preventDefault();
+                    flipCard();
+                    break;
+                case 'ArrowLeft':
+                    event.preventDefault();
+                    prevCard();
+                    break;
+                case 'ArrowRight':
+                    event.preventDefault();
+                    nextCard();
+                    break;
+            }
+        });
+
+        // Timer variables
+        let timerStartTime = 0;
+        let timerElapsedTime = 0;
+        let timerInterval = null;
+        let isTimerRunning = false;
+
+        // Format time as HH:MM:SS
+        function formatTime(milliseconds) {
+            const totalSeconds = Math.floor(milliseconds / 1000);
+            const hours = Math.floor(totalSeconds / 3600);
+            const minutes = Math.floor((totalSeconds % 3600) / 60);
+            const seconds = totalSeconds % 60;
+
+            return String(hours).padStart(2, '0') + ':' +
+                   String(minutes).padStart(2, '0') + ':' +
+                   String(seconds).padStart(2, '0');
+        }
+
+        // Update timer display
+        function updateTimerDisplay() {
+            const currentTime = isTimerRunning ?
+                timerElapsedTime + (Date.now() - timerStartTime) :
+                timerElapsedTime;
+            document.getElementById('timerDisplay').textContent = formatTime(currentTime);
+        }
+
+        // Toggle timer (start/pause)
+        function toggleTimer() {
+            const timerBtn = document.getElementById('timerBtn');
+
+            if (isTimerRunning) {
+                // Pause timer
+                clearInterval(timerInterval);
+                timerElapsedTime += Date.now() - timerStartTime;
+                isTimerRunning = false;
+                timerBtn.textContent = 'Start Timer';
+                timerBtn.classList.remove('pause');
+            } else {
+                // Start timer
+                timerStartTime = Date.now();
+                isTimerRunning = true;
+                timerBtn.textContent = 'Pause Timer';
+                timerBtn.classList.add('pause');
+
+                // Update display every second
+                timerInterval = setInterval(updateTimerDisplay, 1000);
+            }
+        }
+
+        // Reset timer
+        function resetTimer() {
+            clearInterval(timerInterval);
+            timerStartTime = 0;
+            timerElapsedTime = 0;
+            isTimerRunning = false;
+
+            const timerBtn = document.getElementById('timerBtn');
+            timerBtn.textContent = 'Start Timer';
+            timerBtn.classList.remove('pause');
+
+            updateTimerDisplay();
+        }
+
+        // Print flashcards function
+        function printFlashcards() {
+            // Clear any existing content
+            const printTableBody = document.getElementById('printTableBody');
+            printTableBody.innerHTML = '';
+
+            // Use the original flashcards (not affected by current state or invert)
+            processedFlashcards.forEach((card, index) => {
+                const row = document.createElement('tr');
+
+                const questionCell = document.createElement('td');
+                questionCell.innerHTML = card[0]; // Always use original order
+
+                const answerCell = document.createElement('td');
+                answerCell.innerHTML = card[1]; // Always use original order
+
+                row.appendChild(questionCell);
+                row.appendChild(answerCell);
+                printTableBody.appendChild(row);
+            });
+
+            // Trigger print dialog
+            window.print();
+        }
+        
+        // Initialize app when page loads
+        window.onload = init;
+    </script>
+</body>
+</html>

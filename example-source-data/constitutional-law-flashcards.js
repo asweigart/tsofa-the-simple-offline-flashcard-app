@@ -1,0 +1,251 @@
+// Constitutional Law flashcards
+// Copy and paste this into the FLASHCARDS variable in your TSOFA app
+
+let FLASHCARDS = [
+    // Constitutional Structure and Principles
+    ["<b>Supremacy Clause</b>", "Article VI, Clause 2 - Constitution is supreme law of the land, federal law preempts conflicting state law"],
+    ["<b>Separation of Powers</b>", "Division of government into three branches: legislative, executive, judicial - each with distinct powers"],
+    ["<b>Checks and Balances</b>", "System where each branch can limit powers of other branches to prevent concentration of power"],
+    ["<b>Federalism</b>", "Division of power between federal government and states, with each having sovereignty in certain areas"],
+    ["<b>Enumerated Powers</b>", "Powers explicitly granted to Congress in Article I, Section 8 of the Constitution"],
+    ["<b>Implied Powers</b>", "Powers not explicitly stated but necessary to carry out enumerated powers (Necessary and Proper Clause)"],
+    ["<b>Reserved Powers</b>", "10th Amendment - powers not delegated to federal government are reserved to states or people"],
+    ["<b>Concurrent Powers</b>", "Powers shared by both federal and state governments (taxation, law enforcement)"],
+    ["<b>Police Powers</b>", "State authority to regulate for health, safety, welfare, and morals of citizens"],
+    ["<b>Full Faith and Credit Clause</b>", "Article IV - states must recognize public acts, records, and judicial proceedings of other states"],
+    ["<b>Privileges and Immunities Clause</b>", "Article IV - prohibits states from discriminating against out-of-state citizens regarding fundamental rights"],
+    ["<b>Republican Form of Government</b>", "Article IV guarantee that states maintain republican form of government"],
+    
+    // Article I - Legislative Branch
+    ["<b>Commerce Clause</b>", "Article I, Section 8 - Congress can regulate interstate commerce, foreign commerce, and commerce with Indian tribes"],
+    ["<b>Substantial Effects Test</b>", "Congress can regulate economic activities that substantially affect interstate commerce"],
+    ["<b>Cumulative Effects Doctrine</b>", "Wickard v. Filburn - aggregate effect of individual actions can justify Commerce Clause regulation"],
+    ["<b>Necessary and Proper Clause</b>", "Article I, Section 8, Clause 18 - Congress can make laws necessary and proper to execute enumerated powers"],
+    ["<b>Taxing and Spending Power</b>", "Congress can tax and spend for general welfare, can attach conditions to federal funding"],
+    ["<b>South Dakota v. Dole Test</b>", "Conditions on federal funds must: promote general welfare, be unambiguous, relate to federal interest, not violate Constitution, not be coercive"],
+    ["<b>War Powers</b>", "Congress declares war, funds military, makes rules for military; President is Commander-in-Chief"],
+    ["<b>Treaty Power</b>", "President negotiates treaties with 2/3 Senate approval; treaties equal to federal statutes"],
+    ["<b>Executive Agreements</b>", "President's agreements with foreign nations without Senate approval; supreme over state law but not federal law"],
+    ["<b>Impeachment Power</b>", "House impeaches by majority vote; Senate tries impeachment with 2/3 vote to convict"],
+    ["<b>Speech or Debate Clause</b>", "Article I, Section 6 - legislators immune from liability for legislative acts"],
+    ["<b>Ex Post Facto Laws</b>", "Article I prohibition on retroactive criminal laws that disadvantage defendants"],
+    ["<b>Bill of Attainder</b>", "Article I prohibition on legislative acts declaring guilt without trial"],
+    ["<b>Contract Clause</b>", "Article I, Section 10 - states cannot impair obligation of contracts"],
+    
+    // Article II - Executive Branch
+    ["<b>Executive Power</b>", "President enforces laws, conducts foreign policy, commands military, appoints officials"],
+    ["<b>Appointment Power</b>", "President nominates principal officers with Senate confirmation; Congress can vest appointment of inferior officers"],
+    ["<b>Removal Power</b>", "President can remove executive officers at will unless Congress limits for quasi-judicial positions"],
+    ["<b>Executive Orders</b>", "Presidential directives with force of law, must be based on constitutional or statutory authority"],
+    ["<b>Executive Privilege</b>", "Qualified privilege to withhold information from other branches; must yield to important government interests"],
+    ["<b>Commander-in-Chief Power</b>", "President commands military but cannot declare war; broad powers in foreign affairs"],
+    ["<b>Pardon Power</b>", "President can pardon federal crimes except impeachment; includes commutations and reprieves"],
+    ["<b>Take Care Clause</b>", "President must faithfully execute the laws, cannot refuse to enforce constitutional laws"],
+    ["<b>Youngstown Framework</b>", "Three categories of presidential power: maximum (with Congress), twilight zone (Congress silent), minimum (against Congress)"],
+    ["<b>Unitary Executive Theory</b>", "Theory that President has complete control over executive branch"],
+    ["<b>Presidential Immunity</b>", "Absolute immunity for official acts; no immunity for acts before taking office"],
+    
+    // Article III - Judicial Branch
+    ["<b>Federal Judicial Power</b>", "Article III courts hear cases arising under Constitution, federal law, treaties, diversity jurisdiction"],
+    ["<b>Case or Controversy Requirement</b>", "Federal courts only hear actual disputes between adverse parties with real stakes"],
+    ["<b>Standing</b>", "Injury in fact (concrete and particularized), causation, redressability"],
+    ["<b>Ripeness</b>", "Case must be ready for judicial review, not hypothetical or speculative"],
+    ["<b>Mootness</b>", "Live controversy must exist throughout litigation; exceptions for voluntary cessation, capable of repetition yet evading review"],
+    ["<b>Political Question Doctrine</b>", "Courts won't decide issues constitutionally committed to other branches or lacking judicially manageable standards"],
+    ["<b>Abstention Doctrines</b>", "Federal courts may abstain from hearing cases involving unsettled state law or ongoing state proceedings"],
+    ["<b>Sovereign Immunity</b>", "11th Amendment - states immune from suit in federal court unless waived or abrogated"],
+    ["<b>Ex parte Young Doctrine</b>", "Exception to sovereign immunity for prospective injunctive relief against state officials"],
+    ["<b>Adequate and Independent State Grounds</b>", "Supreme Court won't review state court decisions resting on adequate and independent state law"],
+    ["<b>Final Judgment Rule</b>", "Federal courts generally only review final judgments, not interlocutory orders"],
+    
+    // Judicial Review
+    ["<b>Marbury v. Madison</b>", "1803 - Established judicial review; courts can declare laws unconstitutional"],
+    ["<b>Martin v. Hunter's Lessee</b>", "1816 - Supreme Court can review state court decisions on federal law"],
+    ["<b>Cooper v. Aaron</b>", "1958 - States bound by Supreme Court's constitutional interpretations"],
+    ["<b>Judicial Supremacy</b>", "Supreme Court is final interpreter of Constitution; other branches must follow"],
+    ["<b>Constitutional Interpretation Methods</b>", "Originalism, textualism, living constitution, structuralism, prudentialism"],
+    ["<b>Stare Decisis</b>", "Precedent should be followed unless special justification exists for overruling"],
+    ["<b>Rational Basis Review</b>", "Law must be rationally related to legitimate government interest (upheld unless arbitrary)"],
+    ["<b>Intermediate Scrutiny</b>", "Law must be substantially related to important government interest"],
+    ["<b>Strict Scrutiny</b>", "Law must be narrowly tailored to compelling government interest using least restrictive means"],
+    
+    // First Amendment - Religion
+    ["<b>Establishment Clause</b>", "Government cannot establish religion or favor one religion over another"],
+    ["<b>Lemon Test</b>", "Law must have secular purpose, primary effect neither advances nor inhibits religion, no excessive entanglement"],
+    ["<b>Endorsement Test</b>", "Government cannot endorse or disapprove of religion"],
+    ["<b>Coercion Test</b>", "Government cannot coerce religious participation or support"],
+    ["<b>Historical Practices Test</b>", "Some religious practices allowed if historically accepted (legislative prayer)"],
+    ["<b>Free Exercise Clause</b>", "Right to believe and practice religion; beliefs absolutely protected, conduct may be regulated"],
+    ["<b>Employment Division v. Smith</b>", "1990 - Neutral laws of general applicability don't violate Free Exercise even if burden religion"],
+    ["<b>Sherbert Test</b>", "Pre-Smith test requiring compelling interest for substantial burden on religion"],
+    ["<b>Religious Freedom Restoration Act (RFRA)</b>", "Federal statute restoring compelling interest test for federal laws burdening religion"],
+    ["<b>Church Autonomy Doctrine</b>", "Courts cannot interfere in internal church disputes over doctrine or leadership"],
+    ["<b>Ministerial Exception</b>", "Religious organizations exempt from employment discrimination laws for ministerial positions"],
+    
+    // First Amendment - Speech
+    ["<b>Content-Based vs Content-Neutral</b>", "Content-based restrictions get strict scrutiny; content-neutral get intermediate scrutiny"],
+    ["<b>Viewpoint Discrimination</b>", "Government cannot discriminate based on speaker's viewpoint; virtually always unconstitutional"],
+    ["<b>Prior Restraint</b>", "Advance prohibition on speech; presumptively unconstitutional, heavy burden to justify"],
+    ["<b>Clear and Present Danger Test</b>", "Speech can be restricted if creates clear and present danger of imminent lawless action"],
+    ["<b>Brandenburg Test</b>", "Speech advocating illegal action protected unless directed to inciting imminent lawless action and likely to produce it"],
+    ["<b>Fighting Words</b>", "Words that by their very utterance inflict injury or incite immediate breach of peace"],
+    ["<b>True Threats</b>", "Serious expression of intent to commit unlawful violence; not protected"],
+    ["<b>Obscenity (Miller Test)</b>", "Appeals to prurient interest, patently offensive by community standards, lacks serious value"],
+    ["<b>Child Pornography</b>", "Completely unprotected; can be banned even if not obscene"],
+    ["<b>Commercial Speech</b>", "Protected but gets intermediate scrutiny; Central Hudson test"],
+    ["<b>Central Hudson Test</b>", "Commercial speech must be lawful and not misleading; regulation must directly advance substantial interest and be narrowly tailored"],
+    ["<b>Symbolic Speech</b>", "Conduct expressing ideas protected if intended to convey message and likely understood"],
+    ["<b>O'Brien Test</b>", "Regulation of symbolic conduct upheld if furthers important interest unrelated to suppression of expression"],
+    ["<b>Time, Place, Manner Restrictions</b>", "Content-neutral, narrowly tailored to significant interest, leave open alternative channels"],
+    ["<b>Public Forum Doctrine</b>", "Traditional, designated, and limited public forums vs non-public forums"],
+    ["<b>Traditional Public Forum</b>", "Streets, parks, sidewalks - content-based restrictions get strict scrutiny"],
+    ["<b>Designated Public Forum</b>", "Government opens property for speech; same rules as traditional while open"],
+    ["<b>Limited Public Forum</b>", "Government property opened for specific purposes; reasonable restrictions allowed"],
+    ["<b>Non-Public Forum</b>", "Government property not opened for speech; reasonable, viewpoint-neutral restrictions allowed"],
+    ["<b>Government Speech Doctrine</b>", "When government speaks, it can engage in viewpoint discrimination"],
+    ["<b>Unconstitutional Conditions</b>", "Government cannot condition benefit on surrender of constitutional right"],
+    ["<b>Overbreadth Doctrine</b>", "Law invalid if substantially overbroad in restricting protected speech"],
+    ["<b>Vagueness Doctrine</b>", "Law void if doesn't give fair notice or invites arbitrary enforcement"],
+    ["<b>Prior Restraint Standards</b>", "Must have narrowly drawn standards, prompt judicial review, government bears burden"],
+    
+    // First Amendment - Press, Assembly, Association
+    ["<b>Freedom of Press</b>", "Generally no greater rights than general public but special protection against prior restraints"],
+    ["<b>Reporter's Privilege</b>", "No federal constitutional right to protect sources; some states provide protection"],
+    ["<b>Access to Criminal Trials</b>", "Press and public have First Amendment right to attend criminal trials"],
+    ["<b>Freedom of Assembly</b>", "Right to gather peacefully; subject to reasonable time, place, manner restrictions"],
+    ["<b>Freedom of Association</b>", "Implicit right to associate for expressive purposes; strict scrutiny for infringement"],
+    ["<b>Right Not to Associate</b>", "Cannot be compelled to associate or support messages against beliefs"],
+    ["<b>Petition Clause</b>", "Right to petition government for redress of grievances; includes lawsuits"],
+    
+    // Equal Protection
+    ["<b>Equal Protection Clause</b>", "14th Amendment - state must treat similarly situated people equally; 5th Amendment applies to federal"],
+    ["<b>Suspect Classifications</b>", "Race, national origin, alienage (sometimes) - trigger strict scrutiny"],
+    ["<b>Quasi-Suspect Classifications</b>", "Gender, illegitimacy - trigger intermediate scrutiny"],
+    ["<b>Non-Suspect Classifications</b>", "Age, wealth, disability - trigger rational basis review"],
+    ["<b>Discriminatory Intent</b>", "Must show purposeful discrimination, not just disparate impact (Washington v. Davis)"],
+    ["<b>Facial Discrimination</b>", "Law explicitly classifies; gets appropriate level of scrutiny"],
+    ["<b>Facially Neutral Laws</b>", "Must show discriminatory purpose and effect for heightened scrutiny"],
+    ["<b>Affirmative Action (Education)</b>", "Race-conscious admissions get strict scrutiny; diversity is compelling interest but quotas prohibited"],
+    ["<b>Affirmative Action (Contracting)</b>", "Strict scrutiny; must show specific past discrimination to justify"],
+    ["<b>Gender Discrimination</b>", "Intermediate scrutiny; exceedingly persuasive justification needed"],
+    ["<b>Benign Gender Classifications</b>", "Still get intermediate scrutiny even if compensating for past discrimination"],
+    ["<b>Fundamental Rights (Equal Protection)</b>", "Right to travel, vote, access courts trigger strict scrutiny under Equal Protection"],
+    
+    // Due Process - Procedural
+    ["<b>Due Process Clause</b>", "5th Amendment (federal) and 14th Amendment (state) - cannot deprive life, liberty, or property without due process"],
+    ["<b>Procedural Due Process</b>", "Fair procedures required when government deprives life, liberty, or property"],
+    ["<b>Liberty Interest</b>", "Freedom from bodily restraint, fundamental rights, freedom of choice and action"],
+    ["<b>Property Interest</b>", "Legitimate claim of entitlement created by state law, not mere expectation"],
+    ["<b>Mathews v. Eldridge Test</b>", "Balance private interest, risk of erroneous deprivation, government interest"],
+    ["<b>Notice and Hearing</b>", "Generally required before deprivation; timing and formality depend on circumstances"],
+    ["<b>Neutral Decisionmaker</b>", "Unbiased judge required; actual bias or probability of unfairness violates due process"],
+    ["<b>Emergency Exception</b>", "Pre-deprivation hearing not required in emergencies; post-deprivation remedy sufficient"],
+    
+    // Due Process - Substantive
+    ["<b>Substantive Due Process</b>", "Protects fundamental rights from government interference regardless of procedures"],
+    ["<b>Fundamental Rights (Due Process)</b>", "Marriage, procreation, contraception, family, child-rearing, bodily integrity"],
+    ["<b>Strict Scrutiny (Due Process)</b>", "Applied to laws infringing fundamental rights"],
+    ["<b>Rational Basis (Due Process)</b>", "Applied to economic regulations and non-fundamental rights"],
+    ["<b>Right to Privacy</b>", "Penumbral right including marriage, procreation, contraception, family relationships"],
+    ["<b>Right to Marriage</b>", "Fundamental right including same-sex marriage (Obergefell v. Hodges)"],
+    ["<b>Right to Procreation</b>", "Fundamental right to have children; forced sterilization unconstitutional"],
+    ["<b>Right to Contraception</b>", "Fundamental right for married and unmarried persons (Griswold, Eisenstadt)"],
+    ["<b>Right to Abortion</b>", "Pre-Dobbs: viability framework; Post-Dobbs: not constitutionally protected"],
+    ["<b>Parental Rights</b>", "Fundamental right to direct upbringing and education of children"],
+    ["<b>Right to Refuse Medical Treatment</b>", "Competent adults can refuse life-saving treatment; states can require clear evidence"],
+    ["<b>Right to Die</b>", "No fundamental right to physician-assisted suicide; states may prohibit or allow"],
+    ["<b>Bodily Integrity</b>", "Fundamental right against forced medical procedures; includes right to refuse medication"],
+    ["<b>Sexual Autonomy</b>", "Lawrence v. Texas - consensual adult sexual conduct protected"],
+    
+    // Takings Clause
+    ["<b>Takings Clause</b>", "5th Amendment - private property cannot be taken for public use without just compensation"],
+    ["<b>Public Use Requirement</b>", "Broadly defined; includes public purpose (economic development in Kelo)"],
+    ["<b>Just Compensation</b>", "Fair market value at time of taking; consequential damages generally not included"],
+    ["<b>Physical Taking</b>", "Permanent physical occupation is per se taking (Loretto)"],
+    ["<b>Regulatory Taking</b>", "Regulation that goes too far; Penn Central factors or Lucas per se rule"],
+    ["<b>Penn Central Factors</b>", "Economic impact, interference with investment-backed expectations, character of government action"],
+    ["<b>Lucas Per Se Rule</b>", "Complete deprivation of all economically beneficial use is taking unless nuisance"],
+    ["<b>Exactions</b>", "Conditions on development must have nexus and rough proportionality (Nollan/Dolan)"],
+    ["<b>Temporary Taking</b>", "Temporary deprivation of use can be taking requiring compensation"],
+    ["<b>Inverse Condemnation</b>", "Property owner sues claiming government action constitutes taking"],
+    
+    // Other Amendments
+    ["<b>Second Amendment</b>", "Individual right to keep and bear arms; not unlimited (Heller)"],
+    ["<b>Third Amendment</b>", "No quartering of soldiers in homes during peacetime"],
+    ["<b>Fourth Amendment</b>", "Protection against unreasonable searches and seizures; warrant requirement"],
+    ["<b>Fifth Amendment Rights</b>", "Grand jury, double jeopardy, self-incrimination, due process, takings"],
+    ["<b>Sixth Amendment Rights</b>", "Speedy and public trial, jury, notice, confrontation, compulsory process, counsel"],
+    ["<b>Seventh Amendment</b>", "Jury trial in civil cases over $20; facts found by jury cannot be reexamined"],
+    ["<b>Eighth Amendment</b>", "No excessive bail or fines; no cruel and unusual punishment"],
+    ["<b>Ninth Amendment</b>", "Enumeration of rights doesn't deny others retained by people"],
+    ["<b>Tenth Amendment</b>", "Powers not delegated to federal government reserved to states or people"],
+    ["<b>Thirteenth Amendment</b>", "Abolishes slavery and involuntary servitude except as punishment"],
+    ["<b>Fourteenth Amendment Sections</b>", "Section 1: citizenship, privileges/immunities, due process, equal protection; Section 5: enforcement power"],
+    ["<b>Fifteenth Amendment</b>", "Right to vote cannot be denied based on race, color, or previous servitude"],
+    
+    // Incorporation
+    ["<b>Incorporation Doctrine</b>", "Bill of Rights applies to states through 14th Amendment Due Process Clause"],
+    ["<b>Selective Incorporation</b>", "Rights incorporated one by one if fundamental to ordered liberty"],
+    ["<b>Total Incorporation</b>", "Theory that entire Bill of Rights applies to states (rejected)"],
+    ["<b>Rights Not Incorporated</b>", "3rd Amendment, 5th Amendment grand jury, 7th Amendment civil jury, excessive fines"],
+    ["<b>Reverse Incorporation</b>", "Equal protection applies to federal government through 5th Amendment Due Process"],
+    
+    // Commerce Clause Cases
+    ["<b>Gibbons v. Ogden</b>", "1824 - Broad definition of commerce includes navigation"],
+    ["<b>Wickard v. Filburn</b>", "1942 - Aggregate effects of wheat production affect interstate commerce"],
+    ["<b>Heart of Atlanta Motel</b>", "1964 - Civil Rights Act valid under Commerce Clause"],
+    ["<b>United States v. Lopez</b>", "1995 - Gun-Free School Zones Act exceeds Commerce power; not economic activity"],
+    ["<b>United States v. Morrison</b>", "2000 - Violence Against Women Act exceeds Commerce power; not economic"],
+    ["<b>Gonzales v. Raich</b>", "2005 - Federal drug laws apply to local medical marijuana; economic activity"],
+    ["<b>NFIB v. Sebelius</b>", "2012 - Individual mandate not valid under Commerce but valid as tax"],
+    
+    // Dormant Commerce Clause
+    ["<b>Dormant Commerce Clause</b>", "Implied prohibition on state laws that unduly burden interstate commerce"],
+    ["<b>Discrimination Against Interstate Commerce</b>", "Facially discriminatory or purposefully discriminatory laws virtually per se invalid"],
+    ["<b>Pike Balancing Test</b>", "Even-handed law upheld unless burden on commerce clearly excessive compared to local benefits"],
+    ["<b>Market Participant Exception</b>", "State acting as market participant not subject to dormant Commerce Clause"],
+    ["<b>Congressional Authorization</b>", "Congress can authorize state laws that would otherwise violate dormant Commerce Clause"],
+    
+    // Privileges and Immunities
+    ["<b>Article IV Privileges and Immunities</b>", "Protects out-of-state citizens regarding fundamental rights; no corporations"],
+    ["<b>14th Amendment Privileges or Immunities</b>", "Protects rights of national citizenship; largely dormant after Slaughter-House Cases"],
+    ["<b>Right to Travel</b>", "Protected under various theories; includes right to enter/leave states and be treated equally"],
+    
+    // State Action Doctrine
+    ["<b>State Action Requirement</b>", "Constitutional rights generally only protect against government action, not private"],
+    ["<b>Public Function Test</b>", "Private entity performing traditionally exclusive public function is state actor"],
+    ["<b>Entanglement Test</b>", "Significant state involvement in private action can constitute state action"],
+    ["<b>Judicial Enforcement</b>", "Court enforcement of private agreements can be state action (Shelley v. Kraemer)"],
+    ["<b>Licensing and Regulation</b>", "Generally not enough for state action unless state involvement in discrimination"],
+    
+    // Voting Rights
+    ["<b>Right to Vote</b>", "Fundamental right under Equal Protection; restrictions get strict scrutiny"],
+    ["<b>One Person, One Vote</b>", "Legislative districts must have roughly equal population"],
+    ["<b>Gerrymandering</b>", "Racial gerrymandering gets strict scrutiny; political gerrymandering is non-justiciable"],
+    ["<b>Voter ID Laws</b>", "Generally upheld if not unduly burdensome (Crawford v. Marion County)"],
+    ["<b>Poll Taxes</b>", "Unconstitutional under 24th Amendment (federal) and Equal Protection (state)"],
+    ["<b>Literacy Tests</b>", "Prohibited by Voting Rights Act; historically used for discrimination"],
+    ["<b>Felony Disenfranchisement</b>", "Generally constitutional (Richardson v. Ramirez)"],
+    
+    // Congressional Powers
+    ["<b>Section 5 of 14th Amendment</b>", "Congress can enforce but not interpret/expand constitutional rights; must be congruent and proportional"],
+    ["<b>Section 2 of 13th Amendment</b>", "Congress can prohibit badges and incidents of slavery including private discrimination"],
+    ["<b>Section 2 of 15th Amendment</b>", "Congress can enforce voting rights regarding race"],
+    ["<b>City of Boerne v. Flores</b>", "1997 - Congress cannot expand constitutional rights, only enforce as defined by Court"],
+    ["<b>Spending Power Limits</b>", "Cannot be coercive (NFIB v. Sebelius - Medicaid expansion)"],
+    
+    // Executive Powers Cases
+    ["<b>Youngstown Sheet & Tube v. Sawyer</b>", "1952 - President cannot seize steel mills without Congressional authorization"],
+    ["<b>United States v. Nixon</b>", "1974 - Executive privilege must yield to criminal justice needs"],
+    ["<b>Clinton v. Jones</b>", "1997 - President not immune from civil suits for pre-office conduct"],
+    ["<b>Trump v. Vance</b>", "2020 - President not absolutely immune from state criminal subpoenas"],
+    ["<b>Trump v. United States (2024)</b>", "2024 - Presidents have immunity for official acts but not unofficial acts"],
+    
+    // Major Doctrine Shifts
+    ["<b>Lochner Era</b>", "1897-1937 - Court struck down economic regulations under substantive due process"],
+    ["<b>West Coast Hotel v. Parrish</b>", "1937 - End of Lochner era; rational basis for economic regulation"],
+    ["<b>Carolene Products Footnote 4</b>", "1938 - Suggests heightened scrutiny for discrete and insular minorities"],
+    ["<b>Brown v. Board of Education</b>", "1954 - Separate but equal is inherently unequal; overrules Plessy"],
+    ["<b>Dobbs v. Jackson</b>", "2022 - Overrules Roe v. Wade; abortion not constitutionally protected"],
+    ["<b>Students for Fair Admissions v. Harvard</b>", "2023 - Race-conscious admissions violate Equal Protection"]
+];

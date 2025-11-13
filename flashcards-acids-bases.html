@@ -4,17 +4,126 @@
 const version = "1.0.0";
 
 // ===== MODIFY YOUR FLASHCARDS HERE =====
-const TOPIC = "";
+const TOPIC = "Chemistry Acids and Bases";
 
 // Option 1: Array of arrays format
+// Chemical Acids and Bases flashcards
+// Copy and paste this into the FLASHCARDS variable in your TSOFA app
+
 let FLASHCARDS = [
-["What is the capital of France?", "Paris"],
-["What is 2 + 2?", "4"],
-["What is the largest planet in our solar system?", "<b>Jupiter</b><br><i>It has a mass of 1.898 × 10²⁷ kg</i>"],
-["What year did World War II end?", "1945"],
-["Who wrote 'Romeo and Juliet'?", "William Shakespeare"],
-["What is HTML?", "<b>HyperText Markup Language</b><br>The standard markup language for creating web pages"],
+    // Common Acids - Names and Formulas
+    ["<b>Hydrochloric Acid</b>", "HCl<br><small>Strong acid, stomach acid</small>"],
+    ["<b>Sulfuric Acid</b>", "H₂SO₄<br><small>Strong acid, battery acid</small>"],
+    ["<b>Nitric Acid</b>", "HNO₃<br><small>Strong acid, used in fertilizers</small>"],
+    ["<b>Phosphoric Acid</b>", "H₃PO₄<br><small>Weak acid, in soft drinks</small>"],
+    ["<b>Acetic Acid</b>", "CH₃COOH<br><small>Weak acid, vinegar</small>"],
+    ["<b>Citric Acid</b>", "C₆H₈O₇<br><small>Weak acid, in citrus fruits</small>"],
+    ["<b>Carbonic Acid</b>", "H₂CO₃<br><small>Weak acid, in carbonated drinks</small>"],
+    ["<b>Hydrofluoric Acid</b>", "HF<br><small>Weak acid but highly corrosive</small>"],
+    ["<b>Hydrobromic Acid</b>", "HBr<br><small>Strong acid</small>"],
+    ["<b>Hydroiodic Acid</b>", "HI<br><small>Strong acid</small>"],
+    ["<b>Perchloric Acid</b>", "HClO₄<br><small>Strongest known acid</small>"],
+    ["<b>Chloric Acid</b>", "HClO₃<br><small>Strong acid</small>"],
+    ["<b>Sulfurous Acid</b>", "H₂SO₃<br><small>Weak acid</small>"],
+    ["<b>Nitrous Acid</b>", "HNO₂<br><small>Weak acid</small>"],
+    ["<b>Formic Acid</b>", "HCOOH<br><small>Weak acid, ant stings</small>"],
+    ["<b>Benzoic Acid</b>", "C₆H₅COOH<br><small>Weak acid, food preservative</small>"],
+    ["<b>Oxalic Acid</b>", "C₂H₂O₄<br><small>Weak acid, in spinach</small>"],
+    ["<b>Lactic Acid</b>", "C₃H₆O₃<br><small>Weak acid, in sour milk</small>"],
+    ["<b>Ascorbic Acid</b>", "C₆H₈O₆<br><small>Vitamin C</small>"],
+    ["<b>Boric Acid</b>", "H₃BO₃<br><small>Very weak acid, antiseptic</small>"],
+    ["<b>Hydrocyanic Acid</b>", "HCN<br><small>Weak acid, highly toxic</small>"],
+    ["<b>Chromic Acid</b>", "H₂CrO₄<br><small>Strong acid</small>"],
+
+    // Common Bases - Names and Formulas
+    ["<b>Sodium Hydroxide</b>", "NaOH<br><small>Strong base, lye/caustic soda</small>"],
+    ["<b>Potassium Hydroxide</b>", "KOH<br><small>Strong base, caustic potash</small>"],
+    ["<b>Calcium Hydroxide</b>", "Ca(OH)₂<br><small>Strong base, slaked lime</small>"],
+    ["<b>Magnesium Hydroxide</b>", "Mg(OH)₂<br><small>Weak base, milk of magnesia</small>"],
+    ["<b>Ammonia</b>", "NH₃<br><small>Weak base, cleaning agent</small>"],
+    ["<b>Ammonium Hydroxide</b>", "NH₄OH<br><small>Weak base, aqueous ammonia</small>"],
+    ["<b>Barium Hydroxide</b>", "Ba(OH)₂<br><small>Strong base</small>"],
+    ["<b>Aluminum Hydroxide</b>", "Al(OH)₃<br><small>Weak base, antacid</small>"],
+    ["<b>Iron(II) Hydroxide</b>", "Fe(OH)₂<br><small>Weak base</small>"],
+    ["<b>Iron(III) Hydroxide</b>", "Fe(OH)₃<br><small>Weak base</small>"],
+    ["<b>Lithium Hydroxide</b>", "LiOH<br><small>Strong base</small>"],
+    ["<b>Rubidium Hydroxide</b>", "RbOH<br><small>Strong base</small>"],
+    ["<b>Cesium Hydroxide</b>", "CsOH<br><small>Strongest base</small>"],
+    ["<b>Strontium Hydroxide</b>", "Sr(OH)₂<br><small>Strong base</small>"],
+    ["<b>Sodium Bicarbonate</b>", "NaHCO₃<br><small>Weak base, baking soda</small>"],
+    ["<b>Sodium Carbonate</b>", "Na₂CO₃<br><small>Weak base, washing soda</small>"],
+    ["<b>Methylamine</b>", "CH₃NH₂<br><small>Weak organic base</small>"],
+    ["<b>Ethylamine</b>", "C₂H₅NH₂<br><small>Weak organic base</small>"],
+    ["<b>Pyridine</b>", "C₅H₅N<br><small>Weak organic base</small>"],
+    ["<b>Aniline</b>", "C₆H₅NH₂<br><small>Weak organic base</small>"],
+
+    // pH and Indicators
+    ["<b>pH Scale Range</b>", "0-14<br><small>0-7 acidic, 7 neutral, 7-14 basic</small>"],
+    ["<b>pH of Strong Acid (1M)</b>", "pH ≈ 0<br><small>Very acidic</small>"],
+    ["<b>pH of Strong Base (1M)</b>", "pH ≈ 14<br><small>Very basic</small>"],
+    ["<b>pH of Pure Water</b>", "pH = 7<br><small>Neutral at 25°C</small>"],
+    ["<b>pH of Stomach Acid</b>", "pH ≈ 1.5-2<br><small>Highly acidic</small>"],
+    ["<b>pH of Lemon Juice</b>", "pH ≈ 2<br><small>Acidic</small>"],
+    ["<b>pH of Coffee</b>", "pH ≈ 5<br><small>Weakly acidic</small>"],
+    ["<b>pH of Blood</b>", "pH ≈ 7.4<br><small>Slightly basic</small>"],
+    ["<b>pH of Seawater</b>", "pH ≈ 8<br><small>Slightly basic</small>"],
+    ["<b>pH of Household Ammonia</b>", "pH ≈ 11<br><small>Basic</small>"],
+    ["<b>pH of Bleach</b>", "pH ≈ 12.5<br><small>Strongly basic</small>"],
+    ["<b>Litmus Paper</b>", "Red in acid, Blue in base<br><small>pH indicator</small>"],
+    ["<b>Phenolphthalein</b>", "Colorless in acid, Pink in base<br><small>pH 8.2-10.0</small>"],
+    ["<b>Methyl Orange</b>", "Red in acid, Yellow in base<br><small>pH 3.1-4.4</small>"],
+    ["<b>Bromothymol Blue</b>", "Yellow in acid, Blue in base<br><small>pH 6.0-7.6</small>"],
+    ["<b>Universal Indicator</b>", "Red→Orange→Yellow→Green→Blue→Purple<br><small>pH 0-14</small>"],
+
+    // Acid-Base Reactions
+    ["<b>Neutralization Reaction</b>", "Acid + Base → Salt + Water<br><small>HCl + NaOH → NaCl + H₂O</small>"],
+    ["<b>Strong Acid + Strong Base</b>", "Complete neutralization<br><small>pH = 7 at equivalence</small>"],
+    ["<b>Weak Acid + Strong Base</b>", "Forms basic salt<br><small>pH > 7 at equivalence</small>"],
+    ["<b>Strong Acid + Weak Base</b>", "Forms acidic salt<br><small>pH < 7 at equivalence</small>"],
+    ["<b>Buffer Solution</b>", "Weak acid + conjugate base<br><small>Resists pH change</small>"],
+
+    // Conjugate Pairs
+    ["<b>HCl / Cl⁻</b>", "Conjugate acid-base pair<br><small>Strong acid / Very weak base</small>"],
+    ["<b>H₂SO₄ / HSO₄⁻</b>", "Conjugate acid-base pair<br><small>Strong acid / Weak base</small>"],
+    ["<b>HSO₄⁻ / SO₄²⁻</b>", "Conjugate acid-base pair<br><small>Weak acid / Weak base</small>"],
+    ["<b>H₃O⁺ / H₂O</b>", "Conjugate acid-base pair<br><small>Strong acid / Very weak base</small>"],
+    ["<b>H₂O / OH⁻</b>", "Conjugate acid-base pair<br><small>Very weak acid / Strong base</small>"],
+    ["<b>NH₄⁺ / NH₃</b>", "Conjugate acid-base pair<br><small>Weak acid / Weak base</small>"],
+    ["<b>CH₃COOH / CH₃COO⁻</b>", "Conjugate acid-base pair<br><small>Weak acid / Weak base</small>"],
+    ["<b>HCO₃⁻ / CO₃²⁻</b>", "Conjugate acid-base pair<br><small>Weak acid / Weak base</small>"],
+    ["<b>H₂CO₃ / HCO₃⁻</b>", "Conjugate acid-base pair<br><small>Weak acid / Weak base</small>"],
+
+    // Theories and Definitions
+    ["<b>Arrhenius Acid</b>", "Produces H⁺ ions in water<br><small>HCl → H⁺ + Cl⁻</small>"],
+    ["<b>Arrhenius Base</b>", "Produces OH⁻ ions in water<br><small>NaOH → Na⁺ + OH⁻</small>"],
+    ["<b>Brønsted-Lowry Acid</b>", "Proton (H⁺) donor<br><small>Can act without water</small>"],
+    ["<b>Brønsted-Lowry Base</b>", "Proton (H⁺) acceptor<br><small>Can act without water</small>"],
+    ["<b>Lewis Acid</b>", "Electron pair acceptor<br><small>BF₃, AlCl₃</small>"],
+    ["<b>Lewis Base</b>", "Electron pair donor<br><small>NH₃, H₂O</small>"],
+    ["<b>Amphoteric Substance</b>", "Can act as acid or base<br><small>H₂O, HSO₄⁻, HCO₃⁻</small>"],
+    ["<b>Polyprotic Acid</b>", "Can donate multiple protons<br><small>H₂SO₄, H₃PO₄</small>"],
+    ["<b>Monoprotic Acid</b>", "Donates one proton<br><small>HCl, HNO₃, CH₃COOH</small>"],
+
+    // Constants and Calculations
+    ["<b>Kw (Water Constant)</b>", "1.0 × 10⁻¹⁴ at 25°C<br><small>[H⁺][OH⁻] = Kw</small>"],
+    ["<b>pH Formula</b>", "pH = -log[H⁺]<br><small>Negative log of H⁺ concentration</small>"],
+    ["<b>pOH Formula</b>", "pOH = -log[OH⁻]<br><small>pH + pOH = 14</small>"],
+    ["<b>Ka (Acid Constant)</b>", "Measure of acid strength<br><small>Larger Ka = stronger acid</small>"],
+    ["<b>Kb (Base Constant)</b>", "Measure of base strength<br><small>Larger Kb = stronger base</small>"],
+    ["<b>pKa Formula</b>", "pKa = -log(Ka)<br><small>Lower pKa = stronger acid</small>"],
+    ["<b>Henderson-Hasselbalch</b>", "pH = pKa + log([A⁻]/[HA])<br><small>Buffer pH calculation</small>"],
+
+    // Common Salts from Neutralization
+    ["<b>Sodium Chloride</b>", "NaCl<br><small>From HCl + NaOH</small>"],
+    ["<b>Potassium Nitrate</b>", "KNO₃<br><small>From HNO₃ + KOH</small>"],
+    ["<b>Calcium Sulfate</b>", "CaSO₄<br><small>From H₂SO₄ + Ca(OH)₂</small>"],
+    ["<b>Ammonium Chloride</b>", "NH₄Cl<br><small>From HCl + NH₃</small>"],
+    ["<b>Sodium Acetate</b>", "CH₃COONa<br><small>From CH₃COOH + NaOH</small>"],
+    ["<b>Magnesium Sulfate</b>", "MgSO₄<br><small>From H₂SO₄ + Mg(OH)₂</small>"],
+    ["<b>Calcium Carbonate</b>", "CaCO₃<br><small>From H₂CO₃ + Ca(OH)₂</small>"],
+    ["<b>Sodium Phosphate</b>", "Na₃PO₄<br><small>From H₃PO₄ + 3NaOH</small>"]
 ];
+
 
 // Option 2: CSV string format (uncomment to use)
 /*
