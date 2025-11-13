@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <script>
-const version = "1.0.0";
+const version = "1.1.0";
 
 // ===== MODIFY YOUR FLASHCARDS HERE =====
 const TOPIC = "MCAT";
@@ -39,8 +39,8 @@ let FLASHCARDS = [
     ["<b>Okazaki Fragments</b>", "Short DNA segments on lagging strand during replication"],
     ["<b>DNA Polymerase Function</b>", "Synthesizes new DNA, requires primer, 3' to 5' exonuclease activity"],
     ["<b>Helicase Function</b>", "Unwinds DNA double helix during replication"],
-    ["<b>Transcription Process</b>", "DNA → RNA, RNA polymerase, promoter binding, 5' to 3' synthesis"],
-    ["<b>Translation Process</b>", "mRNA → protein, occurs at ribosomes, tRNA brings amino acids"],
+    ["<b>Transcription Process</b>", "DNA &#x2192; RNA, RNA polymerase, promoter binding, 5' to 3' synthesis"],
+    ["<b>Translation Process</b>", "mRNA &#x2192; protein, occurs at ribosomes, tRNA brings amino acids"],
     ["<b>Start Codon</b>", "AUG (methionine)"],
     ["<b>Stop Codons</b>", "UAA, UAG, UGA"],
     ["<b>Point Mutations Types</b>", "Silent, Missense, Nonsense, Frameshift"],
@@ -65,8 +65,8 @@ let FLASHCARDS = [
     ["<b>Total ATP from Glucose</b>", "~30-32 ATP (aerobic respiration)"],
     ["<b>Fermentation Types</b>", "Lactic acid (muscles), Alcoholic (yeast)"],
     ["<b>Gluconeogenesis</b>", "Synthesis of glucose from non-carbohydrate sources"],
-    ["<b>Glycogenesis</b>", "Glucose → Glycogen (storage)"],
-    ["<b>Glycogenolysis</b>", "Glycogen → Glucose (breakdown)"],
+    ["<b>Glycogenesis</b>", "Glucose &#x2192; Glycogen (storage)"],
+    ["<b>Glycogenolysis</b>", "Glycogen &#x2192; Glucose (breakdown)"],
     ["<b>Beta Oxidation</b>", "Fatty acid breakdown in mitochondria, produces acetyl-CoA"],
     ["<b>Ketone Bodies</b>", "Produced from acetyl-CoA during starvation/low glucose"],
     ["<b>Protein Catabolism</b>", "Amino acids deaminated, carbon skeletons enter Krebs cycle"],
@@ -169,16 +169,16 @@ let FLASHCARDS = [
     // Anatomy and Physiology - Sensory Systems
     ["<b>Eye Anatomy</b>", "Cornea, lens, iris, pupil, retina, optic nerve"],
     ["<b>Rods vs Cones</b>", "Rods: dim light, peripheral<br>Cones: bright light, color, central"],
-    ["<b>Phototransduction</b>", "Light → electrical signal, involves rhodopsin in rods"],
-    ["<b>Visual Pathway</b>", "Retina → Optic nerve → Optic chiasm → LGN → Visual cortex"],
+    ["<b>Phototransduction</b>", "Light &#x2192; electrical signal, involves rhodopsin in rods"],
+    ["<b>Visual Pathway</b>", "Retina &#x2192; Optic nerve &#x2192; Optic chiasm &#x2192; LGN &#x2192; Visual cortex"],
     ["<b>Ear Anatomy</b>", "Outer (pinna, canal), Middle (ossicles), Inner (cochlea, semicircular canals)"],
-    ["<b>Sound Transduction</b>", "Sound waves → Tympanic membrane → Ossicles → Oval window → Cochlea"],
+    ["<b>Sound Transduction</b>", "Sound waves &#x2192; Tympanic membrane &#x2192; Ossicles &#x2192; Oval window &#x2192; Cochlea"],
     ["<b>Hair Cells Function</b>", "Mechanoreceptors in cochlea convert vibrations to neural signals"],
     ["<b>Vestibular System</b>", "Balance and spatial orientation (semicircular canals, otoliths)"],
     ["<b>Taste Receptors</b>", "Sweet, sour, salty, bitter, umami"],
     ["<b>Olfactory System</b>", "Chemoreceptors in nasal epithelium, direct connection to limbic system"],
     ["<b>Somatosensation Types</b>", "Touch, pressure, temperature, pain, proprioception"],
-    ["<b>Pain Pathway</b>", "Nociceptors → Spinal cord → Thalamus → Somatosensory cortex"],
+    ["<b>Pain Pathway</b>", "Nociceptors &#x2192; Spinal cord &#x2192; Thalamus &#x2192; Somatosensory cortex"],
     ["<b>Gate Control Theory</b>", "Non-painful input closes gates to painful input"],
 
     // Anatomy and Physiology - Endocrine System
@@ -207,7 +207,7 @@ let FLASHCARDS = [
     // Anatomy and Physiology - Cardiovascular System
     ["<b>Heart Chambers</b>", "Right atrium, Right ventricle, Left atrium, Left ventricle"],
     ["<b>Heart Valves</b>", "Tricuspid, Pulmonary, Bicuspid (Mitral), Aortic"],
-    ["<b>Cardiac Conduction System</b>", "SA node → AV node → Bundle of His → Purkinje fibers"],
+    ["<b>Cardiac Conduction System</b>", "SA node &#x2192; AV node &#x2192; Bundle of His &#x2192; Purkinje fibers"],
     ["<b>Cardiac Cycle</b>", "Systole (contraction), Diastole (relaxation)"],
     ["<b>ECG Waves</b>", "P wave (atrial depolarization), QRS (ventricular depolarization), T wave (ventricular repolarization)"],
     ["<b>Stroke Volume</b>", "Volume of blood pumped per heartbeat"],
@@ -221,13 +221,13 @@ let FLASHCARDS = [
     ["<b>Hemoglobin Structure</b>", "4 subunits, each with heme group containing iron"],
     ["<b>Oxygen-Hemoglobin Dissociation</b>", "Right shift: ↑CO₂, ↑H⁺, ↑temp, ↑2,3-BPG"],
     ["<b>Blood Types</b>", "ABO system (A, B, AB, O) and Rh factor"],
-    ["<b>Clotting Cascade</b>", "Intrinsic and extrinsic pathways → Common pathway → Fibrin"],
+    ["<b>Clotting Cascade</b>", "Intrinsic and extrinsic pathways &#x2192; Common pathway &#x2192; Fibrin"],
     ["<b>Lymphatic System Functions</b>", "Fluid balance, fat absorption, immunity"],
 
     // Anatomy and Physiology - Respiratory System
-    ["<b>Respiratory Pathway</b>", "Nose/mouth → Pharynx → Larynx → Trachea → Bronchi → Bronchioles → Alveoli"],
+    ["<b>Respiratory Pathway</b>", "Nose/mouth &#x2192; Pharynx &#x2192; Larynx &#x2192; Trachea &#x2192; Bronchi &#x2192; Bronchioles &#x2192; Alveoli"],
     ["<b>Alveoli Function</b>", "Gas exchange, surfactant reduces surface tension"],
-    ["<b>Breathing Mechanics</b>", "Diaphragm contracts → Volume ↑ → Pressure ↓ → Air in"],
+    ["<b>Breathing Mechanics</b>", "Diaphragm contracts &#x2192; Volume ↑ &#x2192; Pressure ↓ &#x2192; Air in"],
     ["<b>Tidal Volume</b>", "Normal breathing volume (~500 mL)"],
     ["<b>Vital Capacity</b>", "Maximum air that can be exhaled after maximum inhalation"],
     ["<b>Residual Volume</b>", "Air remaining after maximal exhalation"],
@@ -238,7 +238,7 @@ let FLASHCARDS = [
     ["<b>Haldane Effect</b>", "O₂ binding reduces hemoglobin's CO₂ affinity"],
 
     // Anatomy and Physiology - Digestive System
-    ["<b>Digestive Pathway</b>", "Mouth → Esophagus → Stomach → Small intestine → Large intestine → Rectum"],
+    ["<b>Digestive Pathway</b>", "Mouth &#x2192; Esophagus &#x2192; Stomach &#x2192; Small intestine &#x2192; Large intestine &#x2192; Rectum"],
     ["<b>Salivary Amylase</b>", "Breaks down starch in mouth"],
     ["<b>Stomach Functions</b>", "HCl secretion, pepsin activation, mechanical digestion"],
     ["<b>Pepsin Function</b>", "Protein digestion in acidic environment"],
@@ -258,7 +258,7 @@ let FLASHCARDS = [
     ["<b>Loop of Henle Function</b>", "Countercurrent multiplier, concentrates urine"],
     ["<b>ADH Effect on Kidney</b>", "Increases water reabsorption in collecting duct"],
     ["<b>Aldosterone Effect</b>", "Increases Na⁺ reabsorption, K⁺ secretion in DCT"],
-    ["<b>RAAS System</b>", "Renin → Angiotensinogen → Angiotensin I → ACE → Angiotensin II → Aldosterone"],
+    ["<b>RAAS System</b>", "Renin &#x2192; Angiotensinogen &#x2192; Angiotensin I &#x2192; ACE &#x2192; Angiotensin II &#x2192; Aldosterone"],
     ["<b>GFR Regulation</b>", "Autoregulation, neural, hormonal control"],
     ["<b>Acid-Base Balance</b>", "Kidneys excrete H⁺ and reabsorb HCO₃⁻"],
 
@@ -279,17 +279,17 @@ let FLASHCARDS = [
 
     // Anatomy and Physiology - Reproductive System
     ["<b>Spermatogenesis Location</b>", "Seminiferous tubules in testes"],
-    ["<b>Spermatogenesis Process</b>", "Spermatogonium → Primary → Secondary → Spermatids → Sperm"],
+    ["<b>Spermatogenesis Process</b>", "Spermatogonium &#x2192; Primary &#x2192; Secondary &#x2192; Spermatids &#x2192; Sperm"],
     ["<b>Sperm Structure</b>", "Head (nucleus, acrosome), Midpiece (mitochondria), Tail"],
-    ["<b>Male Hormones</b>", "GnRH → LH/FSH → Testosterone (Leydig cells)"],
-    ["<b>Oogenesis Process</b>", "Oogonium → Primary oocyte → Secondary oocyte → Ovum"],
+    ["<b>Male Hormones</b>", "GnRH &#x2192; LH/FSH &#x2192; Testosterone (Leydig cells)"],
+    ["<b>Oogenesis Process</b>", "Oogonium &#x2192; Primary oocyte &#x2192; Secondary oocyte &#x2192; Ovum"],
     ["<b>Menstrual Cycle Phases</b>", "Follicular (days 1-14), Ovulation (day 14), Luteal (days 15-28)"],
-    ["<b>Ovarian Cycle Hormones</b>", "FSH → Follicle development → Estrogen → LH surge → Ovulation"],
+    ["<b>Ovarian Cycle Hormones</b>", "FSH &#x2192; Follicle development &#x2192; Estrogen &#x2192; LH surge &#x2192; Ovulation"],
     ["<b>Uterine Cycle Phases</b>", "Menstruation, Proliferative, Secretory"],
     ["<b>Fertilization Location</b>", "Usually in ampulla of fallopian tube"],
     ["<b>Implantation</b>", "Blastocyst implants in uterine wall ~6-7 days after fertilization"],
     ["<b>Placenta Functions</b>", "Gas/nutrient exchange, hormone production (hCG, progesterone)"],
-    ["<b>Embryonic Development</b>", "Zygote → Morula → Blastula → Gastrula → Neurula"],
+    ["<b>Embryonic Development</b>", "Zygote &#x2192; Morula &#x2192; Blastula &#x2192; Gastrula &#x2192; Neurula"],
     ["<b>Germ Layers</b>", "Ectoderm (skin, nervous), Mesoderm (muscle, bone), Endoderm (GI, lungs)"],
 
     // General Chemistry - Atomic Structure
@@ -381,9 +381,9 @@ let FLASHCARDS = [
     ["<b>Reaction Quotient (Q)</b>", "Same as K but not at equilibrium"],
     ["<b>Q vs K</b>", "Q < K: forward, Q > K: reverse, Q = K: equilibrium"],
     ["<b>Le Chatelier's Principle</b>", "System shifts to counteract disturbance"],
-    ["<b>Effect of Concentration</b>", "Add reactant → forward, Add product → reverse"],
+    ["<b>Effect of Concentration</b>", "Add reactant &#x2192; forward, Add product &#x2192; reverse"],
     ["<b>Effect of Pressure</b>", "↑P favors fewer moles of gas"],
-    ["<b>Effect of Temperature</b>", "Endothermic: ↑T → forward, Exothermic: ↑T → reverse"],
+    ["<b>Effect of Temperature</b>", "Endothermic: ↑T &#x2192; forward, Exothermic: ↑T &#x2192; reverse"],
     ["<b>Solubility Product (Ksp)</b>", "Equilibrium constant for dissolution"],
     ["<b>Common Ion Effect</b>", "Decreases solubility when common ion added"],
 
@@ -416,7 +416,7 @@ let FLASHCARDS = [
     ["<b>ΔG° and K</b>", "ΔG° = -RT ln K"],
     ["<b>Heat Capacity</b>", "q = mcΔT"],
     ["<b>Specific Heat Water</b>", "4.18 J/g·°C or 1 cal/g·°C"],
-    ["<b>Phase Changes</b>", "Fusion (s→l), Vaporization (l→g), Sublimation (s→g)"],
+    ["<b>Phase Changes</b>", "Fusion (s&#x2192;l), Vaporization (l&#x2192;g), Sublimation (s&#x2192;g)"],
     ["<b>Heating Curve</b>", "Temperature constant during phase changes"],
     ["<b>Hess's Law</b>", "ΔH is path independent"],
     ["<b>Bond Enthalpy</b>", "Energy to break bond, ΔH = Σ(bonds broken) - Σ(bonds formed)"],
@@ -456,7 +456,7 @@ let FLASHCARDS = [
     // Organic Chemistry - Alkanes and Cycloalkanes
     ["<b>Alkane Formula</b>", "CnH2n+2"],
     ["<b>Cycloalkane Formula</b>", "CnH2n"],
-    ["<b>Combustion Reaction</b>", "Alkane + O₂ → CO₂ + H₂O"],
+    ["<b>Combustion Reaction</b>", "Alkane + O₂ &#x2192; CO₂ + H₂O"],
     ["<b>Free Radical Halogenation</b>", "Initiation, Propagation, Termination"],
     ["<b>Reactivity Order</b>", "3° > 2° > 1° > methyl"],
     ["<b>Ring Strain</b>", "Cyclopropane > Cyclobutane > Cyclopentane < Cyclohexane"],
@@ -467,19 +467,19 @@ let FLASHCARDS = [
     ["<b>Alkene Formula</b>", "CnH2n"],
     ["<b>Markovnikov's Rule</b>", "H adds to less substituted carbon"],
     ["<b>Anti-Markovnikov</b>", "With peroxides, H adds to more substituted carbon"],
-    ["<b>Hydration</b>", "H₂O/H⁺ → Markovnikov alcohol"],
-    ["<b>Hydrohalogenation</b>", "HX → Markovnikov product"],
-    ["<b>Halogenation</b>", "X₂ → anti addition, vicinal dihalide"],
-    ["<b>Hydroboration-Oxidation</b>", "BH₃, then H₂O₂/OH⁻ → anti-Markovnikov alcohol"],
-    ["<b>Ozonolysis</b>", "O₃, then Zn → carbonyl compounds"],
-    ["<b>Epoxidation</b>", "mCPBA → epoxide"],
+    ["<b>Hydration</b>", "H₂O/H⁺ &#x2192; Markovnikov alcohol"],
+    ["<b>Hydrohalogenation</b>", "HX &#x2192; Markovnikov product"],
+    ["<b>Halogenation</b>", "X₂ &#x2192; anti addition, vicinal dihalide"],
+    ["<b>Hydroboration-Oxidation</b>", "BH₃, then H₂O₂/OH⁻ &#x2192; anti-Markovnikov alcohol"],
+    ["<b>Ozonolysis</b>", "O₃, then Zn &#x2192; carbonyl compounds"],
+    ["<b>Epoxidation</b>", "mCPBA &#x2192; epoxide"],
     ["<b>Polymerization</b>", "Radical, cationic, or anionic"],
 
     // Organic Chemistry - Alkynes
     ["<b>Alkyne Formula</b>", "CnH2n-2"],
     ["<b>Acidity of Terminal Alkynes</b>", "pKa ≈ 25, can be deprotonated by strong bases"],
-    ["<b>Alkyne Hydration</b>", "HgSO₄/H₂SO₄ → ketone (tautomerization)"],
-    ["<b>Lindlar's Catalyst</b>", "H₂/Pd-CaCO₃ → cis alkene"],
+    ["<b>Alkyne Hydration</b>", "HgSO₄/H₂SO₄ &#x2192; ketone (tautomerization)"],
+    ["<b>Lindlar's Catalyst</b>", "H₂/Pd-CaCO₃ &#x2192; cis alkene"],
     ["<b>Na/NH₃ Reduction</b>", "Trans alkene formation"],
 
     // Organic Chemistry - Aromatic Compounds
@@ -495,52 +495,52 @@ let FLASHCARDS = [
     // Organic Chemistry - Alcohols
     ["<b>Alcohol Nomenclature</b>", "-ol suffix, number for position"],
     ["<b>Alcohol Acidity</b>", "pKa ≈ 15-18, methanol < 1° < 2° < 3°"],
-    ["<b>Oxidation of 1° Alcohol</b>", "PCC → aldehyde, CrO₃ → carboxylic acid"],
-    ["<b>Oxidation of 2° Alcohol</b>", "PCC or CrO₃ → ketone"],
+    ["<b>Oxidation of 1° Alcohol</b>", "PCC &#x2192; aldehyde, CrO₃ &#x2192; carboxylic acid"],
+    ["<b>Oxidation of 2° Alcohol</b>", "PCC or CrO₃ &#x2192; ketone"],
     ["<b>Oxidation of 3° Alcohol</b>", "No reaction"],
-    ["<b>Dehydration</b>", "H₂SO₄/heat → alkene (Zaitsev's rule)"],
-    ["<b>SN1 vs SN2 for Alcohols</b>", "3° → SN1, 1° → SN2 (after protonation)"],
-    ["<b>Tosylate Formation</b>", "TsCl → good leaving group"],
-    ["<b>Grignard with Carbonyl</b>", "RMgX + C=O → alcohol"],
+    ["<b>Dehydration</b>", "H₂SO₄/heat &#x2192; alkene (Zaitsev's rule)"],
+    ["<b>SN1 vs SN2 for Alcohols</b>", "3° &#x2192; SN1, 1° &#x2192; SN2 (after protonation)"],
+    ["<b>Tosylate Formation</b>", "TsCl &#x2192; good leaving group"],
+    ["<b>Grignard with Carbonyl</b>", "RMgX + C=O &#x2192; alcohol"],
 
     // Organic Chemistry - Ethers and Epoxides
     ["<b>Ether Nomenclature</b>", "Alkoxy alkane or dialkyl ether"],
     ["<b>Williamson Ether Synthesis</b>", "SN2: alkoxide + alkyl halide"],
-    ["<b>Ether Cleavage</b>", "HI or HBr → alcohol + alkyl halide"],
+    ["<b>Ether Cleavage</b>", "HI or HBr &#x2192; alcohol + alkyl halide"],
     ["<b>Epoxide Ring Opening</b>", "Acid: more substituted, Base: less substituted"],
     ["<b>Crown Ethers</b>", "Cyclic polyethers, complex with cations"],
 
     // Organic Chemistry - Aldehydes and Ketones
     ["<b>Carbonyl Reactivity</b>", "Nucleophilic addition, aldehydes > ketones"],
     ["<b>Keto-Enol Tautomerism</b>", "α-hydrogen allows enol form"],
-    ["<b>Hydration</b>", "H₂O → gem-diol (hydrate)"],
-    ["<b>Acetal Formation</b>", "2 ROH/H⁺ → acetal + H₂O"],
-    ["<b>Imine Formation</b>", "RNH₂ → C=N + H₂O"],
-    ["<b>Wittig Reaction</b>", "Phosphorus ylide → alkene"],
-    ["<b>Aldol Condensation</b>", "α-hydrogen + carbonyl → β-hydroxy carbonyl"],
+    ["<b>Hydration</b>", "H₂O &#x2192; gem-diol (hydrate)"],
+    ["<b>Acetal Formation</b>", "2 ROH/H⁺ &#x2192; acetal + H₂O"],
+    ["<b>Imine Formation</b>", "RNH₂ &#x2192; C=N + H₂O"],
+    ["<b>Wittig Reaction</b>", "Phosphorus ylide &#x2192; alkene"],
+    ["<b>Aldol Condensation</b>", "α-hydrogen + carbonyl &#x2192; β-hydroxy carbonyl"],
     ["<b>Cannizzaro Reaction</b>", "No α-H, disproportionation in base"],
     ["<b>Reduction to Alcohol</b>", "NaBH₄ (mild) or LiAlH₄ (strong)"],
-    ["<b>Wolff-Kishner Reduction</b>", "N₂H₄/KOH → alkane"],
+    ["<b>Wolff-Kishner Reduction</b>", "N₂H₄/KOH &#x2192; alkane"],
 
     // Organic Chemistry - Carboxylic Acids and Derivatives
     ["<b>Carboxylic Acid Acidity</b>", "pKa ≈ 4-5, resonance stabilized conjugate base"],
     ["<b>Inductive Effects</b>", "EWG increase acidity, EDG decrease acidity"],
     ["<b>Derivative Reactivity</b>", "Acid chloride > anhydride > ester > amide"],
-    ["<b>Fischer Esterification</b>", "RCOOH + ROH/H⁺ → ester + H₂O"],
+    ["<b>Fischer Esterification</b>", "RCOOH + ROH/H⁺ &#x2192; ester + H₂O"],
     ["<b>Acid Chloride Formation</b>", "SOCl₂ or PCl₅"],
-    ["<b>Saponification</b>", "Ester + OH⁻ → carboxylate + alcohol"],
-    ["<b>Amide Hydrolysis</b>", "H₂O/H⁺ or OH⁻ → carboxylic acid + amine"],
+    ["<b>Saponification</b>", "Ester + OH⁻ &#x2192; carboxylate + alcohol"],
+    ["<b>Amide Hydrolysis</b>", "H₂O/H⁺ or OH⁻ &#x2192; carboxylic acid + amine"],
     ["<b>Hell-Volhard-Zelinsky</b>", "α-halogenation with Br₂/PBr₃"],
     ["<b>Decarboxylation</b>", "β-keto acids lose CO₂ on heating"],
 
     // Organic Chemistry - Amines
     ["<b>Amine Basicity</b>", "pKb ≈ 4-5, alkyl > aryl"],
     ["<b>Amine Alkylation</b>", "SN2 with alkyl halide, overalkylation problem"],
-    ["<b>Gabriel Synthesis</b>", "Phthalimide → 1° amine"],
+    ["<b>Gabriel Synthesis</b>", "Phthalimide &#x2192; 1° amine"],
     ["<b>Reductive Amination</b>", "Carbonyl + NH₃/NaBH₃CN"],
-    ["<b>Hofmann Elimination</b>", "Quaternary ammonium → least substituted alkene"],
-    ["<b>Diazonium Salts</b>", "ArNH₂ + HNO₂ → ArN₂⁺"],
-    ["<b>Sandmeyer Reaction</b>", "ArN₂⁺ → ArX with CuX"],
+    ["<b>Hofmann Elimination</b>", "Quaternary ammonium &#x2192; least substituted alkene"],
+    ["<b>Diazonium Salts</b>", "ArNH₂ + HNO₂ &#x2192; ArN₂⁺"],
+    ["<b>Sandmeyer Reaction</b>", "ArN₂⁺ &#x2192; ArX with CuX"],
 
     // Organic Chemistry - Spectroscopy
     ["<b>IR Spectroscopy</b>", "Molecular vibrations, functional group identification"],
@@ -712,8 +712,8 @@ let FLASHCARDS = [
     ["<b>Radioactive Decay</b>", "N = N₀e^(-λt)"],
     ["<b>Half-Life</b>", "t₁/₂ = 0.693/λ"],
     ["<b>Alpha Decay</b>", "Loss of He-4 nucleus"],
-    ["<b>Beta Minus Decay</b>", "Neutron → proton + electron"],
-    ["<b>Beta Plus Decay</b>", "Proton → neutron + positron"],
+    ["<b>Beta Minus Decay</b>", "Neutron &#x2192; proton + electron"],
+    ["<b>Beta Plus Decay</b>", "Proton &#x2192; neutron + positron"],
     ["<b>Gamma Decay</b>", "High energy photon emission"],
 
     // Psychology and Sociology - Research Methods
@@ -846,7 +846,7 @@ let FLASHCARDS = [
     ["<b>Monosaccharides</b>", "Glucose, Fructose, Galactose"],
     ["<b>Disaccharides</b>", "Sucrose (Glu-Fru), Lactose (Gal-Glu), Maltose (Glu-Glu)"],
     ["<b>Polysaccharides</b>", "Starch, Glycogen, Cellulose, Chitin"],
-    ["<b>Glycosidic Bonds</b>", "α(1→4), β(1→4), α(1→6) for branching"],
+    ["<b>Glycosidic Bonds</b>", "α(1&#x2192;4), β(1&#x2192;4), α(1&#x2192;6) for branching"],
     ["<b>Reducing Sugars</b>", "Free anomeric carbon (all mono, most disaccharides)"],
     ["<b>Mutarotation</b>", "Interconversion between α and β anomers"],
 
@@ -890,7 +890,7 @@ let FLASHCARDS = [
     ["<b>ELISA</b>", "Enzyme-linked immunosorbent assay for proteins"],
     ["<b>Western Blot</b>", "Protein detection with antibodies"],
     ["<b>PCR</b>", "Amplify specific DNA sequences"],
-    ["<b>RT-PCR</b>", "RNA → cDNA → amplification"],
+    ["<b>RT-PCR</b>", "RNA &#x2192; cDNA &#x2192; amplification"],
     ["<b>DNA Sequencing</b>", "Sanger method or next-generation"],
     ["<b>X-ray Crystallography</b>", "3D protein structure"],
     ["<b>NMR Spectroscopy</b>", "Protein structure in solution"],
@@ -1007,20 +1007,12 @@ let FLASHCARDS = `"What is the capital of France?","Paris"
             padding: 0 !important;
         }
 
-        .remove-btn {
-            background-color: #dc3545;
+        .remove-btn, .undo-btn {
+            background-color: #fc95a5;
         }
 
-        .remove-btn:hover {
-            background-color: #c82333;
-        }
-
-        .undo-btn {
-            background-color: #17a2b8;
-        }
-
-        .undo-btn:hover:not(:disabled) {
-            background-color: #138496;
+        .remove-btn:hover, .undo-btn:hover {
+            background-color: #ff7373;
         }
 
         .undo-btn:disabled {
@@ -1210,21 +1202,13 @@ let FLASHCARDS = `"What is the capital of France?","Paris"
             background-color: #218838;
         }
 
-        .shuffle-btn {
+        .shuffle-btn, .invert-btn {
             background-color: #ffc107;
             color: #333;
         }
 
-        .shuffle-btn:hover {
+        .shuffle-btn:hover, .invert-btn:hover {
             background-color: #e0a800;
-        }
-
-        .invert-btn {
-            background-color: #dc3545;
-        }
-
-        .invert-btn:hover {
-            background-color: #c82333;
         }
 
         .nav-btn {
@@ -1257,42 +1241,40 @@ let FLASHCARDS = `"What is the capital of France?","Paris"
         </div>
 
         <div class="controls">
-            <button onclick="goToFirst()" class="nav-btn" title="First">⇤</button>
-            <button onclick="prevCard()" id="prevBtn" title="Previous (left)">←</button>
-            <button onclick="flipCard()" class="flip-btn" title="Flip (space)">⤾</button>
-            <button onclick="nextCard()" id="nextBtn" title="Next (right)">→</button>
-            <button onclick="goToLast()" class="nav-btn" title="Last">⇥</button>
+            <button onclick="goToFirst()" class="nav-btn" title="First">&#x21E4;</button>
+            <button onclick="prevCard()" id="prevBtn" title="Previous (left)">&#x2190;</button>
+            <button onclick="flipCard()" class="flip-btn" title="Flip (space)">&#x21BB;</button>
+            <button onclick="nextCard()" id="nextBtn" title="Next (right)">&#x2192;</button>
+            <button onclick="goToLast()" class="nav-btn" title="Last">&#x21E5;</button>
         </div>
 
         <div class="secondary-controls">
-            <button onclick="shuffleCards()" class="shuffle-btn">Shuffle Cards</button>
-            <button onclick="invertCards()" class="invert-btn">Invert Q/A</button>
-            <button onclick="removeCard()" class="remove-btn">Remove Current Card</button>
-            <button onclick="undoRemove()" class="undo-btn" id="undoBtn">Undo Last Remove</button>
+            <button onclick="shuffleCards()" class="shuffle-btn" title="Shuffle Flashcards">&#x1F500;</button>
+            <button onclick="invertCards()" class="invert-btn" title="Swap Question & Answer">Q&#x2194;A</button>
+            <button onclick="removeCard()" class="remove-btn" title="Remove Current Card">&#x274C;</button>
+            <button onclick="undoRemove()" class="undo-btn" id="undoBtn" title="Undo Last Remove">&#x274C;&#x21BB;</button>
             <div class="font-size-controls">
-                <button onclick="decreaseFontSize()" class="font-size-btn" title="Decrease font size">−</button>
-                <button onclick="increaseFontSize()" class="font-size-btn" title="Increase font size">+</button>
+                <button onclick="decreaseFontSize()" class="font-size-btn" title="Decrease font size">-&#x1F50D;</button>
+                <button onclick="increaseFontSize()" class="font-size-btn" title="Increase font size">+&#x1F50D;</button>
             </div>
             <label class="checkbox-label">
-                <input type="checkbox" id="centerCheckbox" checked onchange="toggleCenter()">
-                Center
+                <input type="checkbox" id="centerCheckbox" checked onchange="toggleCenter()" title="Center Flashcard Text">&#x1F3AF;
             </label>
         </div>
 
         <div class="timer-row">
             <div class="timer-display" id="timerDisplay">00:00:00</div>
-            <button onclick="toggleTimer()" class="timer-btn" id="timerBtn">Start Timer</button>
-            <button onclick="resetTimer()" class="reset-btn">Reset Timer</button>
+            <button onclick="toggleTimer()" class="timer-btn" id="timerBtn" title="Start Timer">&#x23F2;&#x25B6;</button>
+            <button onclick="resetTimer()" class="reset-btn" title="Reset Timer">&#x23F2;&#x21BB;</button>
         </div>
 
         <div class="print-row">
-            <button onclick="printFlashcards()" class="print-btn">Print</button>
+            <button onclick="printFlashcards()" class="print-btn" title="Print">&#x1F5A8;</button>
         </div>
 
         <div class="instructions">
-            <strong>Keyboard shortcuts:</strong><br>
-            Space: Flip card | ← →: Navigate cards<br>
-            Click the card to flip it
+            <strong>Keyboard shortcuts:</strong> space to flip card, left/right to navigate cards
+
         </div>
     </div>
 
@@ -1664,13 +1646,13 @@ let FLASHCARDS = `"What is the capital of France?","Paris"
                 clearInterval(timerInterval);
                 timerElapsedTime += Date.now() - timerStartTime;
                 isTimerRunning = false;
-                timerBtn.textContent = 'Start Timer';
+                timerBtn.innerHTML  = '&#x23F2;&#x25B6;';
                 timerBtn.classList.remove('pause');
             } else {
                 // Start timer
                 timerStartTime = Date.now();
                 isTimerRunning = true;
-                timerBtn.textContent = 'Pause Timer';
+                timerBtn.innerHTML = '&#x23F2;&#x23F8;';
                 timerBtn.classList.add('pause');
 
                 // Update display every second
@@ -1686,7 +1668,7 @@ let FLASHCARDS = `"What is the capital of France?","Paris"
             isTimerRunning = false;
 
             const timerBtn = document.getElementById('timerBtn');
-            timerBtn.textContent = 'Start Timer';
+            timerBtn.innerHTML  = '&#x23F2;&#x25B6;';
             timerBtn.classList.remove('pause');
 
             updateTimerDisplay();

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <script>
-const version = "1.0.0";
+const version = "1.1.0";
 
 // ===== MODIFY YOUR FLASHCARDS HERE =====
 const TOPIC = "Pharmacology Mnemonics";
@@ -59,7 +59,7 @@ let FLASHCARDS = [
     ["<b>SNRIs - VEND</b>", "<b>V</b>enlafaxine<br><b>E</b>ffexor (brand)<br><b>N</b>orepinephrine + serotonin<br><b>D</b>uloxetine"],
     ["<b>TCA Side Effects - TCA'S</b>", "<b>T</b>hrombocytopenia<br><b>C</b>ardiac arrhythmias<br><b>A</b>nticholinergic<br><b>S</b>edation"],
     ["<b>MAOIs - PIST</b>", "<b>P</b>henelzine<br><b>I</b>socarboxazid<br><b>S</b>elegiline<br><b>T</b>ranylcypromine"],
-    ["<b>MAOI + Tyramine - WINE & CHEESE</b>", "Avoid:<br>Wine<br>Cheese (aged)<br>Beer<br>Sausage<br>Chocolate<br>→ Hypertensive crisis"],
+    ["<b>MAOI + Tyramine - WINE & CHEESE</b>", "Avoid:<br>Wine<br>Cheese (aged)<br>Beer<br>Sausage<br>Chocolate<br>&#x2192; Hypertensive crisis"],
     ["<b>Benzodiazepines - PAM and LAM</b>", "All end in -pam or -lam:<br>Diazepam<br>Lorazepam<br>Alprazolam<br>Clonazepam<br>Midazolam"],
     ["<b>Benzo Withdrawal - ABCD</b>", "<b>A</b>nxiety<br><b>B</b>enzo withdrawal<br><b>C</b>onvulsions<br><b>D</b>elirium"],
     ["<b>Antipsychotics - Typical HIGH</b>", "<b>H</b>aloperidol<br><b>I</b>ncreased prolactin<br><b>G</b>ynecomastia<br><b>H</b>igh potency = High EPS"],
@@ -77,7 +77,7 @@ let FLASHCARDS = [
     ["<b>COX-2 Inhibitors - COXIB</b>", "All end in -coxib:<br>Celecoxib<br>Rofecoxib (withdrawn)<br>Valdecoxib (withdrawn)"],
 
     // Diabetes
-    ["<b>Sulfonylureas - GLIP/GLYB</b>", "Glipizide<br>Glyburide<br>Glimepiride<br>→ Stimulate insulin release"],
+    ["<b>Sulfonylureas - GLIP/GLYB</b>", "Glipizide<br>Glyburide<br>Glimepiride<br>&#x2192; Stimulate insulin release"],
     ["<b>Biguanides - METFORMIN</b>", "<b>M</b>etformin<br><b>E</b>nhances insulin sensitivity<br><b>T</b>akes time to work<br><b>F</b>irst-line for T2DM<br><b>O</b>ral<br><b>R</b>enal contraindication<br><b>M</b>inimal hypoglycemia<br><b>I</b>nhibits gluconeogenesis<br><b>N</b>o weight gain"],
     ["<b>DPP-4 Inhibitors - GLIPTIN</b>", "All end in -gliptin:<br>Sitagliptin<br>Saxagliptin<br>Linagliptin<br>Alogliptin"],
     ["<b>GLP-1 Agonists - TIDE</b>", "All end in -tide:<br>Exenatide<br>Liraglutide<br>Dulaglutide<br>Semaglutide"],
@@ -105,7 +105,7 @@ let FLASHCARDS = [
     ["<b>Cyclophosphamide - HAMS</b>", "<b>H</b>emorrhagic cystitis<br><b>A</b>lopecia<br><b>M</b>yelosuppression<br><b>S</b>terility<br>Prevent with MESNA"],
     ["<b>Anthracyclines - Doxorubicin</b>", "Doxorubicin = Dilated cardiomyopathy<br>Daunorubicin<br>Red urine<br>Prevent with Dexrazoxane"],
     ["<b>Vinca Alkaloids - CRISPY</b>", "<b>C</b>onstipation<br><b>R</b>ed blood cells affected<br><b>I</b>leus (paralytic)<br><b>S</b>ensory neuropathy<br><b>P</b>eripheral neuropathy<br><b>Y</b>oung cells affected"],
-    ["<b>5-FU Rescue</b>", "5-FU toxicity → Leucovorin rescue<br>Methotrexate toxicity → Leucovorin rescue"],
+    ["<b>5-FU Rescue</b>", "5-FU toxicity &#x2192; Leucovorin rescue<br>Methotrexate toxicity &#x2192; Leucovorin rescue"],
 
     // Hormones
     ["<b>Corticosteroids - BECLOMETHASONE</b>", "<b>B</b>eclomethasone<br><b>E</b>czema treatment<br><b>C</b>ortisol-like<br><b>L</b>ung maturity (prenatal)<br><b>O</b>steoporosis risk<br><b>M</b>oon face<br><b>E</b>levated glucose<br><b>T</b>hin skin<br><b>H</b>ypertension<br><b>A</b>drenal suppression<br><b>S</b>triae<br><b>O</b>besity (central)<br><b>N</b>ecrosis (avascular)<br><b>E</b>cchymoses"],
@@ -116,7 +116,7 @@ let FLASHCARDS = [
     ["<b>Warfarin - WARFARIN</b>", "<b>W</b>arfarin<br><b>A</b>ffects vitamin K<br><b>R</b>eversal with vitamin K<br><b>F</b>actor monitoring (INR)<br><b>A</b>void in pregnancy<br><b>R</b>at poison origin<br><b>I</b>nteractions (many)<br><b>N</b>ecrosis (skin)"],
     ["<b>Heparin vs LMWH</b>", "Heparin = Monitor PTT, protamine reversal<br>LMWH = No monitoring needed, less HIT"],
     ["<b>DOACs - XABAN/GATRAN</b>", "Xa inhibitors end in -xaban:<br>Rivaroxaban, Apixaban, Edoxaban<br>Direct thrombin inhibitors end in -gatran:<br>Dabigatran"],
-    ["<b>HIT - Heparin-Induced Thrombocytopenia</b>", "Heparin → Antibodies → Thrombosis<br>Low platelets but clotting<br>Stop heparin immediately"],
+    ["<b>HIT - Heparin-Induced Thrombocytopenia</b>", "Heparin &#x2192; Antibodies &#x2192; Thrombosis<br>Low platelets but clotting<br>Stop heparin immediately"],
 
     // Drug Interactions
     ["<b>CYP450 Inducers - PC BRAS</b>", "<b>P</b>henytoin<br><b>C</b>arbamazepine<br><b>B</b>arbiturates<br><b>R</b>ifampin<br><b>A</b>lcohol (chronic)<br><b>S</b>t. John's wort"],
@@ -255,20 +255,12 @@ let FLASHCARDS = `"What is the capital of France?","Paris"
             padding: 0 !important;
         }
 
-        .remove-btn {
-            background-color: #dc3545;
+        .remove-btn, .undo-btn {
+            background-color: #fc95a5;
         }
 
-        .remove-btn:hover {
-            background-color: #c82333;
-        }
-
-        .undo-btn {
-            background-color: #17a2b8;
-        }
-
-        .undo-btn:hover:not(:disabled) {
-            background-color: #138496;
+        .remove-btn:hover, .undo-btn:hover {
+            background-color: #ff7373;
         }
 
         .undo-btn:disabled {
@@ -458,21 +450,13 @@ let FLASHCARDS = `"What is the capital of France?","Paris"
             background-color: #218838;
         }
 
-        .shuffle-btn {
+        .shuffle-btn, .invert-btn {
             background-color: #ffc107;
             color: #333;
         }
 
-        .shuffle-btn:hover {
+        .shuffle-btn:hover, .invert-btn:hover {
             background-color: #e0a800;
-        }
-
-        .invert-btn {
-            background-color: #dc3545;
-        }
-
-        .invert-btn:hover {
-            background-color: #c82333;
         }
 
         .nav-btn {
@@ -505,42 +489,40 @@ let FLASHCARDS = `"What is the capital of France?","Paris"
         </div>
 
         <div class="controls">
-            <button onclick="goToFirst()" class="nav-btn" title="First">⇤</button>
-            <button onclick="prevCard()" id="prevBtn" title="Previous (left)">←</button>
-            <button onclick="flipCard()" class="flip-btn" title="Flip (space)">⤾</button>
-            <button onclick="nextCard()" id="nextBtn" title="Next (right)">→</button>
-            <button onclick="goToLast()" class="nav-btn" title="Last">⇥</button>
+            <button onclick="goToFirst()" class="nav-btn" title="First">&#x21E4;</button>
+            <button onclick="prevCard()" id="prevBtn" title="Previous (left)">&#x2190;</button>
+            <button onclick="flipCard()" class="flip-btn" title="Flip (space)">&#x21BB;</button>
+            <button onclick="nextCard()" id="nextBtn" title="Next (right)">&#x2192;</button>
+            <button onclick="goToLast()" class="nav-btn" title="Last">&#x21E5;</button>
         </div>
 
         <div class="secondary-controls">
-            <button onclick="shuffleCards()" class="shuffle-btn">Shuffle Cards</button>
-            <button onclick="invertCards()" class="invert-btn">Invert Q/A</button>
-            <button onclick="removeCard()" class="remove-btn">Remove Current Card</button>
-            <button onclick="undoRemove()" class="undo-btn" id="undoBtn">Undo Last Remove</button>
+            <button onclick="shuffleCards()" class="shuffle-btn" title="Shuffle Flashcards">&#x1F500;</button>
+            <button onclick="invertCards()" class="invert-btn" title="Swap Question & Answer">Q&#x2194;A</button>
+            <button onclick="removeCard()" class="remove-btn" title="Remove Current Card">&#x274C;</button>
+            <button onclick="undoRemove()" class="undo-btn" id="undoBtn" title="Undo Last Remove">&#x274C;&#x21BB;</button>
             <div class="font-size-controls">
-                <button onclick="decreaseFontSize()" class="font-size-btn" title="Decrease font size">−</button>
-                <button onclick="increaseFontSize()" class="font-size-btn" title="Increase font size">+</button>
+                <button onclick="decreaseFontSize()" class="font-size-btn" title="Decrease font size">-&#x1F50D;</button>
+                <button onclick="increaseFontSize()" class="font-size-btn" title="Increase font size">+&#x1F50D;</button>
             </div>
             <label class="checkbox-label">
-                <input type="checkbox" id="centerCheckbox" checked onchange="toggleCenter()">
-                Center
+                <input type="checkbox" id="centerCheckbox" checked onchange="toggleCenter()" title="Center Flashcard Text">&#x1F3AF;
             </label>
         </div>
 
         <div class="timer-row">
             <div class="timer-display" id="timerDisplay">00:00:00</div>
-            <button onclick="toggleTimer()" class="timer-btn" id="timerBtn">Start Timer</button>
-            <button onclick="resetTimer()" class="reset-btn">Reset Timer</button>
+            <button onclick="toggleTimer()" class="timer-btn" id="timerBtn" title="Start Timer">&#x23F2;&#x25B6;</button>
+            <button onclick="resetTimer()" class="reset-btn" title="Reset Timer">&#x23F2;&#x21BB;</button>
         </div>
 
         <div class="print-row">
-            <button onclick="printFlashcards()" class="print-btn">Print</button>
+            <button onclick="printFlashcards()" class="print-btn" title="Print">&#x1F5A8;</button>
         </div>
 
         <div class="instructions">
-            <strong>Keyboard shortcuts:</strong><br>
-            Space: Flip card | ← →: Navigate cards<br>
-            Click the card to flip it
+            <strong>Keyboard shortcuts:</strong> space to flip card, left/right to navigate cards
+
         </div>
     </div>
 
@@ -912,13 +894,13 @@ let FLASHCARDS = `"What is the capital of France?","Paris"
                 clearInterval(timerInterval);
                 timerElapsedTime += Date.now() - timerStartTime;
                 isTimerRunning = false;
-                timerBtn.textContent = 'Start Timer';
+                timerBtn.innerHTML  = '&#x23F2;&#x25B6;';
                 timerBtn.classList.remove('pause');
             } else {
                 // Start timer
                 timerStartTime = Date.now();
                 isTimerRunning = true;
-                timerBtn.textContent = 'Pause Timer';
+                timerBtn.innerHTML = '&#x23F2;&#x23F8;';
                 timerBtn.classList.add('pause');
 
                 // Update display every second
@@ -934,7 +916,7 @@ let FLASHCARDS = `"What is the capital of France?","Paris"
             isTimerRunning = false;
 
             const timerBtn = document.getElementById('timerBtn');
-            timerBtn.textContent = 'Start Timer';
+            timerBtn.innerHTML  = '&#x23F2;&#x25B6;';
             timerBtn.classList.remove('pause');
 
             updateTimerDisplay();

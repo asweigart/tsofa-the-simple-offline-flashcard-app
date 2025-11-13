@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <script>
-const version = "1.0.0";
+const version = "1.1.0";
 
 // ===== MODIFY YOUR FLASHCARDS HERE =====
 const TOPIC = "French Verbs";
@@ -222,20 +222,12 @@ let FLASHCARDS = `"What is the capital of France?","Paris"
             padding: 0 !important;
         }
 
-        .remove-btn {
-            background-color: #dc3545;
+        .remove-btn, .undo-btn {
+            background-color: #fc95a5;
         }
 
-        .remove-btn:hover {
-            background-color: #c82333;
-        }
-
-        .undo-btn {
-            background-color: #17a2b8;
-        }
-
-        .undo-btn:hover:not(:disabled) {
-            background-color: #138496;
+        .remove-btn:hover, .undo-btn:hover {
+            background-color: #ff7373;
         }
 
         .undo-btn:disabled {
@@ -425,21 +417,13 @@ let FLASHCARDS = `"What is the capital of France?","Paris"
             background-color: #218838;
         }
 
-        .shuffle-btn {
+        .shuffle-btn, .invert-btn {
             background-color: #ffc107;
             color: #333;
         }
 
-        .shuffle-btn:hover {
+        .shuffle-btn:hover, .invert-btn:hover {
             background-color: #e0a800;
-        }
-
-        .invert-btn {
-            background-color: #dc3545;
-        }
-
-        .invert-btn:hover {
-            background-color: #c82333;
         }
 
         .nav-btn {
@@ -472,42 +456,40 @@ let FLASHCARDS = `"What is the capital of France?","Paris"
         </div>
 
         <div class="controls">
-            <button onclick="goToFirst()" class="nav-btn" title="First">⇤</button>
-            <button onclick="prevCard()" id="prevBtn" title="Previous (left)">←</button>
-            <button onclick="flipCard()" class="flip-btn" title="Flip (space)">⤾</button>
-            <button onclick="nextCard()" id="nextBtn" title="Next (right)">→</button>
-            <button onclick="goToLast()" class="nav-btn" title="Last">⇥</button>
+            <button onclick="goToFirst()" class="nav-btn" title="First">&#x21E4;</button>
+            <button onclick="prevCard()" id="prevBtn" title="Previous (left)">&#x2190;</button>
+            <button onclick="flipCard()" class="flip-btn" title="Flip (space)">&#x21BB;</button>
+            <button onclick="nextCard()" id="nextBtn" title="Next (right)">&#x2192;</button>
+            <button onclick="goToLast()" class="nav-btn" title="Last">&#x21E5;</button>
         </div>
 
         <div class="secondary-controls">
-            <button onclick="shuffleCards()" class="shuffle-btn">Shuffle Cards</button>
-            <button onclick="invertCards()" class="invert-btn">Invert Q/A</button>
-            <button onclick="removeCard()" class="remove-btn">Remove Current Card</button>
-            <button onclick="undoRemove()" class="undo-btn" id="undoBtn">Undo Last Remove</button>
+            <button onclick="shuffleCards()" class="shuffle-btn" title="Shuffle Flashcards">&#x1F500;</button>
+            <button onclick="invertCards()" class="invert-btn" title="Swap Question & Answer">Q&#x2194;A</button>
+            <button onclick="removeCard()" class="remove-btn" title="Remove Current Card">&#x274C;</button>
+            <button onclick="undoRemove()" class="undo-btn" id="undoBtn" title="Undo Last Remove">&#x274C;&#x21BB;</button>
             <div class="font-size-controls">
-                <button onclick="decreaseFontSize()" class="font-size-btn" title="Decrease font size">−</button>
-                <button onclick="increaseFontSize()" class="font-size-btn" title="Increase font size">+</button>
+                <button onclick="decreaseFontSize()" class="font-size-btn" title="Decrease font size">-&#x1F50D;</button>
+                <button onclick="increaseFontSize()" class="font-size-btn" title="Increase font size">+&#x1F50D;</button>
             </div>
             <label class="checkbox-label">
-                <input type="checkbox" id="centerCheckbox" checked onchange="toggleCenter()">
-                Center
+                <input type="checkbox" id="centerCheckbox" checked onchange="toggleCenter()" title="Center Flashcard Text">&#x1F3AF;
             </label>
         </div>
 
         <div class="timer-row">
             <div class="timer-display" id="timerDisplay">00:00:00</div>
-            <button onclick="toggleTimer()" class="timer-btn" id="timerBtn">Start Timer</button>
-            <button onclick="resetTimer()" class="reset-btn">Reset Timer</button>
+            <button onclick="toggleTimer()" class="timer-btn" id="timerBtn" title="Start Timer">&#x23F2;&#x25B6;</button>
+            <button onclick="resetTimer()" class="reset-btn" title="Reset Timer">&#x23F2;&#x21BB;</button>
         </div>
 
         <div class="print-row">
-            <button onclick="printFlashcards()" class="print-btn">Print</button>
+            <button onclick="printFlashcards()" class="print-btn" title="Print">&#x1F5A8;</button>
         </div>
 
         <div class="instructions">
-            <strong>Keyboard shortcuts:</strong><br>
-            Space: Flip card | ← →: Navigate cards<br>
-            Click the card to flip it
+            <strong>Keyboard shortcuts:</strong> space to flip card, left/right to navigate cards
+
         </div>
     </div>
 
@@ -879,13 +861,13 @@ let FLASHCARDS = `"What is the capital of France?","Paris"
                 clearInterval(timerInterval);
                 timerElapsedTime += Date.now() - timerStartTime;
                 isTimerRunning = false;
-                timerBtn.textContent = 'Start Timer';
+                timerBtn.innerHTML  = '&#x23F2;&#x25B6;';
                 timerBtn.classList.remove('pause');
             } else {
                 // Start timer
                 timerStartTime = Date.now();
                 isTimerRunning = true;
-                timerBtn.textContent = 'Pause Timer';
+                timerBtn.innerHTML = '&#x23F2;&#x23F8;';
                 timerBtn.classList.add('pause');
 
                 // Update display every second
@@ -901,7 +883,7 @@ let FLASHCARDS = `"What is the capital of France?","Paris"
             isTimerRunning = false;
 
             const timerBtn = document.getElementById('timerBtn');
-            timerBtn.textContent = 'Start Timer';
+            timerBtn.innerHTML  = '&#x23F2;&#x25B6;';
             timerBtn.classList.remove('pause');
 
             updateTimerDisplay();
