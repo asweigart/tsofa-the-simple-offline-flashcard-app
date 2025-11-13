@@ -1,32 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
 <script>
-    // ===== MODIFY YOUR FLASHCARDS HERE =====
-    // Option 1: Array of arrays format
-    let FLASHCARDS = [
-        ["What is the capital of France?", "Paris"],
-        ["What is 2 + 2?", "4"],
-        ["What is the largest planet in our solar system?", "<b>Jupiter</b><br><i>It has a mass of 1.898 × 10²⁷ kg</i>"],
-        ["What year did World War II end?", "1945"],
-        ["Who wrote 'Romeo and Juliet'?", "William Shakespeare"],
-        ["What is HTML?", "<b>HyperText Markup Language</b><br>The standard markup language for creating web pages"],
-    ];
-    
-    // Option 2: CSV string format (uncomment to use)
-    /*
-    let FLASHCARDS = `"What is the capital of France?","Paris"
+const version = "1.0.0";
+
+// ===== MODIFY YOUR FLASHCARDS HERE =====
+// Option 1: Array of arrays format
+let FLASHCARDS = [
+["What is the capital of France?", "Paris"],
+["What is 2 + 2?", "4"],
+["What is the largest planet in our solar system?", "<b>Jupiter</b><br><i>It has a mass of 1.898 × 10²⁷ kg</i>"],
+["What year did World War II end?", "1945"],
+["Who wrote 'Romeo and Juliet'?", "William Shakespeare"],
+["What is HTML?", "<b>HyperText Markup Language</b><br>The standard markup language for creating web pages"],
+];
+
+// Option 2: CSV string format (uncomment to use)
+/*
+let FLASHCARDS = `"What is the capital of France?","Paris"
 "What is 2 + 2?","4"
 "What is the largest planet in our solar system?","<b>Jupiter</b><br><i>It has a mass of 1.898 × 10²⁷ kg</i>"
 "What year did World War II end?","1945"
 "Who wrote 'Romeo and Juliet'?","William Shakespeare"
 "What is HTML?","<b>HyperText Markup Language</b><br>The standard markup language for creating web pages"`;
-    */
-    // ========================================
+*/
+// ========================================
 </script>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TSOFA - The Simple, Offline Flashcard App</title>
+    <title>TSOFA - The Simple, Offline Flashcard App by Al Sweigart</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -288,8 +290,7 @@
 </head>
 <body>
     <div class="container">
-        <h1 style="text-align: center; color: #333;">TSOFA</h1>
-        <p style="text-align: center; color: #666; margin-top: -10px; font-size: 14px;">The Simple, Offline Flashcard App</p>
+        <p style="text-align: center; color: #666; margin-top: -10px; font-size: 14px;"><a href="https://inventwithpython.com/tsofa/">TSOFA - The Simple, Offline Flashcard App</a> by Al Sweigart</p>
         
         <div class="card-counter" id="cardCounter">Card 1 of 2</div>
         
