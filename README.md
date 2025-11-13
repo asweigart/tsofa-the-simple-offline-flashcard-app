@@ -65,7 +65,6 @@ let FLASHCARDS = `"Question 1","Answer 1"
 
 * [Cell Biology](https://inventwithpython.com/tsofa/flashcards-cell-biology.html)
 * [Human Organs](https://inventwithpython.com/tsofa/flashcards-human-organs.html)
-* [Commonly Confused Words](https://inventwithpython.com/tsofa/flashcards-confused-words.html)
 * [US Constitutional Amendments](https://inventwithpython.com/tsofa/flashcards-constitutional-amendments.html)
 * [US Constitutional Law](https://inventwithpython.com/tsofa/flashcards-con-law.html)
 * [US State Capitals](https://inventwithpython.com/tsofa/flashcards-state-capitals.html)
@@ -74,6 +73,7 @@ let FLASHCARDS = `"Question 1","Answer 1"
 * [Country Currencies](https://inventwithpython.com/tsofa/flashcards-country-currencies.html)
 * [Economics Terms](https://inventwithpython.com/tsofa/flashcards-economics-terms.html)
 * [English Idioms](https://inventwithpython.com/tsofa/flashcards-english-idioms.html)
+* [Commonly Confused Words](https://inventwithpython.com/tsofa/flashcards-confused-words.html)
 * [French Verbs](https://inventwithpython.com/tsofa/flashcards-french-verbs.html)
 * [Spanish Verbs](https://inventwithpython.com/tsofa/flashcards-spanish-verbs.html)
 * [Japanese Hiragana Characters](https://inventwithpython.com/tsofa/flashcards-hiragana.html)
