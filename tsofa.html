@@ -4,6 +4,8 @@
 const version = "1.0.0";
 
 // ===== MODIFY YOUR FLASHCARDS HERE =====
+const TOPIC = "";
+
 // Option 1: Array of arrays format
 let FLASHCARDS = [
 ["What is the capital of France?", "Paris"],
@@ -23,12 +25,17 @@ let FLASHCARDS = `"What is the capital of France?","Paris"
 "Who wrote 'Romeo and Juliet'?","William Shakespeare"
 "What is HTML?","<b>HyperText Markup Language</b><br>The standard markup language for creating web pages"`;
 */
-// ========================================
+    // ========================================
+
+    // Update page title if TOPIC is set
+    if (TOPIC && TOPIC.trim() !== "") {
+        document.title = "TSOFA - " + TOPIC;
+    }
 </script>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TSOFA - The Simple, Offline Flashcard App by Al Sweigart</title>
+    <title>TSOFA - The Simple, Offline Flashcard App</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -40,19 +47,19 @@ let FLASHCARDS = `"What is the capital of France?","Paris"
             margin: 0;
             min-height: 100vh;
         }
-        
+
         .container {
             max-width: 600px;
             width: 100%;
         }
-        
+
         .card-counter {
             text-align: center;
             margin-bottom: 10px;
             font-size: 18px;
             color: #555;
         }
-        
+
         .flashcard {
             background-color: white;
             border-radius: 10px;
@@ -67,81 +74,81 @@ let FLASHCARDS = `"What is the capital of France?","Paris"
             user-select: none;
             transition: transform 0.1s;
         }
-        
+
         .flashcard:hover {
             transform: scale(1.02);
         }
-        
+
         .flashcard:active {
             transform: scale(0.98);
         }
-        
+
         .flashcard-content {
             font-size: 20px;
             line-height: 1.5;
             width: 100%;
         }
-        
+
         .flashcard-content.centered {
             text-align: center;
         }
-        
+
         .flashcard-content.left-aligned {
             text-align: left;
             white-space: pre-wrap;
         }
-        
+
         .controls {
             display: grid;
             grid-template-columns: repeat(5, 1fr);
             gap: 10px;
             margin-bottom: 20px;
         }
-        
+
         .secondary-controls {
             display: grid;
             grid-template-columns: repeat(4, 1fr) auto auto;
             gap: 10px;
             align-items: center;
         }
-        
+
         .secondary-controls button {
             font-size: 16px;
             height: 72px;
             padding: 0 16px;
         }
-        
+
         .font-size-btn {
             width: 72px;
             padding: 0 !important;
         }
-        
+
         .remove-btn {
             background-color: #dc3545;
         }
-        
+
         .remove-btn:hover {
             background-color: #c82333;
         }
-        
+
         .undo-btn {
             background-color: #17a2b8;
         }
-        
+
         .undo-btn:hover:not(:disabled) {
             background-color: #138496;
         }
-        
+
         .undo-btn:disabled {
             background-color: #cccccc;
             cursor: not-allowed;
         }
-        
+
         .font-size-controls {
             display: flex;
             gap: 5px;
         }
-        
+
         .font-size-btn {
             width: 72px;
             padding: 0 !important;
@@ -152,11 +159,11 @@ let FLASHCARDS = `"What is the capital of France?","Paris"
             justify-content: center;
             background-color: #6c757d;
         }
-        
+
         .font-size-btn:hover {
             background-color: #5a6268;
         }
-        
+
         .checkbox-label {
             display: flex;
             align-items: center;
@@ -168,13 +175,13 @@ let FLASHCARDS = `"What is the capital of France?","Paris"
             padding: 0 10px;
             height: 72px;
         }
-        
+
         .checkbox-label input[type="checkbox"] {
             width: 18px;
             height: 18px;
             cursor: pointer;
         }
-        
+
         button {
             padding: 12px 20px;
             font-size: 20px;
@@ -185,20 +192,20 @@ let FLASHCARDS = `"What is the capital of France?","Paris"
             cursor: pointer;
             transition: background-color 0.2s;
         }
-        
+
         button:hover {
             background-color: #0056b3;
         }
-        
+
         button:active {
             transform: scale(0.95);
         }
-        
+
         button:disabled {
             background-color: #cccccc;
             cursor: not-allowed;
         }
-        
+
         .timer-row {
             margin-top: 15px;
             padding-top: 15px;
@@ -208,7 +215,7 @@ let FLASHCARDS = `"What is the capital of France?","Paris"
             align-items: center;
             gap: 15px;
         }
-        
+
         .timer-display {
             font-family: 'Courier New', monospace;
             font-size: 24px;
@@ -217,68 +224,133 @@ let FLASHCARDS = `"What is the capital of France?","Paris"
             min-width: 120px;
             text-align: center;
         }
-        
+
         .timer-btn {
             background-color: #17a2b8;
             padding: 10px 20px;
             font-size: 16px;
         }
-        
+
         .timer-btn:hover {
             background-color: #138496;
         }
-        
+
         .timer-btn.pause {
             background-color: #ffc107;
         }
-        
+
         .timer-btn.pause:hover {
             background-color: #e0a800;
         }
-        
+
         .reset-btn {
             background-color: #6c757d;
             padding: 10px 20px;
             font-size: 16px;
         }
-        
+
         .reset-btn:hover {
             background-color: #5a6268;
         }
-        
+
+        .print-row {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #ddd;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .print-btn {
+            background-color: #6c757d;
+            padding: 10px 30px;
+            font-size: 16px;
+        }
+
+        .print-btn:hover {
+            background-color: #5a6268;
+        }
+
+        @media print {
+            body {
+                background: white;
+                padding: 20px;
+            }
+
+            .container {
+                display: none;
+            }
+
+            .print-table {
+                display: table !important;
+                width: 100%;
+                border-collapse: collapse;
+                font-family: Arial, sans-serif;
+            }
+
+            .print-table thead {
+                display: none;
+            }
+
+            .print-table td {
+                border: 1px solid #999;
+                padding: 10px;
+                text-align: left;
+                vertical-align: top;
+                width: 50%;
+            }
+
+            .print-table tr:nth-child(even) {
+                background-color: #f9f9f9;
+            }
+
+            .print-header {
+                display: none !important;
+            }
+        }
+
+        .print-table {
+            display: none;
+        }
+
+        .print-header {
+            display: none;
+        }
+
         .flip-btn {
             background-color: #28a745;
         }
-        
+
         .flip-btn:hover {
             background-color: #218838;
         }
-        
+
         .shuffle-btn {
             background-color: #ffc107;
             color: #333;
         }
-        
+
         .shuffle-btn:hover {
             background-color: #e0a800;
         }
-        
+
         .invert-btn {
             background-color: #dc3545;
         }
-        
+
         .invert-btn:hover {
             background-color: #c82333;
         }
-        
+
         .nav-btn {
             background-color: #6c757d;
         }
-        
+
         .nav-btn:hover {
             background-color: #5a6268;
         }
-        
+
         .instructions {
             text-align: center;
             color: #666;
@@ -290,14 +362,16 @@ let FLASHCARDS = `"What is the capital of France?","Paris"
 </head>
 <body>
     <div class="container">
-        <p style="text-align: center; color: #666; margin-top: -10px; font-size: 14px;"><a href="https://inventwithpython.com/tsofa/">TSOFA - The Simple, Offline Flashcard App</a> by Al Sweigart</p>
-        
+        <h1 style="text-align: center; color: #333;">TSOFA</h1>
+        <p style="text-align: center; color: #666; margin-top: -10px; font-size: 14px;">The Simple, Offline Flashcard App by Al Sweigart</p>
+        <h2 id="topicHeading" style="text-align: center; color: #555; margin-top: 10px; margin-bottom: 20px; display: none;"></h2>
+
         <div class="card-counter" id="cardCounter">Card 1 of 2</div>
-        
+
         <div class="flashcard" id="flashcard" onclick="flipCard()">
             <div class="flashcard-content" id="cardContent"></div>
         </div>
-        
+
         <div class="controls">
             <button onclick="goToFirst()" class="nav-btn" title="First">⇤</button>
             <button onclick="prevCard()" id="prevBtn" title="Previous (left)">←</button>
@@ -305,7 +379,7 @@ let FLASHCARDS = `"What is the capital of France?","Paris"
             <button onclick="nextCard()" id="nextBtn" title="Next (right)">→</button>
             <button onclick="goToLast()" class="nav-btn" title="Last">⇥</button>
         </div>
-        
+
         <div class="secondary-controls">
             <button onclick="shuffleCards()" class="shuffle-btn">Shuffle Cards</button>
             <button onclick="invertCards()" class="invert-btn">Invert Q/A</button>
@@ -320,20 +394,40 @@ let FLASHCARDS = `"What is the capital of France?","Paris"
                 Center
             </label>
         </div>
-        
+
         <div class="timer-row">
             <div class="timer-display" id="timerDisplay">00:00:00</div>
             <button onclick="toggleTimer()" class="timer-btn" id="timerBtn">Start Timer</button>
             <button onclick="resetTimer()" class="reset-btn">Reset Timer</button>
         </div>
-        
+
+        <div class="print-row">
+            <button onclick="printFlashcards()" class="print-btn">Print</button>
+        </div>
+
         <div class="instructions">
             <strong>Keyboard shortcuts:</strong><br>
             Space: Flip card | ← →: Navigate cards<br>
             Click the card to flip it
         </div>
     </div>
-    
+
+    <!-- Print-only content -->
+    <div class="print-header" id="printHeader">
+        <h2>TSOFA Flashcards</h2>
+        <h3 id="printTopic"></h3>
+    </div>
+    <table class="print-table" id="printTable">
+        <thead>
+            <tr>
+                <th>Question</th>
+                <th>Answer</th>
+            </tr>
+        </thead>
+        <tbody id="printTableBody">
+        </tbody>
+    </table>
+
     <script>
         // Parse CSV string to array format
         function parseCSV(csvString) {
@@ -342,11 +436,11 @@ let FLASHCARDS = `"What is the capital of France?","Paris"
             let currentField = '';
             let inQuotes = false;
             let i = 0;
-            
+
             while (i < csvString.length) {
                 const char = csvString[i];
                 const nextChar = csvString[i + 1];
-                
+
                 if (!inQuotes) {
                     if (char === '"') {
                         inQuotes = true;
@@ -378,7 +472,7 @@ let FLASHCARDS = `"What is the capital of France?","Paris"
                 }
                 i++;
             }
-            
+
             // Handle the last field and row
             if (currentField !== '' || currentRow.length > 0) {
                 currentRow.push(currentField);
@@ -386,7 +480,7 @@ let FLASHCARDS = `"What is the capital of France?","Paris"
                     rows.push(currentRow);
                 }
             }
-            
+
             // Ensure each row has exactly 2 columns (question and answer)
             return rows.map(row => {
                 if (row.length === 0) return ['', ''];
@@ -394,7 +488,7 @@ let FLASHCARDS = `"What is the capital of France?","Paris"
                 return [row[0], row[1]];
             }).filter(row => row[0] !== '' || row[1] !== ''); // Remove completely empty rows
         }
-        
+
         // Process FLASHCARDS whether it's an array or CSV string
         let processedFlashcards;
         if (typeof FLASHCARDS === 'string') {
@@ -402,7 +496,7 @@ let FLASHCARDS = `"What is the capital of France?","Paris"
         } else {
             processedFlashcards = FLASHCARDS;
         }
-        
+
         // App state
         let currentCards = [...processedFlashcards];
         let currentIndex = 0;
@@ -410,9 +504,16 @@ let FLASHCARDS = `"What is the capital of France?","Paris"
         let isInverted = false;
         let currentFontSize = 20; // Default font size in pixels
         let removedCards = []; // Stack to store removed cards for undo
-        
+
         // Initialize the app
         function init() {
+            // Display topic if set
+            if (TOPIC && TOPIC.trim() !== "") {
+                const topicHeading = document.getElementById('topicHeading');
+                topicHeading.textContent = "Topic: " + TOPIC;
+                topicHeading.style.display = 'block';
+            }
+
             displayCard();
             updateButtons();
             updateCounter();
@@ -420,40 +521,40 @@ let FLASHCARDS = `"What is the capital of France?","Paris"
             updateFontSize();
             updateUndoButton();
         }
-        
+
         // Display current card
         function displayCard() {
             const cardContent = document.getElementById('cardContent');
             const card = currentCards[currentIndex];
-            
+
             if (!card) {
                 cardContent.innerHTML = "No flashcards available";
                 return;
             }
-            
+
             const questionIndex = isInverted ? 1 : 0;
             const answerIndex = isInverted ? 0 : 1;
-            
+
             if (showingQuestion) {
                 cardContent.innerHTML = card[questionIndex];
             } else {
                 cardContent.innerHTML = card[answerIndex];
             }
-            
+
             // Apply centering based on checkbox
             updateTextAlignment();
         }
-        
+
         // Toggle center alignment
         function toggleCenter() {
             updateTextAlignment();
         }
-        
+
         // Update text alignment based on checkbox state
         function updateTextAlignment() {
             const cardContent = document.getElementById('cardContent');
             const centerCheckbox = document.getElementById('centerCheckbox');
-            
+
             if (centerCheckbox.checked) {
                 cardContent.classList.remove('left-aligned');
                 cardContent.classList.add('centered');
@@ -462,7 +563,7 @@ let FLASHCARDS = `"What is the capital of France?","Paris"
                 cardContent.classList.add('left-aligned');
             }
         }
-        
+
         // Increase font size
         function increaseFontSize() {
             if (currentFontSize < 48) { // Maximum font size
@@ -470,7 +571,7 @@ let FLASHCARDS = `"What is the capital of France?","Paris"
                 updateFontSize();
             }
         }
-        
+
         // Decrease font size
         function decreaseFontSize() {
             if (currentFontSize > 12) { // Minimum font size
@@ -478,77 +579,77 @@ let FLASHCARDS = `"What is the capital of France?","Paris"
                 updateFontSize();
             }
         }
-        
+
         // Update the font size of the flashcard content
         function updateFontSize() {
             const cardContent = document.getElementById('cardContent');
             cardContent.style.fontSize = currentFontSize + 'px';
         }
-        
+
         // Remove current card
         function removeCard() {
             if (currentCards.length === 0) return;
-            
+
             // Store removed card with its index for undo
             removedCards.push({
                 card: currentCards[currentIndex],
                 index: currentIndex
             });
-            
+
             // Remove card from current deck
             currentCards.splice(currentIndex, 1);
-            
+
             // Adjust current index if necessary
             if (currentCards.length === 0) {
                 currentIndex = 0;
             } else if (currentIndex >= currentCards.length) {
                 currentIndex = currentCards.length - 1;
             }
-            
+
             // Reset to question side
             showingQuestion = true;
-            
+
             // Update display
             displayCard();
             updateButtons();
             updateCounter();
             updateUndoButton();
         }
-        
+
         // Undo last card removal
         function undoRemove() {
             if (removedCards.length === 0) return;
-            
+
             // Get the last removed card
             const lastRemoved = removedCards.pop();
-            
+
             // Insert card back at its original position or at the end if position is invalid
             const insertIndex = Math.min(lastRemoved.index, currentCards.length);
             currentCards.splice(insertIndex, 0, lastRemoved.card);
-            
+
             // Set current index to the restored card
             currentIndex = insertIndex;
             showingQuestion = true;
-            
+
             // Update display
             displayCard();
             updateButtons();
             updateCounter();
             updateUndoButton();
         }
-        
+
         // Update undo button state
         function updateUndoButton() {
             const undoBtn = document.getElementById('undoBtn');
             undoBtn.disabled = removedCards.length === 0;
         }
-        
+
         // Flip the current card
         function flipCard() {
             showingQuestion = !showingQuestion;
             displayCard();
         }
-        
+
         // Navigate to next card
         function nextCard() {
             if (currentIndex < currentCards.length - 1) {
@@ -559,7 +660,7 @@ let FLASHCARDS = `"What is the capital of France?","Paris"
                 updateCounter();
             }
         }
-        
+
         // Navigate to previous card
         function prevCard() {
             if (currentIndex > 0) {
@@ -570,7 +671,7 @@ let FLASHCARDS = `"What is the capital of France?","Paris"
                 updateCounter();
             }
         }
-        
+
         // Go to first card
         function goToFirst() {
             currentIndex = 0;
@@ -579,7 +680,7 @@ let FLASHCARDS = `"What is the capital of France?","Paris"
             updateButtons();
             updateCounter();
         }
-        
+
         // Go to last card
         function goToLast() {
             currentIndex = currentCards.length - 1;
@@ -588,7 +689,7 @@ let FLASHCARDS = `"What is the capital of France?","Paris"
             updateButtons();
             updateCounter();
         }
-        
+
         // Shuffle the cards
         function shuffleCards() {
             // Reset to original cards before shuffling
@@ -606,25 +707,25 @@ let FLASHCARDS = `"What is the capital of France?","Paris"
             updateCounter();
             updateUndoButton();
         }
-        
+
         // Invert all cards (swap questions and answers)
         function invertCards() {
             isInverted = !isInverted;
             displayCard();
         }
-        
+
         // Update button states
         function updateButtons() {
             document.getElementById('prevBtn').disabled = currentIndex === 0;
             document.getElementById('nextBtn').disabled = currentIndex === currentCards.length - 1;
         }
-        
+
         // Update card counter
         function updateCounter() {
             const counter = document.getElementById('cardCounter');
             counter.textContent = `Card ${currentIndex + 1} of ${currentCards.length}`;
         }
-        
+
         // Keyboard event listeners
         document.addEventListener('keydown', function(event) {
             switch(event.key) {
@@ -643,37 +744,37 @@ let FLASHCARDS = `"What is the capital of France?","Paris"
                     break;
             }
         });
-        
+
         // Timer variables
         let timerStartTime = 0;
         let timerElapsedTime = 0;
         let timerInterval = null;
         let isTimerRunning = false;
-        
+
         // Format time as HH:MM:SS
         function formatTime(milliseconds) {
             const totalSeconds = Math.floor(milliseconds / 1000);
             const hours = Math.floor(totalSeconds / 3600);
             const minutes = Math.floor((totalSeconds % 3600) / 60);
             const seconds = totalSeconds % 60;
-            
+
             return String(hours).padStart(2, '0') + ':' +
                    String(minutes).padStart(2, '0') + ':' +
                    String(seconds).padStart(2, '0');
         }
-        
+
         // Update timer display
         function updateTimerDisplay() {
-            const currentTime = isTimerRunning ? 
-                timerElapsedTime + (Date.now() - timerStartTime) : 
+            const currentTime = isTimerRunning ?
+                timerElapsedTime + (Date.now() - timerStartTime) :
                 timerElapsedTime;
             document.getElementById('timerDisplay').textContent = formatTime(currentTime);
         }
-        
+
         // Toggle timer (start/pause)
         function toggleTimer() {
             const timerBtn = document.getElementById('timerBtn');
-            
+
             if (isTimerRunning) {
                 // Pause timer
                 clearInterval(timerInterval);
@@ -687,24 +788,49 @@ let FLASHCARDS = `"What is the capital of France?","Paris"
                 isTimerRunning = true;
                 timerBtn.textContent = 'Pause Timer';
                 timerBtn.classList.add('pause');
-                
+
                 // Update display every second
                 timerInterval = setInterval(updateTimerDisplay, 1000);
             }
         }
-        
+
         // Reset timer
         function resetTimer() {
             clearInterval(timerInterval);
             timerStartTime = 0;
             timerElapsedTime = 0;
             isTimerRunning = false;
-            
+
             const timerBtn = document.getElementById('timerBtn');
             timerBtn.textContent = 'Start Timer';
             timerBtn.classList.remove('pause');
-            
+
             updateTimerDisplay();
+        }
+
+        // Print flashcards function
+        function printFlashcards() {
+            // Clear any existing content
+            const printTableBody = document.getElementById('printTableBody');
+            printTableBody.innerHTML = '';
+
+            // Use the original flashcards (not affected by current state or invert)
+            processedFlashcards.forEach((card, index) => {
+                const row = document.createElement('tr');
+
+                const questionCell = document.createElement('td');
+                questionCell.innerHTML = card[0]; // Always use original order
+
+                const answerCell = document.createElement('td');
+                answerCell.innerHTML = card[1]; // Always use original order
+
+                row.appendChild(questionCell);
+                row.appendChild(answerCell);
+                printTableBody.appendChild(row);
+            });
+
+            // Trigger print dialog
+            window.print();
         }
         
         // Initialize app when page loads
