@@ -1,73 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
 <script>
-const version = "1.1.0";
+const VERSION = "1.3.0";
+const LANGUAGE = "en"; // en, es, fr, de, nl, it, pt, pl, ru, no, sv, zh, hi, bn, ja, ko, th, ar
 
 // ===== MODIFY YOUR FLASHCARDS HERE =====
-const TOPIC = "Cell Biology";
-
-// Option 1: Array of arrays format
-// Cell Parts and Their Biological Functions flashcards
-// Copy and paste this into the FLASHCARDS variable in your TSOFA app
+const TOPIC = 'Cellular Biology';
 
 let FLASHCARDS = [
-    ["<b>Cell Membrane</b><br><i>(Plasma Membrane)</i>", "Controls the passage of substances in and out of the cell; maintains cell shape and protects the cell from its environment"],
-    ["<b>Nucleus</b>", "Controls cell activities and contains genetic material (DNA); regulates gene expression and mediates DNA replication"],
-    ["<b>Nuclear Envelope</b>", "Double membrane that surrounds the nucleus; regulates transport of molecules between nucleus and cytoplasm"],
-    ["<b>Nuclear Pores</b>", "Allow selective passage of molecules between the nucleus and cytoplasm; regulate import and export of proteins and RNA"],
-    ["<b>Nucleolus</b>", "Produces ribosomal RNA (rRNA) and assembles ribosomes"],
-    ["<b>Chromatin</b>", "DNA and protein complex that packages DNA into a compact form; regulates gene expression and DNA replication"],
-    ["<b>Cytoplasm</b>", "Gel-like substance that fills the cell; site of many metabolic reactions and provides medium for organelles"],
-    ["<b>Mitochondria</b>", "Produces ATP through cellular respiration; known as the 'powerhouse of the cell'"],
-    ["<b>Ribosomes</b>", "Synthesize proteins by translating messenger RNA; can be free-floating or attached to endoplasmic reticulum"],
-    ["<b>Endoplasmic Reticulum (Rough)</b>", "Studded with ribosomes; synthesizes and modifies proteins destined for secretion or membrane insertion"],
-    ["<b>Endoplasmic Reticulum (Smooth)</b>", "Synthesizes lipids, metabolizes carbohydrates, detoxifies drugs and poisons; stores calcium ions"],
-    ["<b>Golgi Apparatus</b><br><i>(Golgi Body)</i>", "Modifies, packages, and ships proteins and lipids received from the ER; creates lysosomes"],
-    ["<b>Lysosomes</b>", "Contains digestive enzymes that break down waste materials, cellular debris, and foreign substances"],
-    ["<b>Peroxisomes</b>", "Break down fatty acids and amino acids; detoxify harmful substances like hydrogen peroxide"],
-    ["<b>Centrosome</b>", "Organizes microtubules and regulates cell cycle progression; contains two centrioles"],
-    ["<b>Centrioles</b>", "Help organize the mitotic spindle during cell division; involved in the formation of cilia and flagella"],
-    ["<b>Cytoskeleton</b>", "Network of protein filaments that maintains cell shape, enables cell movement, and organizes organelles"],
-    ["<b>Microfilaments</b><br><i>(Actin Filaments)</i>", "Provide mechanical support, determine cell shape, enable cell movement and muscle contraction"],
-    ["<b>Intermediate Filaments</b>", "Provide tensile strength to cells; anchor organelles in place"],
-    ["<b>Microtubules</b>", "Form spindle fibers during cell division; provide tracks for organelle movement; form cilia and flagella"],
-    ["<b>Cilia</b>", "Short, hair-like projections that move substances along cell surface or propel single-celled organisms"],
-    ["<b>Flagella</b>", "Long, whip-like projections that enable cell movement; typically one or few per cell"],
-    ["<b>Vacuoles</b>", "Store water, nutrients, and waste products; maintain turgor pressure in plant cells"],
-    ["<b>Cell Wall</b><br><i>(Plant cells only)</i>", "Rigid structure outside cell membrane; provides support, protection, and shape to plant cells"],
-    ["<b>Chloroplasts</b><br><i>(Plant cells only)</i>", "Conduct photosynthesis; convert light energy into chemical energy (glucose)"],
-    ["<b>Central Vacuole</b><br><i>(Plant cells only)</i>", "Large vacuole that maintains cell turgor, stores water and nutrients, and helps maintain plant structure"],
-    ["<b>Plasmodesmata</b><br><i>(Plant cells only)</i>", "Channels between plant cell walls that allow communication and transport between adjacent cells"],
-    ["<b>Thylakoids</b><br><i>(Inside chloroplasts)</i>", "Membrane-bound compartments where light-dependent reactions of photosynthesis occur"],
-    ["<b>Stroma</b><br><i>(Inside chloroplasts)</i>", "Fluid-filled space where light-independent reactions (Calvin cycle) of photosynthesis occur"],
-    ["<b>Grana</b><br><i>(Inside chloroplasts)</i>", "Stacks of thylakoids that increase surface area for light absorption"],
-    ["<b>Cristae</b><br><i>(Inside mitochondria)</i>", "Folded inner membrane that increases surface area for ATP production"],
-    ["<b>Matrix</b><br><i>(Inside mitochondria)</i>", "Inner compartment where the Krebs cycle occurs; contains mitochondrial DNA and ribosomes"],
-    ["<b>Tight Junctions</b><br><i>(Animal cells)</i>", "Seal neighboring cells together to prevent leakage of materials between cells"],
-    ["<b>Gap Junctions</b><br><i>(Animal cells)</i>", "Allow direct communication between adjacent cells through small channels"],
-    ["<b>Desmosomes</b><br><i>(Animal cells)</i>", "Anchor cells together in tissues subject to mechanical stress"],
-    ["<b>Extracellular Matrix</b><br><i>(Animal cells)</i>", "Network of proteins and carbohydrates outside cells; provides structural support and cell signaling"],
-    ["<b>Glycocalyx</b>", "Carbohydrate-rich layer on cell surface; involved in cell recognition and protection"],
-    ["<b>Vesicles</b>", "Small membrane-bound sacs that transport materials within the cell"],
-    ["<b>Secretory Vesicles</b>", "Transport proteins and other materials from Golgi apparatus to cell membrane for secretion"],
-    ["<b>Transport Vesicles</b>", "Move materials between organelles within the endomembrane system"],
-    ["<b>Endosomes</b>", "Sort and process materials brought into cell through endocytosis"],
-    ["<b>Autophagosome</b>", "Double-membrane vesicle that engulfs damaged organelles for degradation"],
-    ["<b>Proteasomes</b>", "Protein complexes that degrade unneeded or damaged proteins"],
-    ["<b>Lipid Rafts</b>", "Specialized membrane microdomains involved in cell signaling and protein sorting"],
-    ["<b>Focal Adhesions</b>", "Connect cytoskeleton to extracellular matrix; important for cell migration"],
-    ["<b>Basal Body</b>", "Organizes the assembly of cilia and flagella; structurally similar to centriole"],
-    ["<b>Inclusion Bodies</b>", "Non-living substances in cytoplasm such as glycogen granules, lipid droplets, or pigments"],
-    ["<b>Nucleoid</b><br><i>(Prokaryotes only)</i>", "Region where genetic material is located in prokaryotic cells; not membrane-bound"],
-    ["<b>Plasmids</b><br><i>(Prokaryotes)</i>", "Small, circular DNA molecules that carry additional genes; can be transferred between cells"],
-    ["<b>Pili</b><br><i>(Prokaryotes)</i>", "Hair-like structures used for attachment to surfaces and DNA transfer during conjugation"],
-    ["<b>Capsule</b><br><i>(Some prokaryotes)</i>", "Protective layer outside cell wall; helps evade immune system and aids in attachment"],
-    ["<b>Magnetosomes</b><br><i>(Some bacteria)</i>", "Membrane-bound compartments containing magnetic crystals; allow bacteria to orient in magnetic fields"],
-    ["<b>Carboxysomes</b><br><i>(Some bacteria)</i>", "Protein-enclosed compartments for carbon fixation; concentrate CO₂ for efficient photosynthesis"],
-    ["<b>Gas Vesicles</b><br><i>(Some prokaryotes)</i>", "Protein structures that provide buoyancy; allow cells to move up and down in water column"],
-    ["<b>Mesosomes</b><br><i>(Some bacteria)</i>", "Invaginations of cell membrane; may assist in cell division and DNA replication"]
+["<b>Cell Membrane</b><br><i>(Plasma Membrane)</i>", "Controls the passage of substances in and out of the cell; maintains cell shape and protects the cell from its environment"],
+["<b>Nucleus</b>", "Controls cell activities and contains genetic material (DNA); regulates gene expression and mediates DNA replication"],
+["<b>Nuclear Envelope</b>", "Double membrane that surrounds the nucleus; regulates transport of molecules between nucleus and cytoplasm"],
+["<b>Nuclear Pores</b>", "Allow selective passage of molecules between the nucleus and cytoplasm; regulate import and export of proteins and RNA"],
+["<b>Nucleolus</b>", "Produces ribosomal RNA (rRNA) and assembles ribosomes"],
+["<b>Chromatin</b>", "DNA and protein complex that packages DNA into a compact form; regulates gene expression and DNA replication"],
+["<b>Cytoplasm</b>", "Gel-like substance that fills the cell; site of many metabolic reactions and provides medium for organelles"],
+["<b>Mitochondria</b>", "Produces ATP through cellular respiration; known as the 'powerhouse of the cell'"],
+["<b>Ribosomes</b>", "Synthesize proteins by translating messenger RNA; can be free-floating or attached to endoplasmic reticulum"],
+["<b>Endoplasmic Reticulum (Rough)</b>", "Studded with ribosomes; synthesizes and modifies proteins destined for secretion or membrane insertion"],
+["<b>Endoplasmic Reticulum (Smooth)</b>", "Synthesizes lipids, metabolizes carbohydrates, detoxifies drugs and poisons; stores calcium ions"],
+["<b>Golgi Apparatus</b><br><i>(Golgi Body)</i>", "Modifies, packages, and ships proteins and lipids received from the ER; creates lysosomes"],
+["<b>Lysosomes</b>", "Contains digestive enzymes that break down waste materials, cellular debris, and foreign substances"],
+["<b>Peroxisomes</b>", "Break down fatty acids and amino acids; detoxify harmful substances like hydrogen peroxide"],
+["<b>Centrosome</b>", "Organizes microtubules and regulates cell cycle progression; contains two centrioles"],
+["<b>Centrioles</b>", "Help organize the mitotic spindle during cell division; involved in the formation of cilia and flagella"],
+["<b>Cytoskeleton</b>", "Network of protein filaments that maintains cell shape, enables cell movement, and organizes organelles"],
+["<b>Microfilaments</b><br><i>(Actin Filaments)</i>", "Provide mechanical support, determine cell shape, enable cell movement and muscle contraction"],
+["<b>Intermediate Filaments</b>", "Provide tensile strength to cells; anchor organelles in place"],
+["<b>Microtubules</b>", "Form spindle fibers during cell division; provide tracks for organelle movement; form cilia and flagella"],
+["<b>Cilia</b>", "Short, hair-like projections that move substances along cell surface or propel single-celled organisms"],
+["<b>Flagella</b>", "Long, whip-like projections that enable cell movement; typically one or few per cell"],
+["<b>Vacuoles</b>", "Store water, nutrients, and waste products; maintain turgor pressure in plant cells"],
+["<b>Cell Wall</b><br><i>(Plant cells only)</i>", "Rigid structure outside cell membrane; provides support, protection, and shape to plant cells"],
+["<b>Chloroplasts</b><br><i>(Plant cells only)</i>", "Conduct photosynthesis; convert light energy into chemical energy (glucose)"],
+["<b>Central Vacuole</b><br><i>(Plant cells only)</i>", "Large vacuole that maintains cell turgor, stores water and nutrients, and helps maintain plant structure"],
+["<b>Plasmodesmata</b><br><i>(Plant cells only)</i>", "Channels between plant cell walls that allow communication and transport between adjacent cells"],
+["<b>Thylakoids</b><br><i>(Inside chloroplasts)</i>", "Membrane-bound compartments where light-dependent reactions of photosynthesis occur"],
+["<b>Stroma</b><br><i>(Inside chloroplasts)</i>", "Fluid-filled space where light-independent reactions (Calvin cycle) of photosynthesis occur"],
+["<b>Grana</b><br><i>(Inside chloroplasts)</i>", "Stacks of thylakoids that increase surface area for light absorption"],
+["<b>Cristae</b><br><i>(Inside mitochondria)</i>", "Folded inner membrane that increases surface area for ATP production"],
+["<b>Matrix</b><br><i>(Inside mitochondria)</i>", "Inner compartment where the Krebs cycle occurs; contains mitochondrial DNA and ribosomes"],
+["<b>Tight Junctions</b><br><i>(Animal cells)</i>", "Seal neighboring cells together to prevent leakage of materials between cells"],
+["<b>Gap Junctions</b><br><i>(Animal cells)</i>", "Allow direct communication between adjacent cells through small channels"],
+["<b>Desmosomes</b><br><i>(Animal cells)</i>", "Anchor cells together in tissues subject to mechanical stress"],
+["<b>Extracellular Matrix</b><br><i>(Animal cells)</i>", "Network of proteins and carbohydrates outside cells; provides structural support and cell signaling"],
+["<b>Glycocalyx</b>", "Carbohydrate-rich layer on cell surface; involved in cell recognition and protection"],
+["<b>Vesicles</b>", "Small membrane-bound sacs that transport materials within the cell"],
+["<b>Secretory Vesicles</b>", "Transport proteins and other materials from Golgi apparatus to cell membrane for secretion"],
+["<b>Transport Vesicles</b>", "Move materials between organelles within the endomembrane system"],
+["<b>Endosomes</b>", "Sort and process materials brought into cell through endocytosis"],
+["<b>Autophagosome</b>", "Double-membrane vesicle that engulfs damaged organelles for degradation"],
+["<b>Proteasomes</b>", "Protein complexes that degrade unneeded or damaged proteins"],
+["<b>Lipid Rafts</b>", "Specialized membrane microdomains involved in cell signaling and protein sorting"],
+["<b>Focal Adhesions</b>", "Connect cytoskeleton to extracellular matrix; important for cell migration"],
+["<b>Basal Body</b>", "Organizes the assembly of cilia and flagella; structurally similar to centriole"],
+["<b>Inclusion Bodies</b>", "Non-living substances in cytoplasm such as glycogen granules, lipid droplets, or pigments"],
+["<b>Nucleoid</b><br><i>(Prokaryotes only)</i>", "Region where genetic material is located in prokaryotic cells; not membrane-bound"],
+["<b>Plasmids</b><br><i>(Prokaryotes)</i>", "Small, circular DNA molecules that carry additional genes; can be transferred between cells"],
+["<b>Pili</b><br><i>(Prokaryotes)</i>", "Hair-like structures used for attachment to surfaces and DNA transfer during conjugation"],
+["<b>Capsule</b><br><i>(Some prokaryotes)</i>", "Protective layer outside cell wall; helps evade immune system and aids in attachment"],
+["<b>Magnetosomes</b><br><i>(Some bacteria)</i>", "Membrane-bound compartments containing magnetic crystals; allow bacteria to orient in magnetic fields"],
+["<b>Carboxysomes</b><br><i>(Some bacteria)</i>", "Protein-enclosed compartments for carbon fixation; concentrate CO₂ for efficient photosynthesis"],
+["<b>Gas Vesicles</b><br><i>(Some prokaryotes)</i>", "Protein structures that provide buoyancy; allow cells to move up and down in water column"],
+["<b>Mesosomes</b><br><i>(Some bacteria)</i>", "Invaginations of cell membrane; may assist in cell division and DNA replication"]
 ];
-
 
 // Option 2: CSV string format (uncomment to use)
 /*
@@ -78,798 +74,1425 @@ let FLASHCARDS = `"What is the capital of France?","Paris"
 "Who wrote 'Romeo and Juliet'?","William Shakespeare"
 "What is HTML?","<b>HyperText Markup Language</b><br>The standard markup language for creating web pages"`;
 */
-    // ========================================
+// ========================================
 
-    // Update page title if TOPIC is set
-    if (TOPIC && TOPIC.trim() !== "") {
-        document.title = "TSOFA - " + TOPIC;
-    }
+// Internationalization text
+const i18n_text = {
+en: {
+title: "TSOFA - The Simple, Offline Flashcard App",
+byAuthor: "TSOFA - The Simple, Offline Flashcard App by Al Sweigart (v" + VERSION + ")",
+topic: "Topic",
+cardCounter: "Card {current} of {total}",
+noFlashcards: "No flashcards available",
+first: "First",
+previous: "Previous (left)",
+flip: "Flip (space)",
+next: "Next (right)",
+last: "Last",
+shuffle: "Shuffle Flashcards",
+swapQA: "Swap Question & Answer",
+swapQALabel: "Q↔A",
+removeCard: "Remove Current Card",
+undoRemove: "Undo Last Remove",
+decreaseFont: "Decrease font size",
+increaseFont: "Increase font size",
+leftJustify: "Left Justify",
+rightJustify: "Right Justify",
+center: "Center",
+startTimer: "Start Timer",
+pauseTimer: "Pause Timer",
+resetTimer: "Reset Timer",
+print: "Print",
+keyboardShortcuts: "Keyboard shortcuts: space to flip card, left/right to navigate cards",
+printHeader: "TSOFA Flashcards",
+createWithEditor: "Create flashcards with the TSOFA editor."
+},
+es: {
+title: "TSOFA - La Aplicación Simple de Tarjetas Didácticas Sin Conexión",
+byAuthor: "TSOFA - La Aplicación Simple de Tarjetas Didácticas Sin Conexión por Al Sweigart (v" + VERSION + ")",
+topic: "Tema",
+cardCounter: "Tarjeta {current} de {total}",
+noFlashcards: "No hay tarjetas disponibles",
+first: "Primera",
+previous: "Anterior (izquierda)",
+flip: "Voltear (espacio)",
+next: "Siguiente (derecha)",
+last: "Última",
+shuffle: "Mezclar Tarjetas",
+swapQA: "Intercambiar Pregunta y Respuesta",
+swapQALabel: "P↔R",
+removeCard: "Eliminar Tarjeta Actual",
+undoRemove: "Deshacer Eliminación",
+decreaseFont: "Disminuir tamaño de fuente",
+increaseFont: "Aumentar tamaño de fuente",
+leftJustify: "Alinear a la Izquierda",
+rightJustify: "Alinear a la Derecha",
+center: "Centrar",
+startTimer: "Iniciar Cronómetro",
+pauseTimer: "Pausar Cronómetro",
+resetTimer: "Reiniciar Cronómetro",
+print: "Imprimir",
+keyboardShortcuts: "Atajos de teclado: espacio para voltear, izquierda/derecha para navegar",
+printHeader: "Tarjetas TSOFA",
+createWithEditor: "Crea tarjetas con el editor TSOFA."
+},
+fr: {
+title: "TSOFA - L'Application Simple de Cartes Flash Hors Ligne",
+byAuthor: "TSOFA - L'Application Simple de Cartes Flash Hors Ligne par Al Sweigart (v" + VERSION + ")",
+topic: "Sujet",
+cardCounter: "Carte {current} sur {total}",
+noFlashcards: "Aucune carte disponible",
+first: "Première",
+previous: "Précédente (gauche)",
+flip: "Retourner (espace)",
+next: "Suivante (droite)",
+last: "Dernière",
+shuffle: "Mélanger les Cartes",
+swapQA: "Échanger Question et Réponse",
+swapQALabel: "Q↔R",
+removeCard: "Supprimer la Carte Actuelle",
+undoRemove: "Annuler la Suppression",
+decreaseFont: "Diminuer la taille de police",
+increaseFont: "Augmenter la taille de police",
+leftJustify: "Aligner à Gauche",
+rightJustify: "Aligner à Droite",
+center: "Centrer",
+startTimer: "Démarrer le Chronomètre",
+pauseTimer: "Pause Chronomètre",
+resetTimer: "Réinitialiser le Chronomètre",
+print: "Imprimer",
+keyboardShortcuts: "Raccourcis clavier: espace pour retourner, gauche/droite pour naviguer",
+printHeader: "Cartes Flash TSOFA",
+createWithEditor: "Créez des cartes flash avec l'éditeur TSOFA."
+},
+de: {
+title: "TSOFA - Die Einfache Offline-Lernkarten-App",
+byAuthor: "TSOFA - Die Einfache Offline-Lernkarten-App von Al Sweigart (v" + VERSION + ")",
+topic: "Thema",
+cardCounter: "Karte {current} von {total}",
+noFlashcards: "Keine Lernkarten verfügbar",
+first: "Erste",
+previous: "Zurück (links)",
+flip: "Umdrehen (Leertaste)",
+next: "Weiter (rechts)",
+last: "Letzte",
+shuffle: "Karten Mischen",
+swapQA: "Frage und Antwort Tauschen",
+swapQALabel: "F↔A",
+removeCard: "Aktuelle Karte Entfernen",
+undoRemove: "Löschen Rückgängig",
+decreaseFont: "Schriftgröße verkleinern",
+increaseFont: "Schriftgröße vergrößern",
+leftJustify: "Linksbündig",
+rightJustify: "Rechtsbündig",
+center: "Zentrieren",
+startTimer: "Timer Starten",
+pauseTimer: "Timer Pausieren",
+resetTimer: "Timer Zurücksetzen",
+print: "Drucken",
+keyboardShortcuts: "Tastenkürzel: Leertaste zum Umdrehen, links/rechts zum Navigieren",
+printHeader: "TSOFA Lernkarten",
+createWithEditor: "Erstellen Sie Lernkarten mit dem TSOFA-Editor."
+},
+nl: {
+title: "TSOFA - De Eenvoudige Offline Flashcard App",
+byAuthor: "TSOFA - De Eenvoudige Offline Flashcard App door Al Sweigart (v" + VERSION + ")",
+topic: "Onderwerp",
+cardCounter: "Kaart {current} van {total}",
+noFlashcards: "Geen flashcards beschikbaar",
+first: "Eerste",
+previous: "Vorige (links)",
+flip: "Omdraaien (spatie)",
+next: "Volgende (rechts)",
+last: "Laatste",
+shuffle: "Kaarten Schudden",
+swapQA: "Vraag en Antwoord Verwisselen",
+swapQALabel: "V↔A",
+removeCard: "Huidige Kaart Verwijderen",
+undoRemove: "Verwijderen Ongedaan Maken",
+decreaseFont: "Lettergrootte verkleinen",
+increaseFont: "Lettergrootte vergroten",
+leftJustify: "Links Uitlijnen",
+rightJustify: "Rechts Uitlijnen",
+center: "Centreren",
+startTimer: "Timer Starten",
+pauseTimer: "Timer Pauzeren",
+resetTimer: "Timer Resetten",
+print: "Afdrukken",
+keyboardShortcuts: "Sneltoetsen: spatie om om te draaien, links/rechts om te navigeren",
+printHeader: "TSOFA Flashcards",
+createWithEditor: "Maak flashcards met de TSOFA-editor."
+},
+it: {
+title: "TSOFA - L'App Semplice per Flashcard Offline",
+byAuthor: "TSOFA - L'App Semplice per Flashcard Offline di Al Sweigart (v" + VERSION + ")",
+topic: "Argomento",
+cardCounter: "Carta {current} di {total}",
+noFlashcards: "Nessuna flashcard disponibile",
+first: "Prima",
+previous: "Precedente (sinistra)",
+flip: "Gira (spazio)",
+next: "Successiva (destra)",
+last: "Ultima",
+shuffle: "Mescola le Carte",
+swapQA: "Scambia Domanda e Risposta",
+swapQALabel: "D↔R",
+removeCard: "Rimuovi Carta Corrente",
+undoRemove: "Annulla Rimozione",
+decreaseFont: "Diminuisci dimensione carattere",
+increaseFont: "Aumenta dimensione carattere",
+leftJustify: "Allinea a Sinistra",
+rightJustify: "Allinea a Destra",
+center: "Centra",
+startTimer: "Avvia Timer",
+pauseTimer: "Pausa Timer",
+resetTimer: "Ripristina Timer",
+print: "Stampa",
+keyboardShortcuts: "Scorciatoie da tastiera: spazio per girare, sinistra/destra per navigare",
+printHeader: "Flashcard TSOFA",
+createWithEditor: "Crea flashcard con l'editor TSOFA."
+},
+pt: {
+title: "TSOFA - O Aplicativo Simples de Flashcards Offline",
+byAuthor: "TSOFA - O Aplicativo Simples de Flashcards Offline por Al Sweigart (v" + VERSION + ")",
+topic: "Tópico",
+cardCounter: "Cartão {current} de {total}",
+noFlashcards: "Nenhum flashcard disponível",
+first: "Primeiro",
+previous: "Anterior (esquerda)",
+flip: "Virar (espaço)",
+next: "Próximo (direita)",
+last: "Último",
+shuffle: "Embaralhar Cartões",
+swapQA: "Trocar Pergunta e Resposta",
+swapQALabel: "P↔R",
+removeCard: "Remover Cartão Atual",
+undoRemove: "Desfazer Remoção",
+decreaseFont: "Diminuir tamanho da fonte",
+increaseFont: "Aumentar tamanho da fonte",
+leftJustify: "Alinhar à Esquerda",
+rightJustify: "Alinhar à Direita",
+center: "Centralizar",
+startTimer: "Iniciar Cronômetro",
+pauseTimer: "Pausar Cronômetro",
+resetTimer: "Redefinir Cronômetro",
+print: "Imprimir",
+keyboardShortcuts: "Atalhos de teclado: espaço para virar, esquerda/direita para navegar",
+printHeader: "Flashcards TSOFA",
+createWithEditor: "Crie flashcards com o editor TSOFA."
+},
+pl: {
+title: "TSOFA - Prosta Aplikacja Fiszek Offline",
+byAuthor: "TSOFA - Prosta Aplikacja Fiszek Offline autorstwa Al Sweigart (v" + VERSION + ")",
+topic: "Temat",
+cardCounter: "Karta {current} z {total}",
+noFlashcards: "Brak dostępnych fiszek",
+first: "Pierwsza",
+previous: "Poprzednia (lewo)",
+flip: "Odwróć (spacja)",
+next: "Następna (prawo)",
+last: "Ostatnia",
+shuffle: "Przetasuj Karty",
+swapQA: "Zamień Pytanie i Odpowiedź",
+swapQALabel: "P↔O",
+removeCard: "Usuń Bieżącą Kartę",
+undoRemove: "Cofnij Usunięcie",
+decreaseFont: "Zmniejsz rozmiar czcionki",
+increaseFont: "Zwiększ rozmiar czcionki",
+leftJustify: "Wyrównaj do Lewej",
+rightJustify: "Wyrównaj do Prawej",
+center: "Wyśrodkuj",
+startTimer: "Start Stopera",
+pauseTimer: "Pauza Stopera",
+resetTimer: "Resetuj Stoper",
+print: "Drukuj",
+keyboardShortcuts: "Skróty klawiszowe: spacja aby odwrócić, lewo/prawo aby nawigować",
+printHeader: "Fiszki TSOFA",
+createWithEditor: "Twórz fiszki za pomocą edytora TSOFA."
+},
+ru: {
+title: "TSOFA - Простое Офлайн Приложение для Карточек",
+byAuthor: "TSOFA - Простое Офлайн Приложение для Карточек от Al Sweigart (v" + VERSION + ")",
+topic: "Тема",
+cardCounter: "Карточка {current} из {total}",
+noFlashcards: "Нет доступных карточек",
+first: "Первая",
+previous: "Предыдущая (влево)",
+flip: "Перевернуть (пробел)",
+next: "Следующая (вправо)",
+last: "Последняя",
+shuffle: "Перемешать Карточки",
+swapQA: "Поменять Вопрос и Ответ",
+swapQALabel: "В↔О",
+removeCard: "Удалить Текущую Карточку",
+undoRemove: "Отменить Удаление",
+decreaseFont: "Уменьшить размер шрифта",
+increaseFont: "Увеличить размер шрифта",
+leftJustify: "Выровнять по Левому Краю",
+rightJustify: "Выровнять по Правому Краю",
+center: "По Центру",
+startTimer: "Запустить Таймер",
+pauseTimer: "Пауза Таймер",
+resetTimer: "Сбросить Таймер",
+print: "Печать",
+keyboardShortcuts: "Горячие клавиши: пробел для переворота, влево/вправо для навигации",
+printHeader: "Карточки TSOFA",
+createWithEditor: "Создавайте карточки с помощью редактора TSOFA."
+},
+no: {
+title: "TSOFA - Den Enkle Offline Flashkort-Appen",
+byAuthor: "TSOFA - Den Enkle Offline Flashkort-Appen av Al Sweigart (v" + VERSION + ")",
+topic: "Emne",
+cardCounter: "Kort {current} av {total}",
+noFlashcards: "Ingen flashkort tilgjengelig",
+first: "Første",
+previous: "Forrige (venstre)",
+flip: "Snu (mellomrom)",
+next: "Neste (høyre)",
+last: "Siste",
+shuffle: "Stokk Kortene",
+swapQA: "Bytt Spørsmål og Svar",
+swapQALabel: "S↔S",
+removeCard: "Fjern Gjeldende Kort",
+undoRemove: "Angre Fjerning",
+decreaseFont: "Reduser skriftstørrelse",
+increaseFont: "Øk skriftstørrelse",
+leftJustify: "Venstrejuster",
+rightJustify: "Høyrejuster",
+center: "Sentrer",
+startTimer: "Start Tidtaker",
+pauseTimer: "Pause Tidtaker",
+resetTimer: "Tilbakestill Tidtaker",
+print: "Skriv ut",
+keyboardShortcuts: "Tastatursnarveier: mellomrom for å snu, venstre/høyre for å navigere",
+printHeader: "TSOFA Flashkort",
+createWithEditor: "Lag flashkort med TSOFA-editoren."
+},
+sv: {
+title: "TSOFA - Den Enkla Offline Flashkort-Appen",
+byAuthor: "TSOFA - Den Enkla Offline Flashkort-Appen av Al Sweigart (v" + VERSION + ")",
+topic: "Ämne",
+cardCounter: "Kort {current} av {total}",
+noFlashcards: "Inga flashkort tillgängliga",
+first: "Första",
+previous: "Föregående (vänster)",
+flip: "Vänd (mellanslag)",
+next: "Nästa (höger)",
+last: "Sista",
+shuffle: "Blanda Korten",
+swapQA: "Byt Fråga och Svar",
+swapQALabel: "F↔S",
+removeCard: "Ta Bort Nuvarande Kort",
+undoRemove: "Ångra Borttagning",
+decreaseFont: "Minska teckenstorlek",
+increaseFont: "Öka teckenstorlek",
+leftJustify: "Vänsterjustera",
+rightJustify: "Högerjustera",
+center: "Centrera",
+startTimer: "Starta Timer",
+pauseTimer: "Pausa Timer",
+resetTimer: "Återställ Timer",
+print: "Skriv ut",
+keyboardShortcuts: "Tangentbordsgenvägar: mellanslag för att vända, vänster/höger för att navigera",
+printHeader: "TSOFA Flashkort",
+createWithEditor: "Skapa flashkort med TSOFA-editorn."
+},
+zh: {
+title: "TSOFA - 简单离线闪卡应用",
+byAuthor: "TSOFA - 简单离线闪卡应用 作者：Al Sweigart (v" + VERSION + ")",
+topic: "主题",
+cardCounter: "卡片 {current} / {total}",
+noFlashcards: "没有可用的闪卡",
+first: "第一张",
+previous: "上一张（左）",
+flip: "翻转（空格）",
+next: "下一张（右）",
+last: "最后一张",
+shuffle: "洗牌",
+swapQA: "交换问题和答案",
+swapQALabel: "问↔答",
+removeCard: "删除当前卡片",
+undoRemove: "撤销删除",
+decreaseFont: "减小字体",
+increaseFont: "增大字体",
+leftJustify: "左对齐",
+rightJustify: "右对齐",
+center: "居中",
+startTimer: "开始计时",
+pauseTimer: "暂停计时",
+resetTimer: "重置计时器",
+print: "打印",
+keyboardShortcuts: "键盘快捷键：空格键翻转，左/右键导航",
+printHeader: "TSOFA 闪卡",
+createWithEditor: "使用 TSOFA 编辑器创建闪卡。"
+},
+hi: {
+title: "TSOFA - सरल ऑफ़लाइन फ्लैशकार्ड ऐप",
+byAuthor: "TSOFA - सरल ऑफ़लाइन फ्लैशकार्ड ऐप - Al Sweigart द्वारा (v" + VERSION + ")",
+topic: "विषय",
+cardCounter: "कार्ड {current} / {total}",
+noFlashcards: "कोई फ्लैशकार्ड उपलब्ध नहीं",
+first: "पहला",
+previous: "पिछला (बाएं)",
+flip: "पलटें (स्पेस)",
+next: "अगला (दाएं)",
+last: "अंतिम",
+shuffle: "फेरबदल करें",
+swapQA: "प्रश्न और उत्तर बदलें",
+swapQALabel: "प्र↔उ",
+removeCard: "वर्तमान कार्ड हटाएं",
+undoRemove: "हटाना रद्द करें",
+decreaseFont: "फ़ॉन्ट आकार घटाएं",
+increaseFont: "फ़ॉन्ट आकार बढ़ाएं",
+leftJustify: "बाएं संरेखित करें",
+rightJustify: "दाएं संरेखित करें",
+center: "केंद्र में",
+startTimer: "टाइमर शुरू करें",
+pauseTimer: "टाइमर रोकें",
+resetTimer: "टाइमर रीसेट करें",
+print: "प्रिंट",
+keyboardShortcuts: "कीबोर्ड शॉर्टकट: पलटने के लिए स्पेस, नेविगेट करने के लिए बाएं/दाएं",
+printHeader: "TSOFA फ्लैशकार्ड",
+createWithEditor: "TSOFA संपादक के साथ फ्लैशकार्ड बनाएं।"
+},
+bn: {
+title: "TSOFA - সহজ অফলাইন ফ্ল্যাশকার্ড অ্যাপ",
+byAuthor: "TSOFA - সহজ অফলাইন ফ্ল্যাশকার্ড অ্যাপ - Al Sweigart দ্বারা (v" + VERSION + ")",
+topic: "বিষয়",
+cardCounter: "কার্ড {current} / {total}",
+noFlashcards: "কোন ফ্ল্যাশকার্ড উপলব্ধ নেই",
+first: "প্রথম",
+previous: "পূর্ববর্তী (বাম)",
+flip: "উল্টান (স্পেস)",
+next: "পরবর্তী (ডান)",
+last: "শেষ",
+shuffle: "এলোমেলো করুন",
+swapQA: "প্রশ্ন ও উত্তর অদলবদল",
+swapQALabel: "প্র↔উ",
+removeCard: "বর্তমান কার্ড সরান",
+undoRemove: "সরানো বাতিল করুন",
+decreaseFont: "ফন্টের আকার কমান",
+increaseFont: "ফন্টের আকার বাড়ান",
+leftJustify: "বাম সারিবদ্ধ",
+rightJustify: "ডান সারিবদ্ধ",
+center: "কেন্দ্র",
+startTimer: "টাইমার শুরু",
+pauseTimer: "টাইমার বিরতি",
+resetTimer: "টাইমার রিসেট",
+print: "প্রিন্ট",
+keyboardShortcuts: "কীবোর্ড শর্টকাট: উল্টাতে স্পেস, নেভিগেট করতে বাম/ডান",
+printHeader: "TSOFA ফ্ল্যাশকার্ড",
+createWithEditor: "TSOFA সম্পাদক দিয়ে ফ্ল্যাশকার্ড তৈরি করুন।"
+},
+ja: {
+title: "TSOFA - シンプルなオフラインフラッシュカードアプリ",
+byAuthor: "TSOFA - シンプルなオフラインフラッシュカードアプリ 作者：Al Sweigart (v" + VERSION + ")",
+topic: "トピック",
+cardCounter: "カード {current} / {total}",
+noFlashcards: "利用可能なフラッシュカードがありません",
+first: "最初",
+previous: "前へ（左）",
+flip: "裏返す（スペース）",
+next: "次へ（右）",
+last: "最後",
+shuffle: "シャッフル",
+swapQA: "質問と答えを入れ替え",
+swapQALabel: "質↔答",
+removeCard: "現在のカードを削除",
+undoRemove: "削除を元に戻す",
+decreaseFont: "フォントサイズを小さく",
+increaseFont: "フォントサイズを大きく",
+leftJustify: "左揃え",
+rightJustify: "右揃え",
+center: "中央揃え",
+startTimer: "タイマー開始",
+pauseTimer: "タイマー一時停止",
+resetTimer: "タイマーリセット",
+print: "印刷",
+keyboardShortcuts: "キーボードショートカット：スペースで裏返す、左/右で移動",
+printHeader: "TSOFA フラッシュカード",
+createWithEditor: "TSOFAエディタでフラッシュカードを作成する。"
+},
+ko: {
+title: "TSOFA - 간단한 오프라인 플래시카드 앱",
+byAuthor: "TSOFA - 간단한 오프라인 플래시카드 앱 제작자: Al Sweigart (v" + VERSION + ")",
+topic: "주제",
+cardCounter: "카드 {current} / {total}",
+noFlashcards: "사용 가능한 플래시카드가 없습니다",
+first: "처음",
+previous: "이전 (왼쪽)",
+flip: "뒤집기 (스페이스)",
+next: "다음 (오른쪽)",
+last: "마지막",
+shuffle: "섞기",
+swapQA: "질문과 답변 바꾸기",
+swapQALabel: "질↔답",
+removeCard: "현재 카드 제거",
+undoRemove: "제거 취소",
+decreaseFont: "글꼴 크기 줄이기",
+increaseFont: "글꼴 크기 늘리기",
+leftJustify: "왼쪽 정렬",
+rightJustify: "오른쪽 정렬",
+center: "가운데 정렬",
+startTimer: "타이머 시작",
+pauseTimer: "타이머 일시정지",
+resetTimer: "타이머 재설정",
+print: "인쇄",
+keyboardShortcuts: "키보드 단축키: 스페이스로 뒤집기, 왼쪽/오른쪽으로 이동",
+printHeader: "TSOFA 플래시카드",
+createWithEditor: "TSOFA 편집기로 플래시카드를 만드세요."
+},
+th: {
+title: "TSOFA - แอปฟลัชการ์ดออฟไลน์ที่เรียบง่าย",
+byAuthor: "TSOFA - แอปฟลัชการ์ดออฟไลน์ที่เรียบง่าย โดย Al Sweigart (v" + VERSION + ")",
+topic: "หัวข้อ",
+cardCounter: "การ์ด {current} จาก {total}",
+noFlashcards: "ไม่มีฟลัชการ์ด",
+first: "แรก",
+previous: "ก่อนหน้า (ซ้าย)",
+flip: "พลิก (สเปซบาร์)",
+next: "ถัดไป (ขวา)",
+last: "สุดท้าย",
+shuffle: "สับเปลี่ยน",
+swapQA: "สลับคำถามและคำตอบ",
+swapQALabel: "ถ↔ต",
+removeCard: "ลบการ์ดปัจจุบัน",
+undoRemove: "ยกเลิกการลบ",
+decreaseFont: "ลดขนาดตัวอักษร",
+increaseFont: "เพิ่มขนาดตัวอักษร",
+leftJustify: "ชิดซ้าย",
+rightJustify: "ชิดขวา",
+center: "กึ่งกลาง",
+startTimer: "เริ่มจับเวลา",
+pauseTimer: "หยุดจับเวลา",
+resetTimer: "รีเซ็ตเวลา",
+print: "พิมพ์",
+keyboardShortcuts: "ปุ่มลัด: สเปซบาร์เพื่อพลิก, ซ้าย/ขวาเพื่อนำทาง",
+printHeader: "ฟลัชการ์ด TSOFA",
+createWithEditor: "สร้างฟลัชการ์ดด้วยตัวแก้ไข TSOFA"
+},
+ar: {
+title: "TSOFA - تطبيق البطاقات التعليمية البسيط دون اتصال",
+byAuthor: "TSOFA - تطبيق البطاقات التعليمية البسيط دون اتصال بواسطة Al Sweigart (v" + VERSION + ")",
+topic: "الموضوع",
+cardCounter: "البطاقة {current} من {total}",
+noFlashcards: "لا توجد بطاقات تعليمية متاحة",
+first: "الأولى",
+previous: "السابقة (يسار)",
+flip: "اقلب (مسافة)",
+next: "التالية (يمين)",
+last: "الأخيرة",
+shuffle: "خلط البطاقات",
+swapQA: "تبديل السؤال والجواب",
+swapQALabel: "س↔ج",
+removeCard: "إزالة البطاقة الحالية",
+undoRemove: "التراجع عن الإزالة",
+decreaseFont: "تصغير حجم الخط",
+increaseFont: "تكبير حجم الخط",
+leftJustify: "محاذاة لليسار",
+rightJustify: "محاذاة لليمين",
+center: "توسيط",
+startTimer: "بدء المؤقت",
+pauseTimer: "إيقاف المؤقت",
+resetTimer: "إعادة تعيين المؤقت",
+print: "طباعة",
+keyboardShortcuts: "اختصارات لوحة المفاتيح: مسافة للقلب، يسار/يمين للتنقل",
+printHeader: "بطاقات TSOFA التعليمية",
+createWithEditor: "أنشئ البطاقات التعليمية باستخدام محرر TSOFA."
+}
+};
+
+// Get the current language texts
+const texts = i18n_text[LANGUAGE] || i18n_text['en'];
+
+ // Update page title if TOPIC is set
+ if (TOPIC && TOPIC.trim() !== "") {
+  document.title = texts.title + " - " + TOPIC;
+ } else {
+  document.title = texts.title;
+ }
 </script>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TSOFA - The Simple, Offline Flashcard App</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 20px;
-            background-color: #f0f0f0;
-            margin: 0;
-            min-height: 100vh;
-        }
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>TSOFA - The Simple, Offline Flashcard App</title>
+ <style>
+  body {
+   font-family: Arial, sans-serif;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   padding: 20px;
+   background-color: #f0f0f0;
+   margin: 0;
+   min-height: 100vh;
+  }
 
-        .container {
-            max-width: 600px;
-            width: 100%;
-        }
+  .container {
+   max-width: 600px;
+   width: 100%;
+  }
 
-        .card-counter {
-            text-align: center;
-            margin-bottom: 10px;
-            font-size: 18px;
-            color: #555;
-        }
+  .card-counter {
+   text-align: center;
+   margin-bottom: 10px;
+   font-size: 18px;
+   color: #555;
+  }
 
-        .flashcard {
-            background-color: white;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            padding: 40px;
-            min-height: 300px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            margin-bottom: 20px;
-            user-select: none;
-            transition: transform 0.1s;
-        }
+  .flashcard {
+   background-color: white;
+   border-radius: 10px;
+   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+   padding: 40px;
+   min-height: 300px;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   cursor: pointer;
+   margin-bottom: 20px;
+   user-select: none;
+   transition: transform 0.1s;
+  }
 
-        .flashcard:hover {
-            transform: scale(1.02);
-        }
+  .flashcard:hover {
+   transform: scale(1.02);
+  }
 
-        .flashcard:active {
-            transform: scale(0.98);
-        }
+  .flashcard:active {
+   transform: scale(0.98);
+  }
 
-        .flashcard-content {
-            font-size: 20px;
-            line-height: 1.5;
-            width: 100%;
-        }
+  .flashcard-content {
+   font-size: 20px;
+   line-height: 1.5;
+   width: 100%;
+  }
 
-        .flashcard-content.centered {
-            text-align: center;
-        }
+  .flashcard-content.centered {
+   text-align: center;
+  }
 
-        .flashcard-content.left-aligned {
-            text-align: left;
-            white-space: pre-wrap;
-        }
+  .flashcard-content.left-aligned {
+   text-align: left;
+   white-space: pre-wrap;
+  }
 
-        .controls {
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 10px;
-            margin-bottom: 20px;
-        }
+  .flashcard-content.right-aligned {
+   text-align: right;
+   white-space: pre-wrap;
+  }
 
-        .secondary-controls {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr) auto auto;
-            gap: 10px;
-            align-items: center;
-        }
+  .controls {
+   display: grid;
+   grid-template-columns: auto 1fr 1fr 1fr auto;
+   gap: 10px;
+   margin-bottom: 20px;
+  }
 
-        .secondary-controls button {
-            font-size: 16px;
-            height: 72px;
-            padding: 0 16px;
-        }
+  .secondary-controls {
+   display: grid;
+   grid-template-columns: repeat(4, 1fr);
+   gap: 10px;
+   align-items: center;
+   margin-bottom: 10px;
+  }
 
-        .font-size-btn {
-            width: 72px;
-            padding: 0 !important;
-        }
+  .secondary-controls button {
+   font-size: 16px;
+   height: 72px;
+   padding: 0 16px;
+  }
 
-        .remove-btn, .undo-btn {
-            background-color: #fc95a5;
-        }
+  .tertiary-controls {
+   display: flex;
+   justify-content: center;
+   gap: 10px;
+   margin-bottom: 10px;
+  }
 
-        .remove-btn:hover, .undo-btn:hover {
-            background-color: #ff7373;
-        }
+  .tertiary-controls button {
+   height: 72px;
+  }
 
-        .undo-btn:disabled {
-            background-color: #cccccc;
-            cursor: not-allowed;
-        }
+  .font-size-btn {
+   width: 72px;
+   padding: 0 !important;
+  }
 
-        .font-size-controls {
-            display: flex;
-            gap: 5px;
-        }
+  .remove-btn, .undo-btn {
+   background-color: #dc3545;
+  }
 
-        .font-size-btn {
-            width: 72px;
-            padding: 0 !important;
-            font-size: 24px !important;
-            line-height: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: #6c757d;
-        }
+  .remove-btn:hover, .undo-btn:hover {
+   background-color: #c82333;
+  }
 
-        .font-size-btn:hover {
-            background-color: #5a6268;
-        }
+  .undo-btn:disabled {
+   background-color: #cccccc;
+   cursor: not-allowed;
+  }
 
-        .checkbox-label {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            font-size: 16px;
-            color: #333;
-            cursor: pointer;
-            user-select: none;
-            padding: 0 10px;
-            height: 72px;
-        }
+  .font-size-btn {
+   width: 72px;
+   padding: 0 !important;
+   font-size: 24px !important;
+   line-height: 1;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   background-color: #6c757d;
+  }
 
-        .checkbox-label input[type="checkbox"] {
-            width: 18px;
-            height: 18px;
-            cursor: pointer;
-        }
+  .font-size-btn:hover {
+   background-color: #5a6268;
+  }
 
-        button {
-            padding: 12px 20px;
-            font-size: 20px;
-            border: none;
-            border-radius: 5px;
-            background-color: #007bff;
-            color: white;
-            cursor: pointer;
-            transition: background-color 0.2s;
-        }
+  .align-btn {
+   width: 72px;
+   padding: 0 !important;
+   font-size: 20px !important;
+   line-height: 1;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   background-color: #6c757d;
+   height: 72px;
+  }
 
-        button:hover {
-            background-color: #0056b3;
-        }
+  .align-btn:hover {
+   background-color: #5a6268;
+  }
 
-        button:active {
-            transform: scale(0.95);
-        }
+  button {
+   padding: 12px 20px;
+   font-size: 20px;
+   border: none;
+   border-radius: 5px;
+   background-color: #007bff;
+   color: white;
+   cursor: pointer;
+   transition: background-color 0.2s;
+  }
 
-        button:disabled {
-            background-color: #cccccc;
-            cursor: not-allowed;
-        }
+  button:hover {
+   background-color: #0056b3;
+  }
 
-        .timer-row {
-            margin-top: 15px;
-            padding-top: 15px;
-            border-top: 1px solid #ddd;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 15px;
-        }
+  button:active {
+   transform: scale(0.95);
+  }
 
-        .timer-display {
-            font-family: 'Courier New', monospace;
-            font-size: 24px;
-            font-weight: bold;
-            color: #333;
-            min-width: 120px;
-            text-align: center;
-        }
+  button:disabled {
+   background-color: #cccccc;
+   cursor: not-allowed;
+  }
 
-        .timer-btn {
-            background-color: #17a2b8;
-            padding: 10px 20px;
-            font-size: 16px;
-        }
+  .timer-row {
+   margin-top: 15px;
+   padding-top: 15px;
+   border-top: 1px solid #ddd;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   gap: 15px;
+  }
 
-        .timer-btn:hover {
-            background-color: #138496;
-        }
+  .timer-display {
+   font-family: 'Courier New', monospace;
+   font-size: 24px;
+   font-weight: bold;
+   color: #333;
+   min-width: 120px;
+   text-align: center;
+  }
 
-        .timer-btn.pause {
-            background-color: #ffc107;
-        }
+  .timer-btn {
+   background-color: #17a2b8;
+   padding: 10px 20px;
+   font-size: 16px;
+  }
 
-        .timer-btn.pause:hover {
-            background-color: #e0a800;
-        }
+  .timer-btn:hover {
+   background-color: #138496;
+  }
 
-        .reset-btn {
-            background-color: #6c757d;
-            padding: 10px 20px;
-            font-size: 16px;
-        }
+  .timer-btn.pause {
+   background-color: #ffc107;
+  }
 
-        .reset-btn:hover {
-            background-color: #5a6268;
-        }
+  .timer-btn.pause:hover {
+   background-color: #e0a800;
+  }
 
-        .print-row {
-            margin-top: 15px;
-            padding-top: 15px;
-            border-top: 1px solid #ddd;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
+  .reset-btn {
+   background-color: #6c757d;
+   padding: 10px 20px;
+   font-size: 16px;
+  }
 
-        .print-btn {
-            background-color: #6c757d;
-            padding: 10px 30px;
-            font-size: 16px;
-        }
+  .reset-btn:hover {
+   background-color: #5a6268;
+  }
 
-        .print-btn:hover {
-            background-color: #5a6268;
-        }
+  .print-row {
+   margin-top: 15px;
+   padding-top: 15px;
+   border-top: 1px solid #ddd;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+  }
 
-        @media print {
-            body {
-                background: white;
-                padding: 20px;
-            }
+  .print-btn {
+   background-color: #6c757d;
+   padding: 10px 30px;
+   font-size: 16px;
+  }
 
-            .container {
-                display: none;
-            }
+  .print-btn:hover {
+   background-color: #5a6268;
+  }
 
-            .print-table {
-                display: table !important;
-                width: 100%;
-                border-collapse: collapse;
-                font-family: Arial, sans-serif;
-            }
+  @media print {
+   body {
+    background: white;
+    padding: 20px;
+   }
 
-            .print-table thead {
-                display: none;
-            }
+   .container {
+    display: none;
+   }
 
-            .print-table td {
-                border: 1px solid #999;
-                padding: 10px;
-                text-align: left;
-                vertical-align: top;
-                width: 50%;
-            }
+   .print-table {
+    display: table !important;
+    width: 100%;
+    border-collapse: collapse;
+    font-family: Arial, sans-serif;
+   }
 
-            .print-table tr:nth-child(even) {
-                background-color: #f9f9f9;
-            }
+   .print-table thead {
+    display: none;
+   }
 
-            .print-header {
-                display: none !important;
-            }
-        }
+   .print-table td {
+    border: 1px solid #999;
+    padding: 10px;
+    text-align: left;
+    vertical-align: top;
+    width: 50%;
+   }
 
-        .print-table {
-            display: none;
-        }
+   .print-table tr {
+    background-color: white;
+   }
 
-        .print-header {
-            display: none;
-        }
+   .print-header {
+    display: none !important;
+   }
+  }
 
-        .flip-btn {
-            background-color: #28a745;
-        }
+  .print-table {
+   display: none;
+  }
 
-        .flip-btn:hover {
-            background-color: #218838;
-        }
+  .print-header {
+   display: none;
+  }
 
-        .shuffle-btn, .invert-btn {
-            background-color: #ffc107;
-            color: #333;
-        }
+  .flip-btn {
+   background-color: #28a745;
+  }
 
-        .shuffle-btn:hover, .invert-btn:hover {
-            background-color: #e0a800;
-        }
+  .flip-btn:hover {
+   background-color: #218838;
+  }
 
-        .nav-btn {
-            background-color: #6c757d;
-        }
+  .shuffle-btn, .invert-btn {
+   background-color: #ffc107;
+   color: #333;
+  }
 
-        .nav-btn:hover {
-            background-color: #5a6268;
-        }
+  .shuffle-btn:hover, .invert-btn:hover {
+   background-color: #e0a800;
+  }
 
-        .instructions {
-            text-align: center;
-            color: #666;
-            margin-top: 20px;
-            font-size: 14px;
-            line-height: 1.4;
-        }
-    </style>
+  .nav-btn {
+   background-color: #6c757d;
+   width: 60px;
+   padding: 12px 8px !important;
+  }
+
+  .nav-btn:hover {
+   background-color: #5a6268;
+  }
+
+  .instructions {
+   text-align: center;
+   color: #666;
+   margin-top: 20px;
+   font-size: 14px;
+   line-height: 1.4;
+  }
+
+  .editor-link {
+   text-align: center;
+   margin-top: 15px;
+   font-size: 12px;
+  }
+
+  .editor-link a {
+   color: #007bff;
+   text-decoration: none;
+  }
+
+  .editor-link a:hover {
+   text-decoration: underline;
+  }
+ </style>
 </head>
 <body>
-    <div class="container">
-
-        <p style="text-align: center; color: #666; margin-top: -10px; font-size: 14px;"><a href="https://inventwithpython.com/tsofa/">TSOFA - The Simple, Offline Flashcard App by Al Sweigart</a></p>
-        <h2 id="topicHeading" style="text-align: center; color: #555; margin-top: 10px; margin-bottom: 20px; display: none;"></h2>
-
-        <div class="card-counter" id="cardCounter">Card 1 of 2</div>
-
-        <div class="flashcard" id="flashcard" onclick="flipCard()">
-            <div class="flashcard-content" id="cardContent"></div>
-        </div>
-
-        <div class="controls">
-            <button onclick="goToFirst()" class="nav-btn" title="First">&#x21E4;</button>
-            <button onclick="prevCard()" id="prevBtn" title="Previous (left)">&#x2190;</button>
-            <button onclick="flipCard()" class="flip-btn" title="Flip (space)">&#x21BB;</button>
-            <button onclick="nextCard()" id="nextBtn" title="Next (right)">&#x2192;</button>
-            <button onclick="goToLast()" class="nav-btn" title="Last">&#x21E5;</button>
-        </div>
-
-        <div class="secondary-controls">
-            <button onclick="shuffleCards()" class="shuffle-btn" title="Shuffle Flashcards">&#x1F500;</button>
-            <button onclick="invertCards()" class="invert-btn" title="Swap Question & Answer">Q&#x2194;A</button>
-            <button onclick="removeCard()" class="remove-btn" title="Remove Current Card">&#x274C;</button>
-            <button onclick="undoRemove()" class="undo-btn" id="undoBtn" title="Undo Last Remove">&#x274C;&#x21BB;</button>
-            <div class="font-size-controls">
-                <button onclick="decreaseFontSize()" class="font-size-btn" title="Decrease font size">-&#x1F50D;</button>
-                <button onclick="increaseFontSize()" class="font-size-btn" title="Increase font size">+&#x1F50D;</button>
-            </div>
-            <label class="checkbox-label">
-                <input type="checkbox" id="centerCheckbox" checked onchange="toggleCenter()" title="Center Flashcard Text">&#x1F3AF;
-            </label>
-        </div>
-
-        <div class="timer-row">
-            <div class="timer-display" id="timerDisplay">00:00:00</div>
-            <button onclick="toggleTimer()" class="timer-btn" id="timerBtn" title="Start Timer">&#x23F2;&#x25B6;</button>
-            <button onclick="resetTimer()" class="reset-btn" title="Reset Timer">&#x23F2;&#x21BB;</button>
-        </div>
-
-        <div class="print-row">
-            <button onclick="printFlashcards()" class="print-btn" title="Print">&#x1F5A8;</button>
-        </div>
-
-        <div class="instructions">
-            <strong>Keyboard shortcuts:</strong> space to flip card, left/right to navigate cards
-
-        </div>
-    </div>
-
-    <!-- Print-only content -->
-    <div class="print-header" id="printHeader">
-        <h2>TSOFA Flashcards</h2>
-        <h3 id="printTopic"></h3>
-    </div>
-    <table class="print-table" id="printTable">
-        <thead>
-            <tr>
-                <th>Question</th>
-                <th>Answer</th>
-            </tr>
-        </thead>
-        <tbody id="printTableBody">
-        </tbody>
-    </table>
-
-    <script>
-        // Parse CSV string to array format
-        function parseCSV(csvString) {
-            const rows = [];
-            let currentRow = [];
-            let currentField = '';
-            let inQuotes = false;
-            let i = 0;
-
-            while (i < csvString.length) {
-                const char = csvString[i];
-                const nextChar = csvString[i + 1];
-
-                if (!inQuotes) {
-                    if (char === '"') {
-                        inQuotes = true;
-                    } else if (char === ',') {
-                        currentRow.push(currentField);
-                        currentField = '';
-                    } else if (char === '\n' || (char === '\r' && nextChar === '\n')) {
-                        currentRow.push(currentField);
-                        if (currentRow.length > 0 && (currentRow[0] !== '' || currentRow.length > 1)) {
-                            rows.push(currentRow);
-                        }
-                        currentRow = [];
-                        currentField = '';
-                        if (char === '\r' && nextChar === '\n') {
-                            i++; // Skip the \n in \r\n
-                        }
-                    } else {
-                        currentField += char;
-                    }
-                } else {
-                    if (char === '"' && nextChar === '"') {
-                        currentField += '"';
-                        i++; // Skip the next quote
-                    } else if (char === '"') {
-                        inQuotes = false;
-                    } else {
-                        currentField += char;
-                    }
-                }
-                i++;
-            }
-
-            // Handle the last field and row
-            if (currentField !== '' || currentRow.length > 0) {
-                currentRow.push(currentField);
-                if (currentRow.length > 0 && (currentRow[0] !== '' || currentRow.length > 1)) {
-                    rows.push(currentRow);
-                }
-            }
-
-            // Ensure each row has exactly 2 columns (question and answer)
-            return rows.map(row => {
-                if (row.length === 0) return ['', ''];
-                if (row.length === 1) return [row[0], ''];
-                return [row[0], row[1]];
-            }).filter(row => row[0] !== '' || row[1] !== ''); // Remove completely empty rows
-        }
-
-        // Process FLASHCARDS whether it's an array or CSV string
-        let processedFlashcards;
-        if (typeof FLASHCARDS === 'string') {
-            processedFlashcards = parseCSV(FLASHCARDS);
-        } else {
-            processedFlashcards = FLASHCARDS;
-        }
-
-        // App state
-        let currentCards = [...processedFlashcards];
-        let currentIndex = 0;
-        let showingQuestion = true;
-        let isInverted = false;
-        let currentFontSize = 20; // Default font size in pixels
-        let removedCards = []; // Stack to store removed cards for undo
-
-        // Initialize the app
-        function init() {
-            // Display topic if set
-            if (TOPIC && TOPIC.trim() !== "") {
-                const topicHeading = document.getElementById('topicHeading');
-                topicHeading.textContent = "Topic: " + TOPIC;
-                topicHeading.style.display = 'block';
-            }
-
-            displayCard();
-            updateButtons();
-            updateCounter();
-            updateTextAlignment();
-            updateFontSize();
-            updateUndoButton();
-        }
-
-        // Display current card
-        function displayCard() {
-            const cardContent = document.getElementById('cardContent');
-            const card = currentCards[currentIndex];
-
-            if (!card) {
-                cardContent.innerHTML = "No flashcards available";
-                return;
-            }
-
-            const questionIndex = isInverted ? 1 : 0;
-            const answerIndex = isInverted ? 0 : 1;
-
-            if (showingQuestion) {
-                cardContent.innerHTML = card[questionIndex];
-            } else {
-                cardContent.innerHTML = card[answerIndex];
-            }
-
-            // Apply centering based on checkbox
-            updateTextAlignment();
-        }
-
-        // Toggle center alignment
-        function toggleCenter() {
-            updateTextAlignment();
-        }
-
-        // Update text alignment based on checkbox state
-        function updateTextAlignment() {
-            const cardContent = document.getElementById('cardContent');
-            const centerCheckbox = document.getElementById('centerCheckbox');
-
-            if (centerCheckbox.checked) {
-                cardContent.classList.remove('left-aligned');
-                cardContent.classList.add('centered');
-            } else {
-                cardContent.classList.remove('centered');
-                cardContent.classList.add('left-aligned');
-            }
-        }
-
-        // Increase font size
-        function increaseFontSize() {
-            if (currentFontSize < 48) { // Maximum font size
-                currentFontSize += 4;
-                updateFontSize();
-            }
-        }
-
-        // Decrease font size
-        function decreaseFontSize() {
-            if (currentFontSize > 12) { // Minimum font size
-                currentFontSize -= 4;
-                updateFontSize();
-            }
-        }
-
-        // Update the font size of the flashcard content
-        function updateFontSize() {
-            const cardContent = document.getElementById('cardContent');
-            cardContent.style.fontSize = currentFontSize + 'px';
-        }
-
-        // Remove current card
-        function removeCard() {
-            if (currentCards.length === 0) return;
-
-            // Store removed card with its index for undo
-            removedCards.push({
-                card: currentCards[currentIndex],
-                index: currentIndex
-            });
-
-            // Remove card from current deck
-            currentCards.splice(currentIndex, 1);
-
-            // Adjust current index if necessary
-            if (currentCards.length === 0) {
-                currentIndex = 0;
-            } else if (currentIndex >= currentCards.length) {
-                currentIndex = currentCards.length - 1;
-            }
-
-            // Reset to question side
-            showingQuestion = true;
-
-            // Update display
-            displayCard();
-            updateButtons();
-            updateCounter();
-            updateUndoButton();
-        }
-
-        // Undo last card removal
-        function undoRemove() {
-            if (removedCards.length === 0) return;
-
-            // Get the last removed card
-            const lastRemoved = removedCards.pop();
-
-            // Insert card back at its original position or at the end if position is invalid
-            const insertIndex = Math.min(lastRemoved.index, currentCards.length);
-            currentCards.splice(insertIndex, 0, lastRemoved.card);
-
-            // Set current index to the restored card
-            currentIndex = insertIndex;
-            showingQuestion = true;
-
-            // Update display
-            displayCard();
-            updateButtons();
-            updateCounter();
-            updateUndoButton();
-        }
-
-        // Update undo button state
-        function updateUndoButton() {
-            const undoBtn = document.getElementById('undoBtn');
-            undoBtn.disabled = removedCards.length === 0;
-        }
-
-        // Flip the current card
-        function flipCard() {
-            showingQuestion = !showingQuestion;
-            displayCard();
-        }
-
-        // Navigate to next card
-        function nextCard() {
-            if (currentIndex < currentCards.length - 1) {
-                currentIndex++;
-                showingQuestion = true;
-                displayCard();
-                updateButtons();
-                updateCounter();
-            }
-        }
-
-        // Navigate to previous card
-        function prevCard() {
-            if (currentIndex > 0) {
-                currentIndex--;
-                showingQuestion = true;
-                displayCard();
-                updateButtons();
-                updateCounter();
-            }
-        }
-
-        // Go to first card
-        function goToFirst() {
-            currentIndex = 0;
-            showingQuestion = true;
-            displayCard();
-            updateButtons();
-            updateCounter();
-        }
-
-        // Go to last card
-        function goToLast() {
-            currentIndex = currentCards.length - 1;
-            showingQuestion = true;
-            displayCard();
-            updateButtons();
-            updateCounter();
-        }
-
-        // Shuffle the cards
-        function shuffleCards() {
-            // Reset to original cards before shuffling
-            currentCards = [...processedFlashcards];
-            // Clear removed cards history
-            removedCards = [];
-            for (let i = currentCards.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [currentCards[i], currentCards[j]] = [currentCards[j], currentCards[i]];
-            }
-            currentIndex = 0;
-            showingQuestion = true;
-            displayCard();
-            updateButtons();
-            updateCounter();
-            updateUndoButton();
-        }
-
-        // Invert all cards (swap questions and answers)
-        function invertCards() {
-            isInverted = !isInverted;
-            displayCard();
-        }
-
-        // Update button states
-        function updateButtons() {
-            document.getElementById('prevBtn').disabled = currentIndex === 0;
-            document.getElementById('nextBtn').disabled = currentIndex === currentCards.length - 1;
-        }
-
-        // Update card counter
-        function updateCounter() {
-            const counter = document.getElementById('cardCounter');
-            counter.textContent = `Card ${currentIndex + 1} of ${currentCards.length}`;
-        }
-
-        // Keyboard event listeners
-        document.addEventListener('keydown', function(event) {
-            switch(event.key) {
-                case ' ':
-                case 'Spacebar':
-                    event.preventDefault();
-                    flipCard();
-                    break;
-                case 'ArrowLeft':
-                    event.preventDefault();
-                    prevCard();
-                    break;
-                case 'ArrowRight':
-                    event.preventDefault();
-                    nextCard();
-                    break;
-            }
-        });
-
-        // Timer variables
-        let timerStartTime = 0;
-        let timerElapsedTime = 0;
-        let timerInterval = null;
-        let isTimerRunning = false;
-
-        // Format time as HH:MM:SS
-        function formatTime(milliseconds) {
-            const totalSeconds = Math.floor(milliseconds / 1000);
-            const hours = Math.floor(totalSeconds / 3600);
-            const minutes = Math.floor((totalSeconds % 3600) / 60);
-            const seconds = totalSeconds % 60;
-
-            return String(hours).padStart(2, '0') + ':' +
-                   String(minutes).padStart(2, '0') + ':' +
-                   String(seconds).padStart(2, '0');
-        }
-
-        // Update timer display
-        function updateTimerDisplay() {
-            const currentTime = isTimerRunning ?
-                timerElapsedTime + (Date.now() - timerStartTime) :
-                timerElapsedTime;
-            document.getElementById('timerDisplay').textContent = formatTime(currentTime);
-        }
-
-        // Toggle timer (start/pause)
-        function toggleTimer() {
-            const timerBtn = document.getElementById('timerBtn');
-
-            if (isTimerRunning) {
-                // Pause timer
-                clearInterval(timerInterval);
-                timerElapsedTime += Date.now() - timerStartTime;
-                isTimerRunning = false;
-                timerBtn.innerHTML  = '&#x23F2;&#x25B6;';
-                timerBtn.classList.remove('pause');
-            } else {
-                // Start timer
-                timerStartTime = Date.now();
-                isTimerRunning = true;
-                timerBtn.innerHTML = '&#x23F2;&#x23F8;';
-                timerBtn.classList.add('pause');
-
-                // Update display every second
-                timerInterval = setInterval(updateTimerDisplay, 1000);
-            }
-        }
-
-        // Reset timer
-        function resetTimer() {
-            clearInterval(timerInterval);
-            timerStartTime = 0;
-            timerElapsedTime = 0;
-            isTimerRunning = false;
-
-            const timerBtn = document.getElementById('timerBtn');
-            timerBtn.innerHTML  = '&#x23F2;&#x25B6;';
-            timerBtn.classList.remove('pause');
-
-            updateTimerDisplay();
-        }
-
-        // Print flashcards function
-        function printFlashcards() {
-            // Clear any existing content
-            const printTableBody = document.getElementById('printTableBody');
-            printTableBody.innerHTML = '';
-
-            // Use the original flashcards (not affected by current state or invert)
-            processedFlashcards.forEach((card, index) => {
-                const row = document.createElement('tr');
-
-                const questionCell = document.createElement('td');
-                questionCell.innerHTML = card[0]; // Always use original order
-
-                const answerCell = document.createElement('td');
-                answerCell.innerHTML = card[1]; // Always use original order
-
-                row.appendChild(questionCell);
-                row.appendChild(answerCell);
-                printTableBody.appendChild(row);
-            });
-
-            // Trigger print dialog
-            window.print();
-        }
-        
-        // Initialize app when page loads
-        window.onload = init;
-    </script>
+ <div class="container">
+
+  <p id="byAuthor" style="text-align: center; color: #666; margin-top: -10px; font-size: 14px;"><a href="https://inventwithpython.com/tsofa/">TSOFA - The Simple, Offline Flashcard App by Al Sweigart</a></p>
+  <h2 id="topicHeading" style="text-align: center; color: #555; margin-top: 10px; margin-bottom: 20px; display: none;"></h2>
+
+  <div class="card-counter" id="cardCounter">Card 1 of 2</div>
+
+  <div class="flashcard" id="flashcard" onclick="flipCard()">
+   <div class="flashcard-content" id="cardContent"></div>
+  </div>
+
+  <div class="controls">
+   <button onclick="goToFirst()" class="nav-btn" id="firstBtn" title="First">&#x21E4;</button>
+   <button onclick="prevCard()" id="prevBtn" title="Previous (left)">&#x2190;</button>
+   <button onclick="flipCard()" class="flip-btn" id="flipBtn" title="Flip (space)">&#x21BB;</button>
+   <button onclick="nextCard()" id="nextBtn" title="Next (right)">&#x2192;</button>
+   <button onclick="goToLast()" class="nav-btn" id="lastBtn" title="Last">&#x21E5;</button>
+  </div>
+
+  <div class="secondary-controls">
+   <button onclick="shuffleCards()" class="shuffle-btn" id="shuffleBtn" title="Shuffle Flashcards">&#x1F500;</button>
+   <button onclick="invertCards()" class="invert-btn" id="invertBtn" title="Swap Question & Answer"><span id="swapQALabelText">Q&#x2194;A</span></button>
+   <button onclick="removeCard()" class="remove-btn" id="removeBtn" title="Remove Current Card">&#x1F4C4;&#x2192;&#x1F5D1;</button>
+   <button onclick="undoRemove()" class="undo-btn" id="undoBtn" title="Undo Last Remove">&#x1F4C4;&#x2190;&#x1F5D1;</button>
+  </div>
+
+  <div class="tertiary-controls">
+   <button onclick="decreaseFontSize()" class="font-size-btn" id="decreaseFontBtn" title="Decrease font size">-&#x1F50D;</button>
+   <button onclick="increaseFontSize()" class="font-size-btn" id="increaseFontBtn" title="Increase font size">+&#x1F50D;</button>
+   <button onclick="toggleAlignment()" class="align-btn" id="alignBtn" title="Left Justify">&#x21E4;&#x1F4C4;</button>
+  </div>
+
+  <div class="timer-row">
+   <div class="timer-display" id="timerDisplay">00:00:00</div>
+   <button onclick="toggleTimer()" class="timer-btn" id="timerBtn" title="Start Timer">&#x23F2;&#x25B6;</button>
+   <button onclick="resetTimer()" class="reset-btn" id="resetBtn" title="Reset Timer">&#x23F2;&#x21BB;</button>
+  </div>
+
+  <div class="print-row">
+   <button onclick="printFlashcards()" class="print-btn" id="printBtn" title="Print">&#x1F5A8;</button>
+  </div>
+
+  <div class="instructions" id="instructions">
+   <strong>Keyboard shortcuts:</strong> space to flip card, left/right to navigate cards
+  </div>
+
+  <div class="editor-link" id="editorLink">
+   <a href="https://inventwithpython.com/tsofa/editor/">Create flashcards with the TSOFA editor.</a>
+  </div>
+ </div>
+
+ <!-- Print-only content -->
+ <div class="print-header" id="printHeader">
+  <h2 id="printTitle">TSOFA Flashcards</h2>
+  <h3 id="printTopic"></h3>
+ </div>
+ <table class="print-table" id="printTable">
+  <thead>
+   <tr>
+    <th>Question</th>
+    <th>Answer</th>
+   </tr>
+  </thead>
+  <tbody id="printTableBody">
+  </tbody>
+ </table>
+
+ <script>
+  // Parse CSV string to array format
+  function parseCSV(csvString) {
+   const rows = [];
+   let currentRow = [];
+   let currentField = '';
+   let inQuotes = false;
+   let i = 0;
+
+   while (i < csvString.length) {
+    const char = csvString[i];
+    const nextChar = csvString[i + 1];
+
+    if (!inQuotes) {
+     if (char === '"') {
+      inQuotes = true;
+     } else if (char === ',') {
+      currentRow.push(currentField);
+      currentField = '';
+     } else if (char === '\n' || (char === '\r' && nextChar === '\n')) {
+      currentRow.push(currentField);
+      if (currentRow.length > 0 && (currentRow[0] !== '' || currentRow.length > 1)) {
+       rows.push(currentRow);
+      }
+      currentRow = [];
+      currentField = '';
+      if (char === '\r' && nextChar === '\n') {
+       i++; // Skip the \n in \r\n
+      }
+     } else {
+      currentField += char;
+     }
+    } else {
+     if (char === '"' && nextChar === '"') {
+      currentField += '"';
+      i++; // Skip the next quote
+     } else if (char === '"') {
+      inQuotes = false;
+     } else {
+      currentField += char;
+     }
+    }
+    i++;
+   }
+
+   // Handle the last field and row
+   if (currentField !== '' || currentRow.length > 0) {
+    currentRow.push(currentField);
+    if (currentRow.length > 0 && (currentRow[0] !== '' || currentRow.length > 1)) {
+     rows.push(currentRow);
+    }
+   }
+
+   // Ensure each row has exactly 2 columns (question and answer)
+   return rows.map(row => {
+    if (row.length === 0) return ['', ''];
+    if (row.length === 1) return [row[0], ''];
+    return [row[0], row[1]];
+   }).filter(row => row[0] !== '' || row[1] !== ''); // Remove completely empty rows
+  }
+
+  // Process FLASHCARDS whether it's an array or CSV string
+  let processedFlashcards;
+  if (typeof FLASHCARDS === 'string') {
+   processedFlashcards = parseCSV(FLASHCARDS);
+  } else {
+   processedFlashcards = FLASHCARDS;
+  }
+
+  // App state
+  let currentCards = [...processedFlashcards];
+  let currentIndex = 0;
+  let showingQuestion = true;
+  let isInverted = false;
+  let currentFontSize = 20; // Default font size in pixels
+  let removedCards = []; // Stack to store removed cards for undo
+  let alignmentState = 'center'; // 'left', 'right', or 'center'
+
+  // Initialize the app
+  function init() {
+   // Set up internationalization
+   applyTranslations();
+
+   // Display topic if set
+   if (TOPIC && TOPIC.trim() !== "") {
+    const topicHeading = document.getElementById('topicHeading');
+    topicHeading.textContent = texts.topic + ": " + TOPIC;
+    topicHeading.style.display = 'block';
+   }
+
+   displayCard();
+   updateButtons();
+   updateCounter();
+   updateTextAlignment();
+   updateFontSize();
+   updateUndoButton();
+   updateAlignButton();
+  }
+
+  // Apply translations to all UI elements
+  function applyTranslations() {
+   // Update link text
+   document.getElementById('byAuthor').innerHTML = `<a href="https://inventwithpython.com/tsofa/">${texts.byAuthor}</a>`;
+
+   // Update button titles and tooltips
+   document.getElementById('firstBtn').title = texts.first;
+   document.getElementById('prevBtn').title = texts.previous;
+   document.getElementById('flipBtn').title = texts.flip;
+   document.getElementById('nextBtn').title = texts.next;
+   document.getElementById('lastBtn').title = texts.last;
+   document.getElementById('shuffleBtn').title = texts.shuffle;
+   document.getElementById('invertBtn').title = texts.swapQA;
+   document.getElementById('swapQALabelText').textContent = texts.swapQALabel;
+   document.getElementById('removeBtn').title = texts.removeCard;
+   document.getElementById('undoBtn').title = texts.undoRemove;
+   document.getElementById('decreaseFontBtn').title = texts.decreaseFont;
+   document.getElementById('increaseFontBtn').title = texts.increaseFont;
+   document.getElementById('printBtn').title = texts.print;
+   document.getElementById('resetBtn').title = texts.resetTimer;
+
+   // Update instructions
+   document.getElementById('instructions').innerHTML = `<strong>${texts.keyboardShortcuts}</strong>`;
+
+   // Update editor link
+   document.getElementById('editorLink').innerHTML = `<a href="https://inventwithpython.com/tsofa/editor/">${texts.createWithEditor}</a>`;
+
+   // Update print header
+   document.getElementById('printTitle').textContent = texts.printHeader;
+  }
+
+  // Display current card
+  function displayCard() {
+   const cardContent = document.getElementById('cardContent');
+   const card = currentCards[currentIndex];
+
+   if (!card) {
+    cardContent.innerHTML = texts.noFlashcards;
+    return;
+   }
+
+   const questionIndex = isInverted ? 1 : 0;
+   const answerIndex = isInverted ? 0 : 1;
+
+   if (showingQuestion) {
+    cardContent.innerHTML = card[questionIndex];
+   } else {
+    cardContent.innerHTML = card[answerIndex];
+   }
+
+   // Apply alignment
+   updateTextAlignment();
+  }
+
+  // Toggle alignment between left, right, and center
+  function toggleAlignment() {
+   if (alignmentState === 'center') {
+    alignmentState = 'left';
+   } else if (alignmentState === 'left') {
+    alignmentState = 'right';
+   } else {
+    alignmentState = 'center';
+   }
+   updateTextAlignment();
+   updateAlignButton();
+  }
+
+  // Update the alignment button label and tooltip
+  function updateAlignButton() {
+   const alignBtn = document.getElementById('alignBtn');
+   if (alignmentState === 'center') {
+    alignBtn.innerHTML = '&#x21E4;&#x1F4C4;'; // ⇤📄
+    alignBtn.title = texts.leftJustify;
+   } else if (alignmentState === 'left') {
+    alignBtn.innerHTML = '&#x1F4C4;&#x21E5;'; // 📄⇥
+    alignBtn.title = texts.rightJustify;
+   } else {
+    alignBtn.innerHTML = '&#x21E4;&#x1F4C4;&#x21E5;'; // ⇤📄⇥
+    alignBtn.title = texts.center;
+   }
+  }
+
+  // Update text alignment based on current state
+  function updateTextAlignment() {
+   const cardContent = document.getElementById('cardContent');
+
+   // Remove all alignment classes
+   cardContent.classList.remove('centered', 'left-aligned', 'right-aligned');
+
+   // Add appropriate class
+   if (alignmentState === 'center') {
+    cardContent.classList.add('centered');
+   } else if (alignmentState === 'left') {
+    cardContent.classList.add('left-aligned');
+   } else {
+    cardContent.classList.add('right-aligned');
+   }
+  }
+
+  // Increase font size
+  function increaseFontSize() {
+   if (currentFontSize < 48) { // Maximum font size
+    currentFontSize += 4;
+    updateFontSize();
+   }
+  }
+
+  // Decrease font size
+  function decreaseFontSize() {
+   if (currentFontSize > 12) { // Minimum font size
+    currentFontSize -= 4;
+    updateFontSize();
+   }
+  }
+
+  // Update the font size of the flashcard content
+  function updateFontSize() {
+   const cardContent = document.getElementById('cardContent');
+   cardContent.style.fontSize = currentFontSize + 'px';
+  }
+
+  // Remove current card
+  function removeCard() {
+   if (currentCards.length === 0) return;
+
+   // Store removed card with its index for undo
+   removedCards.push({
+    card: currentCards[currentIndex],
+    index: currentIndex
+   });
+
+   // Remove card from current deck
+   currentCards.splice(currentIndex, 1);
+
+   // Adjust current index if necessary
+   if (currentCards.length === 0) {
+    currentIndex = 0;
+   } else if (currentIndex >= currentCards.length) {
+    currentIndex = currentCards.length - 1;
+   }
+
+   // Reset to question side
+   showingQuestion = true;
+
+   // Update display
+   displayCard();
+   updateButtons();
+   updateCounter();
+   updateUndoButton();
+  }
+
+  // Undo last card removal
+  function undoRemove() {
+   if (removedCards.length === 0) return;
+
+   // Get the last removed card
+   const lastRemoved = removedCards.pop();
+
+   // Insert card back at its original position or at the end if position is invalid
+   const insertIndex = Math.min(lastRemoved.index, currentCards.length);
+   currentCards.splice(insertIndex, 0, lastRemoved.card);
+
+   // Set current index to the restored card
+   currentIndex = insertIndex;
+   showingQuestion = true;
+
+   // Update display
+   displayCard();
+   updateButtons();
+   updateCounter();
+   updateUndoButton();
+  }
+
+  // Update undo button state
+  function updateUndoButton() {
+   const undoBtn = document.getElementById('undoBtn');
+   undoBtn.disabled = removedCards.length === 0;
+  }
+
+  // Flip the current card
+  function flipCard() {
+   showingQuestion = !showingQuestion;
+   displayCard();
+  }
+
+  // Navigate to next card
+  function nextCard() {
+   if (currentIndex < currentCards.length - 1) {
+    currentIndex++;
+    showingQuestion = true;
+    displayCard();
+    updateButtons();
+    updateCounter();
+   }
+  }
+
+  // Navigate to previous card
+  function prevCard() {
+   if (currentIndex > 0) {
+    currentIndex--;
+    showingQuestion = true;
+    displayCard();
+    updateButtons();
+    updateCounter();
+   }
+  }
+
+  // Go to first card
+  function goToFirst() {
+   currentIndex = 0;
+   showingQuestion = true;
+   displayCard();
+   updateButtons();
+   updateCounter();
+  }
+
+  // Go to last card
+  function goToLast() {
+   currentIndex = currentCards.length - 1;
+   showingQuestion = true;
+   displayCard();
+   updateButtons();
+   updateCounter();
+  }
+
+  // Shuffle the cards
+  function shuffleCards() {
+   // Reset to original cards before shuffling
+   currentCards = [...processedFlashcards];
+   // Clear removed cards history
+   removedCards = [];
+   for (let i = currentCards.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [currentCards[i], currentCards[j]] = [currentCards[j], currentCards[i]];
+   }
+   currentIndex = 0;
+   showingQuestion = true;
+   displayCard();
+   updateButtons();
+   updateCounter();
+   updateUndoButton();
+  }
+
+  // Invert all cards (swap questions and answers)
+  function invertCards() {
+   isInverted = !isInverted;
+   displayCard();
+  }
+
+  // Update button states
+  function updateButtons() {
+   document.getElementById('prevBtn').disabled = currentIndex === 0;
+   document.getElementById('nextBtn').disabled = currentIndex === currentCards.length - 1;
+  }
+
+  // Update card counter
+  function updateCounter() {
+   const counter = document.getElementById('cardCounter');
+   counter.textContent = texts.cardCounter
+    .replace('{current}', currentIndex + 1)
+    .replace('{total}', currentCards.length);
+  }
+
+  // Keyboard event listeners
+  document.addEventListener('keydown', function(event) {
+   switch(event.key) {
+    case ' ':
+    case 'Spacebar':
+     event.preventDefault();
+     flipCard();
+     break;
+    case 'ArrowLeft':
+     event.preventDefault();
+     prevCard();
+     break;
+    case 'ArrowRight':
+     event.preventDefault();
+     nextCard();
+     break;
+   }
+  });
+
+  // Timer variables
+  let timerStartTime = 0;
+  let timerElapsedTime = 0;
+  let timerInterval = null;
+  let isTimerRunning = false;
+
+  // Format time as HH:MM:SS
+  function formatTime(milliseconds) {
+   const totalSeconds = Math.floor(milliseconds / 1000);
+   const hours = Math.floor(totalSeconds / 3600);
+   const minutes = Math.floor((totalSeconds % 3600) / 60);
+   const seconds = totalSeconds % 60;
+
+   return String(hours).padStart(2, '0') + ':' +
+          String(minutes).padStart(2, '0') + ':' +
+          String(seconds).padStart(2, '0');
+  }
+
+  // Update timer display
+  function updateTimerDisplay() {
+   const currentTime = isTimerRunning ?
+    timerElapsedTime + (Date.now() - timerStartTime) :
+    timerElapsedTime;
+   document.getElementById('timerDisplay').textContent = formatTime(currentTime);
+  }
+
+  // Toggle timer (start/pause)
+  function toggleTimer() {
+   const timerBtn = document.getElementById('timerBtn');
+
+   if (isTimerRunning) {
+    // Pause timer
+    clearInterval(timerInterval);
+    timerElapsedTime += Date.now() - timerStartTime;
+    isTimerRunning = false;
+    timerBtn.innerHTML  = '&#x23F2;&#x25B6;';
+    timerBtn.classList.remove('pause');
+    timerBtn.title = texts.startTimer;
+   } else {
+    // Start timer
+    timerStartTime = Date.now();
+    isTimerRunning = true;
+    timerBtn.innerHTML = '&#x23F2;&#x23F8;';
+    timerBtn.classList.add('pause');
+    timerBtn.title = texts.pauseTimer;
+
+    // Update display every second
+    timerInterval = setInterval(updateTimerDisplay, 1000);
+   }
+  }
+
+  // Reset timer
+  function resetTimer() {
+   clearInterval(timerInterval);
+   timerStartTime = 0;
+   timerElapsedTime = 0;
+   isTimerRunning = false;
+
+   const timerBtn = document.getElementById('timerBtn');
+   timerBtn.innerHTML  = '&#x23F2;&#x25B6;';
+   timerBtn.classList.remove('pause');
+   timerBtn.title = texts.startTimer;
+
+   updateTimerDisplay();
+  }
+
+  // Print flashcards function
+  function printFlashcards() {
+   // Clear any existing content
+   const printTableBody = document.getElementById('printTableBody');
+   printTableBody.innerHTML = '';
+
+   // Use the original flashcards (not affected by current state or invert)
+   processedFlashcards.forEach((card, index) => {
+    const row = document.createElement('tr');
+
+    const questionCell = document.createElement('td');
+    questionCell.innerHTML = card[0]; // Always use original order
+
+    const answerCell = document.createElement('td');
+    answerCell.innerHTML = card[1]; // Always use original order
+
+    row.appendChild(questionCell);
+    row.appendChild(answerCell);
+    printTableBody.appendChild(row);
+   });
+
+   // Trigger print dialog
+   window.print();
+  }
+
+  // Initialize app when page loads
+  window.onload = init;
+ </script>
 </body>
 </html>

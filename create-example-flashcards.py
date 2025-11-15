@@ -19,7 +19,7 @@ with open('tsofa.html') as file_obj:
 for filename in os.listdir('example-source-data'):
     if not filename.endswith('.js'): continue
 
-    flashcard_filename = 'flashcards-' + filename[:filename.find('-')] + '.html'
+    flashcard_filename = 'flashcards-' + filename[:filename.rfind('-')] + '.html'
 
     print(flashcard_filename)
 
