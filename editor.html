@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flashcard Editor</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            padding: 20px;
+            background-color: #fafafa;
+            color: #333;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .title {
+            font-size: 18px;
+            font-weight: normal;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .title a {
+            color: #333;
+            text-decoration: none;
+        }
+
+        .title a:hover {
+            text-decoration: underline;
+        }
+
+        .topic-input {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-bottom: 20px;
+        }
+
+        .flashcards-container {
+            margin-bottom: 20px;
+        }
+
+        .flashcard-row {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+            align-items: flex-start;
+            position: relative;
+            transition: opacity 0.3s;
+        }
+
+        .flashcard-row.dragging {
+            opacity: 0.5;
+        }
+
+        .drag-handle {
+            cursor: move;
+            padding: 8px 4px;
+            color: #999;
+            user-select: none;
+            font-size: 20px;
+            line-height: 1;
+            display: flex;
+            align-items: center;
+            height: 80px;
+        }
+
+        .flashcard-content {
+            display: flex;
+            gap: 10px;
+            flex: 1;
+        }
+
+        .flashcard-textarea {
+            flex: 1;
+            min-height: 80px;
+            padding: 10px;
+            font-size: 14px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            resize: vertical;
+            font-family: inherit;
+        }
+
+        .remove-btn {
+            padding: 8px 10px;
+            background-color: #f44336;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            height: fit-content;
+            margin-top: 25px;
+        }
+
+        .remove-btn:hover {
+            background-color: #d32f2f;
+        }
+
+        .add-btn {
+            padding: 10px 40px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .add-btn:hover {
+            background-color: #45a049;
+        }
+
+        .instructions {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        .output-textarea {
+            width: 100%;
+            min-height: 200px;
+            padding: 12px;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background-color: #f5f5f5;
+            resize: vertical;
+        }
+
+        .drop-indicator {
+            height: 2px;
+            background-color: #2196F3;
+            margin: 5px 0;
+            display: none;
+        }
+
+        .drop-indicator.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="title"><a href="https://inventwithpython.com/tsofa/" target="_blank">TSOFA Flashcard Editor by Al Sweigart</a></h1>
+        
+        <input type="text" class="topic-input" id="topicInput" placeholder="Topic (or leave this empty)">
+        
+        <div class="flashcards-container" id="flashcardsContainer"></div>
+        
+        <button class="add-btn" onclick="addFlashcard()">+</button>
+        
+        <p class="instructions">You can copy and paste TOPIC and FLASHCARDS code from existing flashcard apps to load them into this editor:</p>
+        
+        <textarea class="output-textarea" id="outputTextarea"></textarea>
+    </div>
+
+    <script>
+        let flashcards = [
+            { question: '', answer: '' },
+            { question: '', answer: '' },
+            { question: '', answer: '' }
+        ];
+
+        let draggedElement = null;
+        let draggedIndex = null;
+
+        function renderFlashcards() {
+            const container = document.getElementById('flashcardsContainer');
+            container.innerHTML = '';
+
+            flashcards.forEach((flashcard, index) => {
+                const row = document.createElement('div');
+                row.className = 'flashcard-row';
+                row.draggable = true;
+                row.dataset.index = index;
+
+                const dropIndicator = document.createElement('div');
+                dropIndicator.className = 'drop-indicator';
+                dropIndicator.dataset.index = index;
+
+                const dragHandle = document.createElement('div');
+                dragHandle.className = 'drag-handle';
+                dragHandle.innerHTML = '⋮⋮';
+
+                const content = document.createElement('div');
+                content.className = 'flashcard-content';
+
+                const questionTextarea = document.createElement('textarea');
+                questionTextarea.className = 'flashcard-textarea';
+                questionTextarea.placeholder = 'Question';
+                questionTextarea.value = flashcard.question;
+                questionTextarea.oninput = (e) => {
+                    flashcards[index].question = e.target.value;
+                    updateOutputWithFlag();
+                };
+
+                const answerTextarea = document.createElement('textarea');
+                answerTextarea.className = 'flashcard-textarea';
+                answerTextarea.placeholder = 'Answer';
+                answerTextarea.value = flashcard.answer;
+                answerTextarea.oninput = (e) => {
+                    flashcards[index].answer = e.target.value;
+                    updateOutputWithFlag();
+                };
+
+                content.appendChild(questionTextarea);
+                content.appendChild(answerTextarea);
+
+                const removeBtn = document.createElement('button');
+                removeBtn.className = 'remove-btn';
+                removeBtn.textContent = 'X';
+                removeBtn.onclick = () => removeFlashcard(index);
+
+                row.appendChild(dragHandle);
+                row.appendChild(content);
+                row.appendChild(removeBtn);
+
+                // Drag events
+                row.addEventListener('dragstart', handleDragStart);
+                row.addEventListener('dragend', handleDragEnd);
+                row.addEventListener('dragover', handleDragOver);
+                row.addEventListener('drop', handleDrop);
+                row.addEventListener('dragenter', handleDragEnter);
+                row.addEventListener('dragleave', handleDragLeave);
+
+                container.appendChild(dropIndicator);
+                container.appendChild(row);
+            });
+
+            // Add final drop indicator
+            const finalDropIndicator = document.createElement('div');
+            finalDropIndicator.className = 'drop-indicator';
+            finalDropIndicator.dataset.index = flashcards.length;
+            container.appendChild(finalDropIndicator);
+        }
+
+        function handleDragStart(e) {
+            draggedElement = e.currentTarget;
+            draggedIndex = parseInt(e.currentTarget.dataset.index);
+            e.currentTarget.classList.add('dragging');
+            e.dataTransfer.effectAllowed = 'move';
+        }
+
+        function handleDragEnd(e) {
+            e.currentTarget.classList.remove('dragging');
+            document.querySelectorAll('.drop-indicator').forEach(indicator => {
+                indicator.classList.remove('active');
+            });
+            draggedElement = null;
+            draggedIndex = null;
+        }
+
+        function handleDragOver(e) {
+            e.preventDefault();
+            e.dataTransfer.dropEffect = 'move';
+
+            const afterElement = getDragAfterElement(e.currentTarget.parentElement, e.clientY);
+            const indicators = document.querySelectorAll('.drop-indicator');
+            indicators.forEach(indicator => indicator.classList.remove('active'));
+
+            if (afterElement == null) {
+                indicators[indicators.length - 1].classList.add('active');
+            } else {
+                const index = parseInt(afterElement.dataset.index);
+                if (indicators[index]) {
+                    indicators[index].classList.add('active');
+                }
+            }
+        }
+
+        function handleDragEnter(e) {
+            e.preventDefault();
+        }
+
+        function handleDragLeave(e) {
+            // Only remove indicator if leaving the container entirely
+            if (!e.currentTarget.contains(e.relatedTarget)) {
+                document.querySelectorAll('.drop-indicator').forEach(indicator => {
+                    indicator.classList.remove('active');
+                });
+            }
+        }
+
+        function handleDrop(e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            const dropIndex = parseInt(e.currentTarget.dataset.index);
+            
+            if (draggedIndex !== dropIndex) {
+                const draggedItem = flashcards[draggedIndex];
+                flashcards.splice(draggedIndex, 1);
+                
+                let newIndex = dropIndex;
+                if (draggedIndex < dropIndex) {
+                    newIndex--;
+                }
+                
+                flashcards.splice(newIndex, 0, draggedItem);
+                renderFlashcards();
+                updateOutputWithFlag();
+            }
+        }
+
+        function getDragAfterElement(container, y) {
+            const draggableElements = [...container.querySelectorAll('.flashcard-row:not(.dragging)')];
+
+            return draggableElements.reduce((closest, child) => {
+                const box = child.getBoundingClientRect();
+                const offset = y - box.top - box.height / 2;
+
+                if (offset < 0 && offset > closest.offset) {
+                    return { offset: offset, element: child };
+                } else {
+                    return closest;
+                }
+            }, { offset: Number.NEGATIVE_INFINITY }).element;
+        }
+
+        function addFlashcard() {
+            flashcards.push({ question: '', answer: '' });
+            renderFlashcards();
+            updateOutputWithFlag();
+        }
+
+        function removeFlashcard(index) {
+            if (flashcards.length > 1) {
+                flashcards.splice(index, 1);
+                renderFlashcards();
+                updateOutputWithFlag();
+            }
+        }
+
+        function updateOutput() {
+            const topic = document.getElementById('topicInput').value;
+            const outputTextarea = document.getElementById('outputTextarea');
+            
+            let output = `const TOPIC = "${topic}";\nlet FLASHCARDS = [\n`;
+            
+            flashcards.forEach((flashcard, index) => {
+                const question = flashcard.question.replace(/\\/g, '\\\\').replace(/`/g, '\\`');
+                const answer = flashcard.answer.replace(/\\/g, '\\\\').replace(/`/g, '\\`');
+                output += `[\`${question}\`, \`${answer}\`]`;
+                if (index < flashcards.length - 1) {
+                    output += ',';
+                }
+                output += '\n';
+            });
+            
+            output += '];';
+            
+            outputTextarea.value = output;
+        }
+
+        function parseJavaScriptCode() {
+            const outputTextarea = document.getElementById('outputTextarea');
+            const code = outputTextarea.value;
+            
+            try {
+                // Create a sandboxed environment to safely evaluate the code
+                const func = new Function(code + '; return { TOPIC, FLASHCARDS };');
+                const result = func();
+                
+                // Validate the result
+                if (typeof result.TOPIC !== 'string') {
+                    throw new Error('TOPIC must be a string');
+                }
+                
+                if (!Array.isArray(result.FLASHCARDS)) {
+                    throw new Error('FLASHCARDS must be an array');
+                }
+                
+                // Validate each flashcard
+                result.FLASHCARDS.forEach((card, index) => {
+                    if (!Array.isArray(card) || card.length !== 2) {
+                        throw new Error(`Flashcard ${index + 1} must be an array with 2 elements`);
+                    }
+                    if (typeof card[0] !== 'string' || typeof card[1] !== 'string') {
+                        throw new Error(`Flashcard ${index + 1} must contain only strings`);
+                    }
+                });
+                
+                // Update the GUI
+                document.getElementById('topicInput').value = result.TOPIC;
+                
+                // Update flashcards array
+                flashcards = result.FLASHCARDS.map(card => ({
+                    question: card[0],
+                    answer: card[1]
+                }));
+                
+                // If no flashcards, ensure at least one empty one
+                if (flashcards.length === 0) {
+                    flashcards = [{ question: '', answer: '' }];
+                }
+                
+                // Re-render the flashcards
+                renderFlashcards();
+                
+                return true;
+            } catch (error) {
+                // Invalid JS or structure - don't update GUI
+                console.log('Parse error:', error.message);
+                return false;
+            }
+        }
+
+        let isUpdatingOutput = false;
+
+        function handleOutputChange() {
+            if (!isUpdatingOutput) {
+                parseJavaScriptCode();
+            }
+        }
+
+        function updateOutputWithFlag() {
+            isUpdatingOutput = true;
+            updateOutput();
+            isUpdatingOutput = false;
+        }
+
+        // Initialize
+        document.getElementById('topicInput').addEventListener('input', updateOutputWithFlag);
+        document.getElementById('outputTextarea').addEventListener('input', handleOutputChange);
+        renderFlashcards();
+        updateOutputWithFlag();
+    </script>
+</body>
+</html>
