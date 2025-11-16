@@ -18,6 +18,7 @@ TSOFA ("tee-sofa") - The Simple, Offline, Flashcard App - is a flash card app th
 - **CSV import** - Paste data from spreadsheets
 - **Printable** - Print a paper copy of the flashcards
 - **Zero setup** - Works immediately offline, no programming skills needed
+- **Privacy-first** - Your flashcards are not uploaded or stored on cloud servers; the only exist in the HTML file
 - **Free** - No registration, no paywall, no ads, no "premium" features; everything is straight-up free.
 
 ## Creating and Editing Flashcards
