@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <script>
-const VERSION = "1.3.0";
-const LANGUAGE = "en"; // en, es, fr, de, nl, it, pt, pl, ru, no, sv, zh, hi, bn, ja, ko, th, ar
+const VERSION = "1.4.0";
+const LANGUAGE = "English"; // English, Español, Français, Deutsch, Nederlands, Italiano, Português, Polski, Русский, Norsk, Svenska, 中文, हिन्दी, বাংলা, 日本語, 한국어, ไทย, العربية, Tiếng Việt, Türkçe, Tagalog, Kiswahili, فارسی, Bahasa Indonesia
 
 // ===== MODIFY YOUR FLASHCARDS HERE =====
 const TOPIC = "";
@@ -30,9 +30,9 @@ let FLASHCARDS = `"What is the capital of France?","Paris"
 
 // Internationalization text
 const i18n_text = {
-en: {
+English: {
 title: "TSOFA - The Simple, Offline Flashcard App",
-byAuthor: "TSOFA - The Simple, Offline Flashcard App by Al Sweigart (v" + VERSION + ")",
+byAuthor: "TSOFA - The Simple, Offline Flashcard App by Al Sweigart",
 topic: "Topic",
 cardCounter: "Card {current} of {total}",
 noFlashcards: "No flashcards available",
@@ -55,13 +55,15 @@ startTimer: "Start Timer",
 pauseTimer: "Pause Timer",
 resetTimer: "Reset Timer",
 print: "Print",
+download: "Download",
+language: "Language",
 keyboardShortcuts: "Keyboard shortcuts: space to flip card, left/right to navigate cards",
 printHeader: "TSOFA Flashcards",
 createWithEditor: "Create flashcards with the TSOFA editor."
 },
-es: {
+Español: {
 title: "TSOFA - La Aplicación Simple de Tarjetas Didácticas Sin Conexión",
-byAuthor: "TSOFA - La Aplicación Simple de Tarjetas Didácticas Sin Conexión por Al Sweigart (v" + VERSION + ")",
+byAuthor: "TSOFA - La Aplicación Simple de Tarjetas Didácticas Sin Conexión por Al Sweigart",
 topic: "Tema",
 cardCounter: "Tarjeta {current} de {total}",
 noFlashcards: "No hay tarjetas disponibles",
@@ -84,13 +86,15 @@ startTimer: "Iniciar Cronómetro",
 pauseTimer: "Pausar Cronómetro",
 resetTimer: "Reiniciar Cronómetro",
 print: "Imprimir",
+download: "Descargar",
+language: "Idioma",
 keyboardShortcuts: "Atajos de teclado: espacio para voltear, izquierda/derecha para navegar",
 printHeader: "Tarjetas TSOFA",
 createWithEditor: "Crea tarjetas con el editor TSOFA."
 },
-fr: {
+Français: {
 title: "TSOFA - L'Application Simple de Cartes Flash Hors Ligne",
-byAuthor: "TSOFA - L'Application Simple de Cartes Flash Hors Ligne par Al Sweigart (v" + VERSION + ")",
+byAuthor: "TSOFA - L'Application Simple de Cartes Flash Hors Ligne par Al Sweigart",
 topic: "Sujet",
 cardCounter: "Carte {current} sur {total}",
 noFlashcards: "Aucune carte disponible",
@@ -113,13 +117,15 @@ startTimer: "Démarrer le Chronomètre",
 pauseTimer: "Pause Chronomètre",
 resetTimer: "Réinitialiser le Chronomètre",
 print: "Imprimer",
+download: "Télécharger",
+language: "Langue",
 keyboardShortcuts: "Raccourcis clavier: espace pour retourner, gauche/droite pour naviguer",
 printHeader: "Cartes Flash TSOFA",
 createWithEditor: "Créez des cartes flash avec l'éditeur TSOFA."
 },
-de: {
+Deutsch: {
 title: "TSOFA - Die Einfache Offline-Lernkarten-App",
-byAuthor: "TSOFA - Die Einfache Offline-Lernkarten-App von Al Sweigart (v" + VERSION + ")",
+byAuthor: "TSOFA - Die Einfache Offline-Lernkarten-App von Al Sweigart",
 topic: "Thema",
 cardCounter: "Karte {current} von {total}",
 noFlashcards: "Keine Lernkarten verfügbar",
@@ -142,13 +148,15 @@ startTimer: "Timer Starten",
 pauseTimer: "Timer Pausieren",
 resetTimer: "Timer Zurücksetzen",
 print: "Drucken",
+download: "Herunterladen",
+language: "Sprache",
 keyboardShortcuts: "Tastenkürzel: Leertaste zum Umdrehen, links/rechts zum Navigieren",
 printHeader: "TSOFA Lernkarten",
 createWithEditor: "Erstellen Sie Lernkarten mit dem TSOFA-Editor."
 },
-nl: {
+Nederlands: {
 title: "TSOFA - De Eenvoudige Offline Flashcard App",
-byAuthor: "TSOFA - De Eenvoudige Offline Flashcard App door Al Sweigart (v" + VERSION + ")",
+byAuthor: "TSOFA - De Eenvoudige Offline Flashcard App door Al Sweigart",
 topic: "Onderwerp",
 cardCounter: "Kaart {current} van {total}",
 noFlashcards: "Geen flashcards beschikbaar",
@@ -171,13 +179,15 @@ startTimer: "Timer Starten",
 pauseTimer: "Timer Pauzeren",
 resetTimer: "Timer Resetten",
 print: "Afdrukken",
+download: "Downloaden",
+language: "Taal",
 keyboardShortcuts: "Sneltoetsen: spatie om om te draaien, links/rechts om te navigeren",
 printHeader: "TSOFA Flashcards",
 createWithEditor: "Maak flashcards met de TSOFA-editor."
 },
-it: {
+Italiano: {
 title: "TSOFA - L'App Semplice per Flashcard Offline",
-byAuthor: "TSOFA - L'App Semplice per Flashcard Offline di Al Sweigart (v" + VERSION + ")",
+byAuthor: "TSOFA - L'App Semplice per Flashcard Offline di Al Sweigart",
 topic: "Argomento",
 cardCounter: "Carta {current} di {total}",
 noFlashcards: "Nessuna flashcard disponibile",
@@ -200,13 +210,15 @@ startTimer: "Avvia Timer",
 pauseTimer: "Pausa Timer",
 resetTimer: "Ripristina Timer",
 print: "Stampa",
+download: "Scarica",
+language: "Lingua",
 keyboardShortcuts: "Scorciatoie da tastiera: spazio per girare, sinistra/destra per navigare",
 printHeader: "Flashcard TSOFA",
 createWithEditor: "Crea flashcard con l'editor TSOFA."
 },
-pt: {
+Português: {
 title: "TSOFA - O Aplicativo Simples de Flashcards Offline",
-byAuthor: "TSOFA - O Aplicativo Simples de Flashcards Offline por Al Sweigart (v" + VERSION + ")",
+byAuthor: "TSOFA - O Aplicativo Simples de Flashcards Offline por Al Sweigart",
 topic: "Tópico",
 cardCounter: "Cartão {current} de {total}",
 noFlashcards: "Nenhum flashcard disponível",
@@ -229,13 +241,15 @@ startTimer: "Iniciar Cronômetro",
 pauseTimer: "Pausar Cronômetro",
 resetTimer: "Redefinir Cronômetro",
 print: "Imprimir",
+download: "Baixar",
+language: "Idioma",
 keyboardShortcuts: "Atalhos de teclado: espaço para virar, esquerda/direita para navegar",
 printHeader: "Flashcards TSOFA",
 createWithEditor: "Crie flashcards com o editor TSOFA."
 },
-pl: {
+Polski: {
 title: "TSOFA - Prosta Aplikacja Fiszek Offline",
-byAuthor: "TSOFA - Prosta Aplikacja Fiszek Offline autorstwa Al Sweigart (v" + VERSION + ")",
+byAuthor: "TSOFA - Prosta Aplikacja Fiszek Offline autorstwa Al Sweigart",
 topic: "Temat",
 cardCounter: "Karta {current} z {total}",
 noFlashcards: "Brak dostępnych fiszek",
@@ -258,13 +272,15 @@ startTimer: "Start Stopera",
 pauseTimer: "Pauza Stopera",
 resetTimer: "Resetuj Stoper",
 print: "Drukuj",
+download: "Pobierz",
+language: "Język",
 keyboardShortcuts: "Skróty klawiszowe: spacja aby odwrócić, lewo/prawo aby nawigować",
 printHeader: "Fiszki TSOFA",
 createWithEditor: "Twórz fiszki za pomocą edytora TSOFA."
 },
-ru: {
+Русский: {
 title: "TSOFA - Простое Офлайн Приложение для Карточек",
-byAuthor: "TSOFA - Простое Офлайн Приложение для Карточек от Al Sweigart (v" + VERSION + ")",
+byAuthor: "TSOFA - Простое Офлайн Приложение для Карточек от Al Sweigart",
 topic: "Тема",
 cardCounter: "Карточка {current} из {total}",
 noFlashcards: "Нет доступных карточек",
@@ -287,13 +303,15 @@ startTimer: "Запустить Таймер",
 pauseTimer: "Пауза Таймер",
 resetTimer: "Сбросить Таймер",
 print: "Печать",
+download: "Скачать",
+language: "Язык",
 keyboardShortcuts: "Горячие клавиши: пробел для переворота, влево/вправо для навигации",
 printHeader: "Карточки TSOFA",
 createWithEditor: "Создавайте карточки с помощью редактора TSOFA."
 },
-no: {
+Norsk: {
 title: "TSOFA - Den Enkle Offline Flashkort-Appen",
-byAuthor: "TSOFA - Den Enkle Offline Flashkort-Appen av Al Sweigart (v" + VERSION + ")",
+byAuthor: "TSOFA - Den Enkle Offline Flashkort-Appen av Al Sweigart",
 topic: "Emne",
 cardCounter: "Kort {current} av {total}",
 noFlashcards: "Ingen flashkort tilgjengelig",
@@ -316,13 +334,15 @@ startTimer: "Start Tidtaker",
 pauseTimer: "Pause Tidtaker",
 resetTimer: "Tilbakestill Tidtaker",
 print: "Skriv ut",
+download: "Last ned",
+language: "Språk",
 keyboardShortcuts: "Tastatursnarveier: mellomrom for å snu, venstre/høyre for å navigere",
 printHeader: "TSOFA Flashkort",
 createWithEditor: "Lag flashkort med TSOFA-editoren."
 },
-sv: {
+Svenska: {
 title: "TSOFA - Den Enkla Offline Flashkort-Appen",
-byAuthor: "TSOFA - Den Enkla Offline Flashkort-Appen av Al Sweigart (v" + VERSION + ")",
+byAuthor: "TSOFA - Den Enkla Offline Flashkort-Appen av Al Sweigart",
 topic: "Ämne",
 cardCounter: "Kort {current} av {total}",
 noFlashcards: "Inga flashkort tillgängliga",
@@ -345,13 +365,15 @@ startTimer: "Starta Timer",
 pauseTimer: "Pausa Timer",
 resetTimer: "Återställ Timer",
 print: "Skriv ut",
+download: "Ladda ner",
+language: "Språk",
 keyboardShortcuts: "Tangentbordsgenvägar: mellanslag för att vända, vänster/höger för att navigera",
 printHeader: "TSOFA Flashkort",
 createWithEditor: "Skapa flashkort med TSOFA-editorn."
 },
-zh: {
+中文: {
 title: "TSOFA - 简单离线闪卡应用",
-byAuthor: "TSOFA - 简单离线闪卡应用 作者：Al Sweigart (v" + VERSION + ")",
+byAuthor: "TSOFA - 简单离线闪卡应用 作者：Al Sweigart",
 topic: "主题",
 cardCounter: "卡片 {current} / {total}",
 noFlashcards: "没有可用的闪卡",
@@ -374,13 +396,15 @@ startTimer: "开始计时",
 pauseTimer: "暂停计时",
 resetTimer: "重置计时器",
 print: "打印",
+download: "下载",
+language: "语言",
 keyboardShortcuts: "键盘快捷键：空格键翻转，左/右键导航",
 printHeader: "TSOFA 闪卡",
 createWithEditor: "使用 TSOFA 编辑器创建闪卡。"
 },
-hi: {
+हिन्दी: {
 title: "TSOFA - सरल ऑफ़लाइन फ्लैशकार्ड ऐप",
-byAuthor: "TSOFA - सरल ऑफ़लाइन फ्लैशकार्ड ऐप - Al Sweigart द्वारा (v" + VERSION + ")",
+byAuthor: "TSOFA - सरल ऑफ़लाइन फ्लैशकार्ड ऐप - Al Sweigart द्वारा",
 topic: "विषय",
 cardCounter: "कार्ड {current} / {total}",
 noFlashcards: "कोई फ्लैशकार्ड उपलब्ध नहीं",
@@ -403,13 +427,15 @@ startTimer: "टाइमर शुरू करें",
 pauseTimer: "टाइमर रोकें",
 resetTimer: "टाइमर रीसेट करें",
 print: "प्रिंट",
+download: "डाउनलोड",
+language: "भाषा",
 keyboardShortcuts: "कीबोर्ड शॉर्टकट: पलटने के लिए स्पेस, नेविगेट करने के लिए बाएं/दाएं",
 printHeader: "TSOFA फ्लैशकार्ड",
 createWithEditor: "TSOFA संपादक के साथ फ्लैशकार्ड बनाएं।"
 },
-bn: {
+বাংলা: {
 title: "TSOFA - সহজ অফলাইন ফ্ল্যাশকার্ড অ্যাপ",
-byAuthor: "TSOFA - সহজ অফলাইন ফ্ল্যাশকার্ড অ্যাপ - Al Sweigart দ্বারা (v" + VERSION + ")",
+byAuthor: "TSOFA - সহজ অফলাইন ফ্ল্যাশকার্ড অ্যাপ - Al Sweigart দ্বারা",
 topic: "বিষয়",
 cardCounter: "কার্ড {current} / {total}",
 noFlashcards: "কোন ফ্ল্যাশকার্ড উপলব্ধ নেই",
@@ -432,13 +458,15 @@ startTimer: "টাইমার শুরু",
 pauseTimer: "টাইমার বিরতি",
 resetTimer: "টাইমার রিসেট",
 print: "প্রিন্ট",
+download: "ডাউনলোড",
+language: "ভাষা",
 keyboardShortcuts: "কীবোর্ড শর্টকাট: উল্টাতে স্পেস, নেভিগেট করতে বাম/ডান",
 printHeader: "TSOFA ফ্ল্যাশকার্ড",
 createWithEditor: "TSOFA সম্পাদক দিয়ে ফ্ল্যাশকার্ড তৈরি করুন।"
 },
-ja: {
+日本語: {
 title: "TSOFA - シンプルなオフラインフラッシュカードアプリ",
-byAuthor: "TSOFA - シンプルなオフラインフラッシュカードアプリ 作者：Al Sweigart (v" + VERSION + ")",
+byAuthor: "TSOFA - シンプルなオフラインフラッシュカードアプリ 作者：Al Sweigart",
 topic: "トピック",
 cardCounter: "カード {current} / {total}",
 noFlashcards: "利用可能なフラッシュカードがありません",
@@ -461,13 +489,15 @@ startTimer: "タイマー開始",
 pauseTimer: "タイマー一時停止",
 resetTimer: "タイマーリセット",
 print: "印刷",
+download: "ダウンロード",
+language: "言語",
 keyboardShortcuts: "キーボードショートカット：スペースで裏返す、左/右で移動",
 printHeader: "TSOFA フラッシュカード",
 createWithEditor: "TSOFAエディタでフラッシュカードを作成する。"
 },
-ko: {
+한국어: {
 title: "TSOFA - 간단한 오프라인 플래시카드 앱",
-byAuthor: "TSOFA - 간단한 오프라인 플래시카드 앱 제작자: Al Sweigart (v" + VERSION + ")",
+byAuthor: "TSOFA - 간단한 오프라인 플래시카드 앱 제작자: Al Sweigart",
 topic: "주제",
 cardCounter: "카드 {current} / {total}",
 noFlashcards: "사용 가능한 플래시카드가 없습니다",
@@ -490,13 +520,15 @@ startTimer: "타이머 시작",
 pauseTimer: "타이머 일시정지",
 resetTimer: "타이머 재설정",
 print: "인쇄",
+download: "다운로드",
+language: "언어",
 keyboardShortcuts: "키보드 단축키: 스페이스로 뒤집기, 왼쪽/오른쪽으로 이동",
 printHeader: "TSOFA 플래시카드",
 createWithEditor: "TSOFA 편집기로 플래시카드를 만드세요."
 },
-th: {
+ไทย: {
 title: "TSOFA - แอปฟลัชการ์ดออฟไลน์ที่เรียบง่าย",
-byAuthor: "TSOFA - แอปฟลัชการ์ดออฟไลน์ที่เรียบง่าย โดย Al Sweigart (v" + VERSION + ")",
+byAuthor: "TSOFA - แอปฟลัชการ์ดออฟไลน์ที่เรียบง่าย โดย Al Sweigart",
 topic: "หัวข้อ",
 cardCounter: "การ์ด {current} จาก {total}",
 noFlashcards: "ไม่มีฟลัชการ์ด",
@@ -519,13 +551,15 @@ startTimer: "เริ่มจับเวลา",
 pauseTimer: "หยุดจับเวลา",
 resetTimer: "รีเซ็ตเวลา",
 print: "พิมพ์",
+download: "ดาวน์โหลด",
+language: "ภาษา",
 keyboardShortcuts: "ปุ่มลัด: สเปซบาร์เพื่อพลิก, ซ้าย/ขวาเพื่อนำทาง",
 printHeader: "ฟลัชการ์ด TSOFA",
 createWithEditor: "สร้างฟลัชการ์ดด้วยตัวแก้ไข TSOFA"
 },
-ar: {
+العربية: {
 title: "TSOFA - تطبيق البطاقات التعليمية البسيط دون اتصال",
-byAuthor: "TSOFA - تطبيق البطاقات التعليمية البسيط دون اتصال بواسطة Al Sweigart (v" + VERSION + ")",
+byAuthor: "TSOFA - تطبيق البطاقات التعليمية البسيط دون اتصال بواسطة Al Sweigart",
 topic: "الموضوع",
 cardCounter: "البطاقة {current} من {total}",
 noFlashcards: "لا توجد بطاقات تعليمية متاحة",
@@ -548,14 +582,202 @@ startTimer: "بدء المؤقت",
 pauseTimer: "إيقاف المؤقت",
 resetTimer: "إعادة تعيين المؤقت",
 print: "طباعة",
+download: "تحميل",
+language: "اللغة",
 keyboardShortcuts: "اختصارات لوحة المفاتيح: مسافة للقلب، يسار/يمين للتنقل",
 printHeader: "بطاقات TSOFA التعليمية",
 createWithEditor: "أنشئ البطاقات التعليمية باستخدام محرر TSOFA."
+},
+"Tiếng Việt": {
+title: "TSOFA - Ứng Dụng Flashcard Ngoại Tuyến Đơn Giản",
+byAuthor: "TSOFA - Ứng Dụng Flashcard Ngoại Tuyến Đơn Giản bởi Al Sweigart",
+topic: "Chủ đề",
+cardCounter: "Thẻ {current} / {total}",
+noFlashcards: "Không có flashcard nào",
+first: "Đầu tiên",
+previous: "Trước (trái)",
+flip: "Lật (space)",
+next: "Tiếp (phải)",
+last: "Cuối cùng",
+shuffle: "Xáo trộn",
+swapQA: "Đổi Câu hỏi và Câu trả lời",
+swapQALabel: "H↔Đ",
+removeCard: "Xóa thẻ hiện tại",
+undoRemove: "Hoàn tác xóa",
+decreaseFont: "Giảm cỡ chữ",
+increaseFont: "Tăng cỡ chữ",
+leftJustify: "Căn trái",
+rightJustify: "Căn phải",
+center: "Căn giữa",
+startTimer: "Bắt đầu hẹn giờ",
+pauseTimer: "Tạm dừng hẹn giờ",
+resetTimer: "Đặt lại hẹn giờ",
+print: "In",
+download: "Tải xuống",
+language: "Ngôn ngữ",
+keyboardShortcuts: "Phím tắt: space để lật, trái/phải để điều hướng",
+printHeader: "Flashcard TSOFA",
+createWithEditor: "Tạo flashcard với trình biên tập TSOFA."
+},
+Türkçe: {
+title: "TSOFA - Basit Çevrimdışı Flashcard Uygulaması",
+byAuthor: "TSOFA - Basit Çevrimdışı Flashcard Uygulaması - Al Sweigart",
+topic: "Konu",
+cardCounter: "Kart {current} / {total}",
+noFlashcards: "Flashcard yok",
+first: "İlk",
+previous: "Önceki (sol)",
+flip: "Çevir (boşluk)",
+next: "Sonraki (sağ)",
+last: "Son",
+shuffle: "Karıştır",
+swapQA: "Soru ve Cevabı Değiştir",
+swapQALabel: "S↔C",
+removeCard: "Mevcut Kartı Kaldır",
+undoRemove: "Kaldırmayı Geri Al",
+decreaseFont: "Yazı boyutunu küçült",
+increaseFont: "Yazı boyutunu büyüt",
+leftJustify: "Sola Hizala",
+rightJustify: "Sağa Hizala",
+center: "Ortala",
+startTimer: "Zamanlayıcıyı Başlat",
+pauseTimer: "Zamanlayıcıyı Duraklat",
+resetTimer: "Zamanlayıcıyı Sıfırla",
+print: "Yazdır",
+download: "İndir",
+language: "Dil",
+keyboardShortcuts: "Klavye kısayolları: çevirmek için boşluk, gezinmek için sol/sağ",
+printHeader: "TSOFA Flashcardlar",
+createWithEditor: "TSOFA editörü ile flashcard oluşturun."
+},
+Tagalog: {
+title: "TSOFA - Ang Simpleng Offline Flashcard App",
+byAuthor: "TSOFA - Ang Simpleng Offline Flashcard App ni Al Sweigart",
+topic: "Paksa",
+cardCounter: "Card {current} / {total}",
+noFlashcards: "Walang flashcard",
+first: "Una",
+previous: "Nakaraan (kaliwa)",
+flip: "Baliktarin (space)",
+next: "Susunod (kanan)",
+last: "Huli",
+shuffle: "Paghaluin",
+swapQA: "Palitan ang Tanong at Sagot",
+swapQALabel: "T↔S",
+removeCard: "Tanggalin ang Kasalukuyang Card",
+undoRemove: "I-undo ang Pagtanggal",
+decreaseFont: "Paliitin ang font",
+increaseFont: "Palakihin ang font",
+leftJustify: "I-align sa Kaliwa",
+rightJustify: "I-align sa Kanan",
+center: "Gitna",
+startTimer: "Simulan ang Timer",
+pauseTimer: "I-pause ang Timer",
+resetTimer: "I-reset ang Timer",
+print: "I-print",
+download: "I-download",
+language: "Wika",
+keyboardShortcuts: "Keyboard shortcuts: space para baliktarin, kaliwa/kanan para mag-navigate",
+printHeader: "TSOFA Flashcards",
+createWithEditor: "Gumawa ng flashcards gamit ang TSOFA editor."
+},
+Kiswahili: {
+title: "TSOFA - Programu Rahisi ya Kadi za Kujifunza Nje ya Mtandao",
+byAuthor: "TSOFA - Programu Rahisi ya Kadi za Kujifunza Nje ya Mtandao na Al Sweigart",
+topic: "Mada",
+cardCounter: "Kadi {current} / {total}",
+noFlashcards: "Hakuna kadi za kujifunza",
+first: "Ya kwanza",
+previous: "Iliyotangulia (kushoto)",
+flip: "Pindua (nafasi)",
+next: "Ifuatayo (kulia)",
+last: "Ya mwisho",
+shuffle: "Changanya",
+swapQA: "Badilisha Swali na Jibu",
+swapQALabel: "S↔J",
+removeCard: "Ondoa Kadi ya Sasa",
+undoRemove: "Rudisha Kuondoa",
+decreaseFont: "Punguza ukubwa wa herufi",
+increaseFont: "Ongeza ukubwa wa herufi",
+leftJustify: "Pangilia Kushoto",
+rightJustify: "Pangilia Kulia",
+center: "Katikati",
+startTimer: "Anza Kipima muda",
+pauseTimer: "Simamisha Kipima muda",
+resetTimer: "Weka upya Kipima muda",
+print: "Chapisha",
+download: "Pakua",
+language: "Lugha",
+keyboardShortcuts: "Njia za mkato: nafasi kupindua, kushoto/kulia kuelekeza",
+printHeader: "Kadi za Kujifunza za TSOFA",
+createWithEditor: "Unda kadi za kujifunza kwa kutumia kihariri cha TSOFA."
+},
+فارسی: {
+title: "TSOFA - برنامه ساده فلش کارت آفلاین",
+byAuthor: "TSOFA - برنامه ساده فلش کارت آفلاین توسط Al Sweigart",
+topic: "موضوع",
+cardCounter: "کارت {current} از {total}",
+noFlashcards: "فلش کارتی موجود نیست",
+first: "اول",
+previous: "قبلی (چپ)",
+flip: "برگرداندن (فاصله)",
+next: "بعدی (راست)",
+last: "آخر",
+shuffle: "مخلوط کردن",
+swapQA: "تعویض سوال و جواب",
+swapQALabel: "س↔ج",
+removeCard: "حذف کارت فعلی",
+undoRemove: "لغو حذف",
+decreaseFont: "کاهش اندازه فونت",
+increaseFont: "افزایش اندازه فونت",
+leftJustify: "تراز چپ",
+rightJustify: "تراز راست",
+center: "وسط",
+startTimer: "شروع تایمر",
+pauseTimer: "توقف تایمر",
+resetTimer: "بازنشانی تایمر",
+print: "چاپ",
+download: "دانلود",
+language: "زبان",
+keyboardShortcuts: "میانبرهای صفحه کلید: فاصله برای برگرداندن، چپ/راست برای پیمایش",
+printHeader: "فلش کارت‌های TSOFA",
+createWithEditor: "فلش کارت‌ها را با ویرایشگر TSOFA بسازید."
+},
+"Bahasa Indonesia": {
+title: "TSOFA - Aplikasi Flashcard Offline Sederhana",
+byAuthor: "TSOFA - Aplikasi Flashcard Offline Sederhana oleh Al Sweigart",
+topic: "Topik",
+cardCounter: "Kartu {current} dari {total}",
+noFlashcards: "Tidak ada flashcard",
+first: "Pertama",
+previous: "Sebelumnya (kiri)",
+flip: "Balik (spasi)",
+next: "Berikutnya (kanan)",
+last: "Terakhir",
+shuffle: "Acak Kartu",
+swapQA: "Tukar Pertanyaan & Jawaban",
+swapQALabel: "P↔J",
+removeCard: "Hapus Kartu Saat Ini",
+undoRemove: "Batalkan Penghapusan",
+decreaseFont: "Perkecil ukuran font",
+increaseFont: "Perbesar ukuran font",
+leftJustify: "Rata Kiri",
+rightJustify: "Rata Kanan",
+center: "Tengah",
+startTimer: "Mulai Timer",
+pauseTimer: "Jeda Timer",
+resetTimer: "Atur Ulang Timer",
+print: "Cetak",
+download: "Unduh",
+language: "Bahasa",
+keyboardShortcuts: "Pintasan keyboard: spasi untuk membalik, kiri/kanan untuk navigasi",
+printHeader: "Flashcard TSOFA",
+createWithEditor: "Buat flashcard dengan editor TSOFA."
 }
 };
 
 // Get the current language texts
-const texts = i18n_text[LANGUAGE] || i18n_text['en'];
+let texts = i18n_text[LANGUAGE] || i18n_text['English'];
 
  // Update page title if TOPIC is set
  if (TOPIC && TOPIC.trim() !== "") {
@@ -794,22 +1016,38 @@ const texts = i18n_text[LANGUAGE] || i18n_text['en'];
    display: flex;
    justify-content: center;
    align-items: center;
+   gap: 10px;
   }
 
-  .print-btn {
+  .print-btn, .download-btn {
    background-color: #6c757d;
    padding: 10px 30px;
    font-size: 16px;
   }
 
-  .print-btn:hover {
+  .print-btn:hover, .download-btn:hover {
+   background-color: #5a6268;
+  }
+
+  .language-select {
+   background-color: #6c757d;
+   color: white;
+   padding: 10px 15px;
+   font-size: 16px;
+   border: none;
+   border-radius: 5px;
+   cursor: pointer;
+  }
+
+  .language-select:hover {
    background-color: #5a6268;
   }
 
   @media print {
    body {
     background: white;
-    padding: 20px;
+    padding: 5px;
+    margin: 0;
    }
 
    .container {
@@ -821,6 +1059,8 @@ const texts = i18n_text[LANGUAGE] || i18n_text['en'];
     width: 100%;
     border-collapse: collapse;
     font-family: Arial, sans-serif;
+    font-size: 9px;
+    line-height: 1.2;
    }
 
    .print-table thead {
@@ -828,19 +1068,36 @@ const texts = i18n_text[LANGUAGE] || i18n_text['en'];
    }
 
    .print-table td {
-    border: 1px solid #999;
-    padding: 10px;
+    border: 0.5px solid #999;
+    padding: 3px;
     text-align: left;
     vertical-align: top;
     width: 50%;
+    height: auto;
+    max-height: 40px;
+    overflow: hidden;
    }
 
    .print-table tr {
     background-color: white;
+    page-break-inside: avoid;
    }
 
    .print-header {
-    display: none !important;
+    display: block !important;
+    text-align: center;
+    margin-bottom: 5px;
+    font-family: Arial, sans-serif;
+   }
+
+   .print-header h2 {
+    display: none;
+   }
+
+   .print-header h3 {
+    font-size: 10px;
+    margin: 2px 0;
+    font-weight: normal;
    }
   }
 
@@ -850,6 +1107,12 @@ const texts = i18n_text[LANGUAGE] || i18n_text['en'];
 
   .print-header {
    display: none;
+  }
+
+  @media screen {
+   .print-header {
+    display: none !important;
+   }
   }
 
   .flip-btn {
@@ -906,7 +1169,7 @@ const texts = i18n_text[LANGUAGE] || i18n_text['en'];
 <body>
  <div class="container">
 
-  <p id="byAuthor" style="text-align: center; color: #666; margin-top: -10px; font-size: 14px;"><a href="https://inventwithpython.com/tsofa/">TSOFA - The Simple, Offline Flashcard App by Al Sweigart</a></p>
+  <p id="byAuthor" style="text-align: center; color: #666; margin-top: -10px; font-size: 14px;"><a href="https://inventwithpython.com/tsofa/">TSOFA - The Simple, Offline Flashcard App by Al Sweigart <span id="versionText">(v1.3.0)</span></a></p>
   <h2 id="topicHeading" style="text-align: center; color: #555; margin-top: 10px; margin-bottom: 20px; display: none;"></h2>
 
   <div class="card-counter" id="cardCounter">Card 1 of 2</div>
@@ -944,6 +1207,33 @@ const texts = i18n_text[LANGUAGE] || i18n_text['en'];
 
   <div class="print-row">
    <button onclick="printFlashcards()" class="print-btn" id="printBtn" title="Print">&#x1F5A8;</button>
+   <button onclick="downloadFile()" class="download-btn" id="downloadBtn" title="Download">&#x1F4C4;&#x2193;</button>
+   <select onchange="changeLanguage(this.value)" class="language-select" id="languageSelect" title="Language">
+    <option value="English">English</option>
+    <option value="Español">Español</option>
+    <option value="Français">Français</option>
+    <option value="Deutsch">Deutsch</option>
+    <option value="Nederlands">Nederlands</option>
+    <option value="Italiano">Italiano</option>
+    <option value="Português">Português</option>
+    <option value="Polski">Polski</option>
+    <option value="Русский">Русский</option>
+    <option value="Norsk">Norsk</option>
+    <option value="Svenska">Svenska</option>
+    <option value="中文">中文</option>
+    <option value="हिन्दी">हिन्दी</option>
+    <option value="বাংলা">বাংলা</option>
+    <option value="日本語">日本語</option>
+    <option value="한국어">한국어</option>
+    <option value="ไทย">ไทย</option>
+    <option value="العربية">العربية</option>
+    <option value="Tiếng Việt">Tiếng Việt</option>
+    <option value="Türkçe">Türkçe</option>
+    <option value="Tagalog">Tagalog</option>
+    <option value="Kiswahili">Kiswahili</option>
+    <option value="فارسی">فارسی</option>
+    <option value="Bahasa Indonesia">Bahasa Indonesia</option>
+   </select>
   </div>
 
   <div class="instructions" id="instructions">
@@ -957,7 +1247,6 @@ const texts = i18n_text[LANGUAGE] || i18n_text['en'];
 
  <!-- Print-only content -->
  <div class="print-header" id="printHeader">
-  <h2 id="printTitle">TSOFA Flashcards</h2>
   <h3 id="printTopic"></h3>
  </div>
  <table class="print-table" id="printTable">
@@ -1049,10 +1338,19 @@ const texts = i18n_text[LANGUAGE] || i18n_text['en'];
   let removedCards = []; // Stack to store removed cards for undo
   let alignmentState = 'center'; // 'left', 'right', or 'center'
 
+  // Timer variables
+  let timerStartTime = 0;
+  let timerElapsedTime = 0;
+  let timerInterval = null;
+  let isTimerRunning = false;
+
   // Initialize the app
   function init() {
    // Set up internationalization
    applyTranslations();
+
+   // Set the language dropdown to current language
+   document.getElementById('languageSelect').value = LANGUAGE;
 
    // Display topic if set
    if (TOPIC && TOPIC.trim() !== "") {
@@ -1070,10 +1368,30 @@ const texts = i18n_text[LANGUAGE] || i18n_text['en'];
    updateAlignButton();
   }
 
+  // Change the app language
+  function changeLanguage(newLanguage) {
+   // Update the texts object with new language
+   texts = i18n_text[newLanguage] || i18n_text['English'];
+
+   // Reapply translations
+   applyTranslations();
+
+   // Update the topic heading if displayed
+   if (TOPIC && TOPIC.trim() !== "") {
+    const topicHeading = document.getElementById('topicHeading');
+    topicHeading.textContent = texts.topic + ": " + TOPIC;
+   }
+
+   // Update all UI elements
+   updateCounter();
+   displayCard();
+   updateAlignButton();
+  }
+
   // Apply translations to all UI elements
   function applyTranslations() {
-   // Update link text
-   document.getElementById('byAuthor').innerHTML = `<a href="https://inventwithpython.com/tsofa/">${texts.byAuthor}</a>`;
+   // Update link text and version
+   document.getElementById('byAuthor').innerHTML = `<a href="https://inventwithpython.com/tsofa/">${texts.byAuthor} (v${VERSION})</a>`;
 
    // Update button titles and tooltips
    document.getElementById('firstBtn').title = texts.first;
@@ -1089,16 +1407,16 @@ const texts = i18n_text[LANGUAGE] || i18n_text['en'];
    document.getElementById('decreaseFontBtn').title = texts.decreaseFont;
    document.getElementById('increaseFontBtn').title = texts.increaseFont;
    document.getElementById('printBtn').title = texts.print;
+   document.getElementById('downloadBtn').title = texts.download;
+   document.getElementById('languageSelect').title = texts.language;
    document.getElementById('resetBtn').title = texts.resetTimer;
+   document.getElementById('timerBtn').title = isTimerRunning ? texts.pauseTimer : texts.startTimer;
 
    // Update instructions
    document.getElementById('instructions').innerHTML = `<strong>${texts.keyboardShortcuts}</strong>`;
 
    // Update editor link
    document.getElementById('editorLink').innerHTML = `<a href="https://inventwithpython.com/tsofa/editor/">${texts.createWithEditor}</a>`;
-
-   // Update print header
-   document.getElementById('printTitle').textContent = texts.printHeader;
   }
 
   // Display current card
@@ -1352,12 +1670,6 @@ const texts = i18n_text[LANGUAGE] || i18n_text['en'];
    }
   });
 
-  // Timer variables
-  let timerStartTime = 0;
-  let timerElapsedTime = 0;
-  let timerInterval = null;
-  let isTimerRunning = false;
-
   // Format time as HH:MM:SS
   function formatTime(milliseconds) {
    const totalSeconds = Math.floor(milliseconds / 1000);
@@ -1420,6 +1732,15 @@ const texts = i18n_text[LANGUAGE] || i18n_text['en'];
 
   // Print flashcards function
   function printFlashcards() {
+   // Set the print topic header if TOPIC exists
+   const printTopicElement = document.getElementById('printTopic');
+   if (TOPIC && TOPIC.trim() !== "") {
+    printTopicElement.textContent = TOPIC;
+    printTopicElement.style.display = 'block';
+   } else {
+    printTopicElement.style.display = 'none';
+   }
+
    // Clear any existing content
    const printTableBody = document.getElementById('printTableBody');
    printTableBody.innerHTML = '';
@@ -1441,6 +1762,33 @@ const texts = i18n_text[LANGUAGE] || i18n_text['en'];
 
    // Trigger print dialog
    window.print();
+  }
+
+  // Download the HTML file
+  function downloadFile() {
+   // Get the entire HTML content
+   const htmlContent = document.documentElement.outerHTML;
+
+   // Create a Blob with the HTML content
+   const blob = new Blob([htmlContent], { type: 'text/html' });
+
+   // Create a temporary link element
+   const link = document.createElement('a');
+   link.href = URL.createObjectURL(blob);
+
+   // Set the download filename
+   const filename = TOPIC && TOPIC.trim() !== ""
+    ? `TSOFA_${TOPIC.replace(/[^a-z0-9]/gi, '_')}.html`
+    : 'TSOFA_flashcards.html';
+   link.download = filename;
+
+   // Trigger the download
+   document.body.appendChild(link);
+   link.click();
+
+   // Clean up
+   document.body.removeChild(link);
+   URL.revokeObjectURL(link.href);
   }
 
   // Initialize app when page loads
