@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <script>
-const VERSION = "1.4.0";
+const VERSION = "1.5.0";
 const LANGUAGE = "English"; // English, Español, Français, Deutsch, Nederlands, Italiano, Português, Polski, Русский, Norsk, Svenska, 中文, हिन्दी, বাংলা, 日本語, 한국어, ไทย, العربية, Tiếng Việt, Türkçe, Tagalog, Kiswahili, فارسی, Bahasa Indonesia
 
 // ===== MODIFY YOUR FLASHCARDS HERE =====
-const TOPIC = "";
+const TOPIC = "Demo Set of Flashcards";
 
 // Option 1: Array of arrays format
 let FLASHCARDS = [
@@ -1207,7 +1207,7 @@ let texts = i18n_text[LANGUAGE] || i18n_text['English'];
 
   <div class="print-row">
    <button onclick="printFlashcards()" class="print-btn" id="printBtn" title="Print">&#x1F5A8;</button>
-   <button onclick="downloadFile()" class="download-btn" id="downloadBtn" title="Download">&#x1F4C4;&#x2193;</button>
+   <button onclick="downloadFile()" class="download-btn" id="downloadBtn" title="Download"><u>&#x2193;</u></button>
    <select onchange="changeLanguage(this.value)" class="language-select" id="languageSelect" title="Language">
     <option value="English">English</option>
     <option value="Español">Español</option>
