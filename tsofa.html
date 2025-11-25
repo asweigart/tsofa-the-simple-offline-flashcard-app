@@ -6,6 +6,7 @@ const LANGUAGE = "English"; // English, Español, Français, Deutsch, Nederlands
 
 // ===== MODIFY YOUR FLASHCARDS HERE =====
 const TOPIC = "Demo Set of Flashcards";
+let JUSTIFICATION = "center"; // "left", "right", or "center"
 
 // Option 1: Array of arrays format
 let FLASHCARDS = [
@@ -814,6 +815,16 @@ let texts = i18n_text[LANGUAGE] || i18n_text['English'];
    color: #555;
   }
 
+  .card-counter .total-count {
+   display: inline-block;
+   transition: transform 0.15s ease-out, color 0.15s ease-out;
+  }
+
+  .card-counter .total-count.emphasis {
+   transform: scale(1.3);
+   color: #007bff;
+  }
+
   .flashcard {
    background-color: white;
    border-radius: 10px;
@@ -1339,7 +1350,8 @@ let texts = i18n_text[LANGUAGE] || i18n_text['English'];
   let isInverted = false;
   let currentFontSize = 20; // Default font size in pixels
   let removedCards = []; // Stack to store removed cards for undo
-  let alignmentState = 'center'; // 'left', 'right', or 'center'
+  // Initialize alignmentState from JUSTIFICATION variable
+  let alignmentState = (JUSTIFICATION === 'left' || JUSTIFICATION === 'right') ? JUSTIFICATION : 'center';
 
   // Timer variables
   let timerStartTime = 0;
@@ -1590,6 +1602,23 @@ let texts = i18n_text[LANGUAGE] || i18n_text['English'];
    cardContent.style.fontSize = currentFontSize + 'px';
   }
 
+  // Trigger emphasis animation on total count
+  function triggerTotalCountEmphasis() {
+   const totalCountSpan = document.querySelector('.total-count');
+   if (totalCountSpan) {
+    // Remove class first to allow re-triggering
+    totalCountSpan.classList.remove('emphasis');
+    // Force reflow to restart animation
+    void totalCountSpan.offsetWidth;
+    // Add the emphasis class
+    totalCountSpan.classList.add('emphasis');
+    // Remove the class after animation completes
+    setTimeout(() => {
+     totalCountSpan.classList.remove('emphasis');
+    }, 200);
+   }
+  }
+
   // Remove current card
   function removeCard() {
    if (currentCards.length === 0) return;
@@ -1618,6 +1647,9 @@ let texts = i18n_text[LANGUAGE] || i18n_text['English'];
    updateButtons();
    updateCounter();
    updateUndoButton();
+
+   // Trigger emphasis animation
+   triggerTotalCountEmphasis();
   }
 
   // Undo last card removal
@@ -1640,6 +1672,9 @@ let texts = i18n_text[LANGUAGE] || i18n_text['English'];
    updateButtons();
    updateCounter();
    updateUndoButton();
+
+   // Trigger emphasis animation
+   triggerTotalCountEmphasis();
   }
 
   // Update undo button state
@@ -1727,9 +1762,10 @@ let texts = i18n_text[LANGUAGE] || i18n_text['English'];
   // Update card counter
   function updateCounter() {
    const counter = document.getElementById('cardCounter');
-   counter.textContent = texts.cardCounter
+   const currentText = texts.cardCounter
     .replace('{current}', currentIndex + 1)
-    .replace('{total}', currentCards.length);
+    .replace('{total}', `<span class="total-count">${currentCards.length}</span>`);
+   counter.innerHTML = currentText;
   }
 
   // Keyboard event listeners
