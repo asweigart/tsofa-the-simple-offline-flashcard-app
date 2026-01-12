@@ -1,0 +1,32 @@
+const TOPIC = "Automate the Boring Stuff Workbook, Chapter 20 - Sending Email, Texts, and Push Notifications";
+let JUSTIFICATION = "left"; // "left", "right", or "center"
+let FLASHCARDS = [
+  ["What should you do if you accidentally share the credentials or token files for the Gmail API?", "You should revoke your credentials at the Google Cloud Console website if the credentials or token files for the Gmail API are inadvertently shared."],
+  ["What variable in the ezgmail module contains the email address from which you're sending email?", "<code>ezgmail.EMAIL_ADDRESS</code> contains the email address you are sending email from."],
+  ["What does this function call do: <code>ezgmail.send('alice@example.com', 'Hello!', 'Here is that graduation photo.', ['grad.jpg'])</code>?", "This function call sends an email to alice@example.com with the subject \"Hello!\" and body \"Here is that graduation photo.\" It also attaches the file grad.jpg to the email."],
+  ["What data type represents a single received email?", "A single received email is represented as a <code>GmailMessage</code> object."],
+  ["What data type represents a series of back-and-forth emails?", "A series of back-and-forth emails is represented as a <code>GmailThread</code> object."],
+  ["Name two attributes of a GmailMessage object.", "GmailMessage objects have the attributes <code>subject</code>, <code>body</code>, <code>timestamp</code>, <code>sender</code>, and <code>recipient</code>."],
+  ["What function call returns the 50 most recent email threads?", "The function call <code>ezgmail.recent(maxResults=50)</code> returns the 50 most recent email threads. Without <code>maxResults=50</code>, the <code>ezgmail.recent()</code> function returns up to 25 emails by default."],
+  ["What function call returns email messages that mention \"cake recipes\"?", "The function call <code>ezgmail.search('cake recipes')</code> returns email messages that mention \"cake recipes.\""],
+  ["What does <code>ezgmail.search('from:alice@example.com')</code> return?", "This function call returns email sent from the email address alice@example.com."],
+  ["What does <code>ezgmail.summary(ezgmail.unread())</code> do?", "This function call prints a summary of the unread email in the Gmail account, including the sender, subject, and timestamp information."],
+  ["If the variable <code>spam</code> contains a GmailMessage object, what code downloads all of the file attachments in that email?", "<code>spam.downloadAllAttachments()</code>"],
+  ["What happens if you download an attachment that has the same filename as a file on your computer?", "The downloaded attachment overwrites any existing files with the same name."],
+  ["What does SMS stand for?", "SMS stands for Short Message Service."],
+  ["What does MMS stand for?", "MMS stands for Multimedia Messaging Service."],
+  ["Can your Python program send text messages by sending email to an SMS email gateway?", "Yes. However, this isn't a reliable way to send text messages."],
+  ["Can your Python program receive text messages by receiving email from an SMS email gateway?", "No. You cannot receive text messages this way."],
+  ["What information besides the phone number do you need to send a text through an SMS email gateway?", "You must know the recipient's cellular service provider in addition to the recipient's phone number."],
+  ["How much do SMS email gateways cost to use?", "SMS email gateways are free to use, but they are an unreliable way to send text messages."],
+  ["What are two disadvantages of using SMS email gateways instead of a dedicated telecommunications API?", "Disadvantages of using SMS email gateways include requiring you to know the recipient's cellular service provider, not knowing if a text message has been sent, not knowing if a text message has been delayed, not knowing how many text messages can be sent before your program is blocked, and not knowing if the gateway will still work in the future."],
+  ["What module can you use for interacting with the ntfy service?", "The book uses <code>requests</code> for interacting with the ntfy service, but any module that can make HTTP requests will work."],
+  ["How can you receive ntfy notifications on your smartphone?", "You can receive ntfy notifications on your smartphone using the free ntfy Android or iOS app."],
+  ["Can you receive ntfy notifications on your laptop without using Python?", "Yes, you can receive ntfy notifications on your laptop by going to the https://ntfy.sh website."],
+  ["What protocol does the ntfy service use to send and receive push notifications?", "The ntfy service uses HTTPS to send and receive push notifications."],
+  ["What function do you use to send a push notification to the ntfy service?", "The <code>requests.post()</code> function sends a push notification to the ntfy service."],
+  ["How much does it cost to use the ntfy service?", "The ntfy service is free to use for low volumes of notifications. You can also run your own ntfy server for unlimited notifications."],
+  ["What are the lowest and highest priority levels for ntfy messages?", "The lowest priority level is 1 and the highest priority level is 5."],
+  ["What does this code do: <code>requests.post('https://ntfy.sh/hello', 'goodbye')</code>?", "This code posts a notification for the topic 'hello' with the message 'goodbye' to the public ntfy server at https://ntfy.sh."],
+  ["What can keyword arguments for the <code>headers</code> parameter in <code>requests.post()</code> do?", "Keyword arguments for the <code>headers</code> parameter in <code>requests.post()</code> can set the notification title, priority level, and tags."]
+];

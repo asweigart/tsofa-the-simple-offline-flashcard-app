@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <script>
-const VERSION = "1.4.0";
+const VERSION = "1.5.0";
 const LANGUAGE = "English"; // English, Español, Français, Deutsch, Nederlands, Italiano, Português, Polski, Русский, Norsk, Svenska, 中文, हिन्दी, বাংলা, 日本語, 한국어, ไทย, العربية, Tiếng Việt, Türkçe, Tagalog, Kiswahili, فارسی, Bahasa Indonesia
 
 // ===== MODIFY YOUR FLASHCARDS HERE =====
@@ -866,6 +866,16 @@ let texts = i18n_text[LANGUAGE] || i18n_text['English'];
    color: #555;
   }
 
+  .card-counter .total-count {
+   display: inline-block;
+   transition: transform 0.15s ease-out, color 0.15s ease-out;
+  }
+
+  .card-counter .total-count.emphasis {
+   transform: scale(1.3);
+   color: #007bff;
+  }
+
   .flashcard {
    background-color: white;
    border-radius: 10px;
@@ -879,6 +889,7 @@ let texts = i18n_text[LANGUAGE] || i18n_text['English'];
    margin-bottom: 20px;
    user-select: none;
    transition: transform 0.1s;
+   touch-action: pan-y pinch-zoom;
   }
 
   .flashcard:hover {
@@ -999,6 +1010,7 @@ let texts = i18n_text[LANGUAGE] || i18n_text['English'];
    color: white;
    cursor: pointer;
    transition: background-color 0.2s;
+   touch-action: manipulation;
   }
 
   button:hover {
@@ -1089,6 +1101,7 @@ let texts = i18n_text[LANGUAGE] || i18n_text['English'];
    border: none;
    border-radius: 5px;
    cursor: pointer;
+   touch-action: manipulation;
   }
 
   .language-select:hover {
@@ -1259,7 +1272,7 @@ let texts = i18n_text[LANGUAGE] || i18n_text['English'];
 
   <div class="print-row">
    <button onclick="printFlashcards()" class="print-btn" id="printBtn" title="Print">&#x1F5A8;</button>
-   <button onclick="downloadFile()" class="download-btn" id="downloadBtn" title="Download">&#x1F4C4;&#x2193;</button>
+   <button onclick="downloadFile()" class="download-btn" id="downloadBtn" title="Download"><u>&#x2193;</u></button>
    <select onchange="changeLanguage(this.value)" class="language-select" id="languageSelect" title="Language">
     <option value="English">English</option>
     <option value="Español">Español</option>
@@ -1388,13 +1401,21 @@ let texts = i18n_text[LANGUAGE] || i18n_text['English'];
   let isInverted = false;
   let currentFontSize = 20; // Default font size in pixels
   let removedCards = []; // Stack to store removed cards for undo
-  let alignmentState = 'center'; // 'left', 'right', or 'center'
+  // Initialize alignmentState from JUSTIFICATION variable
+  let alignmentState = (JUSTIFICATION === 'left' || JUSTIFICATION === 'right') ? JUSTIFICATION : 'center';
 
   // Timer variables
   let timerStartTime = 0;
   let timerElapsedTime = 0;
   let timerInterval = null;
   let isTimerRunning = false;
+
+  // Swipe gesture variables
+  let touchStartX = 0;
+  let touchStartY = 0;
+  let touchEndX = 0;
+  let touchEndY = 0;
+  const minSwipeDistance = 50; // Minimum distance in pixels for a swipe to register
 
   // Initialize the app
   function init() {
@@ -1411,6 +1432,9 @@ let texts = i18n_text[LANGUAGE] || i18n_text['English'];
     topicHeading.style.display = 'block';
    }
 
+   // Set up swipe gesture handlers
+   initSwipeGestures();
+
    displayCard();
    updateButtons();
    updateCounter();
@@ -1418,6 +1442,55 @@ let texts = i18n_text[LANGUAGE] || i18n_text['English'];
    updateFontSize();
    updateUndoButton();
    updateAlignButton();
+  }
+
+  // Initialize swipe gesture handlers
+  function initSwipeGestures() {
+   const flashcard = document.getElementById('flashcard');
+
+   flashcard.addEventListener('touchstart', handleTouchStart, { passive: true });
+   flashcard.addEventListener('touchmove', handleTouchMove, { passive: true });
+   flashcard.addEventListener('touchend', handleTouchEnd, { passive: true });
+  }
+
+  // Handle touch start
+  function handleTouchStart(event) {
+   touchStartX = event.changedTouches[0].screenX;
+   touchStartY = event.changedTouches[0].screenY;
+  }
+
+  // Handle touch move
+  function handleTouchMove(event) {
+   touchEndX = event.changedTouches[0].screenX;
+   touchEndY = event.changedTouches[0].screenY;
+  }
+
+  // Handle touch end
+  function handleTouchEnd(event) {
+   touchEndX = event.changedTouches[0].screenX;
+   touchEndY = event.changedTouches[0].screenY;
+   handleSwipeGesture();
+  }
+
+  // Process the swipe gesture
+  function handleSwipeGesture() {
+   const deltaX = touchEndX - touchStartX;
+   const deltaY = touchEndY - touchStartY;
+
+   // Check if horizontal swipe is more significant than vertical
+   if (Math.abs(deltaX) > Math.abs(deltaY)) {
+    // Horizontal swipe detected
+    if (Math.abs(deltaX) >= minSwipeDistance) {
+     if (deltaX > 0) {
+      // Swipe right - go to previous card
+      prevCard();
+     } else {
+      // Swipe left - go to next card
+      nextCard();
+     }
+    }
+   }
+   // If vertical swipe is more significant, do nothing (allow normal scroll behavior)
   }
 
   // Change the app language
@@ -1471,6 +1544,25 @@ let texts = i18n_text[LANGUAGE] || i18n_text['English'];
    document.getElementById('editorLink').innerHTML = `<a href="https://inventwithpython.com/tsofa/editor/">${texts.createWithEditor}</a>`;
   }
 
+  // Convert newlines to br tags for HTML display, except inside <pre> tags
+  function convertNewlinesToBr(text) {
+   if (typeof text !== 'string') return text;
+
+   // Split by <pre> tags, keeping the delimiters
+   const parts = text.split(/(<pre[\s\S]*?<\/pre>)/gi);
+
+   // Process each part - only convert newlines outside of <pre> tags
+   return parts.map(part => {
+    if (part.match(/^<pre[\s\S]*?<\/pre>$/i)) {
+     // This is a <pre> block, leave it unchanged
+     return part;
+    } else {
+     // This is outside <pre>, convert newlines to <br>
+     return part.replace(/\n/g, '<br>');
+    }
+   }).join('');
+  }
+
   // Display current card
   function displayCard() {
    const cardContent = document.getElementById('cardContent');
@@ -1485,9 +1577,9 @@ let texts = i18n_text[LANGUAGE] || i18n_text['English'];
    const answerIndex = isInverted ? 0 : 1;
 
    if (showingQuestion) {
-    cardContent.innerHTML = card[questionIndex];
+    cardContent.innerHTML = convertNewlinesToBr(card[questionIndex]);
    } else {
-    cardContent.innerHTML = card[answerIndex];
+    cardContent.innerHTML = convertNewlinesToBr(card[answerIndex]);
    }
 
    // Apply alignment
@@ -1561,6 +1653,23 @@ let texts = i18n_text[LANGUAGE] || i18n_text['English'];
    cardContent.style.fontSize = currentFontSize + 'px';
   }
 
+  // Trigger emphasis animation on total count
+  function triggerTotalCountEmphasis() {
+   const totalCountSpan = document.querySelector('.total-count');
+   if (totalCountSpan) {
+    // Remove class first to allow re-triggering
+    totalCountSpan.classList.remove('emphasis');
+    // Force reflow to restart animation
+    void totalCountSpan.offsetWidth;
+    // Add the emphasis class
+    totalCountSpan.classList.add('emphasis');
+    // Remove the class after animation completes
+    setTimeout(() => {
+     totalCountSpan.classList.remove('emphasis');
+    }, 200);
+   }
+  }
+
   // Remove current card
   function removeCard() {
    if (currentCards.length === 0) return;
@@ -1589,6 +1698,9 @@ let texts = i18n_text[LANGUAGE] || i18n_text['English'];
    updateButtons();
    updateCounter();
    updateUndoButton();
+
+   // Trigger emphasis animation
+   triggerTotalCountEmphasis();
   }
 
   // Undo last card removal
@@ -1611,6 +1723,9 @@ let texts = i18n_text[LANGUAGE] || i18n_text['English'];
    updateButtons();
    updateCounter();
    updateUndoButton();
+
+   // Trigger emphasis animation
+   triggerTotalCountEmphasis();
   }
 
   // Update undo button state
@@ -1698,9 +1813,10 @@ let texts = i18n_text[LANGUAGE] || i18n_text['English'];
   // Update card counter
   function updateCounter() {
    const counter = document.getElementById('cardCounter');
-   counter.textContent = texts.cardCounter
+   const currentText = texts.cardCounter
     .replace('{current}', currentIndex + 1)
-    .replace('{total}', currentCards.length);
+    .replace('{total}', `<span class="total-count">${currentCards.length}</span>`);
+   counter.innerHTML = currentText;
   }
 
   // Keyboard event listeners
@@ -1802,10 +1918,10 @@ let texts = i18n_text[LANGUAGE] || i18n_text['English'];
     const row = document.createElement('tr');
 
     const questionCell = document.createElement('td');
-    questionCell.innerHTML = card[0]; // Always use original order
+    questionCell.innerHTML = convertNewlinesToBr(card[0]); // Always use original order
 
     const answerCell = document.createElement('td');
-    answerCell.innerHTML = card[1]; // Always use original order
+    answerCell.innerHTML = convertNewlinesToBr(card[1]); // Always use original order
 
     row.appendChild(questionCell);
     row.appendChild(answerCell);

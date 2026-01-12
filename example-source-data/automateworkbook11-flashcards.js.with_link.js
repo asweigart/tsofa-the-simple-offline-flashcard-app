@@ -1,0 +1,31 @@
+const TOPIC = "Automate the Boring Stuff Workbook, Chapter 11 - Organizing Files";
+let JUSTIFICATION = "left"; // "left", "right", or "center"
+let FLASHCARDS = [
+  ["What does shutil stand for?", "The shutil module name stands for shell utilities. Shell in this case refers to terminal or command line interfaces."],
+  ["What character does Windows use to separate folders in a filepath?", "The backslash (\\) separates folders in Windows filepaths."],
+  ["What character does macOS and Linux use to separate folders in a filepath?", "The forward slash (/) separates folders in macOS and Linux filepaths."],
+  ["Which of these are actual functions: shutil.copy(), shutil.copyfile(), shutil.copytree(), or shutil.filecopy()?", "shutil.copy(), shutil.copyfile(), and shutil.copytree() are real functions, while shutil.filecopy() is not."],
+  ["Can the shutil.move() function move files, folders, or both?", "Both files and folders can be moved by shutil.move()."],
+  ["What module is the makedirs() function in?", "The os module contains the makedirs() function."],
+  ["Is there a difference between <code>os.makedirs('eggs')</code> and <code>os.makedirs(Path('eggs'))</code>?", "No. There is no difference between os.makedirs('eggs') and os.makedirs(Path('eggs'))."],
+  ["The makedirs() function normally raises an exception if the directory it tries to make already exists. What keyword argument can suppress this exception?", "The <code>exist_ok=True</code> keyword argument."],
+  ["Before running code that deletes files, why should you first do a dry run?", "A dry run can help you verify that your code will delete the files you intend."],
+  ["What functions in the os module delete files?", "The os.unlink() and os.remove() functions delete files."],
+  ["What function in the shutil module deletes an entire folder and its contents?", "The shutil.rmtree() function deletes an entire folder and its contents."],
+  ["Do the deletion functions in the os and shutil modules delete files and folders permanently, or do they move them to the recycle bin?", "The deletion functions in the os and shutil modules delete files and folders permanently."],
+  ["What are the three things that the os.walk() function returns for each iteration of a for loop?", "The folder name, a list of subfolders, and a list of filenames."],
+  ["What argument do you pass to os.walk() to have it start from the current working directory?", "Pass <code>.</code> (or os.getcwd() or Path.cwd()) to start from the current working directory."],
+  ["Does the following code delete every file in the eggs folder and its subfolders?<br><pre>import os\nfrom pathlib import Path\nfor folder_name, subfolders, filenames in os.walk('eggs'):\n    for filename in filenames:\n        os.unlink(Path(folder_name) / filename)</pre>", "Yes. The code deletes every file. Note that it doesn't delete folders."],
+  ["Using the os.walk() function, write code for a program that prints every subfolder in an eggs folder, including the name of the folder it resides in.", "<pre>import os\n\nfor folder_name, subfolders, filenames in os.walk('eggs'):\n    for subfolder in subfolders:\n        print(f\"{folder_name}/{subfolder}\")</pre>"],
+  ["What does a .zip file contain?", "Compressed files and folders are contained in a .zip file."],
+  ["Which of the following imports Python's zip module: <code>import zipfile</code> or <code>import ZipFile</code>?", "<code>import zipfile</code> (it's case sensitive)."],
+  ["Which of the following opens a file named example.zip: <code>zipfile.ZipFile('example.zip')</code> or <code>ZipFile.zipfile('example.zip')</code>?", "<code>zipfile.ZipFile('example.zip')</code>"],
+  ["What happens if you don't pass the <code>compress_type=zipfile.ZIP_DEFLATED</code> keyword argument to the write() method?", "Without the compress_type=zipfile.ZIP_DEFLATED keyword argument, files are written without compression."],
+  ["As you increase the compression level from 0 to 9, how is the performance of the ZipFile object affected?", "As the compression level goes up, the compressed ZIP file becomes smaller in size but slower to read and write."],
+  ["What method gives you a list of the content in a ZIP file?", "The namelist() method gives you a list of the content in a ZIP file."],
+  ["Can ZIP files contain folders as well as files?", "Yes. ZIP files can contain folders as well as files."],
+  ["The getinfo() method returns an object with attributes file_size and compress_size. What do these attributes represent?", "While file_size is the original size of the file, compress_size is the compressed size of the file."],
+  ["What ZipFile method extracts the entire contents of a ZIP file to the current working directory?", "The extractall() method extracts the entire contents of a ZIP file to the current working directory."],
+  ["What ZipFile method extracts a single file from a ZIP file?", "The extract() method extracts a single file from a ZIP file."],
+  ["Say you have a file named contents.txt. Write the code to put it into a ZIP file named contents.zip at the maximum compression level.", "<pre>import zipfile\ncontents_zip = zipfile.ZipFile('contents.zip', 'w',\ncompression=zipfile.ZIP_DEFLATED, compresslevel=9)\ncontents_zip.write('contents.txt')\ncontents_zip.close()</pre>"]
+];

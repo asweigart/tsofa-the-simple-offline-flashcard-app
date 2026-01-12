@@ -1,0 +1,1970 @@
+<!DOCTYPE html>
+<html lang="en">
+<script>
+const VERSION = "1.5.0";
+const LANGUAGE = "English"; // English, Español, Français, Deutsch, Nederlands, Italiano, Português, Polski, Русский, Norsk, Svenska, 中文, हिन्दी, বাংলা, 日本語, 한국어, ไทย, العربية, Tiếng Việt, Türkçe, Tagalog, Kiswahili, فارسی, Bahasa Indonesia
+
+// ===== MODIFY YOUR FLASHCARDS HERE =====
+const TOPIC = "Automate the Boring Stuff Workbook, Chapter 6 - Lists";
+let JUSTIFICATION = "left"; // "left", "right", or "center"
+let FLASHCARDS = [
+  ["What is the first index of any list?", "0. In Python and most programming languages, 0, not 1, is the first index."],
+  ["If a variable named spam contains ['cat', 'bat', 'rat', 'hat'], what does <code>spam[3]</code> evaluate to?", "'hat'. If you thought the answer was 'rat', you forgot that the first index is 0, not 1."],
+  ["If a variable named spam contains ['cat', 'bat', 'rat', 'hat'], what does <code>spam[4]</code> evaluate to?", "This is a trick question! spam[4] would raise a \"list index out of range\" error because 3 is the last index in spam."],
+  ["Do all the values in a Python list need to be of the same data type?", "No. Python lists do not need to contain only values of one data type. This is a restriction in other programming languages, but not in Python."],
+  ["If a variable named spam contains an empty list, what happens when <code>spam[0]</code> is evaluated?", "Python raises a \"list index out of range\" error when evaluating spam[0] and spam is an empty list."],
+  ["In the expression <code>spam[3]</code>, is the [3] also a list?", "No. For spam[3], the [3] is meant to be the index 3 for the list in spam. Even though it uses square brackets, it is not itself a list."],
+  ["What negative index is equivalent to the index in <code>spam[len(spam) - 1]</code>?", "The index -1."],
+  ["What negative index is equivalent to the index in <code>spam[len(spam) - 3]</code>?", "The index -3."],
+  ["If a variable named spam contains a list, what is the difference between the statement <code>del spam[0]</code> and the statement <code>del spam</code>?", "The statement del spam[0] removes the first value in the spam list while del spam deletes the entire list."],
+  ["Determine what this program prints.<br><pre>spam = ['cat', 'dog', 'moose']\nfor i in spam:\n    print(i)</pre>", "The program prints the values in the spam list:<br>cat<br>dog<br>moose"],
+  ["Determine what this program prints.<br><pre>spam = ['cat', 'dog', 'moose']\nfor i in range(len(spam)):\n    print(i)</pre>", "The program prints the indexes of the spam list:<br>0<br>1<br>2"],
+  ["Determine what this program prints.<br><pre>spam = ['cat', 'dog', 'moose']\nfor i in range(len(spam)):\n    print(spam[i])</pre>", "Even though the program loops over the indexes of the spam list, the actual output comprises the values in the spam list:<br>cat<br>dog<br>moose"],
+  ["If an expression is using the in and not in operators, what data type does it evaluate to?", "A Boolean True or False value. For example, 'fish' in ['cat', 'dog', 'moose'] evaluates to False."],
+  ["If spam contains the list ['cat', 'dog', 'moose'] and Python runs the statement <code>a, b, c = spam</code>, what does the b variable contain?", "The variable b contains the string 'dog'. This kind of assignment is called unpacking, where the three values in ['cat', 'dog', 'moose'] are assigned to the variables a, b, and c, respectively."],
+  ["If Python runs the statement <code>a, b, c = 'cat'</code>, what does the b variable contain?", "The variable b contains the string 'a'. The string 'cat' is also a sequence, so it can be unpacked just like a list."],
+  ["Say spam contains a list value and Python runs the statement <code>for a, b in enumerate(spam):</code>. Describe the data that the a and b variables contain.", "The a variable is assigned each index of the spam list, starting at 0. The b variable is assigned that index's value."],
+  ["What does the random.choice() function return?", "The random.choice() function returns a randomly selected value from the list passed to it. For example, random.choice(['cat', 'dog']) could return either 'cat' or 'dog'."],
+  ["What does the random.shuffle() function do?", "The random.shuffle() function randomizes the order of the values in the list passed to it. For example, if spam = ['cat', 'dog', 'moose'], then random.shuffle(spam) could set spam with the value ['moose', 'cat', 'dog']. The list is modified by the function in place and the function doesn't return any values."],
+  ["If spam contains the list ['cat', 'dog', 'moose'] and Python runs <code>import random</code> and <code>random.shuffle(spam)</code>, what does the expression <code>len(spam)</code> evaluate to?", "The expression len(spam) evaluates to 3 because only the order of the values in the list has changed, not the number of values."],
+  ["What does this program print?<br><pre>spam = 100\nfor i in range(5):\n    spam += 1\nprint(spam)</pre>", "The program prints 105."],
+  ["Rewrite the following assignment statement using the equivalent augmented assignment operator.<br><code>spam = spam * 2</code>", "<code>spam *= 2</code>"],
+  ["Rewrite the following assignment statement using the equivalent augmented assignment operator.<br><code>bacon = bacon - 3</code>", "<code>bacon -= 3</code>"],
+  ["Rewrite the following assignment statement using the equivalent augmented assignment operator.<br><code>eggs = eggs + bacon * 5</code>", "<code>eggs += bacon * 5</code>"],
+  ["Rewrite the following assignment statement using the equivalent augmented assignment operator.<br><code>eggs = eggs * bacon + 5</code>", "<code>eggs *= bacon + 5</code>"],
+  ["Rewrite the following assignment statement using the equivalent augmented assignment operator.<br><code>spam = spam + 'LastName'</code>", "<code>spam += 'LastName'</code>"],
+  ["Identify the following as either a function or a method.<br><code>sort()</code>", "sort() is a list method."],
+  ["Identify the following as either a function or a method.<br><code>len()</code>", "len() is a function."],
+  ["Identify the following as either a function or a method.<br><code>append()</code>", "append() is a list method."],
+  ["Identify the following as either a function or a method.<br><code>index()</code>", "index() is a list and string method."],
+  ["Identify the following as either a function or a method.<br><code>print()</code>", "print() is a function."],
+  ["Identify the following as either a function or a method.<br><code>input()</code>", "input() is a function."],
+  ["Identify the following as either a function or a method.<br><code>reverse()</code>", "reverse() is a list method."],
+  ["Both the remove() list method and the del operator can remove items from a list value. How do they work differently?", "The remove() method removes a value by the value (for example, spam.remove('cat')) while the del operator removes a value by the index (for example, del spam[3])."],
+  ["If the spam variable contains a list, running <code>sort(spam)</code> causes an error message. Why?", "The code sort(spam) causes an error because sort() is a list method and not a function. The correct way to call it is spam.sort()."],
+  ["If the spam variable contains a list, what code would rearrange the items in spam in \"ASCIIbetical\" order?", "The code <code>spam.sort()</code> arranges the values in spam in \"ASCIIbetical\" order."],
+  ["What code could we run so that spam's contents are sorted in alphabetical order?", "The code <code>spam.sort(key=str.lower)</code> sorts a list in alphabetical order."],
+  ["Determine what gets printed.<br><pre>>>> spam = ['cat', 'dog', 'moose']\n>>> spam.sort()\n>>> print(spam)</pre>", "['cat', 'dog', 'moose'] because the list was already in \"ASCIIbetical\" order."],
+  ["Determine what gets printed.<br><pre>>>> spam = ['cat', 'dog', 'moose']\n>>> spam.sort(reverse=True)\n>>> print(spam)</pre>", "['moose', 'dog', 'cat'] because the reverse=True keyword argument makes the sort() method sort in reverse order."],
+  ["Determine what gets printed.<br><pre>>>> spam = [3, 99, 86, 42]\n>>> spam.reverse()\n>>> print(spam)</pre>", "[42, 86, 99, 3] because the reverse() list method reverses the order of values in a list."],
+  ["Answer \"Hello\" if the expression prints \"Hello\"; answer \"Nothing\" if it prints nothing.<br><code>True and print('Hello')</code>", "Hello."],
+  ["Answer \"Hello\" if the expression prints \"Hello\"; answer \"Nothing\" if it prints nothing.<br><code>False and print('Hello')</code>", "Nothing."],
+  ["Answer \"Hello\" if the expression prints \"Hello\"; answer \"Nothing\" if it prints nothing.<br><code>True or print('Hello')</code>", "Nothing."],
+  ["Answer \"Hello\" if the expression prints \"Hello\"; answer \"Nothing\" if it prints nothing.<br><code>False or print('Hello')</code>", "Hello."],
+  ["Answer \"Hello\" if the expression prints \"Hello\"; answer \"Nothing\" if it prints nothing.<br><code>print('Hello') and True</code>", "Hello."],
+  ["Answer \"Hello\" if the expression prints \"Hello\"; answer \"Nothing\" if it prints nothing.<br><code>print('Hello') and False</code>", "Hello."],
+  ["Answer \"Hello\" if the expression prints \"Hello\"; answer \"Nothing\" if it prints nothing.<br><code>print('Hello') or True</code>", "Hello."],
+  ["Answer \"Hello\" if the expression prints \"Hello\"; answer \"Nothing\" if it prints nothing.<br><code>print('Hello') or False</code>", "Hello."],
+  ["List at least two different sequence data types in Python.", "Sequence data types include lists, strings, and tuples."],
+  ["Why doesn't the expression <code>'Zophie'[1]</code> evaluate to Z if Z is the first character in the string 'Zophie'?", "Because the first index is 0, not 1. The index 1 refers to the second character in the 'Zophie' string, o."],
+  ["What does the expression <code>'Zophie'[-1]</code> evaluate to?", "The expression 'Zophie'[-1] evaluates to the last index in the string, e."],
+  ["What does the expression <code>'Zophie'[9999]</code> evaluate to?", "This is a trick question! 'Zophie'[9999] results in an IndexError: string index out of range because there is no index 9999 in a string of only six characters."],
+  ["Determine what gets printed.<br><pre>>>> for i in 'cat':\n...     print(i)\n...</pre>", "The code prints each character of the string separately:<br>c<br>a<br>t"],
+  ["Determine what gets printed.<br><pre>>>> for i in [['cat', 'dog'], 'moose']:\n...     print(i)\n...</pre>", "The code prints the first value, the list ['cat', 'dog'], and then the second value, the string 'moose':<br>['cat', 'dog']<br>moose"],
+  ["Determine what gets printed.<br><pre>>>> for i in 'moose'[0:3]:\n...     print(i)\n...</pre>", "Because 'moose'[0:3] evaluates to the string 'moo', the code prints:<br>m<br>o<br>o"],
+  ["Aside from the square brackets and parentheses, what is the main difference between lists and tuples?", "The main difference between lists and tuples is that the contents of a tuple cannot be modified but the contents of a list can be."],
+  ["Write the code that obtains a list value from the tuple ('cat', 'dog').", "<code>list(('cat', 'dog'))</code> returns a list form of the tuple."],
+  ["Write the code that obtains a tuple value from the list ['cat', 'dog'].", "<code>tuple(['cat', 'dog'])</code> returns a tuple form of the list."],
+  ["What happens if you run this code?<br><pre>spam = ('cat', 'dog', 'moose')\nspam[2] = 'cow'</pre>", "You get the error message TypeError: 'tuple' object does not support item assignment because the contents of tuples cannot be modified."],
+  ["In Python, variables never contain values. What do they contain?", "Technically, Python variables always contain references to values rather than the values themselves."],
+  ["In Python, the = assignment operator never copies values. What does it copy?", "In Python, the = assignment operator always copies references to values rather than the values themselves."],
+  ["How many copies of the list value exist in the computer's memory when you run the following code?<br><pre>a = ['cat', 'dog', 'moose']\nb = a\nc = a</pre>", "There is only one list value in the computer's memory; the a, b, and c variables all contain copies of the same reference to this one list value."],
+  ["How many copies of the list value exist in the computer's memory when you run the following code?<br><pre>import copy\na = ['cat', 'dog', 'moose']\nb = copy.copy(a)\nc = copy.copy(a)</pre>", "There are three separate list values in the computer's memory, as the copy() method creates a copy of the list instead of just copying a reference to the list."],
+  ["Which method would you call to copy the value [['cat', 'dog'], 'moose']: the copy.copy() function or the copy.deepcopy() function?", "Use deepcopy() to make a copy of [['cat', 'dog'], 'moose'], as it is a list that contains other list values."]
+];
+
+// Option 2: CSV string format (uncomment to use)
+/*
+let FLASHCARDS = `"What is the capital of France?","Paris"
+"What is 2 + 2?","4"
+"What is the largest planet in our solar system?","<b>Jupiter</b><br><i>It has a mass of 1.898 × 10²⁷ kg</i>"
+"What year did World War II end?","1945"
+"Who wrote 'Romeo and Juliet'?","William Shakespeare"
+"What is HTML?","<b>HyperText Markup Language</b><br>The standard markup language for creating web pages"`;
+*/
+// ========================================
+
+// Internationalization text
+const i18n_text = {
+English: {
+title: "TSOFA - The Simple, Offline Flashcard App",
+byAuthor: "TSOFA - The Simple, Offline Flashcard App by Al Sweigart",
+topic: "Topic",
+cardCounter: "Card {current} of {total}",
+noFlashcards: "No flashcards available",
+first: "First",
+previous: "Previous (left)",
+flip: "Flip (space)",
+next: "Next (right)",
+last: "Last",
+shuffle: "Shuffle Flashcards",
+swapQA: "Swap Question & Answer",
+swapQALabel: "Q↔A",
+removeCard: "Remove Current Card",
+undoRemove: "Undo Last Remove",
+decreaseFont: "Decrease font size",
+increaseFont: "Increase font size",
+leftJustify: "Left Justify",
+rightJustify: "Right Justify",
+center: "Center",
+startTimer: "Start Timer",
+pauseTimer: "Pause Timer",
+resetTimer: "Reset Timer",
+print: "Print",
+download: "Download",
+language: "Language",
+keyboardShortcuts: "Keyboard shortcuts: space to flip card, left/right to navigate cards",
+printHeader: "TSOFA Flashcards",
+createWithEditor: "Create flashcards with the TSOFA editor."
+},
+Español: {
+title: "TSOFA - La Aplicación Simple de Tarjetas Didácticas Sin Conexión",
+byAuthor: "TSOFA - La Aplicación Simple de Tarjetas Didácticas Sin Conexión por Al Sweigart",
+topic: "Tema",
+cardCounter: "Tarjeta {current} de {total}",
+noFlashcards: "No hay tarjetas disponibles",
+first: "Primera",
+previous: "Anterior (izquierda)",
+flip: "Voltear (espacio)",
+next: "Siguiente (derecha)",
+last: "Última",
+shuffle: "Mezclar Tarjetas",
+swapQA: "Intercambiar Pregunta y Respuesta",
+swapQALabel: "P↔R",
+removeCard: "Eliminar Tarjeta Actual",
+undoRemove: "Deshacer Eliminación",
+decreaseFont: "Disminuir tamaño de fuente",
+increaseFont: "Aumentar tamaño de fuente",
+leftJustify: "Alinear a la Izquierda",
+rightJustify: "Alinear a la Derecha",
+center: "Centrar",
+startTimer: "Iniciar Cronómetro",
+pauseTimer: "Pausar Cronómetro",
+resetTimer: "Reiniciar Cronómetro",
+print: "Imprimir",
+download: "Descargar",
+language: "Idioma",
+keyboardShortcuts: "Atajos de teclado: espacio para voltear, izquierda/derecha para navegar",
+printHeader: "Tarjetas TSOFA",
+createWithEditor: "Crea tarjetas con el editor TSOFA."
+},
+Français: {
+title: "TSOFA - L'Application Simple de Cartes Flash Hors Ligne",
+byAuthor: "TSOFA - L'Application Simple de Cartes Flash Hors Ligne par Al Sweigart",
+topic: "Sujet",
+cardCounter: "Carte {current} sur {total}",
+noFlashcards: "Aucune carte disponible",
+first: "Première",
+previous: "Précédente (gauche)",
+flip: "Retourner (espace)",
+next: "Suivante (droite)",
+last: "Dernière",
+shuffle: "Mélanger les Cartes",
+swapQA: "Échanger Question et Réponse",
+swapQALabel: "Q↔R",
+removeCard: "Supprimer la Carte Actuelle",
+undoRemove: "Annuler la Suppression",
+decreaseFont: "Diminuer la taille de police",
+increaseFont: "Augmenter la taille de police",
+leftJustify: "Aligner à Gauche",
+rightJustify: "Aligner à Droite",
+center: "Centrer",
+startTimer: "Démarrer le Chronomètre",
+pauseTimer: "Pause Chronomètre",
+resetTimer: "Réinitialiser le Chronomètre",
+print: "Imprimer",
+download: "Télécharger",
+language: "Langue",
+keyboardShortcuts: "Raccourcis clavier: espace pour retourner, gauche/droite pour naviguer",
+printHeader: "Cartes Flash TSOFA",
+createWithEditor: "Créez des cartes flash avec l'éditeur TSOFA."
+},
+Deutsch: {
+title: "TSOFA - Die Einfache Offline-Lernkarten-App",
+byAuthor: "TSOFA - Die Einfache Offline-Lernkarten-App von Al Sweigart",
+topic: "Thema",
+cardCounter: "Karte {current} von {total}",
+noFlashcards: "Keine Lernkarten verfügbar",
+first: "Erste",
+previous: "Zurück (links)",
+flip: "Umdrehen (Leertaste)",
+next: "Weiter (rechts)",
+last: "Letzte",
+shuffle: "Karten Mischen",
+swapQA: "Frage und Antwort Tauschen",
+swapQALabel: "F↔A",
+removeCard: "Aktuelle Karte Entfernen",
+undoRemove: "Löschen Rückgängig",
+decreaseFont: "Schriftgröße verkleinern",
+increaseFont: "Schriftgröße vergrößern",
+leftJustify: "Linksbündig",
+rightJustify: "Rechtsbündig",
+center: "Zentrieren",
+startTimer: "Timer Starten",
+pauseTimer: "Timer Pausieren",
+resetTimer: "Timer Zurücksetzen",
+print: "Drucken",
+download: "Herunterladen",
+language: "Sprache",
+keyboardShortcuts: "Tastenkürzel: Leertaste zum Umdrehen, links/rechts zum Navigieren",
+printHeader: "TSOFA Lernkarten",
+createWithEditor: "Erstellen Sie Lernkarten mit dem TSOFA-Editor."
+},
+Nederlands: {
+title: "TSOFA - De Eenvoudige Offline Flashcard App",
+byAuthor: "TSOFA - De Eenvoudige Offline Flashcard App door Al Sweigart",
+topic: "Onderwerp",
+cardCounter: "Kaart {current} van {total}",
+noFlashcards: "Geen flashcards beschikbaar",
+first: "Eerste",
+previous: "Vorige (links)",
+flip: "Omdraaien (spatie)",
+next: "Volgende (rechts)",
+last: "Laatste",
+shuffle: "Kaarten Schudden",
+swapQA: "Vraag en Antwoord Verwisselen",
+swapQALabel: "V↔A",
+removeCard: "Huidige Kaart Verwijderen",
+undoRemove: "Verwijderen Ongedaan Maken",
+decreaseFont: "Lettergrootte verkleinen",
+increaseFont: "Lettergrootte vergroten",
+leftJustify: "Links Uitlijnen",
+rightJustify: "Rechts Uitlijnen",
+center: "Centreren",
+startTimer: "Timer Starten",
+pauseTimer: "Timer Pauzeren",
+resetTimer: "Timer Resetten",
+print: "Afdrukken",
+download: "Downloaden",
+language: "Taal",
+keyboardShortcuts: "Sneltoetsen: spatie om om te draaien, links/rechts om te navigeren",
+printHeader: "TSOFA Flashcards",
+createWithEditor: "Maak flashcards met de TSOFA-editor."
+},
+Italiano: {
+title: "TSOFA - L'App Semplice per Flashcard Offline",
+byAuthor: "TSOFA - L'App Semplice per Flashcard Offline di Al Sweigart",
+topic: "Argomento",
+cardCounter: "Carta {current} di {total}",
+noFlashcards: "Nessuna flashcard disponibile",
+first: "Prima",
+previous: "Precedente (sinistra)",
+flip: "Gira (spazio)",
+next: "Successiva (destra)",
+last: "Ultima",
+shuffle: "Mescola le Carte",
+swapQA: "Scambia Domanda e Risposta",
+swapQALabel: "D↔R",
+removeCard: "Rimuovi Carta Corrente",
+undoRemove: "Annulla Rimozione",
+decreaseFont: "Diminuisci dimensione carattere",
+increaseFont: "Aumenta dimensione carattere",
+leftJustify: "Allinea a Sinistra",
+rightJustify: "Allinea a Destra",
+center: "Centra",
+startTimer: "Avvia Timer",
+pauseTimer: "Pausa Timer",
+resetTimer: "Ripristina Timer",
+print: "Stampa",
+download: "Scarica",
+language: "Lingua",
+keyboardShortcuts: "Scorciatoie da tastiera: spazio per girare, sinistra/destra per navigare",
+printHeader: "Flashcard TSOFA",
+createWithEditor: "Crea flashcard con l'editor TSOFA."
+},
+Português: {
+title: "TSOFA - O Aplicativo Simples de Flashcards Offline",
+byAuthor: "TSOFA - O Aplicativo Simples de Flashcards Offline por Al Sweigart",
+topic: "Tópico",
+cardCounter: "Cartão {current} de {total}",
+noFlashcards: "Nenhum flashcard disponível",
+first: "Primeiro",
+previous: "Anterior (esquerda)",
+flip: "Virar (espaço)",
+next: "Próximo (direita)",
+last: "Último",
+shuffle: "Embaralhar Cartões",
+swapQA: "Trocar Pergunta e Resposta",
+swapQALabel: "P↔R",
+removeCard: "Remover Cartão Atual",
+undoRemove: "Desfazer Remoção",
+decreaseFont: "Diminuir tamanho da fonte",
+increaseFont: "Aumentar tamanho da fonte",
+leftJustify: "Alinhar à Esquerda",
+rightJustify: "Alinhar à Direita",
+center: "Centralizar",
+startTimer: "Iniciar Cronômetro",
+pauseTimer: "Pausar Cronômetro",
+resetTimer: "Redefinir Cronômetro",
+print: "Imprimir",
+download: "Baixar",
+language: "Idioma",
+keyboardShortcuts: "Atalhos de teclado: espaço para virar, esquerda/direita para navegar",
+printHeader: "Flashcards TSOFA",
+createWithEditor: "Crie flashcards com o editor TSOFA."
+},
+Polski: {
+title: "TSOFA - Prosta Aplikacja Fiszek Offline",
+byAuthor: "TSOFA - Prosta Aplikacja Fiszek Offline autorstwa Al Sweigart",
+topic: "Temat",
+cardCounter: "Karta {current} z {total}",
+noFlashcards: "Brak dostępnych fiszek",
+first: "Pierwsza",
+previous: "Poprzednia (lewo)",
+flip: "Odwróć (spacja)",
+next: "Następna (prawo)",
+last: "Ostatnia",
+shuffle: "Przetasuj Karty",
+swapQA: "Zamień Pytanie i Odpowiedź",
+swapQALabel: "P↔O",
+removeCard: "Usuń Bieżącą Kartę",
+undoRemove: "Cofnij Usunięcie",
+decreaseFont: "Zmniejsz rozmiar czcionki",
+increaseFont: "Zwiększ rozmiar czcionki",
+leftJustify: "Wyrównaj do Lewej",
+rightJustify: "Wyrównaj do Prawej",
+center: "Wyśrodkuj",
+startTimer: "Start Stopera",
+pauseTimer: "Pauza Stopera",
+resetTimer: "Resetuj Stoper",
+print: "Drukuj",
+download: "Pobierz",
+language: "Język",
+keyboardShortcuts: "Skróty klawiszowe: spacja aby odwrócić, lewo/prawo aby nawigować",
+printHeader: "Fiszki TSOFA",
+createWithEditor: "Twórz fiszki za pomocą edytora TSOFA."
+},
+Русский: {
+title: "TSOFA - Простое Офлайн Приложение для Карточек",
+byAuthor: "TSOFA - Простое Офлайн Приложение для Карточек от Al Sweigart",
+topic: "Тема",
+cardCounter: "Карточка {current} из {total}",
+noFlashcards: "Нет доступных карточек",
+first: "Первая",
+previous: "Предыдущая (влево)",
+flip: "Перевернуть (пробел)",
+next: "Следующая (вправо)",
+last: "Последняя",
+shuffle: "Перемешать Карточки",
+swapQA: "Поменять Вопрос и Ответ",
+swapQALabel: "В↔О",
+removeCard: "Удалить Текущую Карточку",
+undoRemove: "Отменить Удаление",
+decreaseFont: "Уменьшить размер шрифта",
+increaseFont: "Увеличить размер шрифта",
+leftJustify: "Выровнять по Левому Краю",
+rightJustify: "Выровнять по Правому Краю",
+center: "По Центру",
+startTimer: "Запустить Таймер",
+pauseTimer: "Пауза Таймер",
+resetTimer: "Сбросить Таймер",
+print: "Печать",
+download: "Скачать",
+language: "Язык",
+keyboardShortcuts: "Горячие клавиши: пробел для переворота, влево/вправо для навигации",
+printHeader: "Карточки TSOFA",
+createWithEditor: "Создавайте карточки с помощью редактора TSOFA."
+},
+Norsk: {
+title: "TSOFA - Den Enkle Offline Flashkort-Appen",
+byAuthor: "TSOFA - Den Enkle Offline Flashkort-Appen av Al Sweigart",
+topic: "Emne",
+cardCounter: "Kort {current} av {total}",
+noFlashcards: "Ingen flashkort tilgjengelig",
+first: "Første",
+previous: "Forrige (venstre)",
+flip: "Snu (mellomrom)",
+next: "Neste (høyre)",
+last: "Siste",
+shuffle: "Stokk Kortene",
+swapQA: "Bytt Spørsmål og Svar",
+swapQALabel: "S↔S",
+removeCard: "Fjern Gjeldende Kort",
+undoRemove: "Angre Fjerning",
+decreaseFont: "Reduser skriftstørrelse",
+increaseFont: "Øk skriftstørrelse",
+leftJustify: "Venstrejuster",
+rightJustify: "Høyrejuster",
+center: "Sentrer",
+startTimer: "Start Tidtaker",
+pauseTimer: "Pause Tidtaker",
+resetTimer: "Tilbakestill Tidtaker",
+print: "Skriv ut",
+download: "Last ned",
+language: "Språk",
+keyboardShortcuts: "Tastatursnarveier: mellomrom for å snu, venstre/høyre for å navigere",
+printHeader: "TSOFA Flashkort",
+createWithEditor: "Lag flashkort med TSOFA-editoren."
+},
+Svenska: {
+title: "TSOFA - Den Enkla Offline Flashkort-Appen",
+byAuthor: "TSOFA - Den Enkla Offline Flashkort-Appen av Al Sweigart",
+topic: "Ämne",
+cardCounter: "Kort {current} av {total}",
+noFlashcards: "Inga flashkort tillgängliga",
+first: "Första",
+previous: "Föregående (vänster)",
+flip: "Vänd (mellanslag)",
+next: "Nästa (höger)",
+last: "Sista",
+shuffle: "Blanda Korten",
+swapQA: "Byt Fråga och Svar",
+swapQALabel: "F↔S",
+removeCard: "Ta Bort Nuvarande Kort",
+undoRemove: "Ångra Borttagning",
+decreaseFont: "Minska teckenstorlek",
+increaseFont: "Öka teckenstorlek",
+leftJustify: "Vänsterjustera",
+rightJustify: "Högerjustera",
+center: "Centrera",
+startTimer: "Starta Timer",
+pauseTimer: "Pausa Timer",
+resetTimer: "Återställ Timer",
+print: "Skriv ut",
+download: "Ladda ner",
+language: "Språk",
+keyboardShortcuts: "Tangentbordsgenvägar: mellanslag för att vända, vänster/höger för att navigera",
+printHeader: "TSOFA Flashkort",
+createWithEditor: "Skapa flashkort med TSOFA-editorn."
+},
+中文: {
+title: "TSOFA - 简单离线闪卡应用",
+byAuthor: "TSOFA - 简单离线闪卡应用 作者：Al Sweigart",
+topic: "主题",
+cardCounter: "卡片 {current} / {total}",
+noFlashcards: "没有可用的闪卡",
+first: "第一张",
+previous: "上一张（左）",
+flip: "翻转（空格）",
+next: "下一张（右）",
+last: "最后一张",
+shuffle: "洗牌",
+swapQA: "交换问题和答案",
+swapQALabel: "问↔答",
+removeCard: "删除当前卡片",
+undoRemove: "撤销删除",
+decreaseFont: "减小字体",
+increaseFont: "增大字体",
+leftJustify: "左对齐",
+rightJustify: "右对齐",
+center: "居中",
+startTimer: "开始计时",
+pauseTimer: "暂停计时",
+resetTimer: "重置计时器",
+print: "打印",
+download: "下载",
+language: "语言",
+keyboardShortcuts: "键盘快捷键：空格键翻转，左/右键导航",
+printHeader: "TSOFA 闪卡",
+createWithEditor: "使用 TSOFA 编辑器创建闪卡。"
+},
+हिन्दी: {
+title: "TSOFA - सरल ऑफ़लाइन फ्लैशकार्ड ऐप",
+byAuthor: "TSOFA - सरल ऑफ़लाइन फ्लैशकार्ड ऐप - Al Sweigart द्वारा",
+topic: "विषय",
+cardCounter: "कार्ड {current} / {total}",
+noFlashcards: "कोई फ्लैशकार्ड उपलब्ध नहीं",
+first: "पहला",
+previous: "पिछला (बाएं)",
+flip: "पलटें (स्पेस)",
+next: "अगला (दाएं)",
+last: "अंतिम",
+shuffle: "फेरबदल करें",
+swapQA: "प्रश्न और उत्तर बदलें",
+swapQALabel: "प्र↔उ",
+removeCard: "वर्तमान कार्ड हटाएं",
+undoRemove: "हटाना रद्द करें",
+decreaseFont: "फ़ॉन्ट आकार घटाएं",
+increaseFont: "फ़ॉन्ट आकार बढ़ाएं",
+leftJustify: "बाएं संरेखित करें",
+rightJustify: "दाएं संरेखित करें",
+center: "केंद्र में",
+startTimer: "टाइमर शुरू करें",
+pauseTimer: "टाइमर रोकें",
+resetTimer: "टाइमर रीसेट करें",
+print: "प्रिंट",
+download: "डाउनलोड",
+language: "भाषा",
+keyboardShortcuts: "कीबोर्ड शॉर्टकट: पलटने के लिए स्पेस, नेविगेट करने के लिए बाएं/दाएं",
+printHeader: "TSOFA फ्लैशकार्ड",
+createWithEditor: "TSOFA संपादक के साथ फ्लैशकार्ड बनाएं।"
+},
+বাংলা: {
+title: "TSOFA - সহজ অফলাইন ফ্ল্যাশকার্ড অ্যাপ",
+byAuthor: "TSOFA - সহজ অফলাইন ফ্ল্যাশকার্ড অ্যাপ - Al Sweigart দ্বারা",
+topic: "বিষয়",
+cardCounter: "কার্ড {current} / {total}",
+noFlashcards: "কোন ফ্ল্যাশকার্ড উপলব্ধ নেই",
+first: "প্রথম",
+previous: "পূর্ববর্তী (বাম)",
+flip: "উল্টান (স্পেস)",
+next: "পরবর্তী (ডান)",
+last: "শেষ",
+shuffle: "এলোমেলো করুন",
+swapQA: "প্রশ্ন ও উত্তর অদলবদল",
+swapQALabel: "প্র↔উ",
+removeCard: "বর্তমান কার্ড সরান",
+undoRemove: "সরানো বাতিল করুন",
+decreaseFont: "ফন্টের আকার কমান",
+increaseFont: "ফন্টের আকার বাড়ান",
+leftJustify: "বাম সারিবদ্ধ",
+rightJustify: "ডান সারিবদ্ধ",
+center: "কেন্দ্র",
+startTimer: "টাইমার শুরু",
+pauseTimer: "টাইমার বিরতি",
+resetTimer: "টাইমার রিসেট",
+print: "প্রিন্ট",
+download: "ডাউনলোড",
+language: "ভাষা",
+keyboardShortcuts: "কীবোর্ড শর্টকাট: উল্টাতে স্পেস, নেভিগেট করতে বাম/ডান",
+printHeader: "TSOFA ফ্ল্যাশকার্ড",
+createWithEditor: "TSOFA সম্পাদক দিয়ে ফ্ল্যাশকার্ড তৈরি করুন।"
+},
+日本語: {
+title: "TSOFA - シンプルなオフラインフラッシュカードアプリ",
+byAuthor: "TSOFA - シンプルなオフラインフラッシュカードアプリ 作者：Al Sweigart",
+topic: "トピック",
+cardCounter: "カード {current} / {total}",
+noFlashcards: "利用可能なフラッシュカードがありません",
+first: "最初",
+previous: "前へ（左）",
+flip: "裏返す（スペース）",
+next: "次へ（右）",
+last: "最後",
+shuffle: "シャッフル",
+swapQA: "質問と答えを入れ替え",
+swapQALabel: "質↔答",
+removeCard: "現在のカードを削除",
+undoRemove: "削除を元に戻す",
+decreaseFont: "フォントサイズを小さく",
+increaseFont: "フォントサイズを大きく",
+leftJustify: "左揃え",
+rightJustify: "右揃え",
+center: "中央揃え",
+startTimer: "タイマー開始",
+pauseTimer: "タイマー一時停止",
+resetTimer: "タイマーリセット",
+print: "印刷",
+download: "ダウンロード",
+language: "言語",
+keyboardShortcuts: "キーボードショートカット：スペースで裏返す、左/右で移動",
+printHeader: "TSOFA フラッシュカード",
+createWithEditor: "TSOFAエディタでフラッシュカードを作成する。"
+},
+한국어: {
+title: "TSOFA - 간단한 오프라인 플래시카드 앱",
+byAuthor: "TSOFA - 간단한 오프라인 플래시카드 앱 제작자: Al Sweigart",
+topic: "주제",
+cardCounter: "카드 {current} / {total}",
+noFlashcards: "사용 가능한 플래시카드가 없습니다",
+first: "처음",
+previous: "이전 (왼쪽)",
+flip: "뒤집기 (스페이스)",
+next: "다음 (오른쪽)",
+last: "마지막",
+shuffle: "섞기",
+swapQA: "질문과 답변 바꾸기",
+swapQALabel: "질↔답",
+removeCard: "현재 카드 제거",
+undoRemove: "제거 취소",
+decreaseFont: "글꼴 크기 줄이기",
+increaseFont: "글꼴 크기 늘리기",
+leftJustify: "왼쪽 정렬",
+rightJustify: "오른쪽 정렬",
+center: "가운데 정렬",
+startTimer: "타이머 시작",
+pauseTimer: "타이머 일시정지",
+resetTimer: "타이머 재설정",
+print: "인쇄",
+download: "다운로드",
+language: "언어",
+keyboardShortcuts: "키보드 단축키: 스페이스로 뒤집기, 왼쪽/오른쪽으로 이동",
+printHeader: "TSOFA 플래시카드",
+createWithEditor: "TSOFA 편집기로 플래시카드를 만드세요."
+},
+ไทย: {
+title: "TSOFA - แอปฟลัชการ์ดออฟไลน์ที่เรียบง่าย",
+byAuthor: "TSOFA - แอปฟลัชการ์ดออฟไลน์ที่เรียบง่าย โดย Al Sweigart",
+topic: "หัวข้อ",
+cardCounter: "การ์ด {current} จาก {total}",
+noFlashcards: "ไม่มีฟลัชการ์ด",
+first: "แรก",
+previous: "ก่อนหน้า (ซ้าย)",
+flip: "พลิก (สเปซบาร์)",
+next: "ถัดไป (ขวา)",
+last: "สุดท้าย",
+shuffle: "สับเปลี่ยน",
+swapQA: "สลับคำถามและคำตอบ",
+swapQALabel: "ถ↔ต",
+removeCard: "ลบการ์ดปัจจุบัน",
+undoRemove: "ยกเลิกการลบ",
+decreaseFont: "ลดขนาดตัวอักษร",
+increaseFont: "เพิ่มขนาดตัวอักษร",
+leftJustify: "ชิดซ้าย",
+rightJustify: "ชิดขวา",
+center: "กึ่งกลาง",
+startTimer: "เริ่มจับเวลา",
+pauseTimer: "หยุดจับเวลา",
+resetTimer: "รีเซ็ตเวลา",
+print: "พิมพ์",
+download: "ดาวน์โหลด",
+language: "ภาษา",
+keyboardShortcuts: "ปุ่มลัด: สเปซบาร์เพื่อพลิก, ซ้าย/ขวาเพื่อนำทาง",
+printHeader: "ฟลัชการ์ด TSOFA",
+createWithEditor: "สร้างฟลัชการ์ดด้วยตัวแก้ไข TSOFA"
+},
+العربية: {
+title: "TSOFA - تطبيق البطاقات التعليمية البسيط دون اتصال",
+byAuthor: "TSOFA - تطبيق البطاقات التعليمية البسيط دون اتصال بواسطة Al Sweigart",
+topic: "الموضوع",
+cardCounter: "البطاقة {current} من {total}",
+noFlashcards: "لا توجد بطاقات تعليمية متاحة",
+first: "الأولى",
+previous: "السابقة (يسار)",
+flip: "اقلب (مسافة)",
+next: "التالية (يمين)",
+last: "الأخيرة",
+shuffle: "خلط البطاقات",
+swapQA: "تبديل السؤال والجواب",
+swapQALabel: "س↔ج",
+removeCard: "إزالة البطاقة الحالية",
+undoRemove: "التراجع عن الإزالة",
+decreaseFont: "تصغير حجم الخط",
+increaseFont: "تكبير حجم الخط",
+leftJustify: "محاذاة لليسار",
+rightJustify: "محاذاة لليمين",
+center: "توسيط",
+startTimer: "بدء المؤقت",
+pauseTimer: "إيقاف المؤقت",
+resetTimer: "إعادة تعيين المؤقت",
+print: "طباعة",
+download: "تحميل",
+language: "اللغة",
+keyboardShortcuts: "اختصارات لوحة المفاتيح: مسافة للقلب، يسار/يمين للتنقل",
+printHeader: "بطاقات TSOFA التعليمية",
+createWithEditor: "أنشئ البطاقات التعليمية باستخدام محرر TSOFA."
+},
+"Tiếng Việt": {
+title: "TSOFA - Ứng Dụng Flashcard Ngoại Tuyến Đơn Giản",
+byAuthor: "TSOFA - Ứng Dụng Flashcard Ngoại Tuyến Đơn Giản bởi Al Sweigart",
+topic: "Chủ đề",
+cardCounter: "Thẻ {current} / {total}",
+noFlashcards: "Không có flashcard nào",
+first: "Đầu tiên",
+previous: "Trước (trái)",
+flip: "Lật (space)",
+next: "Tiếp (phải)",
+last: "Cuối cùng",
+shuffle: "Xáo trộn",
+swapQA: "Đổi Câu hỏi và Câu trả lời",
+swapQALabel: "H↔Đ",
+removeCard: "Xóa thẻ hiện tại",
+undoRemove: "Hoàn tác xóa",
+decreaseFont: "Giảm cỡ chữ",
+increaseFont: "Tăng cỡ chữ",
+leftJustify: "Căn trái",
+rightJustify: "Căn phải",
+center: "Căn giữa",
+startTimer: "Bắt đầu hẹn giờ",
+pauseTimer: "Tạm dừng hẹn giờ",
+resetTimer: "Đặt lại hẹn giờ",
+print: "In",
+download: "Tải xuống",
+language: "Ngôn ngữ",
+keyboardShortcuts: "Phím tắt: space để lật, trái/phải để điều hướng",
+printHeader: "Flashcard TSOFA",
+createWithEditor: "Tạo flashcard với trình biên tập TSOFA."
+},
+Türkçe: {
+title: "TSOFA - Basit Çevrimdışı Flashcard Uygulaması",
+byAuthor: "TSOFA - Basit Çevrimdışı Flashcard Uygulaması - Al Sweigart",
+topic: "Konu",
+cardCounter: "Kart {current} / {total}",
+noFlashcards: "Flashcard yok",
+first: "İlk",
+previous: "Önceki (sol)",
+flip: "Çevir (boşluk)",
+next: "Sonraki (sağ)",
+last: "Son",
+shuffle: "Karıştır",
+swapQA: "Soru ve Cevabı Değiştir",
+swapQALabel: "S↔C",
+removeCard: "Mevcut Kartı Kaldır",
+undoRemove: "Kaldırmayı Geri Al",
+decreaseFont: "Yazı boyutunu küçült",
+increaseFont: "Yazı boyutunu büyüt",
+leftJustify: "Sola Hizala",
+rightJustify: "Sağa Hizala",
+center: "Ortala",
+startTimer: "Zamanlayıcıyı Başlat",
+pauseTimer: "Zamanlayıcıyı Duraklat",
+resetTimer: "Zamanlayıcıyı Sıfırla",
+print: "Yazdır",
+download: "İndir",
+language: "Dil",
+keyboardShortcuts: "Klavye kısayolları: çevirmek için boşluk, gezinmek için sol/sağ",
+printHeader: "TSOFA Flashcardlar",
+createWithEditor: "TSOFA editörü ile flashcard oluşturun."
+},
+Tagalog: {
+title: "TSOFA - Ang Simpleng Offline Flashcard App",
+byAuthor: "TSOFA - Ang Simpleng Offline Flashcard App ni Al Sweigart",
+topic: "Paksa",
+cardCounter: "Card {current} / {total}",
+noFlashcards: "Walang flashcard",
+first: "Una",
+previous: "Nakaraan (kaliwa)",
+flip: "Baliktarin (space)",
+next: "Susunod (kanan)",
+last: "Huli",
+shuffle: "Paghaluin",
+swapQA: "Palitan ang Tanong at Sagot",
+swapQALabel: "T↔S",
+removeCard: "Tanggalin ang Kasalukuyang Card",
+undoRemove: "I-undo ang Pagtanggal",
+decreaseFont: "Paliitin ang font",
+increaseFont: "Palakihin ang font",
+leftJustify: "I-align sa Kaliwa",
+rightJustify: "I-align sa Kanan",
+center: "Gitna",
+startTimer: "Simulan ang Timer",
+pauseTimer: "I-pause ang Timer",
+resetTimer: "I-reset ang Timer",
+print: "I-print",
+download: "I-download",
+language: "Wika",
+keyboardShortcuts: "Keyboard shortcuts: space para baliktarin, kaliwa/kanan para mag-navigate",
+printHeader: "TSOFA Flashcards",
+createWithEditor: "Gumawa ng flashcards gamit ang TSOFA editor."
+},
+Kiswahili: {
+title: "TSOFA - Programu Rahisi ya Kadi za Kujifunza Nje ya Mtandao",
+byAuthor: "TSOFA - Programu Rahisi ya Kadi za Kujifunza Nje ya Mtandao na Al Sweigart",
+topic: "Mada",
+cardCounter: "Kadi {current} / {total}",
+noFlashcards: "Hakuna kadi za kujifunza",
+first: "Ya kwanza",
+previous: "Iliyotangulia (kushoto)",
+flip: "Pindua (nafasi)",
+next: "Ifuatayo (kulia)",
+last: "Ya mwisho",
+shuffle: "Changanya",
+swapQA: "Badilisha Swali na Jibu",
+swapQALabel: "S↔J",
+removeCard: "Ondoa Kadi ya Sasa",
+undoRemove: "Rudisha Kuondoa",
+decreaseFont: "Punguza ukubwa wa herufi",
+increaseFont: "Ongeza ukubwa wa herufi",
+leftJustify: "Pangilia Kushoto",
+rightJustify: "Pangilia Kulia",
+center: "Katikati",
+startTimer: "Anza Kipima muda",
+pauseTimer: "Simamisha Kipima muda",
+resetTimer: "Weka upya Kipima muda",
+print: "Chapisha",
+download: "Pakua",
+language: "Lugha",
+keyboardShortcuts: "Njia za mkato: nafasi kupindua, kushoto/kulia kuelekeza",
+printHeader: "Kadi za Kujifunza za TSOFA",
+createWithEditor: "Unda kadi za kujifunza kwa kutumia kihariri cha TSOFA."
+},
+فارسی: {
+title: "TSOFA - برنامه ساده فلش کارت آفلاین",
+byAuthor: "TSOFA - برنامه ساده فلش کارت آفلاین توسط Al Sweigart",
+topic: "موضوع",
+cardCounter: "کارت {current} از {total}",
+noFlashcards: "فلش کارتی موجود نیست",
+first: "اول",
+previous: "قبلی (چپ)",
+flip: "برگرداندن (فاصله)",
+next: "بعدی (راست)",
+last: "آخر",
+shuffle: "مخلوط کردن",
+swapQA: "تعویض سوال و جواب",
+swapQALabel: "س↔ج",
+removeCard: "حذف کارت فعلی",
+undoRemove: "لغو حذف",
+decreaseFont: "کاهش اندازه فونت",
+increaseFont: "افزایش اندازه فونت",
+leftJustify: "تراز چپ",
+rightJustify: "تراز راست",
+center: "وسط",
+startTimer: "شروع تایمر",
+pauseTimer: "توقف تایمر",
+resetTimer: "بازنشانی تایمر",
+print: "چاپ",
+download: "دانلود",
+language: "زبان",
+keyboardShortcuts: "میانبرهای صفحه کلید: فاصله برای برگرداندن، چپ/راست برای پیمایش",
+printHeader: "فلش کارت‌های TSOFA",
+createWithEditor: "فلش کارت‌ها را با ویرایشگر TSOFA بسازید."
+},
+"Bahasa Indonesia": {
+title: "TSOFA - Aplikasi Flashcard Offline Sederhana",
+byAuthor: "TSOFA - Aplikasi Flashcard Offline Sederhana oleh Al Sweigart",
+topic: "Topik",
+cardCounter: "Kartu {current} dari {total}",
+noFlashcards: "Tidak ada flashcard",
+first: "Pertama",
+previous: "Sebelumnya (kiri)",
+flip: "Balik (spasi)",
+next: "Berikutnya (kanan)",
+last: "Terakhir",
+shuffle: "Acak Kartu",
+swapQA: "Tukar Pertanyaan & Jawaban",
+swapQALabel: "P↔J",
+removeCard: "Hapus Kartu Saat Ini",
+undoRemove: "Batalkan Penghapusan",
+decreaseFont: "Perkecil ukuran font",
+increaseFont: "Perbesar ukuran font",
+leftJustify: "Rata Kiri",
+rightJustify: "Rata Kanan",
+center: "Tengah",
+startTimer: "Mulai Timer",
+pauseTimer: "Jeda Timer",
+resetTimer: "Atur Ulang Timer",
+print: "Cetak",
+download: "Unduh",
+language: "Bahasa",
+keyboardShortcuts: "Pintasan keyboard: spasi untuk membalik, kiri/kanan untuk navigasi",
+printHeader: "Flashcard TSOFA",
+createWithEditor: "Buat flashcard dengan editor TSOFA."
+}
+};
+
+// Get the current language texts
+let texts = i18n_text[LANGUAGE] || i18n_text['English'];
+
+ // Update page title if TOPIC is set
+ if (TOPIC && TOPIC.trim() !== "") {
+  document.title = texts.title + " - " + TOPIC;
+ } else {
+  document.title = texts.title;
+ }
+</script>
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>TSOFA - The Simple, Offline Flashcard App</title>
+ <style>
+  body {
+   font-family: Arial, sans-serif;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   padding: 20px;
+   background-color: #f0f0f0;
+   margin: 0;
+   min-height: 100vh;
+  }
+
+  .container {
+   max-width: 600px;
+   width: 100%;
+  }
+
+  .card-counter {
+   text-align: center;
+   margin-bottom: 10px;
+   font-size: 18px;
+   color: #555;
+  }
+
+  .card-counter .total-count {
+   display: inline-block;
+   transition: transform 0.15s ease-out, color 0.15s ease-out;
+  }
+
+  .card-counter .total-count.emphasis {
+   transform: scale(1.3);
+   color: #007bff;
+  }
+
+  .flashcard {
+   background-color: white;
+   border-radius: 10px;
+   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+   padding: 40px;
+   min-height: 300px;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   cursor: pointer;
+   margin-bottom: 20px;
+   user-select: none;
+   transition: transform 0.1s;
+   touch-action: pan-y pinch-zoom;
+  }
+
+  .flashcard:hover {
+   transform: scale(1.02);
+  }
+
+  .flashcard:active {
+   transform: scale(0.98);
+  }
+
+  .flashcard-content {
+   font-size: 20px;
+   line-height: 1.5;
+   width: 100%;
+  }
+
+  .flashcard-content.centered {
+   text-align: center;
+  }
+
+  .flashcard-content.left-aligned {
+   text-align: left;
+   white-space: pre-wrap;
+  }
+
+  .flashcard-content.right-aligned {
+   text-align: right;
+   white-space: pre-wrap;
+  }
+
+  .controls {
+   display: grid;
+   grid-template-columns: auto 1fr 1fr 1fr auto;
+   gap: 10px;
+   margin-bottom: 20px;
+  }
+
+  .secondary-controls {
+   display: grid;
+   grid-template-columns: repeat(4, 1fr);
+   gap: 10px;
+   align-items: center;
+   margin-bottom: 10px;
+  }
+
+  .secondary-controls button {
+   font-size: 16px;
+   height: 72px;
+   padding: 0 16px;
+  }
+
+  .tertiary-controls {
+   display: flex;
+   justify-content: center;
+   gap: 10px;
+   margin-bottom: 10px;
+  }
+
+  .tertiary-controls button {
+   height: 72px;
+  }
+
+  .font-size-btn {
+   width: 72px;
+   padding: 0 !important;
+  }
+
+  .remove-btn, .undo-btn {
+   background-color: #dc3545;
+  }
+
+  .remove-btn:hover, .undo-btn:hover {
+   background-color: #c82333;
+  }
+
+  .undo-btn:disabled {
+   background-color: #cccccc;
+   cursor: not-allowed;
+  }
+
+  .font-size-btn {
+   width: 72px;
+   padding: 0 !important;
+   font-size: 24px !important;
+   line-height: 1;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   background-color: #6c757d;
+  }
+
+  .font-size-btn:hover {
+   background-color: #5a6268;
+  }
+
+  .align-btn {
+   width: 72px;
+   padding: 0 !important;
+   font-size: 20px !important;
+   line-height: 1;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   background-color: #6c757d;
+   height: 72px;
+  }
+
+  .align-btn:hover {
+   background-color: #5a6268;
+  }
+
+  button {
+   padding: 12px 20px;
+   font-size: 20px;
+   border: none;
+   border-radius: 5px;
+   background-color: #007bff;
+   color: white;
+   cursor: pointer;
+   transition: background-color 0.2s;
+   touch-action: manipulation;
+  }
+
+  button:hover {
+   background-color: #0056b3;
+  }
+
+  button:active {
+   transform: scale(0.95);
+  }
+
+  button:disabled {
+   background-color: #cccccc;
+   cursor: not-allowed;
+  }
+
+  .timer-row {
+   margin-top: 15px;
+   padding-top: 15px;
+   border-top: 1px solid #ddd;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   gap: 15px;
+  }
+
+  .timer-display {
+   font-family: 'Courier New', monospace;
+   font-size: 24px;
+   font-weight: bold;
+   color: #333;
+   min-width: 120px;
+   text-align: center;
+  }
+
+  .timer-btn {
+   background-color: #17a2b8;
+   padding: 10px 20px;
+   font-size: 16px;
+  }
+
+  .timer-btn:hover {
+   background-color: #138496;
+  }
+
+  .timer-btn.pause {
+   background-color: #ffc107;
+  }
+
+  .timer-btn.pause:hover {
+   background-color: #e0a800;
+  }
+
+  .reset-btn {
+   background-color: #6c757d;
+   padding: 10px 20px;
+   font-size: 16px;
+  }
+
+  .reset-btn:hover {
+   background-color: #5a6268;
+  }
+
+  .print-row {
+   margin-top: 15px;
+   padding-top: 15px;
+   border-top: 1px solid #ddd;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   gap: 10px;
+  }
+
+  .print-btn, .download-btn {
+   background-color: #6c757d;
+   padding: 10px 30px;
+   font-size: 16px;
+  }
+
+  .print-btn:hover, .download-btn:hover {
+   background-color: #5a6268;
+  }
+
+  .language-select {
+   background-color: #6c757d;
+   color: white;
+   padding: 10px 15px;
+   font-size: 16px;
+   border: none;
+   border-radius: 5px;
+   cursor: pointer;
+   touch-action: manipulation;
+  }
+
+  .language-select:hover {
+   background-color: #5a6268;
+  }
+
+  @media print {
+   body {
+    background: white;
+    padding: 5px;
+    margin: 0;
+   }
+
+   .container {
+    display: none;
+   }
+
+   .print-table {
+    display: table !important;
+    width: 100%;
+    border-collapse: collapse;
+    font-family: Arial, sans-serif;
+    font-size: 9px;
+    line-height: 1.2;
+   }
+
+   .print-table thead {
+    display: none;
+   }
+
+   .print-table td {
+    border: 0.5px solid #999;
+    padding: 3px;
+    text-align: left;
+    vertical-align: top;
+    width: 50%;
+    height: auto;
+    max-height: 40px;
+    overflow: hidden;
+   }
+
+   .print-table tr {
+    background-color: white;
+    page-break-inside: avoid;
+   }
+
+   .print-header {
+    display: block !important;
+    text-align: center;
+    margin-bottom: 5px;
+    font-family: Arial, sans-serif;
+   }
+
+   .print-header h2 {
+    display: none;
+   }
+
+   .print-header h3 {
+    font-size: 10px;
+    margin: 2px 0;
+    font-weight: normal;
+   }
+  }
+
+  .print-table {
+   display: none;
+  }
+
+  .print-header {
+   display: none;
+  }
+
+  @media screen {
+   .print-header {
+    display: none !important;
+   }
+  }
+
+  .flip-btn {
+   background-color: #28a745;
+  }
+
+  .flip-btn:hover {
+   background-color: #218838;
+  }
+
+  .shuffle-btn, .invert-btn {
+   background-color: #ffc107;
+   color: #333;
+  }
+
+  .shuffle-btn:hover, .invert-btn:hover {
+   background-color: #e0a800;
+  }
+
+  .nav-btn {
+   background-color: #6c757d;
+   width: 60px;
+   padding: 12px 8px !important;
+  }
+
+  .nav-btn:hover {
+   background-color: #5a6268;
+  }
+
+  .instructions {
+   text-align: center;
+   color: #666;
+   margin-top: 20px;
+   font-size: 14px;
+   line-height: 1.4;
+  }
+
+  .editor-link {
+   text-align: center;
+   margin-top: 15px;
+   font-size: 12px;
+  }
+
+  .editor-link a {
+   color: #007bff;
+   text-decoration: none;
+  }
+
+  .editor-link a:hover {
+   text-decoration: underline;
+  }
+ </style>
+</head>
+<body>
+ <div class="container">
+
+  <p id="byAuthor" style="text-align: center; color: #666; margin-top: -10px; font-size: 14px;"><a href="https://inventwithpython.com/tsofa/">TSOFA - The Simple, Offline Flashcard App by Al Sweigart <span id="versionText">(v1.3.0)</span></a></p>
+  <h2 id="topicHeading" style="text-align: center; color: #555; margin-top: 10px; margin-bottom: 20px; display: none;"></h2>
+
+  <div class="card-counter" id="cardCounter">Card 1 of 2</div>
+
+  <div class="flashcard" id="flashcard" onclick="flipCard()">
+   <div class="flashcard-content" id="cardContent"></div>
+  </div>
+
+  <div class="controls">
+   <button onclick="goToFirst()" class="nav-btn" id="firstBtn" title="First">&#x21E4;</button>
+   <button onclick="prevCard()" id="prevBtn" title="Previous (left)">&#x2190;</button>
+   <button onclick="flipCard()" class="flip-btn" id="flipBtn" title="Flip (space)">&#x21BB;</button>
+   <button onclick="nextCard()" id="nextBtn" title="Next (right)">&#x2192;</button>
+   <button onclick="goToLast()" class="nav-btn" id="lastBtn" title="Last">&#x21E5;</button>
+  </div>
+
+  <div class="secondary-controls">
+   <button onclick="shuffleCards()" class="shuffle-btn" id="shuffleBtn" title="Shuffle Flashcards">&#x1F500;</button>
+   <button onclick="invertCards()" class="invert-btn" id="invertBtn" title="Swap Question & Answer"><span id="swapQALabelText">Q&#x2194;A</span></button>
+   <button onclick="removeCard()" class="remove-btn" id="removeBtn" title="Remove Current Card">&#x1F4C4;&#x2192;&#x1F5D1;</button>
+   <button onclick="undoRemove()" class="undo-btn" id="undoBtn" title="Undo Last Remove">&#x1F4C4;&#x2190;&#x1F5D1;</button>
+  </div>
+
+  <div class="tertiary-controls">
+   <button onclick="decreaseFontSize()" class="font-size-btn" id="decreaseFontBtn" title="Decrease font size">-&#x1F50D;</button>
+   <button onclick="increaseFontSize()" class="font-size-btn" id="increaseFontBtn" title="Increase font size">+&#x1F50D;</button>
+   <button onclick="toggleAlignment()" class="align-btn" id="alignBtn" title="Left Justify">&#x21E4;&#x1F4C4;</button>
+  </div>
+
+  <div class="timer-row">
+   <div class="timer-display" id="timerDisplay">00:00:00</div>
+   <button onclick="toggleTimer()" class="timer-btn" id="timerBtn" title="Start Timer">&#x23F2;&#x25B6;</button>
+   <button onclick="resetTimer()" class="reset-btn" id="resetBtn" title="Reset Timer">&#x23F2;&#x21BB;</button>
+  </div>
+
+  <div class="print-row">
+   <button onclick="printFlashcards()" class="print-btn" id="printBtn" title="Print">&#x1F5A8;</button>
+   <button onclick="downloadFile()" class="download-btn" id="downloadBtn" title="Download"><u>&#x2193;</u></button>
+   <select onchange="changeLanguage(this.value)" class="language-select" id="languageSelect" title="Language">
+    <option value="English">English</option>
+    <option value="Español">Español</option>
+    <option value="Français">Français</option>
+    <option value="Deutsch">Deutsch</option>
+    <option value="Nederlands">Nederlands</option>
+    <option value="Italiano">Italiano</option>
+    <option value="Português">Português</option>
+    <option value="Polski">Polski</option>
+    <option value="Русский">Русский</option>
+    <option value="Norsk">Norsk</option>
+    <option value="Svenska">Svenska</option>
+    <option value="中文">中文</option>
+    <option value="हिन्दी">हिन्दी</option>
+    <option value="বাংলা">বাংলা</option>
+    <option value="日本語">日本語</option>
+    <option value="한국어">한국어</option>
+    <option value="ไทย">ไทย</option>
+    <option value="العربية">العربية</option>
+    <option value="Tiếng Việt">Tiếng Việt</option>
+    <option value="Türkçe">Türkçe</option>
+    <option value="Tagalog">Tagalog</option>
+    <option value="Kiswahili">Kiswahili</option>
+    <option value="فارسی">فارسی</option>
+    <option value="Bahasa Indonesia">Bahasa Indonesia</option>
+   </select>
+  </div>
+
+  <div class="instructions" id="instructions">
+   <strong>Keyboard shortcuts:</strong> space to flip card, left/right to navigate cards
+  </div>
+
+  <div class="editor-link" id="editorLink">
+   <a href="https://inventwithpython.com/tsofa/editor/">Create flashcards with the TSOFA editor.</a>
+  </div>
+ </div>
+
+ <!-- Print-only content -->
+ <div class="print-header" id="printHeader">
+  <h3 id="printTopic"></h3>
+ </div>
+ <table class="print-table" id="printTable">
+  <thead>
+   <tr>
+    <th>Question</th>
+    <th>Answer</th>
+   </tr>
+  </thead>
+  <tbody id="printTableBody">
+  </tbody>
+ </table>
+
+ <script>
+  // Parse CSV string to array format
+  function parseCSV(csvString) {
+   const rows = [];
+   let currentRow = [];
+   let currentField = '';
+   let inQuotes = false;
+   let i = 0;
+
+   while (i < csvString.length) {
+    const char = csvString[i];
+    const nextChar = csvString[i + 1];
+
+    if (!inQuotes) {
+     if (char === '"') {
+      inQuotes = true;
+     } else if (char === ',') {
+      currentRow.push(currentField);
+      currentField = '';
+     } else if (char === '\n' || (char === '\r' && nextChar === '\n')) {
+      currentRow.push(currentField);
+      if (currentRow.length > 0 && (currentRow[0] !== '' || currentRow.length > 1)) {
+       rows.push(currentRow);
+      }
+      currentRow = [];
+      currentField = '';
+      if (char === '\r' && nextChar === '\n') {
+       i++; // Skip the \n in \r\n
+      }
+     } else {
+      currentField += char;
+     }
+    } else {
+     if (char === '"' && nextChar === '"') {
+      currentField += '"';
+      i++; // Skip the next quote
+     } else if (char === '"') {
+      inQuotes = false;
+     } else {
+      currentField += char;
+     }
+    }
+    i++;
+   }
+
+   // Handle the last field and row
+   if (currentField !== '' || currentRow.length > 0) {
+    currentRow.push(currentField);
+    if (currentRow.length > 0 && (currentRow[0] !== '' || currentRow.length > 1)) {
+     rows.push(currentRow);
+    }
+   }
+
+   // Ensure each row has exactly 2 columns (question and answer)
+   return rows.map(row => {
+    if (row.length === 0) return ['', ''];
+    if (row.length === 1) return [row[0], ''];
+    return [row[0], row[1]];
+   }).filter(row => row[0] !== '' || row[1] !== ''); // Remove completely empty rows
+  }
+
+  // Process FLASHCARDS whether it's an array or CSV string
+  let processedFlashcards;
+  if (typeof FLASHCARDS === 'string') {
+   processedFlashcards = parseCSV(FLASHCARDS);
+  } else {
+   processedFlashcards = FLASHCARDS;
+  }
+
+  // App state
+  let currentCards = [...processedFlashcards];
+  let currentIndex = 0;
+  let showingQuestion = true;
+  let isInverted = false;
+  let currentFontSize = 20; // Default font size in pixels
+  let removedCards = []; // Stack to store removed cards for undo
+  // Initialize alignmentState from JUSTIFICATION variable
+  let alignmentState = (JUSTIFICATION === 'left' || JUSTIFICATION === 'right') ? JUSTIFICATION : 'center';
+
+  // Timer variables
+  let timerStartTime = 0;
+  let timerElapsedTime = 0;
+  let timerInterval = null;
+  let isTimerRunning = false;
+
+  // Swipe gesture variables
+  let touchStartX = 0;
+  let touchStartY = 0;
+  let touchEndX = 0;
+  let touchEndY = 0;
+  const minSwipeDistance = 50; // Minimum distance in pixels for a swipe to register
+
+  // Initialize the app
+  function init() {
+   // Set up internationalization
+   applyTranslations();
+
+   // Set the language dropdown to current language
+   document.getElementById('languageSelect').value = LANGUAGE;
+
+   // Display topic if set
+   if (TOPIC && TOPIC.trim() !== "") {
+    const topicHeading = document.getElementById('topicHeading');
+    topicHeading.textContent = texts.topic + ": " + TOPIC;
+    topicHeading.style.display = 'block';
+   }
+
+   // Set up swipe gesture handlers
+   initSwipeGestures();
+
+   displayCard();
+   updateButtons();
+   updateCounter();
+   updateTextAlignment();
+   updateFontSize();
+   updateUndoButton();
+   updateAlignButton();
+  }
+
+  // Initialize swipe gesture handlers
+  function initSwipeGestures() {
+   const flashcard = document.getElementById('flashcard');
+
+   flashcard.addEventListener('touchstart', handleTouchStart, { passive: true });
+   flashcard.addEventListener('touchmove', handleTouchMove, { passive: true });
+   flashcard.addEventListener('touchend', handleTouchEnd, { passive: true });
+  }
+
+  // Handle touch start
+  function handleTouchStart(event) {
+   touchStartX = event.changedTouches[0].screenX;
+   touchStartY = event.changedTouches[0].screenY;
+  }
+
+  // Handle touch move
+  function handleTouchMove(event) {
+   touchEndX = event.changedTouches[0].screenX;
+   touchEndY = event.changedTouches[0].screenY;
+  }
+
+  // Handle touch end
+  function handleTouchEnd(event) {
+   touchEndX = event.changedTouches[0].screenX;
+   touchEndY = event.changedTouches[0].screenY;
+   handleSwipeGesture();
+  }
+
+  // Process the swipe gesture
+  function handleSwipeGesture() {
+   const deltaX = touchEndX - touchStartX;
+   const deltaY = touchEndY - touchStartY;
+
+   // Check if horizontal swipe is more significant than vertical
+   if (Math.abs(deltaX) > Math.abs(deltaY)) {
+    // Horizontal swipe detected
+    if (Math.abs(deltaX) >= minSwipeDistance) {
+     if (deltaX > 0) {
+      // Swipe right - go to previous card
+      prevCard();
+     } else {
+      // Swipe left - go to next card
+      nextCard();
+     }
+    }
+   }
+   // If vertical swipe is more significant, do nothing (allow normal scroll behavior)
+  }
+
+  // Change the app language
+  function changeLanguage(newLanguage) {
+   // Update the texts object with new language
+   texts = i18n_text[newLanguage] || i18n_text['English'];
+
+   // Reapply translations
+   applyTranslations();
+
+   // Update the topic heading if displayed
+   if (TOPIC && TOPIC.trim() !== "") {
+    const topicHeading = document.getElementById('topicHeading');
+    topicHeading.textContent = texts.topic + ": " + TOPIC;
+   }
+
+   // Update all UI elements
+   updateCounter();
+   displayCard();
+   updateAlignButton();
+  }
+
+  // Apply translations to all UI elements
+  function applyTranslations() {
+   // Update link text and version
+   document.getElementById('byAuthor').innerHTML = `<a href="https://inventwithpython.com/tsofa/">${texts.byAuthor} (v${VERSION})</a>`;
+
+   // Update button titles and tooltips
+   document.getElementById('firstBtn').title = texts.first;
+   document.getElementById('prevBtn').title = texts.previous;
+   document.getElementById('flipBtn').title = texts.flip;
+   document.getElementById('nextBtn').title = texts.next;
+   document.getElementById('lastBtn').title = texts.last;
+   document.getElementById('shuffleBtn').title = texts.shuffle;
+   document.getElementById('invertBtn').title = texts.swapQA;
+   document.getElementById('swapQALabelText').textContent = texts.swapQALabel;
+   document.getElementById('removeBtn').title = texts.removeCard;
+   document.getElementById('undoBtn').title = texts.undoRemove;
+   document.getElementById('decreaseFontBtn').title = texts.decreaseFont;
+   document.getElementById('increaseFontBtn').title = texts.increaseFont;
+   document.getElementById('printBtn').title = texts.print;
+   document.getElementById('downloadBtn').title = texts.download;
+   document.getElementById('languageSelect').title = texts.language;
+   document.getElementById('resetBtn').title = texts.resetTimer;
+   document.getElementById('timerBtn').title = isTimerRunning ? texts.pauseTimer : texts.startTimer;
+
+   // Update instructions
+   document.getElementById('instructions').innerHTML = `<strong>${texts.keyboardShortcuts}</strong>`;
+
+   // Update editor link
+   document.getElementById('editorLink').innerHTML = `<a href="https://inventwithpython.com/tsofa/editor/">${texts.createWithEditor}</a>`;
+  }
+
+  // Convert newlines to br tags for HTML display, except inside <pre> tags
+  function convertNewlinesToBr(text) {
+   if (typeof text !== 'string') return text;
+
+   // Split by <pre> tags, keeping the delimiters
+   const parts = text.split(/(<pre[\s\S]*?<\/pre>)/gi);
+
+   // Process each part - only convert newlines outside of <pre> tags
+   return parts.map(part => {
+    if (part.match(/^<pre[\s\S]*?<\/pre>$/i)) {
+     // This is a <pre> block, leave it unchanged
+     return part;
+    } else {
+     // This is outside <pre>, convert newlines to <br>
+     return part.replace(/\n/g, '<br>');
+    }
+   }).join('');
+  }
+
+  // Display current card
+  function displayCard() {
+   const cardContent = document.getElementById('cardContent');
+   const card = currentCards[currentIndex];
+
+   if (!card) {
+    cardContent.innerHTML = texts.noFlashcards;
+    return;
+   }
+
+   const questionIndex = isInverted ? 1 : 0;
+   const answerIndex = isInverted ? 0 : 1;
+
+   if (showingQuestion) {
+    cardContent.innerHTML = convertNewlinesToBr(card[questionIndex]);
+   } else {
+    cardContent.innerHTML = convertNewlinesToBr(card[answerIndex]);
+   }
+
+   // Apply alignment
+   updateTextAlignment();
+  }
+
+  // Toggle alignment between left, right, and center
+  function toggleAlignment() {
+   if (alignmentState === 'center') {
+    alignmentState = 'left';
+   } else if (alignmentState === 'left') {
+    alignmentState = 'right';
+   } else {
+    alignmentState = 'center';
+   }
+   updateTextAlignment();
+   updateAlignButton();
+  }
+
+  // Update the alignment button label and tooltip
+  function updateAlignButton() {
+   const alignBtn = document.getElementById('alignBtn');
+   if (alignmentState === 'center') {
+    alignBtn.innerHTML = '&#x21E4;&#x1F4C4;'; // ⇤📄
+    alignBtn.title = texts.leftJustify;
+   } else if (alignmentState === 'left') {
+    alignBtn.innerHTML = '&#x1F4C4;&#x21E5;'; // 📄⇥
+    alignBtn.title = texts.rightJustify;
+   } else {
+    alignBtn.innerHTML = '&#x21E4;&#x1F4C4;&#x21E5;'; // ⇤📄⇥
+    alignBtn.title = texts.center;
+   }
+  }
+
+  // Update text alignment based on current state
+  function updateTextAlignment() {
+   const cardContent = document.getElementById('cardContent');
+
+   // Remove all alignment classes
+   cardContent.classList.remove('centered', 'left-aligned', 'right-aligned');
+
+   // Add appropriate class
+   if (alignmentState === 'center') {
+    cardContent.classList.add('centered');
+   } else if (alignmentState === 'left') {
+    cardContent.classList.add('left-aligned');
+   } else {
+    cardContent.classList.add('right-aligned');
+   }
+  }
+
+  // Increase font size
+  function increaseFontSize() {
+   if (currentFontSize < 48) { // Maximum font size
+    currentFontSize += 4;
+    updateFontSize();
+   }
+  }
+
+  // Decrease font size
+  function decreaseFontSize() {
+   if (currentFontSize > 12) { // Minimum font size
+    currentFontSize -= 4;
+    updateFontSize();
+   }
+  }
+
+  // Update the font size of the flashcard content
+  function updateFontSize() {
+   const cardContent = document.getElementById('cardContent');
+   cardContent.style.fontSize = currentFontSize + 'px';
+  }
+
+  // Trigger emphasis animation on total count
+  function triggerTotalCountEmphasis() {
+   const totalCountSpan = document.querySelector('.total-count');
+   if (totalCountSpan) {
+    // Remove class first to allow re-triggering
+    totalCountSpan.classList.remove('emphasis');
+    // Force reflow to restart animation
+    void totalCountSpan.offsetWidth;
+    // Add the emphasis class
+    totalCountSpan.classList.add('emphasis');
+    // Remove the class after animation completes
+    setTimeout(() => {
+     totalCountSpan.classList.remove('emphasis');
+    }, 200);
+   }
+  }
+
+  // Remove current card
+  function removeCard() {
+   if (currentCards.length === 0) return;
+
+   // Store removed card with its index for undo
+   removedCards.push({
+    card: currentCards[currentIndex],
+    index: currentIndex
+   });
+
+   // Remove card from current deck
+   currentCards.splice(currentIndex, 1);
+
+   // Adjust current index if necessary
+   if (currentCards.length === 0) {
+    currentIndex = 0;
+   } else if (currentIndex >= currentCards.length) {
+    currentIndex = currentCards.length - 1;
+   }
+
+   // Reset to question side
+   showingQuestion = true;
+
+   // Update display
+   displayCard();
+   updateButtons();
+   updateCounter();
+   updateUndoButton();
+
+   // Trigger emphasis animation
+   triggerTotalCountEmphasis();
+  }
+
+  // Undo last card removal
+  function undoRemove() {
+   if (removedCards.length === 0) return;
+
+   // Get the last removed card
+   const lastRemoved = removedCards.pop();
+
+   // Insert card back at its original position or at the end if position is invalid
+   const insertIndex = Math.min(lastRemoved.index, currentCards.length);
+   currentCards.splice(insertIndex, 0, lastRemoved.card);
+
+   // Set current index to the restored card
+   currentIndex = insertIndex;
+   showingQuestion = true;
+
+   // Update display
+   displayCard();
+   updateButtons();
+   updateCounter();
+   updateUndoButton();
+
+   // Trigger emphasis animation
+   triggerTotalCountEmphasis();
+  }
+
+  // Update undo button state
+  function updateUndoButton() {
+   const undoBtn = document.getElementById('undoBtn');
+   undoBtn.disabled = removedCards.length === 0;
+  }
+
+  // Flip the current card
+  function flipCard() {
+   showingQuestion = !showingQuestion;
+   displayCard();
+  }
+
+  // Navigate to next card
+  function nextCard() {
+   if (currentIndex < currentCards.length - 1) {
+    currentIndex++;
+    showingQuestion = true;
+    displayCard();
+    updateButtons();
+    updateCounter();
+   }
+  }
+
+  // Navigate to previous card
+  function prevCard() {
+   if (currentIndex > 0) {
+    currentIndex--;
+    showingQuestion = true;
+    displayCard();
+    updateButtons();
+    updateCounter();
+   }
+  }
+
+  // Go to first card
+  function goToFirst() {
+   currentIndex = 0;
+   showingQuestion = true;
+   displayCard();
+   updateButtons();
+   updateCounter();
+  }
+
+  // Go to last card
+  function goToLast() {
+   currentIndex = currentCards.length - 1;
+   showingQuestion = true;
+   displayCard();
+   updateButtons();
+   updateCounter();
+  }
+
+  // Shuffle the cards
+  function shuffleCards() {
+   // Reset to original cards before shuffling
+   currentCards = [...processedFlashcards];
+   // Clear removed cards history
+   removedCards = [];
+   for (let i = currentCards.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [currentCards[i], currentCards[j]] = [currentCards[j], currentCards[i]];
+   }
+   currentIndex = 0;
+   showingQuestion = true;
+   displayCard();
+   updateButtons();
+   updateCounter();
+   updateUndoButton();
+  }
+
+  // Invert all cards (swap questions and answers)
+  function invertCards() {
+   isInverted = !isInverted;
+   displayCard();
+  }
+
+  // Update button states
+  function updateButtons() {
+   document.getElementById('prevBtn').disabled = currentIndex === 0;
+   document.getElementById('nextBtn').disabled = currentIndex === currentCards.length - 1;
+  }
+
+  // Update card counter
+  function updateCounter() {
+   const counter = document.getElementById('cardCounter');
+   const currentText = texts.cardCounter
+    .replace('{current}', currentIndex + 1)
+    .replace('{total}', `<span class="total-count">${currentCards.length}</span>`);
+   counter.innerHTML = currentText;
+  }
+
+  // Keyboard event listeners
+  document.addEventListener('keydown', function(event) {
+   switch(event.key) {
+    case ' ':
+    case 'Spacebar':
+     event.preventDefault();
+     flipCard();
+     break;
+    case 'ArrowLeft':
+     event.preventDefault();
+     prevCard();
+     break;
+    case 'ArrowRight':
+     event.preventDefault();
+     nextCard();
+     break;
+   }
+  });
+
+  // Format time as HH:MM:SS
+  function formatTime(milliseconds) {
+   const totalSeconds = Math.floor(milliseconds / 1000);
+   const hours = Math.floor(totalSeconds / 3600);
+   const minutes = Math.floor((totalSeconds % 3600) / 60);
+   const seconds = totalSeconds % 60;
+
+   return String(hours).padStart(2, '0') + ':' +
+          String(minutes).padStart(2, '0') + ':' +
+          String(seconds).padStart(2, '0');
+  }
+
+  // Update timer display
+  function updateTimerDisplay() {
+   const currentTime = isTimerRunning ?
+    timerElapsedTime + (Date.now() - timerStartTime) :
+    timerElapsedTime;
+   document.getElementById('timerDisplay').textContent = formatTime(currentTime);
+  }
+
+  // Toggle timer (start/pause)
+  function toggleTimer() {
+   const timerBtn = document.getElementById('timerBtn');
+
+   if (isTimerRunning) {
+    // Pause timer
+    clearInterval(timerInterval);
+    timerElapsedTime += Date.now() - timerStartTime;
+    isTimerRunning = false;
+    timerBtn.innerHTML  = '&#x23F2;&#x25B6;';
+    timerBtn.classList.remove('pause');
+    timerBtn.title = texts.startTimer;
+   } else {
+    // Start timer
+    timerStartTime = Date.now();
+    isTimerRunning = true;
+    timerBtn.innerHTML = '&#x23F2;&#x23F8;';
+    timerBtn.classList.add('pause');
+    timerBtn.title = texts.pauseTimer;
+
+    // Update display every second
+    timerInterval = setInterval(updateTimerDisplay, 1000);
+   }
+  }
+
+  // Reset timer
+  function resetTimer() {
+   clearInterval(timerInterval);
+   timerStartTime = 0;
+   timerElapsedTime = 0;
+   isTimerRunning = false;
+
+   const timerBtn = document.getElementById('timerBtn');
+   timerBtn.innerHTML  = '&#x23F2;&#x25B6;';
+   timerBtn.classList.remove('pause');
+   timerBtn.title = texts.startTimer;
+
+   updateTimerDisplay();
+  }
+
+  // Print flashcards function
+  function printFlashcards() {
+   // Set the print topic header if TOPIC exists
+   const printTopicElement = document.getElementById('printTopic');
+   if (TOPIC && TOPIC.trim() !== "") {
+    printTopicElement.textContent = TOPIC;
+    printTopicElement.style.display = 'block';
+   } else {
+    printTopicElement.style.display = 'none';
+   }
+
+   // Clear any existing content
+   const printTableBody = document.getElementById('printTableBody');
+   printTableBody.innerHTML = '';
+
+   // Use the original flashcards (not affected by current state or invert)
+   processedFlashcards.forEach((card, index) => {
+    const row = document.createElement('tr');
+
+    const questionCell = document.createElement('td');
+    questionCell.innerHTML = convertNewlinesToBr(card[0]); // Always use original order
+
+    const answerCell = document.createElement('td');
+    answerCell.innerHTML = convertNewlinesToBr(card[1]); // Always use original order
+
+    row.appendChild(questionCell);
+    row.appendChild(answerCell);
+    printTableBody.appendChild(row);
+   });
+
+   // Trigger print dialog
+   window.print();
+  }
+
+  // Download the HTML file
+  function downloadFile() {
+   // Get the entire HTML content
+   const htmlContent = document.documentElement.outerHTML;
+
+   // Create a Blob with the HTML content
+   const blob = new Blob([htmlContent], { type: 'text/html' });
+
+   // Create a temporary link element
+   const link = document.createElement('a');
+   link.href = URL.createObjectURL(blob);
+
+   // Set the download filename
+   const filename = TOPIC && TOPIC.trim() !== ""
+    ? `TSOFA_${TOPIC.replace(/[^a-z0-9]/gi, '_')}.html`
+    : 'TSOFA_flashcards.html';
+   link.download = filename;
+
+   // Trigger the download
+   document.body.appendChild(link);
+   link.click();
+
+   // Clean up
+   document.body.removeChild(link);
+   URL.revokeObjectURL(link.href);
+  }
+
+  // Initialize app when page loads
+  window.onload = init;
+ </script>
+</body>
+</html>

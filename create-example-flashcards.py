@@ -1,6 +1,7 @@
 import os
 
-ORIGINAL_FLASHCARDS = '''const TOPIC = "";
+ORIGINAL_FLASHCARDS = '''const TOPIC = "Demo Set of Flashcards";
+let JUSTIFICATION = "center"; // "left", "right", or "center"
 
 // Option 1: Array of arrays format
 let FLASHCARDS = [
@@ -17,6 +18,7 @@ with open('tsofa.html') as file_obj:
     template = file_obj.read()
 
 for filename in os.listdir('example-source-data'):
+    #if filename != 'automateworkbook1-flashcards.js.with_link.js': continue
     if not filename.endswith('.js'): continue
 
     flashcard_filename = 'flashcards-' + filename[:filename.rfind('-')] + '.html'

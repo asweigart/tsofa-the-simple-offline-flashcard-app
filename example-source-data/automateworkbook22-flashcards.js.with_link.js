@@ -1,0 +1,32 @@
+const TOPIC = "Automate the Boring Stuff Workbook, Chapter 22 - Recognizing Text in Images";
+let JUSTIFICATION = "left"; // "left", "right", or "center"
+let FLASHCARDS = [
+  ["What is the difference between Tesseract and PyTesseract?", "Tesseract is the actual OCR engine, and PyTesseract is the Python package that works with Tesseract."],
+  ["Can your Python scripts do OCR with just PyTesseract installed, and not Tesseract?", "No. Your Python scripts require both PyTesseract and Tesseract to be installed."],
+  ["What do the eng.traineddata and jpn.traineddata files contain?", "The eng.traineddata and jpn.traineddata files contain the language packs for English and Japanese, respectively."],
+  ["Is Tesseract installed in the same way on Windows, macOS, and Linux?", "No. Tesseract has different installation steps for Windows, macOS, and Linux."],
+  ["Does PyTesseract require Pillow to be installed?", "Yes. PyTesseract requires Pillow to be installed."],
+  ["What PyTesseract function takes an Image object argument and returns a string of the text in that image?", "The <code>image_to_string()</code> function takes an Image object argument and returns a string of the text in that image."],
+  ["Can PyTesseract identify fonts, font sizes, and font colors?", "No. PyTesseract cannot identify fonts, font sizes, and font colors. Tesseract returns only plaintext strings."],
+  ["Can PyTesseract extract text from a scanned document of typed text?", "Yes. PyTesseract can extract text from a scanned document of typed text."],
+  ["Can PyTesseract extract text from a scanned document of handwritten text?", "No. PyTesseract cannot extract text from a scanned document of handwritten text (or, at least, not with any degree of reliability). That's because the language pack models have been trained on typed text."],
+  ["Can PyTesseract extract the text of a license plate from a photo of a car?", "No. PyTesseract cannot extract the text of a license plate (or any other text) from photographs. That's because the language pack models have been trained on typed text."],
+  ["In general, will PyTesseract preserve the layout of the source text, such as hyphenated words broken across lines?", "Yes. PyTesseract preserves the layout of text such as hyphenated words broken across lines."],
+  ["In general, how reliable are LLMs at cleaning up the extracted text from PyTesseract?", "LLMs are somewhat reliable at \"cleaning up\" the extracted text from PyTesseract, but this output always requires human review to confirm its accuracy."],
+  ["Can you usually use the spellchecker to identify incorrectly extracted words from PyTesseract?", "Yes and no. While the spellchecker can identify incorrectly extracted words from PyTesseract, the spellchecker will also identify correctly extracted words misspelled in the original image."],
+  ["Can you use the spellchecker to identify incorrectly extracted numbers from PyTesseract?", "No. The spellchecker does not identify correctly or incorrectly extracted numbers."],
+  ["Tesseract identifies characters of what language by default?", "Tesseract identifies English characters by default."],
+  ["How can you view a list of all the languages that Tesseract supports?", "The <code>get_languages()</code> function returns a list of all the languages that Tesseract supports."],
+  ["What keyword argument would you pass to make the <code>image_to_string()</code> function recognize Japanese characters?", "The <code>lang='jpn'</code> keyword argument makes the <code>image_to_string()</code> function recognize Japanese characters."],
+  ["What happens if you don't pass the <code>lang</code> keyword argument to <code>image_to_string()</code> while passing it an image of Japanese characters?", "The <code>image_to_string()</code> function returns nonsense garbage text because it tries to interpret the Japanese characters as English characters."],
+  ["What keyword argument would you pass to make the <code>image_to_string()</code> function recognize English and Japanese characters in the same document?", "The <code>lang='eng+jpn'</code> keyword argument makes the <code>image_to_string()</code> function recognize English and Japanese characters in the same document."],
+  ["How much does the NAPS2 app cost?", "The NAPS2 app is free."],
+  ["Which operating systems is the NAPS2 app available on?", "The NAPS2 app runs on Windows, macOS, and Linux."],
+  ["What Python module allows you to run NAPS2 from your Python program?", "The <code>subprocess</code> module allows your Python programs to run the NAPS2 app."],
+  ["What does the command line flag <code>-i</code> followed by <code>frankenstein.png</code> mean to the NAPS2 app?", "The command line flag <code>-i</code> followed by <code>frankenstein.png</code> specifies the frankenstein.png image as the input to NAPS2."],
+  ["What does the command line flag <code>-o</code> followed by <code>output.pdf</code> mean to the NAPS2 app?", "The command line flag <code>-o</code> followed by <code>output.pdf</code> causes the NAPS2 app to output the PDF to a file named output.pdf."],
+  ["If you already have the English language pack installed, what does the command line flag <code>--install</code> followed by <code>ocr-eng</code> do?", "If you already have the English language pack installed for NAPS2, these command line flags do nothing. You should include them in case NAPS2 doesn't already have the English language pack installed."],
+  ["What command line flags would you pass to install the Japanese language pack for NAPS2?", "The command line flags <code>--install</code> followed by <code>ocr-jpn</code> installs the Japanese language pack for NAPS2."],
+  ["What does the command line flag <code>-n</code> followed by <code>0</code> mean to the NAPS2 app?", "The command line flag <code>-n</code> followed by <code>0</code> runs NAPS2 without requiring a flatbed scanner to perform any scans."],
+  ["What does the command line flag <code>-i</code> followed by <code>page1.png;page2.png</code> mean to the NAPS2 app?", "The command line flag <code>-i</code> followed by <code>page1.png;page2.png</code> causes NAPS2 to use the page1.png and page2.png image files as the inputs on which to perform OCR."]
+];
