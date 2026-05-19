@@ -1,63 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <script>
-const VERSION = "1.5.0";
+const VERSION = "1.6.0";
 const LANGUAGE = "English"; // English, Español, Français, Deutsch, Nederlands, Italiano, Português, Polski, Русский, Norsk, Svenska, 中文, हिन्दी, বাংলা, 日本語, 한국어, ไทย, العربية, Tiếng Việt, Türkçe, Tagalog, Kiswahili, فارسی, Bahasa Indonesia
 
 // ===== MODIFY YOUR FLASHCARDS HERE =====
-const TOPIC = 'US State Capitals';
+let TOPIC = "Demo Set of Flashcards";
+let JUSTIFICATION = "center"; // "left", "right", or "center"
 
+// Option 1: Array of arrays format
 let FLASHCARDS = [
-["What is the capital of Alabama?", "Montgomery"],
-["What is the capital of Alaska?", "Juneau"],
-["What is the capital of Arizona?", "Phoenix"],
-["What is the capital of Arkansas?", "Little Rock"],
-["What is the capital of California?", "Sacramento"],
-["What is the capital of Colorado?", "Denver"],
-["What is the capital of Connecticut?", "Hartford"],
-["What is the capital of Delaware?", "Dover"],
-["What is the capital of Florida?", "Tallahassee"],
-["What is the capital of Georgia?", "Atlanta"],
-["What is the capital of Hawaii?", "Honolulu"],
-["What is the capital of Idaho?", "Boise"],
-["What is the capital of Illinois?", "Springfield"],
-["What is the capital of Indiana?", "Indianapolis"],
-["What is the capital of Iowa?", "Des Moines"],
-["What is the capital of Kansas?", "Topeka"],
-["What is the capital of Kentucky?", "Frankfort"],
-["What is the capital of Louisiana?", "Baton Rouge"],
-["What is the capital of Maine?", "Augusta"],
-["What is the capital of Maryland?", "Annapolis"],
-["What is the capital of Massachusetts?", "Boston"],
-["What is the capital of Michigan?", "Lansing"],
-["What is the capital of Minnesota?", "Saint Paul"],
-["What is the capital of Mississippi?", "Jackson"],
-["What is the capital of Missouri?", "Jefferson City"],
-["What is the capital of Montana?", "Helena"],
-["What is the capital of Nebraska?", "Lincoln"],
-["What is the capital of Nevada?", "Carson City"],
-["What is the capital of New Hampshire?", "Concord"],
-["What is the capital of New Jersey?", "Trenton"],
-["What is the capital of New Mexico?", "Santa Fe"],
-["What is the capital of New York?", "Albany"],
-["What is the capital of North Carolina?", "Raleigh"],
-["What is the capital of North Dakota?", "Bismarck"],
-["What is the capital of Ohio?", "Columbus"],
-["What is the capital of Oklahoma?", "Oklahoma City"],
-["What is the capital of Oregon?", "Salem"],
-["What is the capital of Pennsylvania?", "Harrisburg"],
-["What is the capital of Rhode Island?", "Providence"],
-["What is the capital of South Carolina?", "Columbia"],
-["What is the capital of South Dakota?", "Pierre"],
-["What is the capital of Tennessee?", "Nashville"],
-["What is the capital of Texas?", "Austin"],
-["What is the capital of Utah?", "Salt Lake City"],
-["What is the capital of Vermont?", "Montpelier"],
-["What is the capital of Virginia?", "Richmond"],
-["What is the capital of Washington?", "Olympia"],
-["What is the capital of West Virginia?", "Charleston"],
-["What is the capital of Wisconsin?", "Madison"],
-["What is the capital of Wyoming?", "Cheyenne"]
+["What is the capital of France?", "Paris"],
+["What is 2 + 2?", "4"],
+["What is the largest planet in our solar system?", "<b>Jupiter</b><br><i>It has a mass of 1.898 × 10²⁷ kg</i>"],
+["What year did World War II end?", "1945"],
+["Who wrote 'Romeo and Juliet'?", "William Shakespeare"],
+["What is HTML?", "<b>HyperText Markup Language</b><br>The standard markup language for creating web pages"],
 ];
 
 // Option 2: CSV string format (uncomment to use)
@@ -1106,8 +1064,9 @@ let texts = i18n_text[LANGUAGE] || i18n_text['English'];
     margin: 0;
    }
 
-   .container {
-    display: none;
+   .container,
+   .editor-view {
+    display: none !important;
    }
 
    .print-table {
@@ -1220,10 +1179,252 @@ let texts = i18n_text[LANGUAGE] || i18n_text['English'];
   .editor-link a:hover {
    text-decoration: underline;
   }
+
+  .editor-link button {
+   background: none;
+   border: none;
+   padding: 0;
+   color: #007bff;
+   text-decoration: none;
+   cursor: pointer;
+   font-size: 12px;
+   font-family: inherit;
+  }
+
+  .editor-link button:hover {
+   text-decoration: underline;
+   background: none;
+  }
+
+  .editor-view {
+   max-width: 900px;
+   width: 100%;
+   color: #333;
+  }
+
+  .editor-view .editor-header {
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   margin-bottom: 20px;
+   flex-wrap: wrap;
+   gap: 10px;
+  }
+
+  .editor-view .editor-title {
+   font-size: 18px;
+   font-weight: normal;
+   margin: 0;
+   text-align: center;
+   flex: 1;
+  }
+
+  .editor-view .editor-back-btn {
+   padding: 8px 16px;
+   background-color: #6c757d;
+   color: white;
+   border: none;
+   border-radius: 4px;
+   cursor: pointer;
+   font-size: 14px;
+  }
+
+  .editor-view .editor-back-btn:hover {
+   background-color: #5a6268;
+  }
+
+  .editor-view .editor-topic-input {
+   width: 100%;
+   padding: 12px;
+   font-size: 16px;
+   border: 1px solid #ddd;
+   border-radius: 4px;
+   margin-bottom: 20px;
+   font-family: inherit;
+   box-sizing: border-box;
+  }
+
+  .editor-view .flashcards-edit-container {
+   margin-bottom: 20px;
+  }
+
+  .editor-view .flashcard-row {
+   display: flex;
+   gap: 10px;
+   margin-bottom: 10px;
+   align-items: flex-start;
+   position: relative;
+   transition: opacity 0.3s;
+  }
+
+  .editor-view .flashcard-row.dragging {
+   opacity: 0.5;
+  }
+
+  .editor-view .drag-handle {
+   cursor: move;
+   padding: 8px 4px;
+   color: #999;
+   user-select: none;
+   font-size: 20px;
+   line-height: 1;
+   display: flex;
+   align-items: center;
+   height: 80px;
+  }
+
+  .editor-view .edit-card-content {
+   display: flex;
+   gap: 10px;
+   flex: 1;
+  }
+
+  .editor-view .flashcard-textarea {
+   flex: 1;
+   min-height: 80px;
+   padding: 10px;
+   font-size: 14px;
+   border: 1px solid #ddd;
+   border-radius: 4px;
+   resize: vertical;
+   font-family: inherit;
+   box-sizing: border-box;
+  }
+
+  .editor-view .remove-card-btn {
+   padding: 8px 10px;
+   background-color: #f44336;
+   color: white;
+   border: none;
+   border-radius: 4px;
+   cursor: pointer;
+   font-size: 16px;
+   font-weight: bold;
+   height: fit-content;
+   margin-top: 25px;
+   transition: background-color 0.2s;
+  }
+
+  .editor-view .remove-card-btn:hover {
+   background-color: #d32f2f;
+  }
+
+  .editor-view .editor-button-row {
+   display: flex;
+   gap: 10px;
+   margin-bottom: 20px;
+   flex-wrap: wrap;
+  }
+
+  .editor-view .add-card-btn {
+   padding: 10px 40px;
+   background-color: #4CAF50;
+   color: white;
+   border: none;
+   border-radius: 4px;
+   cursor: pointer;
+   font-size: 20px;
+   font-weight: bold;
+   transition: background-color 0.2s;
+  }
+
+  .editor-view .add-card-btn:hover {
+   background-color: #45a049;
+  }
+
+  .editor-view .apply-btn {
+   padding: 10px 20px;
+   background-color: #28a745;
+   color: white;
+   border: none;
+   border-radius: 4px;
+   cursor: pointer;
+   font-size: 16px;
+   font-weight: bold;
+   transition: background-color 0.2s;
+  }
+
+  .editor-view .apply-btn:hover {
+   background-color: #218838;
+  }
+
+  .editor-view .download-edit-btn {
+   padding: 10px 20px;
+   background-color: #2196F3;
+   color: white;
+   border: none;
+   border-radius: 4px;
+   cursor: pointer;
+   font-size: 16px;
+   font-weight: bold;
+   transition: background-color 0.2s;
+  }
+
+  .editor-view .download-edit-btn:hover {
+   background-color: #1976D2;
+  }
+
+  .editor-view .editor-instructions {
+   font-size: 14px;
+   color: #666;
+   margin-bottom: 10px;
+  }
+
+  .editor-view .output-textarea {
+   width: 100%;
+   min-height: 200px;
+   padding: 12px;
+   font-family: 'Courier New', monospace;
+   font-size: 13px;
+   border: 1px solid #ddd;
+   border-radius: 4px;
+   background-color: #f5f5f5;
+   resize: vertical;
+   box-sizing: border-box;
+  }
+
+  .editor-view .drop-indicator {
+   height: 2px;
+   background-color: #2196F3;
+   margin: 5px 0;
+   display: none;
+  }
+
+  .editor-view .drop-indicator.active {
+   display: block;
+  }
+
+  .editor-view .editor-cancel-note {
+   font-size: 14px;
+   color: #666;
+   text-align: center;
+   margin-top: 20px;
+   padding-top: 15px;
+   border-top: 1px solid #ddd;
+  }
+
+  .edit-row {
+   margin-top: 15px;
+   padding-top: 15px;
+   border-top: 1px solid #ddd;
+   display: flex;
+   justify-content: center;
+  }
+
+  .edit-btn {
+   background-color: #17a2b8;
+   padding: 14px 20px;
+   font-size: 18px;
+   width: 100%;
+  }
+
+  .edit-btn:hover {
+   background-color: #138496;
+  }
  </style>
 </head>
 <body>
- <div class="container">
+ <div class="container" id="viewerView">
 
   <p id="byAuthor" style="text-align: center; color: #666; margin-top: -10px; font-size: 14px;"><a href="https://inventwithpython.com/tsofa/">TSOFA - The Simple, Offline Flashcard App by Al Sweigart <span id="versionText">(v1.3.0)</span></a></p>
   <h2 id="topicHeading" style="text-align: center; color: #555; margin-top: 10px; margin-bottom: 20px; display: none;"></h2>
@@ -1292,13 +1493,39 @@ let texts = i18n_text[LANGUAGE] || i18n_text['English'];
    </select>
   </div>
 
+  <div class="edit-row">
+   <button onclick="openEditor()" class="edit-btn" id="editBtn" title="Edit Flashcards">&#x270F;&#xFE0F;</button>
+  </div>
+
   <div class="instructions" id="instructions">
    <strong>Keyboard shortcuts:</strong> space to flip card, left/right to navigate cards
   </div>
 
   <div class="editor-link" id="editorLink">
-   <a href="https://inventwithpython.com/tsofa/editor/">Create flashcards with the TSOFA editor.</a>
+   <button type="button" onclick="openEditor()">Create flashcards with the TSOFA editor.</button>
   </div>
+ </div>
+
+ <div class="editor-view" id="editorView" style="display: none;">
+  <div class="editor-header">
+   <h1 class="editor-title" id="editorTitle">TSOFA Flashcard Editor</h1>
+   <button onclick="closeEditor()" class="editor-back-btn" id="editorBackBtn">&#x2190; Discard Changes</button>
+  </div>
+
+  <input type="text" class="editor-topic-input" id="editorTopicInput" placeholder="Topic (or leave this empty)">
+
+  <div class="flashcards-edit-container" id="flashcardsEditContainer"></div>
+
+  <div class="editor-button-row">
+   <button class="add-card-btn" onclick="editorAddFlashcard()" title="Add Flashcard">+&#x1F4C4;</button>
+   <button class="download-edit-btn" onclick="editorDownload()" id="editorDownloadBtn">Download</button>
+  </div>
+
+  <p class="editor-instructions" id="editorInstructions">You can copy and paste TOPIC and FLASHCARDS code from existing flashcard apps to load them into this editor:</p>
+
+  <textarea class="output-textarea" id="editorOutputTextarea"></textarea>
+
+  <p class="editor-cancel-note" id="editorCancelNote">Refresh page to cancel changes and go back to the flashcards.</p>
  </div>
 
  <!-- Print-only content -->
@@ -1923,32 +2150,342 @@ let texts = i18n_text[LANGUAGE] || i18n_text['English'];
    window.print();
   }
 
+  // Build a FLASHCARDS literal string from current cards using backtick strings
+  function serializeFlashcards(cards) {
+   let out = 'let FLASHCARDS = [\n';
+   cards.forEach((card, i) => {
+    const q = String(card[0]).replace(/\\/g, '\\\\').replace(/`/g, '\\`').replace(/\$\{/g, '\\${');
+    const a = String(card[1]).replace(/\\/g, '\\\\').replace(/`/g, '\\`').replace(/\$\{/g, '\\${');
+    out += '[`' + q + '`, `' + a + '`]';
+    if (i < cards.length - 1) out += ',';
+    out += '\n';
+   });
+   out += '];';
+   return out;
+  }
+
+  // Rebuild HTML source with current TOPIC and FLASHCARDS baked in
+  function buildDownloadSource() {
+   let html = document.documentElement.outerHTML;
+
+   // Replace the TOPIC declaration
+   const topicStart = html.indexOf('let TOPIC =');
+   if (topicStart !== -1) {
+    const topicLineEnd = html.indexOf('\n', topicStart);
+    html = html.substring(0, topicStart) +
+           'let TOPIC = ' + JSON.stringify(TOPIC) + ';' +
+           html.substring(topicLineEnd);
+   }
+
+   // Replace the active FLASHCARDS block between Option 1 and Option 2 markers
+   const startMarker = '// Option 1: Array of arrays format\n';
+   const endMarker = '\n\n// Option 2: CSV string format';
+   const startIdx = html.indexOf(startMarker);
+   const endIdx = html.indexOf(endMarker, startIdx >= 0 ? startIdx : 0);
+   if (startIdx !== -1 && endIdx !== -1) {
+    html = html.substring(0, startIdx + startMarker.length) +
+           serializeFlashcards(processedFlashcards) +
+           html.substring(endIdx);
+   }
+
+   return html;
+  }
+
   // Download the HTML file
   function downloadFile() {
-   // Get the entire HTML content
-   const htmlContent = document.documentElement.outerHTML;
+   const htmlContent = buildDownloadSource();
 
-   // Create a Blob with the HTML content
    const blob = new Blob([htmlContent], { type: 'text/html' });
-
-   // Create a temporary link element
    const link = document.createElement('a');
    link.href = URL.createObjectURL(blob);
 
-   // Set the download filename
    const filename = TOPIC && TOPIC.trim() !== ""
     ? `TSOFA_${TOPIC.replace(/[^a-z0-9]/gi, '_')}.html`
     : 'TSOFA_flashcards.html';
    link.download = filename;
 
-   // Trigger the download
    document.body.appendChild(link);
    link.click();
 
-   // Clean up
    document.body.removeChild(link);
    URL.revokeObjectURL(link.href);
   }
+
+  // ===== Embedded editor =====
+  const editor_translations = {
+   "English": { topicPlaceholder: "Topic (or leave this empty)", questionPlaceholder: "Question", answerPlaceholder: "Answer", title: "TSOFA Flashcard Editor", back: "← Discard Changes", apply: "Apply", download: "Download", instructions: "You can copy and paste TOPIC and FLASHCARDS code from existing flashcard apps to load them into this editor:", cancelNote: "Refresh page to cancel changes and go back to the flashcards." },
+   "Español": { topicPlaceholder: "Tema (o déjalo vacío)", questionPlaceholder: "Pregunta", answerPlaceholder: "Respuesta", title: "Editor de Tarjetas TSOFA", back: "← Volver a las Tarjetas", apply: "Aplicar", download: "Descargar", instructions: "Puedes copiar y pegar el código TOPIC y FLASHCARDS de aplicaciones de tarjetas existentes para cargarlas en este editor:", cancelNote: "Actualiza la página para cancelar los cambios y volver a las tarjetas." },
+   "Français": { topicPlaceholder: "Sujet (ou laissez vide)", questionPlaceholder: "Question", answerPlaceholder: "Réponse", title: "Éditeur de Cartes TSOFA", back: "← Retour aux Cartes", apply: "Appliquer", download: "Télécharger", instructions: "Vous pouvez copier et coller le code TOPIC et FLASHCARDS d'applications de cartes mémoire existantes pour les charger dans cet éditeur:", cancelNote: "Actualisez la page pour annuler les modifications et revenir aux cartes." },
+   "Deutsch": { topicPlaceholder: "Thema (oder leer lassen)", questionPlaceholder: "Frage", answerPlaceholder: "Antwort", title: "TSOFA Lernkarten-Editor", back: "← Zurück zu den Karten", apply: "Anwenden", download: "Herunterladen", instructions: "Sie können TOPIC- und FLASHCARDS-Code aus bestehenden Karteikarten-Apps kopieren und in diesen Editor einfügen:", cancelNote: "Seite aktualisieren, um Änderungen zu verwerfen und zu den Lernkarten zurückzukehren." },
+   "Nederlands": { topicPlaceholder: "Onderwerp (of laat leeg)", questionPlaceholder: "Vraag", answerPlaceholder: "Antwoord", title: "TSOFA Flashcard Editor", back: "← Terug naar Flashcards", apply: "Toepassen", download: "Downloaden", instructions: "Je kunt TOPIC en FLASHCARDS code van bestaande flashcard apps kopiëren en plakken om ze in deze editor te laden:", cancelNote: "Vernieuw de pagina om wijzigingen te annuleren en terug te gaan naar de flashcards." },
+   "Italiano": { topicPlaceholder: "Argomento (o lascia vuoto)", questionPlaceholder: "Domanda", answerPlaceholder: "Risposta", title: "Editor di Flashcard TSOFA", back: "← Torna alle Flashcard", apply: "Applica", download: "Scarica", instructions: "Puoi copiare e incollare il codice TOPIC e FLASHCARDS da app di flashcard esistenti per caricarle in questo editor:", cancelNote: "Aggiorna la pagina per annullare le modifiche e tornare alle flashcard." },
+   "Português": { topicPlaceholder: "Tópico (ou deixe vazio)", questionPlaceholder: "Pergunta", answerPlaceholder: "Resposta", title: "Editor de Flashcards TSOFA", back: "← Voltar aos Flashcards", apply: "Aplicar", download: "Baixar", instructions: "Você pode copiar e colar o código TOPIC e FLASHCARDS de aplicativos de flashcards existentes para carregá-los neste editor:", cancelNote: "Atualize a página para cancelar as alterações e voltar aos flashcards." },
+   "Polski": { topicPlaceholder: "Temat (lub zostaw puste)", questionPlaceholder: "Pytanie", answerPlaceholder: "Odpowiedź", title: "Edytor Fiszek TSOFA", back: "← Powrót do Fiszek", apply: "Zastosuj", download: "Pobierz", instructions: "Możesz skopiować i wkleić kod TOPIC i FLASHCARDS z istniejących aplikacji fiszek, aby załadować je do tego edytora:", cancelNote: "Odśwież stronę, aby anulować zmiany i wrócić do fiszek." },
+   "Русский": { topicPlaceholder: "Тема (или оставьте пустым)", questionPlaceholder: "Вопрос", answerPlaceholder: "Ответ", title: "Редактор карточек TSOFA", back: "← Назад к карточкам", apply: "Применить", download: "Скачать", instructions: "Вы можете скопировать и вставить код TOPIC и FLASHCARDS из существующих приложений карточек для загрузки в этот редактор:", cancelNote: "Обновите страницу, чтобы отменить изменения и вернуться к карточкам." },
+   "Norsk": { topicPlaceholder: "Emne (eller la stå tomt)", questionPlaceholder: "Spørsmål", answerPlaceholder: "Svar", title: "TSOFA Flashkort-editor", back: "← Tilbake til flashkort", apply: "Bruk", download: "Last ned", instructions: "Du kan kopiere og lime inn TOPIC og FLASHCARDS kode fra eksisterende flashkort-apper for å laste dem inn i denne editoren:", cancelNote: "Oppdater siden for å avbryte endringer og gå tilbake til flashkortene." },
+   "Svenska": { topicPlaceholder: "Ämne (eller lämna tomt)", questionPlaceholder: "Fråga", answerPlaceholder: "Svar", title: "TSOFA Flashkort-editor", back: "← Tillbaka till flashkort", apply: "Tillämpa", download: "Ladda ner", instructions: "Du kan kopiera och klistra in TOPIC och FLASHCARDS kod från befintliga flashkort-appar för att ladda dem i denna editor:", cancelNote: "Uppdatera sidan för att avbryta ändringar och gå tillbaka till flashkorten." },
+   "中文": { topicPlaceholder: "主题（或留空）", questionPlaceholder: "问题", answerPlaceholder: "答案", title: "TSOFA 闪卡编辑器", back: "← 返回闪卡", apply: "应用", download: "下载", instructions: "您可以从现有的闪卡应用程序复制并粘贴TOPIC和FLASHCARDS代码以加载到此编辑器中：", cancelNote: "刷新页面以取消更改并返回闪卡。" },
+   "हिन्दी": { topicPlaceholder: "विषय (या खाली छोड़ें)", questionPlaceholder: "प्रश्न", answerPlaceholder: "उत्तर", title: "TSOFA फ्लैशकार्ड एडिटर", back: "← फ्लैशकार्ड पर वापस", apply: "लागू करें", download: "डाउनलोड", instructions: "आप मौजूदा फ्लैशकार्ड ऐप्स से TOPIC और FLASHCARDS कोड कॉपी और पेस्ट करके इस एडिटर में लोड कर सकते हैं:", cancelNote: "परिवर्तन रद्द करने और फ्लैशकार्ड पर वापस जाने के लिए पृष्ठ को रिफ्रेश करें।" },
+   "বাংলা": { topicPlaceholder: "বিষয় (অথবা খালি রাখুন)", questionPlaceholder: "প্রশ্ন", answerPlaceholder: "উত্তর", title: "TSOFA ফ্ল্যাশকার্ড এডিটর", back: "← ফ্ল্যাশকার্ডে ফিরে যান", apply: "প্রয়োগ করুন", download: "ডাউনলোড", instructions: "আপনি বিদ্যমান ফ্ল্যাশকার্ড অ্যাপ্স থেকে TOPIC এবং FLASHCARDS কোড কপি এবং পেস্ট করে এই এডিটরে লোড করতে পারেন:", cancelNote: "পরিবর্তন বাতিল করে ফ্ল্যাশকার্ডে ফিরে যেতে পৃষ্ঠা রিফ্রেশ করুন।" },
+   "日本語": { topicPlaceholder: "トピック（または空白のまま）", questionPlaceholder: "質問", answerPlaceholder: "答え", title: "TSOFA フラッシュカードエディタ", back: "← フラッシュカードに戻る", apply: "適用", download: "ダウンロード", instructions: "既存のフラッシュカードアプリからTOPICとFLASHCARDSコードをコピーして貼り付けることで、このエディタに読み込むことができます：", cancelNote: "変更を取り消してフラッシュカードに戻るにはページを更新してください。" },
+   "한국어": { topicPlaceholder: "주제 (또는 비워두기)", questionPlaceholder: "질문", answerPlaceholder: "답변", title: "TSOFA 플래시카드 편집기", back: "← 플래시카드로 돌아가기", apply: "적용", download: "다운로드", instructions: "기존 플래시카드 앱에서 TOPIC과 FLASHCARDS 코드를 복사하여 이 편집기에 붙여넣을 수 있습니다:", cancelNote: "변경 사항을 취소하고 플래시카드로 돌아가려면 페이지를 새로 고치세요." },
+   "ไทย": { topicPlaceholder: "หัวข้อ (หรือเว้นว่าง)", questionPlaceholder: "คำถาม", answerPlaceholder: "คำตอบ", title: "ตัวแก้ไขบัตรคำ TSOFA", back: "← กลับไปยังบัตรคำ", apply: "นำไปใช้", download: "ดาวน์โหลด", instructions: "คุณสามารถคัดลอกและวางโค้ด TOPIC และ FLASHCARDS จากแอปบัตรคำที่มีอยู่เพื่อโหลดในโปรแกรมแก้ไขนี้:", cancelNote: "รีเฟรชหน้าเพื่อยกเลิกการเปลี่ยนแปลงและกลับไปยังบัตรคำ" },
+   "العربية": { topicPlaceholder: "الموضوع (أو اتركه فارغًا)", questionPlaceholder: "السؤال", answerPlaceholder: "الجواب", title: "محرر بطاقات TSOFA", back: "← العودة إلى البطاقات", apply: "تطبيق", download: "تحميل", instructions: "يمكنك نسخ ولصق كود TOPIC و FLASHCARDS من تطبيقات البطاقات التعليمية الموجودة لتحميلها في هذا المحرر:", cancelNote: "قم بتحديث الصفحة لإلغاء التغييرات والعودة إلى البطاقات." },
+   "Tiếng Việt": { topicPlaceholder: "Chủ đề (hoặc để trống)", questionPlaceholder: "Câu hỏi", answerPlaceholder: "Câu trả lời", title: "Trình chỉnh sửa Flashcard TSOFA", back: "← Quay lại Flashcards", apply: "Áp dụng", download: "Tải xuống", instructions: "Bạn có thể sao chép và dán mã TOPIC và FLASHCARDS từ các ứng dụng flashcard hiện có để tải chúng vào trình chỉnh sửa này:", cancelNote: "Làm mới trang để hủy các thay đổi và quay lại flashcard." },
+   "Türkçe": { topicPlaceholder: "Konu (veya boş bırakın)", questionPlaceholder: "Soru", answerPlaceholder: "Cevap", title: "TSOFA Flashcard Editörü", back: "← Flashcardlara Dön", apply: "Uygula", download: "İndir", instructions: "Mevcut flashcard uygulamalarından TOPIC ve FLASHCARDS kodunu kopyalayıp yapıştırarak bu editöre yükleyebilirsiniz:", cancelNote: "Değişiklikleri iptal etmek ve flashcardlara dönmek için sayfayı yenileyin." },
+   "Tagalog": { topicPlaceholder: "Paksa (o iwanang blangko)", questionPlaceholder: "Tanong", answerPlaceholder: "Sagot", title: "TSOFA Flashcard Editor", back: "← Bumalik sa mga Flashcard", apply: "Ilapat", download: "I-download", instructions: "Maaari mong kopyahin at i-paste ang TOPIC at FLASHCARDS code mula sa mga umiiral na flashcard apps upang i-load sa editor na ito:", cancelNote: "I-refresh ang pahina upang kanselahin ang mga pagbabago at bumalik sa mga flashcard." },
+   "Kiswahili": { topicPlaceholder: "Mada (au acha tupu)", questionPlaceholder: "Swali", answerPlaceholder: "Jibu", title: "Mhariri wa Flashcard wa TSOFA", back: "← Rudi kwa Flashcard", apply: "Tekeleza", download: "Pakua", instructions: "Unaweza kunakili na kubandika msimbo wa TOPIC na FLASHCARDS kutoka kwa programu za kadi za kujifunza zilizopo ili kuzipakia katika mhariri huu:", cancelNote: "Onyesha upya ukurasa ili kughairi mabadiliko na kurudi kwa flashcard." },
+   "فارسی": { topicPlaceholder: "موضوع (یا خالی بگذارید)", questionPlaceholder: "سوال", answerPlaceholder: "جواب", title: "ویرایشگر فلش کارت TSOFA", back: "← بازگشت به فلش کارت‌ها", apply: "اعمال", download: "دانلود", instructions: "می‌توانید کد TOPIC و FLASHCARDS را از برنامه‌های فلش کارت موجود کپی و در این ویرایشگر بارگذاری کنید:", cancelNote: "برای لغو تغییرات و بازگشت به فلش کارت‌ها، صفحه را تازه‌سازی کنید." },
+   "Bahasa Indonesia": { topicPlaceholder: "Topik (atau biarkan kosong)", questionPlaceholder: "Pertanyaan", answerPlaceholder: "Jawaban", title: "Editor Flashcard TSOFA", back: "← Kembali ke Flashcard", apply: "Terapkan", download: "Unduh", instructions: "Anda dapat menyalin dan menempel kode TOPIC dan FLASHCARDS dari aplikasi flashcard yang ada untuk memuat ke editor ini:", cancelNote: "Segarkan halaman untuk membatalkan perubahan dan kembali ke flashcard." }
+  };
+
+  let editorFlashcards = [];
+  let editorDraggedIndex = null;
+  let editorOutputUpdating = false;
+
+  function editorTexts() {
+   const lang = document.getElementById('languageSelect').value;
+   return editor_translations[lang] || editor_translations['English'];
+  }
+
+  function openEditor() {
+   const t = editorTexts();
+   document.getElementById('editorTitle').textContent = t.title;
+   document.getElementById('editorBackBtn').textContent = t.back;
+   document.getElementById('editorTopicInput').placeholder = t.topicPlaceholder;
+   document.getElementById('editorDownloadBtn').textContent = t.download;
+   document.getElementById('editorInstructions').textContent = t.instructions;
+   document.getElementById('editorCancelNote').textContent = t.cancelNote;
+
+   document.getElementById('editorTopicInput').value = TOPIC || '';
+   editorFlashcards = processedFlashcards.map(c => ({ question: c[0] || '', answer: c[1] || '' }));
+   if (editorFlashcards.length === 0) {
+    editorFlashcards = [{ question: '', answer: '' }, { question: '', answer: '' }, { question: '', answer: '' }];
+   }
+   editorRenderFlashcards();
+   editorUpdateOutputWithFlag();
+
+   document.getElementById('viewerView').style.display = 'none';
+   document.getElementById('editorView').style.display = 'block';
+  }
+
+  function closeEditor() {
+   document.getElementById('editorView').style.display = 'none';
+   document.getElementById('viewerView').style.display = 'block';
+  }
+
+  function editorAddFlashcard() {
+   editorFlashcards.push({ question: '', answer: '' });
+   editorRenderFlashcards();
+   editorUpdateOutputWithFlag();
+  }
+
+  function editorRemoveFlashcard(index) {
+   if (editorFlashcards.length > 1) {
+    editorFlashcards.splice(index, 1);
+    editorRenderFlashcards();
+    editorUpdateOutputWithFlag();
+   }
+  }
+
+  function editorRenderFlashcards() {
+   const container = document.getElementById('flashcardsEditContainer');
+   const t = editorTexts();
+   container.innerHTML = '';
+
+   editorFlashcards.forEach((flashcard, index) => {
+    const dropIndicator = document.createElement('div');
+    dropIndicator.className = 'drop-indicator';
+    dropIndicator.dataset.index = index;
+    container.appendChild(dropIndicator);
+
+    const row = document.createElement('div');
+    row.className = 'flashcard-row';
+    row.draggable = true;
+    row.dataset.index = index;
+
+    const dragHandle = document.createElement('div');
+    dragHandle.className = 'drag-handle';
+    dragHandle.textContent = '⋮⋮';
+
+    const content = document.createElement('div');
+    content.className = 'edit-card-content';
+
+    const qta = document.createElement('textarea');
+    qta.className = 'flashcard-textarea';
+    qta.placeholder = t.questionPlaceholder;
+    qta.value = flashcard.question;
+    qta.oninput = (e) => { editorFlashcards[index].question = e.target.value; editorUpdateOutputWithFlag(); };
+
+    const ata = document.createElement('textarea');
+    ata.className = 'flashcard-textarea';
+    ata.placeholder = t.answerPlaceholder;
+    ata.value = flashcard.answer;
+    ata.oninput = (e) => { editorFlashcards[index].answer = e.target.value; editorUpdateOutputWithFlag(); };
+
+    content.appendChild(qta);
+    content.appendChild(ata);
+
+    const removeBtn = document.createElement('button');
+    removeBtn.className = 'remove-card-btn';
+    removeBtn.textContent = 'X';
+    removeBtn.onclick = () => editorRemoveFlashcard(index);
+
+    row.appendChild(dragHandle);
+    row.appendChild(content);
+    row.appendChild(removeBtn);
+
+    row.addEventListener('dragstart', editorHandleDragStart);
+    row.addEventListener('dragend', editorHandleDragEnd);
+
+    container.appendChild(row);
+   });
+
+   const finalDropIndicator = document.createElement('div');
+   finalDropIndicator.className = 'drop-indicator';
+   finalDropIndicator.dataset.index = editorFlashcards.length;
+   container.appendChild(finalDropIndicator);
+  }
+
+  function editorHandleDragStart(e) {
+   editorDraggedIndex = parseInt(e.currentTarget.dataset.index, 10);
+   e.currentTarget.classList.add('dragging');
+   e.dataTransfer.effectAllowed = 'move';
+  }
+
+  function editorHandleDragEnd(e) {
+   e.currentTarget.classList.remove('dragging');
+   document.querySelectorAll('#flashcardsEditContainer .drop-indicator').forEach(d => d.classList.remove('active'));
+   editorDraggedIndex = null;
+  }
+
+  function editorHandleDragOver(e) {
+   e.preventDefault();
+   e.dataTransfer.dropEffect = 'move';
+   const container = document.getElementById('flashcardsEditContainer');
+   const afterElement = editorGetDragAfterElement(container, e.clientY);
+   const indicators = container.querySelectorAll('.drop-indicator');
+   indicators.forEach(d => d.classList.remove('active'));
+   if (afterElement == null) {
+    indicators[indicators.length - 1].classList.add('active');
+   } else {
+    const idx = parseInt(afterElement.dataset.index, 10);
+    if (indicators[idx]) indicators[idx].classList.add('active');
+   }
+  }
+
+  function editorHandleDrop(e) {
+   e.preventDefault();
+   e.stopPropagation();
+   if (editorDraggedIndex === null) return;
+   const container = document.getElementById('flashcardsEditContainer');
+   const afterElement = editorGetDragAfterElement(container, e.clientY);
+   let dropIndex = afterElement == null ? editorFlashcards.length : parseInt(afterElement.dataset.index, 10);
+   if (editorDraggedIndex !== dropIndex && editorDraggedIndex + 1 !== dropIndex) {
+    const item = editorFlashcards[editorDraggedIndex];
+    editorFlashcards.splice(editorDraggedIndex, 1);
+    let newIdx = dropIndex;
+    if (editorDraggedIndex < dropIndex) newIdx--;
+    editorFlashcards.splice(newIdx, 0, item);
+    editorRenderFlashcards();
+    editorUpdateOutputWithFlag();
+   }
+  }
+
+  function editorGetDragAfterElement(container, y) {
+   const draggable = [...container.querySelectorAll('.flashcard-row:not(.dragging)')];
+   return draggable.reduce((closest, child) => {
+    const box = child.getBoundingClientRect();
+    const offset = y - box.top - box.height / 2;
+    if (offset < 0 && offset > closest.offset) return { offset: offset, element: child };
+    return closest;
+   }, { offset: Number.NEGATIVE_INFINITY }).element;
+  }
+
+  function editorUpdateOutput() {
+   const topic = document.getElementById('editorTopicInput').value;
+   const language = document.getElementById('languageSelect').value;
+   let out = 'const LANGUAGE = ' + JSON.stringify(language) + ';\n';
+   out += 'const TOPIC = ' + JSON.stringify(topic) + ';\n';
+   const cards = editorFlashcards.map(c => [c.question, c.answer]);
+   out += serializeFlashcards(cards);
+   document.getElementById('editorOutputTextarea').value = out;
+  }
+
+  function editorUpdateOutputWithFlag() {
+   editorOutputUpdating = true;
+   editorUpdateOutput();
+   editorOutputUpdating = false;
+  }
+
+  function editorParseCode() {
+   const code = document.getElementById('editorOutputTextarea').value;
+   try {
+    const fn = new Function(code + '; return { TOPIC: typeof TOPIC !== "undefined" ? TOPIC : "", FLASHCARDS: typeof FLASHCARDS !== "undefined" ? FLASHCARDS : [] };');
+    const result = fn();
+    if (typeof result.TOPIC === 'string') {
+     document.getElementById('editorTopicInput').value = result.TOPIC;
+    }
+    let cards = result.FLASHCARDS;
+    if (typeof cards === 'string') {
+     cards = parseCSV(cards);
+    }
+    if (Array.isArray(cards)) {
+     editorFlashcards = cards.map(c => ({
+      question: (c && c[0] != null) ? String(c[0]) : '',
+      answer: (c && c[1] != null) ? String(c[1]) : ''
+     }));
+     if (editorFlashcards.length === 0) editorFlashcards = [{ question: '', answer: '' }];
+     editorRenderFlashcards();
+    }
+   } catch (err) {
+    // ignore parse errors while typing
+   }
+  }
+
+  function editorApply() {
+   TOPIC = document.getElementById('editorTopicInput').value;
+   FLASHCARDS = editorFlashcards.map(c => [c.question, c.answer]);
+   processedFlashcards = FLASHCARDS;
+   currentCards = [...processedFlashcards];
+   currentIndex = 0;
+   showingQuestion = true;
+   removedCards = [];
+
+   const topicHeading = document.getElementById('topicHeading');
+   if (TOPIC && TOPIC.trim() !== "") {
+    topicHeading.textContent = texts.topic + ": " + TOPIC;
+    topicHeading.style.display = 'block';
+    document.title = texts.title + " - " + TOPIC;
+   } else {
+    topicHeading.style.display = 'none';
+    document.title = texts.title;
+   }
+
+   displayCard();
+   updateButtons();
+   updateCounter();
+   updateUndoButton();
+
+   closeEditor();
+  }
+
+  function editorDownload() {
+   editorApply();
+   downloadFile();
+  }
+
+  // Wire up output textarea two-way sync (script runs at end of body, so elements exist)
+  document.getElementById('editorOutputTextarea').addEventListener('input', () => {
+   if (!editorOutputUpdating) editorParseCode();
+  });
+  document.getElementById('editorTopicInput').addEventListener('input', editorUpdateOutputWithFlag);
+
+  // Drag-and-drop listeners on the container so drops work in gaps between rows too
+  const flashcardsEditContainer = document.getElementById('flashcardsEditContainer');
+  flashcardsEditContainer.addEventListener('dragover', editorHandleDragOver);
+  flashcardsEditContainer.addEventListener('drop', editorHandleDrop);
+  flashcardsEditContainer.addEventListener('dragenter', (e) => e.preventDefault());
 
   // Initialize app when page loads
   window.onload = init;

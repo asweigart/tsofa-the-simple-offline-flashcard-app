@@ -1,620 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <script>
-const VERSION = "1.5.0";
+const VERSION = "1.6.0";
 const LANGUAGE = "English"; // English, Español, Français, Deutsch, Nederlands, Italiano, Português, Polski, Русский, Norsk, Svenska, 中文, हिन्दी, বাংলা, 日本語, 한국어, ไทย, العربية, Tiếng Việt, Türkçe, Tagalog, Kiswahili, فارسی, Bahasa Indonesia
 
 // ===== MODIFY YOUR FLASHCARDS HERE =====
-const TOPIC = 'Economics Terms';
+let TOPIC = "Demo Set of Flashcards";
+let JUSTIFICATION = "center"; // "left", "right", or "center"
 
+// Option 1: Array of arrays format
 let FLASHCARDS = [
-// Fundamental Concepts
-["<b>Economics</b>", "The study of how society manages its scarce resources"],
-["<b>Scarcity</b>", "Limited resources to meet unlimited wants"],
-["<b>Opportunity Cost</b>", "The value of the next best alternative forgone"],
-["<b>Trade-off</b>", "Giving up one thing to get another"],
-["<b>Incentive</b>", "Something that motivates or encourages behavior"],
-["<b>Marginal</b>", "Relating to an additional unit"],
-["<b>Utility</b>", "Satisfaction or benefit derived from consuming a good"],
-["<b>Rational Choice</b>", "Decision-making based on maximizing benefit"],
-["<b>Economic Model</b>", "Simplified representation of economic reality"],
-["<b>Ceteris Paribus</b>", "All other things being equal"],
-["<b>Positive Economics</b>", "Objective analysis of what is"],
-["<b>Normative Economics</b>", "Subjective statements about what ought to be"],
-["<b>Efficiency</b>", "Maximum output from given inputs"],
-["<b>Equity</b>", "Fairness in distribution of resources"],
-["<b>Factors of Production</b>", "Land, labor, capital, and entrepreneurship"],
-["<b>Capital</b>", "Man-made resources used in production"],
-["<b>Human Capital</b>", "Knowledge and skills of workers"],
-["<b>Physical Capital</b>", "Tools, machinery, and buildings"],
-["<b>Natural Resources</b>", "Materials from nature used in production"],
-["<b>Entrepreneurship</b>", "Risk-taking and innovation in business"],
-
-// Microeconomics - Supply and Demand
-["<b>Microeconomics</b>", "Study of individual economic units"],
-["<b>Demand</b>", "Quantity consumers are willing to buy at various prices"],
-["<b>Supply</b>", "Quantity producers are willing to sell at various prices"],
-["<b>Law of Demand</b>", "Price increases, quantity demanded decreases"],
-["<b>Law of Supply</b>", "Price increases, quantity supplied increases"],
-["<b>Equilibrium</b>", "Point where supply equals demand"],
-["<b>Equilibrium Price</b>", "Price where quantity supplied equals quantity demanded"],
-["<b>Market Clearing Price</b>", "Another term for equilibrium price"],
-["<b>Surplus</b>", "Quantity supplied exceeds quantity demanded"],
-["<b>Shortage</b>", "Quantity demanded exceeds quantity supplied"],
-["<b>Price Ceiling</b>", "Legal maximum price"],
-["<b>Price Floor</b>", "Legal minimum price"],
-["<b>Demand Curve</b>", "Graphical representation of demand schedule"],
-["<b>Supply Curve</b>", "Graphical representation of supply schedule"],
-["<b>Movement Along Curve</b>", "Change due to price change"],
-["<b>Shift of Curve</b>", "Change due to non-price factors"],
-["<b>Determinants of Demand</b>", "Income, preferences, prices of related goods, expectations, number of buyers"],
-["<b>Determinants of Supply</b>", "Input costs, technology, expectations, number of sellers"],
-["<b>Substitute Goods</b>", "Goods that can replace each other"],
-["<b>Complementary Goods</b>", "Goods used together"],
-["<b>Normal Good</b>", "Demand increases with income"],
-["<b>Inferior Good</b>", "Demand decreases with income"],
-["<b>Giffen Good</b>", "Inferior good where demand increases with price"],
-["<b>Veblen Good</b>", "Luxury good where demand increases with price"],
-
-// Elasticity
-["<b>Elasticity</b>", "Responsiveness of one variable to changes in another"],
-["<b>Price Elasticity of Demand</b>", "% change in quantity demanded / % change in price"],
-["<b>Price Elasticity of Supply</b>", "% change in quantity supplied / % change in price"],
-["<b>Elastic Demand</b>", "Elasticity > 1; responsive to price changes"],
-["<b>Inelastic Demand</b>", "Elasticity < 1; unresponsive to price changes"],
-["<b>Unit Elastic</b>", "Elasticity = 1; proportional response"],
-["<b>Perfectly Elastic</b>", "Infinite elasticity; horizontal demand curve"],
-["<b>Perfectly Inelastic</b>", "Zero elasticity; vertical demand curve"],
-["<b>Income Elasticity</b>", "% change in demand / % change in income"],
-["<b>Cross-Price Elasticity</b>", "% change in demand for X / % change in price of Y"],
-["<b>Determinants of Elasticity</b>", "Substitutes availability, necessity, time period, budget share"],
-["<b>Total Revenue Test</b>", "If elastic, price and revenue move oppositely"],
-["<b>Midpoint Method</b>", "Formula using average values for elasticity"],
-
-// Consumer Theory
-["<b>Consumer Surplus</b>", "Difference between willingness to pay and actual price"],
-["<b>Producer Surplus</b>", "Difference between actual price and willingness to sell"],
-["<b>Total Surplus</b>", "Consumer surplus + Producer surplus"],
-["<b>Deadweight Loss</b>", "Loss of economic efficiency"],
-["<b>Marginal Utility</b>", "Additional satisfaction from one more unit"],
-["<b>Diminishing Marginal Utility</b>", "Each additional unit provides less satisfaction"],
-["<b>Budget Constraint</b>", "Limit on consumption based on income"],
-["<b>Indifference Curve</b>", "Combinations providing equal satisfaction"],
-["<b>Marginal Rate of Substitution</b>", "Rate of trading one good for another"],
-["<b>Income Effect</b>", "Change in consumption due to change in purchasing power"],
-["<b>Substitution Effect</b>", "Change in consumption due to relative price change"],
-["<b>Consumer Equilibrium</b>", "Point where consumer maximizes utility"],
-["<b>Revealed Preference</b>", "Preferences shown through choices"],
-["<b>Behavioral Economics</b>", "Psychology in economic decision-making"],
-
-// Production and Costs
-["<b>Production Function</b>", "Relationship between inputs and output"],
-["<b>Short Run</b>", "Period where at least one input is fixed"],
-["<b>Long Run</b>", "Period where all inputs are variable"],
-["<b>Total Product</b>", "Total output produced"],
-["<b>Average Product</b>", "Output per unit of input"],
-["<b>Marginal Product</b>", "Additional output from one more input unit"],
-["<b>Law of Diminishing Returns</b>", "Eventually, marginal product decreases"],
-["<b>Returns to Scale</b>", "Output change when all inputs change proportionally"],
-["<b>Increasing Returns to Scale</b>", "Output increases more than proportionally"],
-["<b>Constant Returns to Scale</b>", "Output increases proportionally"],
-["<b>Decreasing Returns to Scale</b>", "Output increases less than proportionally"],
-["<b>Fixed Costs</b>", "Costs that don't vary with output"],
-["<b>Variable Costs</b>", "Costs that vary with output"],
-["<b>Total Cost</b>", "Fixed costs + Variable costs"],
-["<b>Average Total Cost</b>", "Total cost / Quantity"],
-["<b>Average Fixed Cost</b>", "Fixed cost / Quantity"],
-["<b>Average Variable Cost</b>", "Variable cost / Quantity"],
-["<b>Marginal Cost</b>", "Cost of producing one additional unit"],
-["<b>Economies of Scale</b>", "Cost advantages from increased production"],
-["<b>Diseconomies of Scale</b>", "Cost disadvantages from excessive size"],
-["<b>Minimum Efficient Scale</b>", "Smallest output where long-run average cost is minimized"],
-["<b>Sunk Cost</b>", "Cost that cannot be recovered"],
-["<b>Economic Cost</b>", "Explicit costs + Implicit costs"],
-["<b>Accounting Cost</b>", "Explicit monetary costs only"],
-["<b>Implicit Cost</b>", "Opportunity cost of using owned resources"],
-["<b>Economic Profit</b>", "Total revenue - Economic costs"],
-["<b>Accounting Profit</b>", "Total revenue - Accounting costs"],
-["<b>Normal Profit</b>", "Zero economic profit; covering opportunity costs"],
-
-// Market Structures
-["<b>Perfect Competition</b>", "Many sellers, identical products, no barriers"],
-["<b>Monopoly</b>", "Single seller, unique product, high barriers"],
-["<b>Oligopoly</b>", "Few sellers, similar products, some barriers"],
-["<b>Monopolistic Competition</b>", "Many sellers, differentiated products, low barriers"],
-["<b>Market Power</b>", "Ability to influence market price"],
-["<b>Price Taker</b>", "Firm that accepts market price"],
-["<b>Price Maker</b>", "Firm that can set its price"],
-["<b>Barriers to Entry</b>", "Obstacles preventing new firms from entering"],
-["<b>Natural Monopoly</b>", "Single firm can supply entire market at lowest cost"],
-["<b>Product Differentiation</b>", "Making products distinct from competitors"],
-["<b>Profit Maximization</b>", "Producing where MR = MC"],
-["<b>Shutdown Point</b>", "Price below average variable cost"],
-["<b>Break-even Point</b>", "Zero economic profit"],
-["<b>Contestable Market</b>", "Market with low barriers and potential competition"],
-["<b>Concentration Ratio</b>", "Market share of largest firms"],
-["<b>Herfindahl Index</b>", "Sum of squared market shares"],
-
-// Game Theory and Strategic Behavior
-["<b>Game Theory</b>", "Study of strategic decision-making"],
-["<b>Nash Equilibrium</b>", "No player can benefit by changing strategy alone"],
-["<b>Dominant Strategy</b>", "Best strategy regardless of others' actions"],
-["<b>Prisoner's Dilemma</b>", "Game where individual rationality leads to collective irrationality"],
-["<b>Zero-Sum Game</b>", "One's gain equals another's loss"],
-["<b>Positive-Sum Game</b>", "All players can gain"],
-["<b>Collusion</b>", "Firms cooperating to restrict competition"],
-["<b>Cartel</b>", "Formal collusive agreement"],
-["<b>Price Leadership</b>", "One firm sets price, others follow"],
-["<b>Predatory Pricing</b>", "Below-cost pricing to eliminate competitors"],
-["<b>Price Discrimination</b>", "Charging different prices to different consumers"],
-["<b>First-Degree Price Discrimination</b>", "Perfect price discrimination; charging maximum willingness to pay"],
-["<b>Second-Degree Price Discrimination</b>", "Quantity discounts"],
-["<b>Third-Degree Price Discrimination</b>", "Different prices for different groups"],
-
-// Market Failures
-["<b>Market Failure</b>", "Market fails to allocate resources efficiently"],
-["<b>Externality</b>", "Cost or benefit affecting third parties"],
-["<b>Negative Externality</b>", "External cost (e.g., pollution)"],
-["<b>Positive Externality</b>", "External benefit (e.g., education)"],
-["<b>Public Good</b>", "Non-rival and non-excludable"],
-["<b>Private Good</b>", "Rival and excludable"],
-["<b>Common Resource</b>", "Rival but non-excludable"],
-["<b>Club Good</b>", "Non-rival but excludable"],
-["<b>Free Rider Problem</b>", "Using goods without paying"],
-["<b>Tragedy of the Commons</b>", "Overuse of common resources"],
-["<b>Asymmetric Information</b>", "Unequal information between parties"],
-["<b>Adverse Selection</b>", "Hidden information before transaction"],
-["<b>Moral Hazard</b>", "Hidden action after transaction"],
-["<b>Principal-Agent Problem</b>", "Conflict between owner and manager interests"],
-["<b>Signaling</b>", "Credible communication of private information"],
-["<b>Screening</b>", "Inducing information revelation"],
-["<b>Coase Theorem</b>", "Private bargaining can solve externalities"],
-["<b>Pigouvian Tax</b>", "Tax equal to external cost"],
-["<b>Subsidy</b>", "Payment to encourage activity"],
-
-// Labor Economics
-["<b>Labor Force</b>", "Employed plus unemployed seeking work"],
-["<b>Labor Force Participation Rate</b>", "Labor force / Working-age population"],
-["<b>Unemployment Rate</b>", "Unemployed / Labor force"],
-["<b>Employment Rate</b>", "Employed / Working-age population"],
-["<b>Frictional Unemployment</b>", "Short-term job searching"],
-["<b>Structural Unemployment</b>", "Mismatch between skills and jobs"],
-["<b>Cyclical Unemployment</b>", "Due to economic downturns"],
-["<b>Natural Rate of Unemployment</b>", "Frictional + Structural unemployment"],
-["<b>Full Employment</b>", "Only natural unemployment exists"],
-["<b>Wage</b>", "Price of labor"],
-["<b>Minimum Wage</b>", "Legal minimum hourly payment"],
-["<b>Efficiency Wage</b>", "Above-market wage to increase productivity"],
-["<b>Compensating Differential</b>", "Wage difference for job characteristics"],
-["<b>Human Capital Theory</b>", "Education/training increases productivity"],
-["<b>Marginal Revenue Product</b>", "Additional revenue from one more worker"],
-["<b>Derived Demand</b>", "Demand for inputs based on output demand"],
-["<b>Monopsony</b>", "Single buyer in labor market"],
-["<b>Labor Union</b>", "Organization representing workers"],
-["<b>Collective Bargaining</b>", "Union negotiation with employers"],
-["<b>Strike</b>", "Work stoppage by employees"],
-["<b>Discrimination</b>", "Different treatment based on non-economic factors"],
-["<b>Glass Ceiling</b>", "Invisible barrier to advancement"],
-["<b>Gender Wage Gap</b>", "Difference in average earnings by gender"],
-
-// Macroeconomics - National Accounts
-["<b>Macroeconomics</b>", "Study of the economy as a whole"],
-["<b>Gross Domestic Product (GDP)</b>", "Total value of goods and services produced"],
-["<b>Nominal GDP</b>", "GDP at current prices"],
-["<b>Real GDP</b>", "GDP adjusted for inflation"],
-["<b>GDP Deflator</b>", "Price index measuring inflation"],
-["<b>GDP Per Capita</b>", "GDP divided by population"],
-["<b>Gross National Product (GNP)</b>", "GDP plus net income from abroad"],
-["<b>Net Domestic Product</b>", "GDP minus depreciation"],
-["<b>National Income</b>", "Total income earned by factors of production"],
-["<b>Personal Income</b>", "Income received by individuals"],
-["<b>Disposable Income</b>", "Personal income minus taxes"],
-["<b>Consumption</b>", "Spending on goods and services"],
-["<b>Investment</b>", "Spending on capital goods"],
-["<b>Government Spending</b>", "Public sector purchases"],
-["<b>Net Exports</b>", "Exports minus imports"],
-["<b>Aggregate Demand</b>", "Total demand for goods and services"],
-["<b>Aggregate Supply</b>", "Total supply of goods and services"],
-["<b>Output Gap</b>", "Difference between actual and potential GDP"],
-["<b>Potential GDP</b>", "Maximum sustainable output"],
-
-// Money and Banking
-["<b>Money</b>", "Medium of exchange, unit of account, store of value"],
-["<b>Currency</b>", "Physical money (coins and bills)"],
-["<b>M1 Money Supply</b>", "Currency + Checkable deposits"],
-["<b>M2 Money Supply</b>", "M1 + Savings deposits + Money market funds"],
-["<b>Liquidity</b>", "Ease of converting to cash"],
-["<b>Fiat Money</b>", "Money with no intrinsic value"],
-["<b>Commodity Money</b>", "Money with intrinsic value"],
-["<b>Central Bank</b>", "Institution managing money supply"],
-["<b>Federal Reserve</b>", "U.S. central bank"],
-["<b>Commercial Bank</b>", "Institution accepting deposits and making loans"],
-["<b>Reserve Requirement</b>", "Minimum reserves banks must hold"],
-["<b>Excess Reserves</b>", "Reserves above requirement"],
-["<b>Money Multiplier</b>", "1 / Reserve requirement ratio"],
-["<b>Fractional Reserve Banking</b>", "Banks lend out portion of deposits"],
-["<b>Bank Run</b>", "Mass withdrawal of deposits"],
-["<b>FDIC Insurance</b>", "Federal deposit insurance"],
-["<b>Interest Rate</b>", "Cost of borrowing money"],
-["<b>Nominal Interest Rate</b>", "Stated interest rate"],
-["<b>Real Interest Rate</b>", "Nominal rate minus inflation"],
-["<b>Prime Rate</b>", "Rate for best customers"],
-["<b>Federal Funds Rate</b>", "Rate banks charge each other"],
-["<b>Discount Rate</b>", "Rate Fed charges banks"],
-["<b>Yield</b>", "Return on investment"],
-["<b>Bond</b>", "Debt security"],
-["<b>Stock</b>", "Ownership share"],
-
-// Monetary Policy
-["<b>Monetary Policy</b>", "Central bank actions affecting money supply"],
-["<b>Expansionary Monetary Policy</b>", "Increasing money supply"],
-["<b>Contractionary Monetary Policy</b>", "Decreasing money supply"],
-["<b>Open Market Operations</b>", "Buying/selling government securities"],
-["<b>Quantitative Easing</b>", "Large-scale asset purchases"],
-["<b>Forward Guidance</b>", "Communication about future policy"],
-["<b>Taylor Rule</b>", "Formula for setting interest rates"],
-["<b>Inflation Targeting</b>", "Policy focused on price stability"],
-["<b>Dual Mandate</b>", "Price stability and full employment"],
-["<b>Monetary Base</b>", "Currency + Bank reserves"],
-["<b>Velocity of Money</b>", "Rate money changes hands"],
-["<b>Quantity Theory of Money</b>", "MV = PY"],
-["<b>Liquidity Trap</b>", "Monetary policy ineffective at zero rates"],
-["<b>Zero Lower Bound</b>", "Nominal rates can't go below zero"],
-
-// Inflation
-["<b>Inflation</b>", "General price level increase"],
-["<b>Deflation</b>", "General price level decrease"],
-["<b>Disinflation</b>", "Decreasing inflation rate"],
-["<b>Hyperinflation</b>", "Extremely high inflation"],
-["<b>Stagflation</b>", "Inflation with stagnant growth"],
-["<b>Consumer Price Index (CPI)</b>", "Measure of consumer prices"],
-["<b>Producer Price Index (PPI)</b>", "Measure of wholesale prices"],
-["<b>Core Inflation</b>", "Excluding food and energy"],
-["<b>Cost-Push Inflation</b>", "Rising costs cause inflation"],
-["<b>Demand-Pull Inflation</b>", "Excess demand causes inflation"],
-["<b>Wage-Price Spiral</b>", "Wages and prices reinforcing each other"],
-["<b>Inflation Expectations</b>", "Anticipated future inflation"],
-["<b>Menu Costs</b>", "Costs of changing prices"],
-["<b>Shoe Leather Costs</b>", "Costs of reducing money holdings"],
-["<b>Bracket Creep</b>", "Inflation pushing into higher tax brackets"],
-["<b>Fisher Effect</b>", "Nominal rate = Real rate + Inflation"],
-["<b>Phillips Curve</b>", "Trade-off between inflation and unemployment"],
-["<b>NAIRU</b>", "Non-accelerating inflation rate of unemployment"],
-
-// Fiscal Policy
-["<b>Fiscal Policy</b>", "Government spending and taxation"],
-["<b>Expansionary Fiscal Policy</b>", "Increasing spending or cutting taxes"],
-["<b>Contractionary Fiscal Policy</b>", "Decreasing spending or raising taxes"],
-["<b>Budget Deficit</b>", "Spending exceeds revenue"],
-["<b>Budget Surplus</b>", "Revenue exceeds spending"],
-["<b>Balanced Budget</b>", "Revenue equals spending"],
-["<b>National Debt</b>", "Accumulated deficits"],
-["<b>Debt-to-GDP Ratio</b>", "Debt relative to economic size"],
-["<b>Crowding Out</b>", "Government borrowing reducing private investment"],
-["<b>Ricardian Equivalence</b>", "Consumers save for future taxes"],
-["<b>Automatic Stabilizers</b>", "Taxes and transfers that adjust automatically"],
-["<b>Discretionary Fiscal Policy</b>", "Deliberate policy changes"],
-["<b>Multiplier Effect</b>", "Initial spending creates larger impact"],
-["<b>Marginal Propensity to Consume</b>", "Fraction of extra income spent"],
-["<b>Marginal Propensity to Save</b>", "Fraction of extra income saved"],
-["<b>Tax Incidence</b>", "Who bears the tax burden"],
-["<b>Progressive Tax</b>", "Higher rates for higher incomes"],
-["<b>Regressive Tax</b>", "Higher burden on lower incomes"],
-["<b>Proportional Tax</b>", "Same rate for all incomes"],
-["<b>Laffer Curve</b>", "Relationship between tax rates and revenue"],
-
-// Economic Growth
-["<b>Economic Growth</b>", "Increase in real GDP over time"],
-["<b>Growth Rate</b>", "Percentage change in GDP"],
-["<b>Rule of 70</b>", "Years to double = 70/growth rate"],
-["<b>Productivity</b>", "Output per unit of input"],
-["<b>Labor Productivity</b>", "Output per worker"],
-["<b>Total Factor Productivity</b>", "Efficiency in using all inputs"],
-["<b>Solow Growth Model</b>", "Model of long-run growth"],
-["<b>Steady State</b>", "Long-run equilibrium in growth model"],
-["<b>Convergence</b>", "Poor countries growing faster"],
-["<b>Human Capital (Growth)</b>", "Education and skills affecting growth"],
-["<b>Physical Capital (Growth)</b>", "Machinery and infrastructure"],
-["<b>Technological Progress</b>", "Innovation driving growth"],
-["<b>Research and Development</b>", "Investment in innovation"],
-["<b>Creative Destruction</b>", "Innovation replacing old methods"],
-["<b>Institutions</b>", "Rules and organizations affecting economy"],
-["<b>Property Rights</b>", "Legal ownership protection"],
-["<b>Rule of Law</b>", "Fair and predictable legal system"],
-["<b>Infrastructure</b>", "Basic physical systems"],
-["<b>Demographic Transition</b>", "Population changes with development"],
-
-// Business Cycles
-["<b>Business Cycle</b>", "Fluctuations in economic activity"],
-["<b>Expansion</b>", "Period of economic growth"],
-["<b>Peak</b>", "High point of business cycle"],
-["<b>Contraction</b>", "Period of economic decline"],
-["<b>Trough</b>", "Low point of business cycle"],
-["<b>Recession</b>", "Two consecutive quarters of negative growth"],
-["<b>Depression</b>", "Severe and prolonged recession"],
-["<b>Recovery</b>", "Return to growth after recession"],
-["<b>Leading Indicators</b>", "Predict future economic activity"],
-["<b>Lagging Indicators</b>", "Confirm past economic activity"],
-["<b>Coincident Indicators</b>", "Move with current economy"],
-["<b>Procyclical</b>", "Moves with business cycle"],
-["<b>Countercyclical</b>", "Moves against business cycle"],
-["<b>Acyclical</b>", "No relation to business cycle"],
-["<b>Output Volatility</b>", "Fluctuations in production"],
-["<b>Consumption Smoothing</b>", "Stable consumption over time"],
-["<b>Investment Volatility</b>", "Large fluctuations in investment"],
-["<b>Inventory Cycle</b>", "Fluctuations in stock levels"],
-["<b>Credit Cycle</b>", "Expansion and contraction of credit"],
-
-// International Trade
-["<b>International Trade</b>", "Exchange between countries"],
-["<b>Exports</b>", "Goods sold to other countries"],
-["<b>Imports</b>", "Goods bought from other countries"],
-["<b>Trade Balance</b>", "Exports minus imports"],
-["<b>Trade Surplus</b>", "Exports exceed imports"],
-["<b>Trade Deficit</b>", "Imports exceed exports"],
-["<b>Current Account</b>", "Trade balance + Income flows"],
-["<b>Capital Account</b>", "Financial asset flows"],
-["<b>Balance of Payments</b>", "All international transactions"],
-["<b>Comparative Advantage</b>", "Lower opportunity cost in production"],
-["<b>Absolute Advantage</b>", "More efficient production"],
-["<b>Terms of Trade</b>", "Export prices / Import prices"],
-["<b>Gains from Trade</b>", "Benefits from specialization and exchange"],
-["<b>Trade Barriers</b>", "Restrictions on international trade"],
-["<b>Tariff</b>", "Tax on imports"],
-["<b>Quota</b>", "Quantity limit on imports"],
-["<b>Embargo</b>", "Complete trade ban"],
-["<b>Subsidy (Trade)</b>", "Government support for exports"],
-["<b>Dumping</b>", "Selling below cost in foreign markets"],
-["<b>Free Trade</b>", "No barriers to trade"],
-["<b>Protectionism</b>", "Policies restricting imports"],
-["<b>Trade Agreement</b>", "Treaty reducing trade barriers"],
-["<b>World Trade Organization (WTO)</b>", "International trade regulation body"],
-["<b>NAFTA/USMCA</b>", "North American trade agreement"],
-["<b>European Union (EU)</b>", "European economic integration"],
-["<b>Globalization</b>", "Increasing international integration"],
-
-// Exchange Rates
-["<b>Exchange Rate</b>", "Price of one currency in another"],
-["<b>Appreciation</b>", "Currency value increase"],
-["<b>Depreciation</b>", "Currency value decrease"],
-["<b>Floating Exchange Rate</b>", "Market-determined rate"],
-["<b>Fixed Exchange Rate</b>", "Government-set rate"],
-["<b>Managed Float</b>", "Occasional government intervention"],
-["<b>Devaluation</b>", "Official reduction in fixed rate"],
-["<b>Revaluation</b>", "Official increase in fixed rate"],
-["<b>Foreign Exchange Market</b>", "Market for currency trading"],
-["<b>Spot Rate</b>", "Current exchange rate"],
-["<b>Forward Rate</b>", "Future exchange rate"],
-["<b>Currency Arbitrage</b>", "Profiting from rate differences"],
-["<b>Purchasing Power Parity</b>", "Exchange rates equalizing prices"],
-["<b>Big Mac Index</b>", "Informal PPP measure"],
-["<b>Real Exchange Rate</b>", "Nominal rate adjusted for prices"],
-["<b>Currency Crisis</b>", "Rapid depreciation"],
-["<b>Capital Flight</b>", "Large outflow of financial assets"],
-["<b>Foreign Reserves</b>", "Central bank foreign currency holdings"],
-["<b>Bretton Woods</b>", "Post-WWII fixed rate system"],
-["<b>Gold Standard</b>", "Currency backed by gold"],
-
-// Financial Markets
-["<b>Financial Market</b>", "Market for financial assets"],
-["<b>Capital Market</b>", "Long-term securities market"],
-["<b>Money Market</b>", "Short-term debt market"],
-["<b>Primary Market</b>", "New securities issuance"],
-["<b>Secondary Market</b>", "Existing securities trading"],
-["<b>Stock Market</b>", "Equity trading market"],
-["<b>Bond Market</b>", "Debt securities market"],
-["<b>Derivatives Market</b>", "Market for financial contracts"],
-["<b>Foreign Exchange Market (Forex)</b>", "Currency trading market"],
-["<b>Commodity Market</b>", "Raw materials trading"],
-["<b>IPO (Initial Public Offering)</b>", "First stock sale to public"],
-["<b>Market Capitalization</b>", "Total value of company's shares"],
-["<b>Dividend</b>", "Payment to shareholders"],
-["<b>Capital Gain</b>", "Profit from asset sale"],
-["<b>Yield Curve</b>", "Interest rates across maturities"],
-["<b>Risk Premium</b>", "Extra return for risk"],
-["<b>Default Risk</b>", "Risk of non-payment"],
-["<b>Credit Rating</b>", "Assessment of creditworthiness"],
-["<b>Leverage</b>", "Using borrowed funds"],
-["<b>Margin</b>", "Borrowing to buy securities"],
-["<b>Short Selling</b>", "Selling borrowed securities"],
-["<b>Hedge</b>", "Protection against risk"],
-["<b>Speculation</b>", "Risky investment for profit"],
-["<b>Portfolio</b>", "Collection of investments"],
-["<b>Diversification</b>", "Spreading risk across assets"],
-["<b>Systematic Risk</b>", "Market-wide risk"],
-["<b>Unsystematic Risk</b>", "Firm-specific risk"],
-["<b>Beta</b>", "Measure of systematic risk"],
-["<b>Alpha</b>", "Excess return over benchmark"],
-["<b>Efficient Market Hypothesis</b>", "Prices reflect all information"],
-["<b>Behavioral Finance</b>", "Psychology in financial decisions"],
-["<b>Bubble</b>", "Asset prices exceed fundamental value"],
-["<b>Market Crash</b>", "Rapid market decline"],
-["<b>Bull Market</b>", "Rising market"],
-["<b>Bear Market</b>", "Falling market"],
-["<b>Volatility</b>", "Price fluctuation magnitude"],
-["<b>Liquidity (Finance)</b>", "Ease of buying/selling without price impact"],
-
-// Financial Instruments
-["<b>Equity</b>", "Ownership stake"],
-["<b>Debt Security</b>", "Loan instrument"],
-["<b>Common Stock</b>", "Basic ownership shares"],
-["<b>Preferred Stock</b>", "Priority shares with fixed dividend"],
-["<b>Corporate Bond</b>", "Company debt security"],
-["<b>Government Bond</b>", "Government debt security"],
-["<b>Municipal Bond</b>", "Local government debt"],
-["<b>Treasury Bill</b>", "Short-term government security"],
-["<b>Treasury Note</b>", "Medium-term government security"],
-["<b>Treasury Bond</b>", "Long-term government security"],
-["<b>Zero-Coupon Bond</b>", "Bond sold at discount"],
-["<b>Convertible Bond</b>", "Bond convertible to stock"],
-["<b>Junk Bond</b>", "High-risk, high-yield bond"],
-["<b>Commercial Paper</b>", "Short-term corporate debt"],
-["<b>Certificate of Deposit (CD)</b>", "Time deposit"],
-["<b>Money Market Fund</b>", "Short-term securities fund"],
-["<b>Mutual Fund</b>", "Pooled investment fund"],
-["<b>Exchange-Traded Fund (ETF)</b>", "Tradable investment fund"],
-["<b>Index Fund</b>", "Fund tracking market index"],
-["<b>Hedge Fund</b>", "Private investment fund"],
-["<b>Private Equity</b>", "Non-public company investment"],
-["<b>Venture Capital</b>", "Startup investment"],
-["<b>Option</b>", "Right to buy/sell at set price"],
-["<b>Call Option</b>", "Right to buy"],
-["<b>Put Option</b>", "Right to sell"],
-["<b>Strike Price</b>", "Option exercise price"],
-["<b>Future</b>", "Obligation to buy/sell"],
-["<b>Forward Contract</b>", "Customized future"],
-["<b>Swap</b>", "Exchange of cash flows"],
-["<b>Collateralized Debt Obligation (CDO)</b>", "Structured debt product"],
-["<b>Mortgage-Backed Security (MBS)</b>", "Security backed by mortgages"],
-["<b>Asset-Backed Security</b>", "Security backed by assets"],
-
-// Economic Systems and Development
-["<b>Capitalism</b>", "Private ownership market economy"],
-["<b>Socialism</b>", "Collective ownership economy"],
-["<b>Mixed Economy</b>", "Combination of market and planning"],
-["<b>Command Economy</b>", "Central planning system"],
-["<b>Market Economy</b>", "Decentralized decision-making"],
-["<b>Traditional Economy</b>", "Custom-based system"],
-["<b>Planned Economy</b>", "Government-directed economy"],
-["<b>Laissez-faire</b>", "Minimal government intervention"],
-["<b>Welfare State</b>", "Government social protection"],
-["<b>Privatization</b>", "Transfer to private ownership"],
-["<b>Nationalization</b>", "Transfer to public ownership"],
-["<b>Deregulation</b>", "Removing government rules"],
-["<b>Liberalization</b>", "Reducing government restrictions"],
-["<b>Industrial Policy</b>", "Government support for industries"],
-["<b>Import Substitution</b>", "Domestic production replacing imports"],
-["<b>Export-Led Growth</b>", "Growth through exports"],
-["<b>Structural Adjustment</b>", "Economic reform programs"],
-["<b>Washington Consensus</b>", "Free-market reform package"],
-["<b>Development Economics</b>", "Study of economic development"],
-["<b>Economic Development</b>", "Improvement in living standards"],
-["<b>Developing Country</b>", "Lower income nation"],
-["<b>Emerging Market</b>", "Rapidly growing developing economy"],
-["<b>Least Developed Country</b>", "Poorest nations"],
-["<b>Middle Income Trap</b>", "Stagnation at middle income"],
-["<b>Poverty Line</b>", "Minimum income level"],
-["<b>Absolute Poverty</b>", "Below subsistence level"],
-["<b>Relative Poverty</b>", "Below societal standards"],
-["<b>Income Inequality</b>", "Uneven income distribution"],
-["<b>Gini Coefficient</b>", "Inequality measure (0-1)"],
-["<b>Lorenz Curve</b>", "Graphical inequality representation"],
-["<b>Human Development Index</b>", "Broader development measure"],
-["<b>Sustainable Development</b>", "Meeting needs without compromising future"],
-["<b>Foreign Aid</b>", "International assistance"],
-["<b>Foreign Direct Investment</b>", "Cross-border business investment"],
-["<b>Remittances</b>", "Money sent home by migrants"],
-["<b>Brain Drain</b>", "Skilled worker emigration"],
-["<b>Dutch Disease</b>", "Resource exports harming other sectors"],
-["<b>Resource Curse</b>", "Natural resources hindering development"],
-["<b>Infant Industry</b>", "New industry needing protection"],
-
-// Behavioral Economics
-["<b>Behavioral Economics (Field)</b>", "Psychology in economic decisions"],
-["<b>Bounded Rationality</b>", "Limited cognitive abilities"],
-["<b>Heuristics</b>", "Mental shortcuts"],
-["<b>Cognitive Bias</b>", "Systematic thinking error"],
-["<b>Anchoring Bias</b>", "Over-relying on first information"],
-["<b>Availability Heuristic</b>", "Overweighting easily recalled"],
-["<b>Confirmation Bias</b>", "Seeking supporting information"],
-["<b>Loss Aversion</b>", "Losses hurt more than gains please"],
-["<b>Endowment Effect</b>", "Overvaluing what we own"],
-["<b>Sunk Cost Fallacy</b>", "Considering irrelevant past costs"],
-["<b>Mental Accounting</b>", "Treating money differently by source"],
-["<b>Framing Effect</b>", "Decisions affected by presentation"],
-["<b>Status Quo Bias</b>", "Preference for current state"],
-["<b>Present Bias</b>", "Overvaluing immediate rewards"],
-["<b>Hyperbolic Discounting</b>", "Inconsistent time preferences"],
-["<b>Overconfidence Bias</b>", "Overestimating abilities"],
-["<b>Hindsight Bias</b>", "Seeing past as predictable"],
-["<b>Herding Behavior</b>", "Following the crowd"],
-["<b>Nudge</b>", "Choice architecture influence"],
-["<b>Choice Architecture</b>", "Designing decision contexts"],
-["<b>Default Option</b>", "Pre-selected choice"],
-["<b>Prospect Theory</b>", "Decision-making under uncertainty"],
-["<b>Reference Point</b>", "Baseline for comparisons"],
-["<b>Diminishing Sensitivity</b>", "Decreasing marginal impact"],
-
-// Environmental Economics
-["<b>Environmental Economics</b>", "Economics of environmental issues"],
-["<b>Natural Capital</b>", "Environmental resources"],
-["<b>Ecosystem Services</b>", "Benefits from nature"],
-["<b>Sustainability</b>", "Meeting needs without depleting resources"],
-["<b>Carbon Tax</b>", "Tax on carbon emissions"],
-["<b>Cap and Trade</b>", "Emissions trading system"],
-["<b>Carbon Credit</b>", "Permit to emit carbon"],
-["<b>Green Economy</b>", "Environmentally sustainable economy"],
-["<b>Circular Economy</b>", "Reuse and recycling system"],
-["<b>Renewable Resources</b>", "Replenishable resources"],
-["<b>Non-renewable Resources</b>", "Finite resources"],
-["<b>Resource Depletion</b>", "Using up natural resources"],
-["<b>Environmental Externality</b>", "Environmental cost/benefit to others"],
-["<b>Pollution</b>", "Environmental contamination"],
-["<b>Climate Change Economics</b>", "Economic impacts of climate change"],
-["<b>Carbon Footprint</b>", "Total greenhouse gas emissions"],
-["<b>Green GDP</b>", "GDP minus environmental costs"],
-["<b>Environmental Regulation</b>", "Rules protecting environment"],
-["<b>Cost-Benefit Analysis (Environmental)</b>", "Comparing environmental costs and benefits"],
-["<b>Contingent Valuation</b>", "Valuing non-market environmental goods"],
-["<b>Hedonic Pricing</b>", "Inferring environmental values from prices"],
-["<b>Travel Cost Method</b>", "Valuing sites by visit costs"],
-
-// Public Economics
-["<b>Public Economics</b>", "Study of government economic role"],
-["<b>Public Finance</b>", "Government revenue and spending"],
-["<b>Public Choice Theory</b>", "Economic analysis of politics"],
-["<b>Government Failure</b>", "Inefficient government intervention"],
-["<b>Rent-Seeking</b>", "Seeking economic gain through politics"],
-["<b>Regulatory Capture</b>", "Regulators serving industry interests"],
-["<b>Tax Revenue</b>", "Government income from taxes"],
-["<b>Tax Base</b>", "What is subject to tax"],
-["<b>Tax Rate</b>", "Percentage applied to tax base"],
-["<b>Marginal Tax Rate</b>", "Tax on additional income"],
-["<b>Average Tax Rate</b>", "Total tax / Total income"],
-["<b>Tax Bracket</b>", "Income range with specific rate"],
-["<b>Tax Credit</b>", "Direct reduction in tax owed"],
-["<b>Tax Deduction</b>", "Reduction in taxable income"],
-["<b>Tax Exemption</b>", "Income not subject to tax"],
-["<b>Tax Evasion</b>", "Illegal tax avoidance"],
-["<b>Tax Avoidance</b>", "Legal tax minimization"],
-["<b>Tax Haven</b>", "Low-tax jurisdiction"],
-["<b>Transfer Payment</b>", "Government payment without service"],
-["<b>Entitlement Program</b>", "Guaranteed benefit program"],
-["<b>Social Security</b>", "Retirement and disability program"],
-["<b>Medicare</b>", "Health insurance for elderly"],
-["<b>Medicaid</b>", "Health insurance for poor"],
-["<b>Unemployment Insurance</b>", "Benefits for unemployed"],
-["<b>Welfare</b>", "Government assistance programs"],
-["<b>Universal Basic Income</b>", "Unconditional regular payment"],
-["<b>Means Testing</b>", "Benefits based on income/assets"],
-["<b>Public Goods Provision</b>", "Government supplying public goods"],
-["<b>User Fee</b>", "Charge for public service"],
-["<b>Congestion Pricing</b>", "Charge for using busy resources"],
-
-// Economic History and Thought
-["<b>Classical Economics</b>", "Smith, Ricardo school of thought"],
-["<b>Neoclassical Economics</b>", "Marginalist revolution school"],
-["<b>Keynesian Economics</b>", "Keynes's macroeconomic theory"],
-["<b>Monetarism</b>", "Friedman's monetary focus"],
-["<b>Austrian School</b>", "Mises, Hayek tradition"],
-["<b>Chicago School</b>", "Free-market oriented school"],
-["<b>Institutional Economics</b>", "Focus on institutions"],
-["<b>New Keynesian</b>", "Modern Keynesian with micro foundations"],
-["<b>New Classical</b>", "Rational expectations school"],
-["<b>Supply-Side Economics</b>", "Focus on production incentives"],
-["<b>Trickle-Down Economics</b>", "Benefits to wealthy help all"],
-["<b>Invisible Hand</b>", "Smith's self-interest benefiting society"],
-["<b>Creative Destruction (History)</b>", "Schumpeter's innovation concept"],
-["<b>Animal Spirits</b>", "Keynes's confidence concept"],
-["<b>Rational Expectations</b>", "Using all available information"],
-["<b>Efficient Markets (History)</b>", "Fama's market efficiency theory"],
-["<b>Great Depression</b>", "1930s economic collapse"],
-["<b>Great Recession</b>", "2007-2009 financial crisis"],
-["<b>Stagflation Crisis</b>", "1970s inflation and stagnation"],
-["<b>Dot-com Bubble</b>", "Late 1990s tech bubble"],
-["<b>Housing Bubble</b>", "2000s real estate bubble"],
-["<b>Tulip Mania</b>", "17th century Dutch bubble"],
-["<b>South Sea Bubble</b>", "18th century British bubble"]
+["What is the capital of France?", "Paris"],
+["What is 2 + 2?", "4"],
+["What is the largest planet in our solar system?", "<b>Jupiter</b><br><i>It has a mass of 1.898 × 10²⁷ kg</i>"],
+["What year did World War II end?", "1945"],
+["Who wrote 'Romeo and Juliet'?", "William Shakespeare"],
+["What is HTML?", "<b>HyperText Markup Language</b><br>The standard markup language for creating web pages"],
 ];
 
 // Option 2: CSV string format (uncomment to use)
@@ -1663,8 +1064,9 @@ let texts = i18n_text[LANGUAGE] || i18n_text['English'];
     margin: 0;
    }
 
-   .container {
-    display: none;
+   .container,
+   .editor-view {
+    display: none !important;
    }
 
    .print-table {
@@ -1777,10 +1179,252 @@ let texts = i18n_text[LANGUAGE] || i18n_text['English'];
   .editor-link a:hover {
    text-decoration: underline;
   }
+
+  .editor-link button {
+   background: none;
+   border: none;
+   padding: 0;
+   color: #007bff;
+   text-decoration: none;
+   cursor: pointer;
+   font-size: 12px;
+   font-family: inherit;
+  }
+
+  .editor-link button:hover {
+   text-decoration: underline;
+   background: none;
+  }
+
+  .editor-view {
+   max-width: 900px;
+   width: 100%;
+   color: #333;
+  }
+
+  .editor-view .editor-header {
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   margin-bottom: 20px;
+   flex-wrap: wrap;
+   gap: 10px;
+  }
+
+  .editor-view .editor-title {
+   font-size: 18px;
+   font-weight: normal;
+   margin: 0;
+   text-align: center;
+   flex: 1;
+  }
+
+  .editor-view .editor-back-btn {
+   padding: 8px 16px;
+   background-color: #6c757d;
+   color: white;
+   border: none;
+   border-radius: 4px;
+   cursor: pointer;
+   font-size: 14px;
+  }
+
+  .editor-view .editor-back-btn:hover {
+   background-color: #5a6268;
+  }
+
+  .editor-view .editor-topic-input {
+   width: 100%;
+   padding: 12px;
+   font-size: 16px;
+   border: 1px solid #ddd;
+   border-radius: 4px;
+   margin-bottom: 20px;
+   font-family: inherit;
+   box-sizing: border-box;
+  }
+
+  .editor-view .flashcards-edit-container {
+   margin-bottom: 20px;
+  }
+
+  .editor-view .flashcard-row {
+   display: flex;
+   gap: 10px;
+   margin-bottom: 10px;
+   align-items: flex-start;
+   position: relative;
+   transition: opacity 0.3s;
+  }
+
+  .editor-view .flashcard-row.dragging {
+   opacity: 0.5;
+  }
+
+  .editor-view .drag-handle {
+   cursor: move;
+   padding: 8px 4px;
+   color: #999;
+   user-select: none;
+   font-size: 20px;
+   line-height: 1;
+   display: flex;
+   align-items: center;
+   height: 80px;
+  }
+
+  .editor-view .edit-card-content {
+   display: flex;
+   gap: 10px;
+   flex: 1;
+  }
+
+  .editor-view .flashcard-textarea {
+   flex: 1;
+   min-height: 80px;
+   padding: 10px;
+   font-size: 14px;
+   border: 1px solid #ddd;
+   border-radius: 4px;
+   resize: vertical;
+   font-family: inherit;
+   box-sizing: border-box;
+  }
+
+  .editor-view .remove-card-btn {
+   padding: 8px 10px;
+   background-color: #f44336;
+   color: white;
+   border: none;
+   border-radius: 4px;
+   cursor: pointer;
+   font-size: 16px;
+   font-weight: bold;
+   height: fit-content;
+   margin-top: 25px;
+   transition: background-color 0.2s;
+  }
+
+  .editor-view .remove-card-btn:hover {
+   background-color: #d32f2f;
+  }
+
+  .editor-view .editor-button-row {
+   display: flex;
+   gap: 10px;
+   margin-bottom: 20px;
+   flex-wrap: wrap;
+  }
+
+  .editor-view .add-card-btn {
+   padding: 10px 40px;
+   background-color: #4CAF50;
+   color: white;
+   border: none;
+   border-radius: 4px;
+   cursor: pointer;
+   font-size: 20px;
+   font-weight: bold;
+   transition: background-color 0.2s;
+  }
+
+  .editor-view .add-card-btn:hover {
+   background-color: #45a049;
+  }
+
+  .editor-view .apply-btn {
+   padding: 10px 20px;
+   background-color: #28a745;
+   color: white;
+   border: none;
+   border-radius: 4px;
+   cursor: pointer;
+   font-size: 16px;
+   font-weight: bold;
+   transition: background-color 0.2s;
+  }
+
+  .editor-view .apply-btn:hover {
+   background-color: #218838;
+  }
+
+  .editor-view .download-edit-btn {
+   padding: 10px 20px;
+   background-color: #2196F3;
+   color: white;
+   border: none;
+   border-radius: 4px;
+   cursor: pointer;
+   font-size: 16px;
+   font-weight: bold;
+   transition: background-color 0.2s;
+  }
+
+  .editor-view .download-edit-btn:hover {
+   background-color: #1976D2;
+  }
+
+  .editor-view .editor-instructions {
+   font-size: 14px;
+   color: #666;
+   margin-bottom: 10px;
+  }
+
+  .editor-view .output-textarea {
+   width: 100%;
+   min-height: 200px;
+   padding: 12px;
+   font-family: 'Courier New', monospace;
+   font-size: 13px;
+   border: 1px solid #ddd;
+   border-radius: 4px;
+   background-color: #f5f5f5;
+   resize: vertical;
+   box-sizing: border-box;
+  }
+
+  .editor-view .drop-indicator {
+   height: 2px;
+   background-color: #2196F3;
+   margin: 5px 0;
+   display: none;
+  }
+
+  .editor-view .drop-indicator.active {
+   display: block;
+  }
+
+  .editor-view .editor-cancel-note {
+   font-size: 14px;
+   color: #666;
+   text-align: center;
+   margin-top: 20px;
+   padding-top: 15px;
+   border-top: 1px solid #ddd;
+  }
+
+  .edit-row {
+   margin-top: 15px;
+   padding-top: 15px;
+   border-top: 1px solid #ddd;
+   display: flex;
+   justify-content: center;
+  }
+
+  .edit-btn {
+   background-color: #17a2b8;
+   padding: 14px 20px;
+   font-size: 18px;
+   width: 100%;
+  }
+
+  .edit-btn:hover {
+   background-color: #138496;
+  }
  </style>
 </head>
 <body>
- <div class="container">
+ <div class="container" id="viewerView">
 
   <p id="byAuthor" style="text-align: center; color: #666; margin-top: -10px; font-size: 14px;"><a href="https://inventwithpython.com/tsofa/">TSOFA - The Simple, Offline Flashcard App by Al Sweigart <span id="versionText">(v1.3.0)</span></a></p>
   <h2 id="topicHeading" style="text-align: center; color: #555; margin-top: 10px; margin-bottom: 20px; display: none;"></h2>
@@ -1849,13 +1493,39 @@ let texts = i18n_text[LANGUAGE] || i18n_text['English'];
    </select>
   </div>
 
+  <div class="edit-row">
+   <button onclick="openEditor()" class="edit-btn" id="editBtn" title="Edit Flashcards">&#x270F;&#xFE0F;</button>
+  </div>
+
   <div class="instructions" id="instructions">
    <strong>Keyboard shortcuts:</strong> space to flip card, left/right to navigate cards
   </div>
 
   <div class="editor-link" id="editorLink">
-   <a href="https://inventwithpython.com/tsofa/editor/">Create flashcards with the TSOFA editor.</a>
+   <button type="button" onclick="openEditor()">Create flashcards with the TSOFA editor.</button>
   </div>
+ </div>
+
+ <div class="editor-view" id="editorView" style="display: none;">
+  <div class="editor-header">
+   <h1 class="editor-title" id="editorTitle">TSOFA Flashcard Editor</h1>
+   <button onclick="closeEditor()" class="editor-back-btn" id="editorBackBtn">&#x2190; Discard Changes</button>
+  </div>
+
+  <input type="text" class="editor-topic-input" id="editorTopicInput" placeholder="Topic (or leave this empty)">
+
+  <div class="flashcards-edit-container" id="flashcardsEditContainer"></div>
+
+  <div class="editor-button-row">
+   <button class="add-card-btn" onclick="editorAddFlashcard()" title="Add Flashcard">+&#x1F4C4;</button>
+   <button class="download-edit-btn" onclick="editorDownload()" id="editorDownloadBtn">Download</button>
+  </div>
+
+  <p class="editor-instructions" id="editorInstructions">You can copy and paste TOPIC and FLASHCARDS code from existing flashcard apps to load them into this editor:</p>
+
+  <textarea class="output-textarea" id="editorOutputTextarea"></textarea>
+
+  <p class="editor-cancel-note" id="editorCancelNote">Refresh page to cancel changes and go back to the flashcards.</p>
  </div>
 
  <!-- Print-only content -->
@@ -2480,32 +2150,342 @@ let texts = i18n_text[LANGUAGE] || i18n_text['English'];
    window.print();
   }
 
+  // Build a FLASHCARDS literal string from current cards using backtick strings
+  function serializeFlashcards(cards) {
+   let out = 'let FLASHCARDS = [\n';
+   cards.forEach((card, i) => {
+    const q = String(card[0]).replace(/\\/g, '\\\\').replace(/`/g, '\\`').replace(/\$\{/g, '\\${');
+    const a = String(card[1]).replace(/\\/g, '\\\\').replace(/`/g, '\\`').replace(/\$\{/g, '\\${');
+    out += '[`' + q + '`, `' + a + '`]';
+    if (i < cards.length - 1) out += ',';
+    out += '\n';
+   });
+   out += '];';
+   return out;
+  }
+
+  // Rebuild HTML source with current TOPIC and FLASHCARDS baked in
+  function buildDownloadSource() {
+   let html = document.documentElement.outerHTML;
+
+   // Replace the TOPIC declaration
+   const topicStart = html.indexOf('let TOPIC =');
+   if (topicStart !== -1) {
+    const topicLineEnd = html.indexOf('\n', topicStart);
+    html = html.substring(0, topicStart) +
+           'let TOPIC = ' + JSON.stringify(TOPIC) + ';' +
+           html.substring(topicLineEnd);
+   }
+
+   // Replace the active FLASHCARDS block between Option 1 and Option 2 markers
+   const startMarker = '// Option 1: Array of arrays format\n';
+   const endMarker = '\n\n// Option 2: CSV string format';
+   const startIdx = html.indexOf(startMarker);
+   const endIdx = html.indexOf(endMarker, startIdx >= 0 ? startIdx : 0);
+   if (startIdx !== -1 && endIdx !== -1) {
+    html = html.substring(0, startIdx + startMarker.length) +
+           serializeFlashcards(processedFlashcards) +
+           html.substring(endIdx);
+   }
+
+   return html;
+  }
+
   // Download the HTML file
   function downloadFile() {
-   // Get the entire HTML content
-   const htmlContent = document.documentElement.outerHTML;
+   const htmlContent = buildDownloadSource();
 
-   // Create a Blob with the HTML content
    const blob = new Blob([htmlContent], { type: 'text/html' });
-
-   // Create a temporary link element
    const link = document.createElement('a');
    link.href = URL.createObjectURL(blob);
 
-   // Set the download filename
    const filename = TOPIC && TOPIC.trim() !== ""
     ? `TSOFA_${TOPIC.replace(/[^a-z0-9]/gi, '_')}.html`
     : 'TSOFA_flashcards.html';
    link.download = filename;
 
-   // Trigger the download
    document.body.appendChild(link);
    link.click();
 
-   // Clean up
    document.body.removeChild(link);
    URL.revokeObjectURL(link.href);
   }
+
+  // ===== Embedded editor =====
+  const editor_translations = {
+   "English": { topicPlaceholder: "Topic (or leave this empty)", questionPlaceholder: "Question", answerPlaceholder: "Answer", title: "TSOFA Flashcard Editor", back: "← Discard Changes", apply: "Apply", download: "Download", instructions: "You can copy and paste TOPIC and FLASHCARDS code from existing flashcard apps to load them into this editor:", cancelNote: "Refresh page to cancel changes and go back to the flashcards." },
+   "Español": { topicPlaceholder: "Tema (o déjalo vacío)", questionPlaceholder: "Pregunta", answerPlaceholder: "Respuesta", title: "Editor de Tarjetas TSOFA", back: "← Volver a las Tarjetas", apply: "Aplicar", download: "Descargar", instructions: "Puedes copiar y pegar el código TOPIC y FLASHCARDS de aplicaciones de tarjetas existentes para cargarlas en este editor:", cancelNote: "Actualiza la página para cancelar los cambios y volver a las tarjetas." },
+   "Français": { topicPlaceholder: "Sujet (ou laissez vide)", questionPlaceholder: "Question", answerPlaceholder: "Réponse", title: "Éditeur de Cartes TSOFA", back: "← Retour aux Cartes", apply: "Appliquer", download: "Télécharger", instructions: "Vous pouvez copier et coller le code TOPIC et FLASHCARDS d'applications de cartes mémoire existantes pour les charger dans cet éditeur:", cancelNote: "Actualisez la page pour annuler les modifications et revenir aux cartes." },
+   "Deutsch": { topicPlaceholder: "Thema (oder leer lassen)", questionPlaceholder: "Frage", answerPlaceholder: "Antwort", title: "TSOFA Lernkarten-Editor", back: "← Zurück zu den Karten", apply: "Anwenden", download: "Herunterladen", instructions: "Sie können TOPIC- und FLASHCARDS-Code aus bestehenden Karteikarten-Apps kopieren und in diesen Editor einfügen:", cancelNote: "Seite aktualisieren, um Änderungen zu verwerfen und zu den Lernkarten zurückzukehren." },
+   "Nederlands": { topicPlaceholder: "Onderwerp (of laat leeg)", questionPlaceholder: "Vraag", answerPlaceholder: "Antwoord", title: "TSOFA Flashcard Editor", back: "← Terug naar Flashcards", apply: "Toepassen", download: "Downloaden", instructions: "Je kunt TOPIC en FLASHCARDS code van bestaande flashcard apps kopiëren en plakken om ze in deze editor te laden:", cancelNote: "Vernieuw de pagina om wijzigingen te annuleren en terug te gaan naar de flashcards." },
+   "Italiano": { topicPlaceholder: "Argomento (o lascia vuoto)", questionPlaceholder: "Domanda", answerPlaceholder: "Risposta", title: "Editor di Flashcard TSOFA", back: "← Torna alle Flashcard", apply: "Applica", download: "Scarica", instructions: "Puoi copiare e incollare il codice TOPIC e FLASHCARDS da app di flashcard esistenti per caricarle in questo editor:", cancelNote: "Aggiorna la pagina per annullare le modifiche e tornare alle flashcard." },
+   "Português": { topicPlaceholder: "Tópico (ou deixe vazio)", questionPlaceholder: "Pergunta", answerPlaceholder: "Resposta", title: "Editor de Flashcards TSOFA", back: "← Voltar aos Flashcards", apply: "Aplicar", download: "Baixar", instructions: "Você pode copiar e colar o código TOPIC e FLASHCARDS de aplicativos de flashcards existentes para carregá-los neste editor:", cancelNote: "Atualize a página para cancelar as alterações e voltar aos flashcards." },
+   "Polski": { topicPlaceholder: "Temat (lub zostaw puste)", questionPlaceholder: "Pytanie", answerPlaceholder: "Odpowiedź", title: "Edytor Fiszek TSOFA", back: "← Powrót do Fiszek", apply: "Zastosuj", download: "Pobierz", instructions: "Możesz skopiować i wkleić kod TOPIC i FLASHCARDS z istniejących aplikacji fiszek, aby załadować je do tego edytora:", cancelNote: "Odśwież stronę, aby anulować zmiany i wrócić do fiszek." },
+   "Русский": { topicPlaceholder: "Тема (или оставьте пустым)", questionPlaceholder: "Вопрос", answerPlaceholder: "Ответ", title: "Редактор карточек TSOFA", back: "← Назад к карточкам", apply: "Применить", download: "Скачать", instructions: "Вы можете скопировать и вставить код TOPIC и FLASHCARDS из существующих приложений карточек для загрузки в этот редактор:", cancelNote: "Обновите страницу, чтобы отменить изменения и вернуться к карточкам." },
+   "Norsk": { topicPlaceholder: "Emne (eller la stå tomt)", questionPlaceholder: "Spørsmål", answerPlaceholder: "Svar", title: "TSOFA Flashkort-editor", back: "← Tilbake til flashkort", apply: "Bruk", download: "Last ned", instructions: "Du kan kopiere og lime inn TOPIC og FLASHCARDS kode fra eksisterende flashkort-apper for å laste dem inn i denne editoren:", cancelNote: "Oppdater siden for å avbryte endringer og gå tilbake til flashkortene." },
+   "Svenska": { topicPlaceholder: "Ämne (eller lämna tomt)", questionPlaceholder: "Fråga", answerPlaceholder: "Svar", title: "TSOFA Flashkort-editor", back: "← Tillbaka till flashkort", apply: "Tillämpa", download: "Ladda ner", instructions: "Du kan kopiera och klistra in TOPIC och FLASHCARDS kod från befintliga flashkort-appar för att ladda dem i denna editor:", cancelNote: "Uppdatera sidan för att avbryta ändringar och gå tillbaka till flashkorten." },
+   "中文": { topicPlaceholder: "主题（或留空）", questionPlaceholder: "问题", answerPlaceholder: "答案", title: "TSOFA 闪卡编辑器", back: "← 返回闪卡", apply: "应用", download: "下载", instructions: "您可以从现有的闪卡应用程序复制并粘贴TOPIC和FLASHCARDS代码以加载到此编辑器中：", cancelNote: "刷新页面以取消更改并返回闪卡。" },
+   "हिन्दी": { topicPlaceholder: "विषय (या खाली छोड़ें)", questionPlaceholder: "प्रश्न", answerPlaceholder: "उत्तर", title: "TSOFA फ्लैशकार्ड एडिटर", back: "← फ्लैशकार्ड पर वापस", apply: "लागू करें", download: "डाउनलोड", instructions: "आप मौजूदा फ्लैशकार्ड ऐप्स से TOPIC और FLASHCARDS कोड कॉपी और पेस्ट करके इस एडिटर में लोड कर सकते हैं:", cancelNote: "परिवर्तन रद्द करने और फ्लैशकार्ड पर वापस जाने के लिए पृष्ठ को रिफ्रेश करें।" },
+   "বাংলা": { topicPlaceholder: "বিষয় (অথবা খালি রাখুন)", questionPlaceholder: "প্রশ্ন", answerPlaceholder: "উত্তর", title: "TSOFA ফ্ল্যাশকার্ড এডিটর", back: "← ফ্ল্যাশকার্ডে ফিরে যান", apply: "প্রয়োগ করুন", download: "ডাউনলোড", instructions: "আপনি বিদ্যমান ফ্ল্যাশকার্ড অ্যাপ্স থেকে TOPIC এবং FLASHCARDS কোড কপি এবং পেস্ট করে এই এডিটরে লোড করতে পারেন:", cancelNote: "পরিবর্তন বাতিল করে ফ্ল্যাশকার্ডে ফিরে যেতে পৃষ্ঠা রিফ্রেশ করুন।" },
+   "日本語": { topicPlaceholder: "トピック（または空白のまま）", questionPlaceholder: "質問", answerPlaceholder: "答え", title: "TSOFA フラッシュカードエディタ", back: "← フラッシュカードに戻る", apply: "適用", download: "ダウンロード", instructions: "既存のフラッシュカードアプリからTOPICとFLASHCARDSコードをコピーして貼り付けることで、このエディタに読み込むことができます：", cancelNote: "変更を取り消してフラッシュカードに戻るにはページを更新してください。" },
+   "한국어": { topicPlaceholder: "주제 (또는 비워두기)", questionPlaceholder: "질문", answerPlaceholder: "답변", title: "TSOFA 플래시카드 편집기", back: "← 플래시카드로 돌아가기", apply: "적용", download: "다운로드", instructions: "기존 플래시카드 앱에서 TOPIC과 FLASHCARDS 코드를 복사하여 이 편집기에 붙여넣을 수 있습니다:", cancelNote: "변경 사항을 취소하고 플래시카드로 돌아가려면 페이지를 새로 고치세요." },
+   "ไทย": { topicPlaceholder: "หัวข้อ (หรือเว้นว่าง)", questionPlaceholder: "คำถาม", answerPlaceholder: "คำตอบ", title: "ตัวแก้ไขบัตรคำ TSOFA", back: "← กลับไปยังบัตรคำ", apply: "นำไปใช้", download: "ดาวน์โหลด", instructions: "คุณสามารถคัดลอกและวางโค้ด TOPIC และ FLASHCARDS จากแอปบัตรคำที่มีอยู่เพื่อโหลดในโปรแกรมแก้ไขนี้:", cancelNote: "รีเฟรชหน้าเพื่อยกเลิกการเปลี่ยนแปลงและกลับไปยังบัตรคำ" },
+   "العربية": { topicPlaceholder: "الموضوع (أو اتركه فارغًا)", questionPlaceholder: "السؤال", answerPlaceholder: "الجواب", title: "محرر بطاقات TSOFA", back: "← العودة إلى البطاقات", apply: "تطبيق", download: "تحميل", instructions: "يمكنك نسخ ولصق كود TOPIC و FLASHCARDS من تطبيقات البطاقات التعليمية الموجودة لتحميلها في هذا المحرر:", cancelNote: "قم بتحديث الصفحة لإلغاء التغييرات والعودة إلى البطاقات." },
+   "Tiếng Việt": { topicPlaceholder: "Chủ đề (hoặc để trống)", questionPlaceholder: "Câu hỏi", answerPlaceholder: "Câu trả lời", title: "Trình chỉnh sửa Flashcard TSOFA", back: "← Quay lại Flashcards", apply: "Áp dụng", download: "Tải xuống", instructions: "Bạn có thể sao chép và dán mã TOPIC và FLASHCARDS từ các ứng dụng flashcard hiện có để tải chúng vào trình chỉnh sửa này:", cancelNote: "Làm mới trang để hủy các thay đổi và quay lại flashcard." },
+   "Türkçe": { topicPlaceholder: "Konu (veya boş bırakın)", questionPlaceholder: "Soru", answerPlaceholder: "Cevap", title: "TSOFA Flashcard Editörü", back: "← Flashcardlara Dön", apply: "Uygula", download: "İndir", instructions: "Mevcut flashcard uygulamalarından TOPIC ve FLASHCARDS kodunu kopyalayıp yapıştırarak bu editöre yükleyebilirsiniz:", cancelNote: "Değişiklikleri iptal etmek ve flashcardlara dönmek için sayfayı yenileyin." },
+   "Tagalog": { topicPlaceholder: "Paksa (o iwanang blangko)", questionPlaceholder: "Tanong", answerPlaceholder: "Sagot", title: "TSOFA Flashcard Editor", back: "← Bumalik sa mga Flashcard", apply: "Ilapat", download: "I-download", instructions: "Maaari mong kopyahin at i-paste ang TOPIC at FLASHCARDS code mula sa mga umiiral na flashcard apps upang i-load sa editor na ito:", cancelNote: "I-refresh ang pahina upang kanselahin ang mga pagbabago at bumalik sa mga flashcard." },
+   "Kiswahili": { topicPlaceholder: "Mada (au acha tupu)", questionPlaceholder: "Swali", answerPlaceholder: "Jibu", title: "Mhariri wa Flashcard wa TSOFA", back: "← Rudi kwa Flashcard", apply: "Tekeleza", download: "Pakua", instructions: "Unaweza kunakili na kubandika msimbo wa TOPIC na FLASHCARDS kutoka kwa programu za kadi za kujifunza zilizopo ili kuzipakia katika mhariri huu:", cancelNote: "Onyesha upya ukurasa ili kughairi mabadiliko na kurudi kwa flashcard." },
+   "فارسی": { topicPlaceholder: "موضوع (یا خالی بگذارید)", questionPlaceholder: "سوال", answerPlaceholder: "جواب", title: "ویرایشگر فلش کارت TSOFA", back: "← بازگشت به فلش کارت‌ها", apply: "اعمال", download: "دانلود", instructions: "می‌توانید کد TOPIC و FLASHCARDS را از برنامه‌های فلش کارت موجود کپی و در این ویرایشگر بارگذاری کنید:", cancelNote: "برای لغو تغییرات و بازگشت به فلش کارت‌ها، صفحه را تازه‌سازی کنید." },
+   "Bahasa Indonesia": { topicPlaceholder: "Topik (atau biarkan kosong)", questionPlaceholder: "Pertanyaan", answerPlaceholder: "Jawaban", title: "Editor Flashcard TSOFA", back: "← Kembali ke Flashcard", apply: "Terapkan", download: "Unduh", instructions: "Anda dapat menyalin dan menempel kode TOPIC dan FLASHCARDS dari aplikasi flashcard yang ada untuk memuat ke editor ini:", cancelNote: "Segarkan halaman untuk membatalkan perubahan dan kembali ke flashcard." }
+  };
+
+  let editorFlashcards = [];
+  let editorDraggedIndex = null;
+  let editorOutputUpdating = false;
+
+  function editorTexts() {
+   const lang = document.getElementById('languageSelect').value;
+   return editor_translations[lang] || editor_translations['English'];
+  }
+
+  function openEditor() {
+   const t = editorTexts();
+   document.getElementById('editorTitle').textContent = t.title;
+   document.getElementById('editorBackBtn').textContent = t.back;
+   document.getElementById('editorTopicInput').placeholder = t.topicPlaceholder;
+   document.getElementById('editorDownloadBtn').textContent = t.download;
+   document.getElementById('editorInstructions').textContent = t.instructions;
+   document.getElementById('editorCancelNote').textContent = t.cancelNote;
+
+   document.getElementById('editorTopicInput').value = TOPIC || '';
+   editorFlashcards = processedFlashcards.map(c => ({ question: c[0] || '', answer: c[1] || '' }));
+   if (editorFlashcards.length === 0) {
+    editorFlashcards = [{ question: '', answer: '' }, { question: '', answer: '' }, { question: '', answer: '' }];
+   }
+   editorRenderFlashcards();
+   editorUpdateOutputWithFlag();
+
+   document.getElementById('viewerView').style.display = 'none';
+   document.getElementById('editorView').style.display = 'block';
+  }
+
+  function closeEditor() {
+   document.getElementById('editorView').style.display = 'none';
+   document.getElementById('viewerView').style.display = 'block';
+  }
+
+  function editorAddFlashcard() {
+   editorFlashcards.push({ question: '', answer: '' });
+   editorRenderFlashcards();
+   editorUpdateOutputWithFlag();
+  }
+
+  function editorRemoveFlashcard(index) {
+   if (editorFlashcards.length > 1) {
+    editorFlashcards.splice(index, 1);
+    editorRenderFlashcards();
+    editorUpdateOutputWithFlag();
+   }
+  }
+
+  function editorRenderFlashcards() {
+   const container = document.getElementById('flashcardsEditContainer');
+   const t = editorTexts();
+   container.innerHTML = '';
+
+   editorFlashcards.forEach((flashcard, index) => {
+    const dropIndicator = document.createElement('div');
+    dropIndicator.className = 'drop-indicator';
+    dropIndicator.dataset.index = index;
+    container.appendChild(dropIndicator);
+
+    const row = document.createElement('div');
+    row.className = 'flashcard-row';
+    row.draggable = true;
+    row.dataset.index = index;
+
+    const dragHandle = document.createElement('div');
+    dragHandle.className = 'drag-handle';
+    dragHandle.textContent = '⋮⋮';
+
+    const content = document.createElement('div');
+    content.className = 'edit-card-content';
+
+    const qta = document.createElement('textarea');
+    qta.className = 'flashcard-textarea';
+    qta.placeholder = t.questionPlaceholder;
+    qta.value = flashcard.question;
+    qta.oninput = (e) => { editorFlashcards[index].question = e.target.value; editorUpdateOutputWithFlag(); };
+
+    const ata = document.createElement('textarea');
+    ata.className = 'flashcard-textarea';
+    ata.placeholder = t.answerPlaceholder;
+    ata.value = flashcard.answer;
+    ata.oninput = (e) => { editorFlashcards[index].answer = e.target.value; editorUpdateOutputWithFlag(); };
+
+    content.appendChild(qta);
+    content.appendChild(ata);
+
+    const removeBtn = document.createElement('button');
+    removeBtn.className = 'remove-card-btn';
+    removeBtn.textContent = 'X';
+    removeBtn.onclick = () => editorRemoveFlashcard(index);
+
+    row.appendChild(dragHandle);
+    row.appendChild(content);
+    row.appendChild(removeBtn);
+
+    row.addEventListener('dragstart', editorHandleDragStart);
+    row.addEventListener('dragend', editorHandleDragEnd);
+
+    container.appendChild(row);
+   });
+
+   const finalDropIndicator = document.createElement('div');
+   finalDropIndicator.className = 'drop-indicator';
+   finalDropIndicator.dataset.index = editorFlashcards.length;
+   container.appendChild(finalDropIndicator);
+  }
+
+  function editorHandleDragStart(e) {
+   editorDraggedIndex = parseInt(e.currentTarget.dataset.index, 10);
+   e.currentTarget.classList.add('dragging');
+   e.dataTransfer.effectAllowed = 'move';
+  }
+
+  function editorHandleDragEnd(e) {
+   e.currentTarget.classList.remove('dragging');
+   document.querySelectorAll('#flashcardsEditContainer .drop-indicator').forEach(d => d.classList.remove('active'));
+   editorDraggedIndex = null;
+  }
+
+  function editorHandleDragOver(e) {
+   e.preventDefault();
+   e.dataTransfer.dropEffect = 'move';
+   const container = document.getElementById('flashcardsEditContainer');
+   const afterElement = editorGetDragAfterElement(container, e.clientY);
+   const indicators = container.querySelectorAll('.drop-indicator');
+   indicators.forEach(d => d.classList.remove('active'));
+   if (afterElement == null) {
+    indicators[indicators.length - 1].classList.add('active');
+   } else {
+    const idx = parseInt(afterElement.dataset.index, 10);
+    if (indicators[idx]) indicators[idx].classList.add('active');
+   }
+  }
+
+  function editorHandleDrop(e) {
+   e.preventDefault();
+   e.stopPropagation();
+   if (editorDraggedIndex === null) return;
+   const container = document.getElementById('flashcardsEditContainer');
+   const afterElement = editorGetDragAfterElement(container, e.clientY);
+   let dropIndex = afterElement == null ? editorFlashcards.length : parseInt(afterElement.dataset.index, 10);
+   if (editorDraggedIndex !== dropIndex && editorDraggedIndex + 1 !== dropIndex) {
+    const item = editorFlashcards[editorDraggedIndex];
+    editorFlashcards.splice(editorDraggedIndex, 1);
+    let newIdx = dropIndex;
+    if (editorDraggedIndex < dropIndex) newIdx--;
+    editorFlashcards.splice(newIdx, 0, item);
+    editorRenderFlashcards();
+    editorUpdateOutputWithFlag();
+   }
+  }
+
+  function editorGetDragAfterElement(container, y) {
+   const draggable = [...container.querySelectorAll('.flashcard-row:not(.dragging)')];
+   return draggable.reduce((closest, child) => {
+    const box = child.getBoundingClientRect();
+    const offset = y - box.top - box.height / 2;
+    if (offset < 0 && offset > closest.offset) return { offset: offset, element: child };
+    return closest;
+   }, { offset: Number.NEGATIVE_INFINITY }).element;
+  }
+
+  function editorUpdateOutput() {
+   const topic = document.getElementById('editorTopicInput').value;
+   const language = document.getElementById('languageSelect').value;
+   let out = 'const LANGUAGE = ' + JSON.stringify(language) + ';\n';
+   out += 'const TOPIC = ' + JSON.stringify(topic) + ';\n';
+   const cards = editorFlashcards.map(c => [c.question, c.answer]);
+   out += serializeFlashcards(cards);
+   document.getElementById('editorOutputTextarea').value = out;
+  }
+
+  function editorUpdateOutputWithFlag() {
+   editorOutputUpdating = true;
+   editorUpdateOutput();
+   editorOutputUpdating = false;
+  }
+
+  function editorParseCode() {
+   const code = document.getElementById('editorOutputTextarea').value;
+   try {
+    const fn = new Function(code + '; return { TOPIC: typeof TOPIC !== "undefined" ? TOPIC : "", FLASHCARDS: typeof FLASHCARDS !== "undefined" ? FLASHCARDS : [] };');
+    const result = fn();
+    if (typeof result.TOPIC === 'string') {
+     document.getElementById('editorTopicInput').value = result.TOPIC;
+    }
+    let cards = result.FLASHCARDS;
+    if (typeof cards === 'string') {
+     cards = parseCSV(cards);
+    }
+    if (Array.isArray(cards)) {
+     editorFlashcards = cards.map(c => ({
+      question: (c && c[0] != null) ? String(c[0]) : '',
+      answer: (c && c[1] != null) ? String(c[1]) : ''
+     }));
+     if (editorFlashcards.length === 0) editorFlashcards = [{ question: '', answer: '' }];
+     editorRenderFlashcards();
+    }
+   } catch (err) {
+    // ignore parse errors while typing
+   }
+  }
+
+  function editorApply() {
+   TOPIC = document.getElementById('editorTopicInput').value;
+   FLASHCARDS = editorFlashcards.map(c => [c.question, c.answer]);
+   processedFlashcards = FLASHCARDS;
+   currentCards = [...processedFlashcards];
+   currentIndex = 0;
+   showingQuestion = true;
+   removedCards = [];
+
+   const topicHeading = document.getElementById('topicHeading');
+   if (TOPIC && TOPIC.trim() !== "") {
+    topicHeading.textContent = texts.topic + ": " + TOPIC;
+    topicHeading.style.display = 'block';
+    document.title = texts.title + " - " + TOPIC;
+   } else {
+    topicHeading.style.display = 'none';
+    document.title = texts.title;
+   }
+
+   displayCard();
+   updateButtons();
+   updateCounter();
+   updateUndoButton();
+
+   closeEditor();
+  }
+
+  function editorDownload() {
+   editorApply();
+   downloadFile();
+  }
+
+  // Wire up output textarea two-way sync (script runs at end of body, so elements exist)
+  document.getElementById('editorOutputTextarea').addEventListener('input', () => {
+   if (!editorOutputUpdating) editorParseCode();
+  });
+  document.getElementById('editorTopicInput').addEventListener('input', editorUpdateOutputWithFlag);
+
+  // Drag-and-drop listeners on the container so drops work in gaps between rows too
+  const flashcardsEditContainer = document.getElementById('flashcardsEditContainer');
+  flashcardsEditContainer.addEventListener('dragover', editorHandleDragOver);
+  flashcardsEditContainer.addEventListener('drop', editorHandleDrop);
+  flashcardsEditContainer.addEventListener('dragenter', (e) => e.preventDefault());
 
   // Initialize app when page loads
   window.onload = init;
