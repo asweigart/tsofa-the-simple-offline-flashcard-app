@@ -14,7 +14,7 @@ let FLASHCARDS = [
 ];
 '''
 
-with open('tsofa.html') as file_obj:
+with open('tsofa.html', encoding='utf-8') as file_obj:
     template = file_obj.read()
 
 for filename in os.listdir('example-source-data'):
@@ -25,10 +25,10 @@ for filename in os.listdir('example-source-data'):
 
     print(flashcard_filename)
 
-    with open('example-source-data/' + filename) as file_obj:
+    with open('example-source-data/' + filename, encoding='utf-8') as file_obj:
         content = file_obj.read()
 
-    with open(flashcard_filename, 'w') as file_obj:
+    with open(flashcard_filename, 'w', encoding='utf-8') as file_obj:
         file_obj.write(template.replace(ORIGINAL_FLASHCARDS, content))
 
 print('Done.')

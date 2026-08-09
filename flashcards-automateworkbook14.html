@@ -792,13 +792,28 @@ let texts = i18n_text[LANGUAGE] || i18n_text['English'];
  <meta name="viewport" content="width=device-width, initial-scale=1.0">
  <title>TSOFA - The Simple, Offline Flashcard App</title>
  <style>
+  :root {
+   --color-canvas: #f0f0f0;
+   --color-text: #333;
+   --color-muted: #666;
+   --color-border: #ddd;
+   --color-primary: #007bff;
+   --color-secondary: #6c757d;
+   --color-danger: #dc3545;
+   --color-success: #28a745;
+   --space-sm: 10px;
+   --space-md: 15px;
+   --space-lg: 20px;
+   --control-radius: 5px;
+  }
+
   body {
    font-family: Arial, sans-serif;
    display: flex;
    flex-direction: column;
    align-items: center;
    padding: 20px;
-   background-color: #f0f0f0;
+   background-color: var(--color-canvas);
    margin: 0;
    min-height: 100vh;
   }
@@ -841,6 +856,11 @@ let texts = i18n_text[LANGUAGE] || i18n_text['English'];
    touch-action: pan-y pinch-zoom;
   }
 
+  .flashcard:focus-visible {
+   outline: 4px solid #005fcc;
+   outline-offset: 4px;
+  }
+
   .flashcard:hover {
    transform: scale(1.02);
   }
@@ -876,12 +896,34 @@ let texts = i18n_text[LANGUAGE] || i18n_text['English'];
    margin-bottom: 20px;
   }
 
+  .tool-group {
+   margin-bottom: var(--space-md);
+   border: 1px solid var(--color-border);
+   border-radius: var(--control-radius);
+   background: rgba(255, 255, 255, 0.55);
+  }
+
+  .tool-group summary {
+   padding: 10px 14px;
+   color: var(--color-text);
+   font-weight: bold;
+   cursor: pointer;
+  }
+
+  .tool-group[open] summary {
+   border-bottom: 1px solid var(--color-border);
+  }
+
+  .tool-group-content {
+   padding: var(--space-md);
+  }
+
   .secondary-controls {
    display: grid;
    grid-template-columns: repeat(4, 1fr);
    gap: 10px;
    align-items: center;
-   margin-bottom: 10px;
+   margin-bottom: 0;
   }
 
   .secondary-controls button {
@@ -894,7 +936,7 @@ let texts = i18n_text[LANGUAGE] || i18n_text['English'];
    display: flex;
    justify-content: center;
    gap: 10px;
-   margin-bottom: 10px;
+   margin-bottom: 0;
   }
 
   .tertiary-controls button {
@@ -902,16 +944,24 @@ let texts = i18n_text[LANGUAGE] || i18n_text['English'];
   }
 
   .font-size-btn {
-   width: 72px;
+   width: auto;
    padding: 0 !important;
   }
 
-  .remove-btn, .undo-btn {
-   background-color: #dc3545;
+  .remove-btn {
+   background-color: var(--color-danger);
   }
 
-  .remove-btn:hover, .undo-btn:hover {
+  .remove-btn:hover {
    background-color: #c82333;
+  }
+
+  .undo-btn {
+   background-color: #198754;
+  }
+
+  .undo-btn:hover {
+   background-color: #146c43;
   }
 
   .undo-btn:disabled {
@@ -920,9 +970,9 @@ let texts = i18n_text[LANGUAGE] || i18n_text['English'];
   }
 
   .font-size-btn {
-   width: 72px;
+   width: auto;
    padding: 0 !important;
-   font-size: 24px !important;
+   font-size: 16px !important;
    line-height: 1;
    display: flex;
    align-items: center;
@@ -935,9 +985,9 @@ let texts = i18n_text[LANGUAGE] || i18n_text['English'];
   }
 
   .align-btn {
-   width: 72px;
+   width: auto;
    padding: 0 !important;
-   font-size: 20px !important;
+   font-size: 16px !important;
    line-height: 1;
    display: flex;
    align-items: center;
@@ -952,10 +1002,10 @@ let texts = i18n_text[LANGUAGE] || i18n_text['English'];
 
   button {
    padding: 12px 20px;
-   font-size: 20px;
+   font-size: 16px;
    border: none;
-   border-radius: 5px;
-   background-color: #007bff;
+   border-radius: var(--control-radius);
+   background-color: var(--color-primary);
    color: white;
    cursor: pointer;
    transition: background-color 0.2s;
@@ -973,6 +1023,81 @@ let texts = i18n_text[LANGUAGE] || i18n_text['English'];
   button:disabled {
    background-color: #cccccc;
    cursor: not-allowed;
+  }
+
+  .status-message {
+   min-height: 1.5em;
+   margin: 0 0 var(--space-md);
+   color: var(--color-muted);
+   text-align: center;
+   font-size: 14px;
+  }
+
+  .status-message:empty {
+   display: none;
+  }
+
+  .sr-only {
+   position: absolute;
+   width: 1px;
+   height: 1px;
+   padding: 0;
+   margin: -1px;
+   overflow: hidden;
+   clip: rect(0, 0, 0, 0);
+   white-space: nowrap;
+   border: 0;
+  }
+
+  .tool-group-content .timer-row,
+  .tool-group-content .print-row,
+  .tool-group-content .edit-row {
+   border-top: 0;
+   margin-top: 0;
+  }
+
+  @media (max-width: 520px) {
+   body {
+    padding: 12px;
+   }
+
+   .flashcard {
+    min-height: 240px;
+    padding: 24px;
+   }
+
+   .controls {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+   }
+
+   .controls .flip-btn {
+    order: -1;
+    grid-column: 1 / -1;
+   }
+
+   .controls button,
+   .secondary-controls button,
+   .tertiary-controls button,
+   .timer-row button,
+   .print-row button,
+   .language-select {
+    min-width: 0;
+    width: 100%;
+   }
+
+   .secondary-controls,
+   .tertiary-controls,
+   .timer-row,
+   .print-row {
+    grid-template-columns: 1fr;
+    flex-direction: column;
+   }
+
+   .secondary-controls button,
+   .tertiary-controls button {
+    height: auto;
+    min-height: 48px;
+   }
   }
 
   .timer-row {
@@ -1066,6 +1191,11 @@ let texts = i18n_text[LANGUAGE] || i18n_text['English'];
 
    .container,
    .editor-view {
+    display: none !important;
+   }
+
+   .status-message,
+   .tool-group {
     display: none !important;
    }
 
@@ -1431,41 +1561,47 @@ let texts = i18n_text[LANGUAGE] || i18n_text['English'];
 
   <div class="card-counter" id="cardCounter">Card 1 of 2</div>
 
-  <div class="flashcard" id="flashcard" onclick="flipCard()">
+  <div class="flashcard" id="flashcard" role="button" tabindex="0" aria-label="Flashcard. Press Enter or Space to flip." onclick="flipCard()">
    <div class="flashcard-content" id="cardContent"></div>
   </div>
 
+  <div class="status-message" id="statusMessage" role="status" aria-live="polite" aria-atomic="true"></div>
+
   <div class="controls">
-   <button onclick="goToFirst()" class="nav-btn" id="firstBtn" title="First">&#x21E4;</button>
-   <button onclick="prevCard()" id="prevBtn" title="Previous (left)">&#x2190;</button>
-   <button onclick="flipCard()" class="flip-btn" id="flipBtn" title="Flip (space)">&#x21BB;</button>
-   <button onclick="nextCard()" id="nextBtn" title="Next (right)">&#x2192;</button>
-   <button onclick="goToLast()" class="nav-btn" id="lastBtn" title="Last">&#x21E5;</button>
+   <button onclick="goToFirst()" class="nav-btn" id="firstBtn" title="First">First</button>
+   <button onclick="prevCard()" id="prevBtn" title="Previous (left)">Previous</button>
+   <button onclick="flipCard()" class="flip-btn" id="flipBtn" title="Flip (space)">Flip</button>
+   <button onclick="nextCard()" id="nextBtn" title="Next (right)">Next</button>
+   <button onclick="goToLast()" class="nav-btn" id="lastBtn" title="Last">Last</button>
   </div>
 
-  <div class="secondary-controls">
-   <button onclick="shuffleCards()" class="shuffle-btn" id="shuffleBtn" title="Shuffle Flashcards">&#x1F500;</button>
-   <button onclick="invertCards()" class="invert-btn" id="invertBtn" title="Swap Question & Answer"><span id="swapQALabelText">Q&#x2194;A</span></button>
-   <button onclick="removeCard()" class="remove-btn" id="removeBtn" title="Remove Current Card">&#x1F4C4;&#x2192;&#x1F5D1;</button>
-   <button onclick="undoRemove()" class="undo-btn" id="undoBtn" title="Undo Last Remove">&#x1F4C4;&#x2190;&#x1F5D1;</button>
-  </div>
+  <details class="tool-group">
+   <summary>Study tools</summary>
+   <div class="tool-group-content">
+    <div class="secondary-controls">
+     <button onclick="shuffleCards()" class="shuffle-btn" id="shuffleBtn" title="Shuffle Flashcards">Shuffle</button>
+     <button onclick="invertCards()" class="invert-btn" id="invertBtn" title="Swap Question & Answer"><span id="swapQALabelText">Swap Q&amp;A</span></button>
+     <button onclick="removeCard()" class="remove-btn" id="removeBtn" title="Remove Current Card">Remove</button>
+     <button onclick="undoRemove()" class="undo-btn" id="undoBtn" title="Undo Last Remove">Undo</button>
+    </div>
 
-  <div class="tertiary-controls">
-   <button onclick="decreaseFontSize()" class="font-size-btn" id="decreaseFontBtn" title="Decrease font size">-&#x1F50D;</button>
-   <button onclick="increaseFontSize()" class="font-size-btn" id="increaseFontBtn" title="Increase font size">+&#x1F50D;</button>
-   <button onclick="toggleAlignment()" class="align-btn" id="alignBtn" title="Left Justify">&#x21E4;&#x1F4C4;</button>
-  </div>
+    <div class="tertiary-controls">
+     <button onclick="decreaseFontSize()" class="font-size-btn" id="decreaseFontBtn" title="Decrease font size">Decrease text</button>
+     <button onclick="increaseFontSize()" class="font-size-btn" id="increaseFontBtn" title="Increase font size">Increase text</button>
+     <button onclick="toggleAlignment()" class="align-btn" id="alignBtn" title="Left Justify">Align text</button>
+    </div>
 
-  <div class="timer-row">
-   <div class="timer-display" id="timerDisplay">00:00:00</div>
-   <button onclick="toggleTimer()" class="timer-btn" id="timerBtn" title="Start Timer">&#x23F2;&#x25B6;</button>
-   <button onclick="resetTimer()" class="reset-btn" id="resetBtn" title="Reset Timer">&#x23F2;&#x21BB;</button>
-  </div>
+    <div class="timer-row">
+     <div class="timer-display" id="timerDisplay">00:00:00</div>
+     <button onclick="toggleTimer()" class="timer-btn" id="timerBtn" title="Start Timer">Start timer</button>
+     <button onclick="resetTimer()" class="reset-btn" id="resetBtn" title="Reset Timer">Reset timer</button>
+    </div>
 
-  <div class="print-row">
-   <button onclick="printFlashcards()" class="print-btn" id="printBtn" title="Print">&#x1F5A8;</button>
-   <button onclick="downloadFile()" class="download-btn" id="downloadBtn" title="Download"><u>&#x2193;</u></button>
-   <select onchange="changeLanguage(this.value)" class="language-select" id="languageSelect" title="Language">
+    <div class="print-row">
+     <button onclick="printFlashcards()" class="print-btn" id="printBtn" title="Print">Print</button>
+     <button onclick="downloadFile()" class="download-btn" id="downloadBtn" title="Download">Download</button>
+     <label for="languageSelect" class="sr-only">Language</label>
+     <select onchange="changeLanguage(this.value)" class="language-select" id="languageSelect" title="Language">
     <option value="English">English</option>
     <option value="Español">Español</option>
     <option value="Français">Français</option>
@@ -1490,26 +1626,33 @@ let texts = i18n_text[LANGUAGE] || i18n_text['English'];
     <option value="Kiswahili">Kiswahili</option>
     <option value="فارسی">فارسی</option>
     <option value="Bahasa Indonesia">Bahasa Indonesia</option>
-   </select>
-  </div>
+     </select>
+    </div>
+   </div>
+  </details>
 
-  <div class="edit-row">
-   <button onclick="openEditor()" class="edit-btn" id="editBtn" title="Edit Flashcards">&#x270F;&#xFE0F;</button>
-  </div>
+  <details class="tool-group">
+   <summary>Editor and deck tools</summary>
+   <div class="tool-group-content">
+    <div class="edit-row">
+     <button onclick="openEditor()" class="edit-btn" id="editBtn" title="Edit Flashcards">Edit flashcards</button>
+    </div>
+    <div class="editor-link" id="editorLink">
+     <button type="button" onclick="openEditor()">Create flashcards with the TSOFA editor.</button>
+    </div>
+   </div>
+  </details>
 
   <div class="instructions" id="instructions">
    <strong>Keyboard shortcuts:</strong> space to flip card, left/right to navigate cards
   </div>
 
-  <div class="editor-link" id="editorLink">
-   <button type="button" onclick="openEditor()">Create flashcards with the TSOFA editor.</button>
-  </div>
  </div>
 
  <div class="editor-view" id="editorView" style="display: none;">
   <div class="editor-header">
    <h1 class="editor-title" id="editorTitle">TSOFA Flashcard Editor</h1>
-   <button onclick="closeEditor()" class="editor-back-btn" id="editorBackBtn">&#x2190; Discard Changes</button>
+   <button onclick="closeEditor()" class="editor-back-btn" id="editorBackBtn">Cancel editing</button>
   </div>
 
   <input type="text" class="editor-topic-input" id="editorTopicInput" placeholder="Topic (or leave this empty)">
@@ -1517,7 +1660,8 @@ let texts = i18n_text[LANGUAGE] || i18n_text['English'];
   <div class="flashcards-edit-container" id="flashcardsEditContainer"></div>
 
   <div class="editor-button-row">
-   <button class="add-card-btn" onclick="editorAddFlashcard()" title="Add Flashcard">+&#x1F4C4;</button>
+   <button class="add-card-btn" onclick="editorAddFlashcard()" title="Add Flashcard">Add flashcard</button>
+   <button class="apply-btn" onclick="editorApply()" id="editorApplyBtn">Apply changes</button>
    <button class="download-edit-btn" onclick="editorDownload()" id="editorDownloadBtn">Download</button>
   </div>
 
@@ -1525,7 +1669,7 @@ let texts = i18n_text[LANGUAGE] || i18n_text['English'];
 
   <textarea class="output-textarea" id="editorOutputTextarea"></textarea>
 
-  <p class="editor-cancel-note" id="editorCancelNote">Refresh page to cancel changes and go back to the flashcards.</p>
+  <p class="editor-cancel-note" id="editorCancelNote">Canceling keeps your draft until you confirm that you want to discard it.</p>
  </div>
 
  <!-- Print-only content -->
@@ -1619,6 +1763,7 @@ let texts = i18n_text[LANGUAGE] || i18n_text['English'];
   let isInverted = false;
   let currentFontSize = 20; // Default font size in pixels
   let removedCards = []; // Stack to store removed cards for undo
+  let undoTimeout = null;
   // Initialize alignmentState from JUSTIFICATION variable
   let alignmentState = (JUSTIFICATION === 'left' || JUSTIFICATION === 'right') ? JUSTIFICATION : 'center';
 
@@ -1627,6 +1772,7 @@ let texts = i18n_text[LANGUAGE] || i18n_text['English'];
   let timerElapsedTime = 0;
   let timerInterval = null;
   let isTimerRunning = false;
+  let editorSnapshot = null;
 
   // Swipe gesture variables
   let touchStartX = 0;
@@ -1736,30 +1882,54 @@ let texts = i18n_text[LANGUAGE] || i18n_text['English'];
    // Update link text and version
    document.getElementById('byAuthor').innerHTML = `<a href="https://inventwithpython.com/tsofa/">${texts.byAuthor} (v${VERSION})</a>`;
 
-   // Update button titles and tooltips
+   // Update visible button labels and accessible names
    document.getElementById('firstBtn').title = texts.first;
+   document.getElementById('firstBtn').textContent = texts.first;
    document.getElementById('prevBtn').title = texts.previous;
+   document.getElementById('prevBtn').textContent = texts.previous;
    document.getElementById('flipBtn').title = texts.flip;
+   document.getElementById('flipBtn').textContent = texts.flip;
    document.getElementById('nextBtn').title = texts.next;
+   document.getElementById('nextBtn').textContent = texts.next;
    document.getElementById('lastBtn').title = texts.last;
+   document.getElementById('lastBtn').textContent = texts.last;
    document.getElementById('shuffleBtn').title = texts.shuffle;
+   document.getElementById('shuffleBtn').textContent = texts.shuffle;
    document.getElementById('invertBtn').title = texts.swapQA;
-   document.getElementById('swapQALabelText').textContent = texts.swapQALabel;
+   document.getElementById('invertBtn').textContent = texts.swapQA;
    document.getElementById('removeBtn').title = texts.removeCard;
+   document.getElementById('removeBtn').textContent = texts.removeCard;
    document.getElementById('undoBtn').title = texts.undoRemove;
+   document.getElementById('undoBtn').textContent = texts.undoRemove;
    document.getElementById('decreaseFontBtn').title = texts.decreaseFont;
+   document.getElementById('decreaseFontBtn').textContent = texts.decreaseFont;
    document.getElementById('increaseFontBtn').title = texts.increaseFont;
+   document.getElementById('increaseFontBtn').textContent = texts.increaseFont;
+   document.getElementById('alignBtn').textContent = texts.leftJustify;
    document.getElementById('printBtn').title = texts.print;
+   document.getElementById('printBtn').textContent = texts.print;
    document.getElementById('downloadBtn').title = texts.download;
+   document.getElementById('downloadBtn').textContent = texts.download;
    document.getElementById('languageSelect').title = texts.language;
    document.getElementById('resetBtn').title = texts.resetTimer;
+   document.getElementById('resetBtn').textContent = texts.resetTimer;
    document.getElementById('timerBtn').title = isTimerRunning ? texts.pauseTimer : texts.startTimer;
+   document.getElementById('timerBtn').textContent = isTimerRunning ? texts.pauseTimer : texts.startTimer;
+   document.getElementById('flashcard').setAttribute('aria-label', texts.flip);
 
    // Update instructions
    document.getElementById('instructions').innerHTML = `<strong>${texts.keyboardShortcuts}</strong>`;
 
    // Update editor link
    document.getElementById('editorLink').innerHTML = `<a href="https://inventwithpython.com/tsofa/editor/">${texts.createWithEditor}</a>`;
+  }
+
+  // Announce meaningful state changes without interrupting study navigation.
+  function announceStatus(message) {
+   const status = document.getElementById('statusMessage');
+   if (!status || !message) return;
+   status.textContent = '';
+   window.setTimeout(() => { status.textContent = message; }, 20);
   }
 
   // Convert newlines to br tags for HTML display, except inside <pre> tags
@@ -1821,15 +1991,13 @@ let texts = i18n_text[LANGUAGE] || i18n_text['English'];
   function updateAlignButton() {
    const alignBtn = document.getElementById('alignBtn');
    if (alignmentState === 'center') {
-    alignBtn.innerHTML = '&#x21E4;&#x1F4C4;'; // ⇤📄
     alignBtn.title = texts.leftJustify;
    } else if (alignmentState === 'left') {
-    alignBtn.innerHTML = '&#x1F4C4;&#x21E5;'; // 📄⇥
     alignBtn.title = texts.rightJustify;
    } else {
-    alignBtn.innerHTML = '&#x21E4;&#x1F4C4;&#x21E5;'; // ⇤📄⇥
     alignBtn.title = texts.center;
    }
+   alignBtn.textContent = alignBtn.title;
   }
 
   // Update text alignment based on current state
@@ -1897,6 +2065,11 @@ let texts = i18n_text[LANGUAGE] || i18n_text['English'];
     card: currentCards[currentIndex],
     index: currentIndex
    });
+   if (undoTimeout) clearTimeout(undoTimeout);
+   undoTimeout = setTimeout(() => {
+    removedCards = [];
+    updateUndoButton();
+   }, 10000);
 
    // Remove card from current deck
    currentCards.splice(currentIndex, 1);
@@ -1919,6 +2092,7 @@ let texts = i18n_text[LANGUAGE] || i18n_text['English'];
 
    // Trigger emphasis animation
    triggerTotalCountEmphasis();
+   announceStatus('Card removed. Undo is available for 10 seconds.');
   }
 
   // Undo last card removal
@@ -1944,6 +2118,7 @@ let texts = i18n_text[LANGUAGE] || i18n_text['English'];
 
    // Trigger emphasis animation
    triggerTotalCountEmphasis();
+   announceStatus('Card restored.');
   }
 
   // Update undo button state
@@ -1957,6 +2132,13 @@ let texts = i18n_text[LANGUAGE] || i18n_text['English'];
    showingQuestion = !showingQuestion;
    displayCard();
   }
+
+  document.getElementById('flashcard').addEventListener('keydown', function(event) {
+   if (event.key === 'Enter' || event.key === ' ') {
+    event.preventDefault();
+    flipCard();
+   }
+  });
 
   // Navigate to next card
   function nextCard() {
@@ -2004,6 +2186,10 @@ let texts = i18n_text[LANGUAGE] || i18n_text['English'];
    currentCards = [...processedFlashcards];
    // Clear removed cards history
    removedCards = [];
+   if (undoTimeout) {
+    clearTimeout(undoTimeout);
+    undoTimeout = null;
+   }
    for (let i = currentCards.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
     [currentCards[i], currentCards[j]] = [currentCards[j], currentCards[i]];
@@ -2014,12 +2200,14 @@ let texts = i18n_text[LANGUAGE] || i18n_text['English'];
    updateButtons();
    updateCounter();
    updateUndoButton();
+   announceStatus('Cards shuffled.');
   }
 
   // Invert all cards (swap questions and answers)
   function invertCards() {
    isInverted = !isInverted;
    displayCard();
+   announceStatus(isInverted ? 'Questions and answers swapped.' : 'Questions and answers restored.');
   }
 
   // Update button states
@@ -2088,6 +2276,8 @@ let texts = i18n_text[LANGUAGE] || i18n_text['English'];
     timerBtn.innerHTML  = '&#x23F2;&#x25B6;';
     timerBtn.classList.remove('pause');
     timerBtn.title = texts.startTimer;
+    timerBtn.textContent = texts.startTimer;
+    announceStatus('Timer paused.');
    } else {
     // Start timer
     timerStartTime = Date.now();
@@ -2095,6 +2285,8 @@ let texts = i18n_text[LANGUAGE] || i18n_text['English'];
     timerBtn.innerHTML = '&#x23F2;&#x23F8;';
     timerBtn.classList.add('pause');
     timerBtn.title = texts.pauseTimer;
+    timerBtn.textContent = texts.pauseTimer;
+    announceStatus('Timer started.');
 
     // Update display every second
     timerInterval = setInterval(updateTimerDisplay, 1000);
@@ -2112,8 +2304,10 @@ let texts = i18n_text[LANGUAGE] || i18n_text['English'];
    timerBtn.innerHTML  = '&#x23F2;&#x25B6;';
    timerBtn.classList.remove('pause');
    timerBtn.title = texts.startTimer;
+   timerBtn.textContent = texts.startTimer;
 
    updateTimerDisplay();
+   announceStatus('Timer reset.');
   }
 
   // Print flashcards function
@@ -2148,6 +2342,7 @@ let texts = i18n_text[LANGUAGE] || i18n_text['English'];
 
    // Trigger print dialog
    window.print();
+   announceStatus('Print dialog opened.');
   }
 
   // Build a FLASHCARDS literal string from current cards using backtick strings
@@ -2209,11 +2404,12 @@ let texts = i18n_text[LANGUAGE] || i18n_text['English'];
 
    document.body.removeChild(link);
    URL.revokeObjectURL(link.href);
+   announceStatus('Download started.');
   }
 
   // ===== Embedded editor =====
   const editor_translations = {
-   "English": { topicPlaceholder: "Topic (or leave this empty)", questionPlaceholder: "Question", answerPlaceholder: "Answer", title: "TSOFA Flashcard Editor", back: "← Discard Changes", apply: "Apply", download: "Download", instructions: "You can copy and paste TOPIC and FLASHCARDS code from existing flashcard apps to load them into this editor:", cancelNote: "Refresh page to cancel changes and go back to the flashcards." },
+   "English": { topicPlaceholder: "Topic (or leave this empty)", questionPlaceholder: "Question", answerPlaceholder: "Answer", title: "TSOFA Flashcard Editor", back: "Cancel editing", apply: "Apply changes", download: "Download", instructions: "You can copy and paste TOPIC and FLASHCARDS code from existing flashcard apps to load them into this editor:", cancelNote: "Cancel keeps your draft until you confirm discard." },
    "Español": { topicPlaceholder: "Tema (o déjalo vacío)", questionPlaceholder: "Pregunta", answerPlaceholder: "Respuesta", title: "Editor de Tarjetas TSOFA", back: "← Volver a las Tarjetas", apply: "Aplicar", download: "Descargar", instructions: "Puedes copiar y pegar el código TOPIC y FLASHCARDS de aplicaciones de tarjetas existentes para cargarlas en este editor:", cancelNote: "Actualiza la página para cancelar los cambios y volver a las tarjetas." },
    "Français": { topicPlaceholder: "Sujet (ou laissez vide)", questionPlaceholder: "Question", answerPlaceholder: "Réponse", title: "Éditeur de Cartes TSOFA", back: "← Retour aux Cartes", apply: "Appliquer", download: "Télécharger", instructions: "Vous pouvez copier et coller le code TOPIC et FLASHCARDS d'applications de cartes mémoire existantes pour les charger dans cet éditeur:", cancelNote: "Actualisez la page pour annuler les modifications et revenir aux cartes." },
    "Deutsch": { topicPlaceholder: "Thema (oder leer lassen)", questionPlaceholder: "Frage", answerPlaceholder: "Antwort", title: "TSOFA Lernkarten-Editor", back: "← Zurück zu den Karten", apply: "Anwenden", download: "Herunterladen", instructions: "Sie können TOPIC- und FLASHCARDS-Code aus bestehenden Karteikarten-Apps kopieren und in diesen Editor einfügen:", cancelNote: "Seite aktualisieren, um Änderungen zu verwerfen und zu den Lernkarten zurückzukehren." },
@@ -2251,17 +2447,22 @@ let texts = i18n_text[LANGUAGE] || i18n_text['English'];
   function openEditor() {
    const t = editorTexts();
    document.getElementById('editorTitle').textContent = t.title;
-   document.getElementById('editorBackBtn').textContent = t.back;
+   document.getElementById('editorBackBtn').textContent = 'Cancel editing';
    document.getElementById('editorTopicInput').placeholder = t.topicPlaceholder;
    document.getElementById('editorDownloadBtn').textContent = t.download;
+   document.getElementById('editorApplyBtn').textContent = t.apply;
    document.getElementById('editorInstructions').textContent = t.instructions;
-   document.getElementById('editorCancelNote').textContent = t.cancelNote;
+   document.getElementById('editorCancelNote').textContent = 'Cancel keeps your draft until you confirm discard.';
 
    document.getElementById('editorTopicInput').value = TOPIC || '';
    editorFlashcards = processedFlashcards.map(c => ({ question: c[0] || '', answer: c[1] || '' }));
    if (editorFlashcards.length === 0) {
     editorFlashcards = [{ question: '', answer: '' }, { question: '', answer: '' }, { question: '', answer: '' }];
    }
+   editorSnapshot = JSON.stringify({
+    topic: document.getElementById('editorTopicInput').value,
+    cards: editorFlashcards
+   });
    editorRenderFlashcards();
    editorUpdateOutputWithFlag();
 
@@ -2270,8 +2471,17 @@ let texts = i18n_text[LANGUAGE] || i18n_text['English'];
   }
 
   function closeEditor() {
+   const currentDraft = JSON.stringify({
+    topic: document.getElementById('editorTopicInput').value,
+    cards: editorFlashcards
+   });
+   if (editorSnapshot && currentDraft !== editorSnapshot && !window.confirm('Discard your unsaved changes? Select Cancel to keep editing.')) {
+    return;
+   }
    document.getElementById('editorView').style.display = 'none';
    document.getElementById('viewerView').style.display = 'block';
+   editorSnapshot = null;
+   announceStatus('Editor closed.');
   }
 
   function editorAddFlashcard() {
@@ -2451,6 +2661,10 @@ let texts = i18n_text[LANGUAGE] || i18n_text['English'];
    currentIndex = 0;
    showingQuestion = true;
    removedCards = [];
+   if (undoTimeout) {
+    clearTimeout(undoTimeout);
+    undoTimeout = null;
+   }
 
    const topicHeading = document.getElementById('topicHeading');
    if (TOPIC && TOPIC.trim() !== "") {
@@ -2467,7 +2681,10 @@ let texts = i18n_text[LANGUAGE] || i18n_text['English'];
    updateCounter();
    updateUndoButton();
 
-   closeEditor();
+   editorSnapshot = null;
+   document.getElementById('editorView').style.display = 'none';
+   document.getElementById('viewerView').style.display = 'block';
+   announceStatus('Flashcard changes applied.');
   }
 
   function editorDownload() {

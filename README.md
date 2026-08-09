@@ -9,11 +9,11 @@ TSOFA ("tee-sofa") - The Simple, Offline, Flashcard App - is a flash card app th
 
 - **Single HTML file** - Everything in one HTML file, easy to share and view on any device
 - **Multi-lingual Support** - 24 languages supported: English, Español, Français, Deutsch, Nederlands, Italiano, Português, Polski, Русский, Norsk, Svenska, 中文, हिन्दी, বাংলা, 日本語, 한국어, ไทย, العربية, Tiếng Việt, Türkçe, Tagalog, Kiswahili, فارسی, Bahasa Indonesia
-- **Keyboard controls** - Space to flip, arrows to navigate
+- **Keyboard controls** - Space to flip, arrows to navigate; the focused card also flips with Enter or Space
 - **HTML support** - Embed images, format text, add links
 - **Shuffle cards** - Randomize order for practice
 - **Invert Q/A** - Swap questions with answers
-- **Remove flashcards** - Remove cards as you master them, reload the page to bring them back
+- **Remove flashcards** - Remove cards as you master them, with a labeled Undo action available briefly after removal
 - **Left/Right Justified, Centering** - Change alignment to preserve indentation
 - **Integrated timer** - If you want to time your run through the flashcard deck
 - **CSV import** - Paste data from spreadsheets
@@ -23,6 +23,8 @@ TSOFA ("tee-sofa") - The Simple, Offline, Flashcard App - is a flash card app th
 - **Free** - No registration, no paywall, no ads, no "premium" features; everything is straight-up free.
 
 ## Creating and Editing Flashcards
+
+The viewer keeps the main study controls visible and places secondary study and editor tools in labeled sections. In the editor, Cancel asks before discarding a changed draft; Apply changes updates the current deck.
 
 [You can use the editor page to create new flashcard sets.](https://inventwithpython.com/tsofa/editor/)
 
